@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'download' | 'about' | 'team' | 'contact' | 'shop';
+interface Product {
+    name: string;
+    price: number;
+    originalPrice?: number;
+    category: string;
+    imageUrl: string;
+}
 
 // --- SVG Icon Components ---
 
@@ -509,6 +516,140 @@ const ContactPage: React.FC = () => {
     );
 };
 
+const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
+    <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col">
+        <div className="w-full h-48 bg-slate-800 flex items-center justify-center">
+            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+        </div>
+        <div className="p-4 flex flex-col flex-grow">
+            <h3 className="text-lg font-semibold text-white flex-grow">{product.name}</h3>
+            <div className="mt-2">
+                {product.originalPrice ? (
+                    <p className="text-amber-400 text-xl font-bold">
+                        <del className="text-gray-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
+                    </p>
+                ) : (
+                    <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
+                )}
+            </div>
+            <a href="#" className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">
+                Buy product
+            </a>
+        </div>
+    </div>
+);
+
+const ShopPage: React.FC = () => {
+    const products: Product[] = [
+        { name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Platinum Trade Ideas (Monthly Subscription)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Diamond Trade Ideas (Monthly Subscription)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Private Wealth VIP_Black Trade Ideas (Monthly Subscription)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Mr One Dollar Forex Trading Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Mr One Dollar Forex Trading Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Mr One Dollar Forex Trading Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+    ];
+
+    const categories = Array.from(new Set(products.map(p => p.category)))
+        .map(cat => ({
+            name: cat,
+            count: products.filter(p => p.category === cat).length
+        }));
+
+
+    return (
+        <div className="bg-black py-16 sm:py-24">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex flex-col lg:flex-row gap-12">
+                    {/* Main Content */}
+                    <div className="lg:w-3/4">
+                        <h1 className="text-4xl font-extrabold text-white mb-4">Shop</h1>
+                        <div className="flex justify-between items-center mb-6 text-gray-400">
+                            <p>Showing 1–12 of 15 results</p>
+                            <select className="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                <option>Default sorting</option>
+                                <option>Sort by popularity</option>
+                                <option>Sort by latest</option>
+                                <option>Sort by price: low to high</option>
+                                <option>Sort by price: high to low</option>
+                            </select>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                            {products.slice(0, 12).map((product, index) => (
+                                <ProductCard key={index} product={product} />
+                            ))}
+                        </div>
+
+                        <nav className="flex justify-center items-center space-x-2 mt-12">
+                            <span aria-current="page" className="bg-amber-400 text-black font-bold w-10 h-10 flex items-center justify-center rounded-md">1</span>
+                            <a href="#" className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">2</a>
+                            <a href="#" className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</a>
+                        </nav>
+                    </div>
+
+                    {/* Sidebar */}
+                    <aside className="lg:w-1/4 space-y-8">
+                         <div className="bg-slate-900 p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
+                            <div className="relative">
+                                <input type="search" placeholder="Search products…" className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-4 pr-10 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                                <button className="absolute inset-y-0 right-0 px-3 flex items-center bg-amber-400 text-black rounded-r-md hover:bg-amber-300">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                        <div className="bg-slate-900 p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
+                            {/* Simple input fields for price range */}
+                             <div className="flex items-center space-x-2 mb-4">
+                                <input type="number" placeholder="Min price" className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                                <input type="number" placeholder="Max price" className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                            </div>
+                            <button className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">Filter</button>
+                             <p className="text-gray-400 mt-4 text-sm">Price: $10 — $1,150</p>
+                        </div>
+                        <div className="bg-slate-900 p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Cart</h3>
+                            <p className="text-gray-400">No products in the cart.</p>
+                        </div>
+                        <div className="bg-slate-900 p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
+                            <ul className="space-y-2">
+                                {categories.map(cat => (
+                                     <li key={cat.name}>
+                                        <a href="#" className="flex justify-between text-gray-400 hover:text-amber-400">
+                                            <span>{cat.name}</span>
+                                            <span>({cat.count})</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                         <div className="bg-slate-900 p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Product tags</h3>
+                            <div className="flex flex-wrap gap-2">
+                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">bag</a>
+                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">clothes</a>
+                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">colorful</a>
+                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">stuff</a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -525,7 +666,8 @@ const App: React.FC = () => {
             return <TeamPage />;
         case 'contact':
             return <ContactPage />;
-        // Add cases for other pages here as they are built
+        case 'shop':
+            return <ShopPage />;
         default:
             return <HomePage />;
     }
