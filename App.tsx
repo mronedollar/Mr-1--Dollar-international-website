@@ -1,6 +1,8 @@
 
 
-import React, { useState, useMemo, useEffect } from 'react';
+
+
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
@@ -32,6 +34,34 @@ const servicesData: Product[] = [
     { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
     { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://images.unsplash.com/photo-1504754524776-8f4f37790774?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
     { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+];
+
+const testimonialsData = [
+    {
+        quote: "High Voltage is something else... We woke up in deep profits!",
+        author: "Lungelo C.",
+        role: "Gold Member",
+    },
+    {
+        quote: "Tebza made R5000 early in the morning while driving. When I see profits I get motivated to send more trade ideas!",
+        author: "Mr. $1 Team",
+        role: "Community Update",
+    },
+    {
+        quote: "We thank you alpha as we were comfortable in our waiting process, because we know when it's time we eat and get full.",
+        author: "Prince Mofokeng",
+        role: "Platinum Member",
+    },
+    {
+        quote: "No worries at all, we trust this family!",
+        author: "Siphelele H.",
+        role: "Community Member",
+    },
+    {
+        quote: "I am surviving because I know for as long as you are still alive, I will succeed!",
+        author: "Grace Ranyane",
+        role: "Gold Member",
+    },
 ];
 
 // --- SVG Icon Components ---
@@ -69,19 +99,19 @@ const EnvelopeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" 
 
 const ShieldCheckIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622A11.959 11.959 0 0112 3.75z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M12 21.75c2.435-1.122 4.633-2.618 6.42-4.357C20.142 15.66 21 12.76 21 9.75c0-3.01-0.858-5.91-2.58-7.643a13.363 13.363 0 0 0-6.42-3.643 1.5 1.5 0 0 0-1.018 0 13.363 13.363 0 0 0-6.42 3.643C2.858 3.84 2 6.74 2 9.75c0 3.01 0.858 5.91 2.58 7.643A13.363 13.363 0 0 0 11 21.75a1.5 1.5 0 0 0 1 0Z" />
     </svg>
 );
 
-const ChatBubbleLeftRightIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const UsersIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.722.534a1.125 1.125 0 01-1.097-.727l-.452-1.44a1.125 1.125 0 00-1.097-.727H8.384a1.125 1.125 0 00-1.097.727l-.452 1.44a1.125 1.125 0 01-1.097.727L2.219 17.5c-1.133-.093-1.98-1.057-1.98-2.193V9.608c0-.97.616-1.813 1.5-2.097L6.6 6.49a1.125 1.125 0 011.25.392l.868 1.285a1.125 1.125 0 001.096.727h3.336a1.125 1.125 0 001.096-.727l.868-1.285a1.125 1.125 0 011.25-.392l2.6-1.043zM6.375 11.25a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12.375 11.25a.375.375 0 11-.75 0 .375.375 0 01.75 0zM18.375 11.25a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962c.57-1.01 1.255-1.883 2.06-2.634.804-.75 1.72-1.34 2.696-1.763M12 3c2.755 0 5 2.245 5 5s-2.245 5-5 5-5-2.245-5-5 2.245-5 5-5Zm-7.268 9.062a8.952 8.952 0 0 0-2.432 2.432 8.952 8.952 0 0 0 2.432 2.432M12 21a9.094 9.094 0 0 0-3.741-.479 3 3 0 0 0-4.682-2.72M3.055 12.312a8.952 8.952 0 0 1 2.432-2.432 8.952 8.952 0 0 1 2.432 2.432" />
     </svg>
 );
 
-const GlobeAmericasIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const RocketLaunchIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.115 5.186a.75.75 0 011.06 0l1.06 1.06a.75.75 0 001.06 0l1.06-1.06a.75.75 0 011.06 0l1.06 1.06a.75.75 0 001.06 0l1.06-1.06a.75.75 0 011.06 0l1.06 1.06a.75.75 0 001.06 0l1.06-1.06a.75.75 0 011.06 0l3.182 3.182a.75.75 0 010 1.06l-3.182 3.182a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 00-1.06 0l-1.06 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 00-1.06 0l-1.06 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 00-1.06 0l-1.06 1.06a.75.75 0 01-1.06 0L.92 9.426a.75.75 0 010-1.06L4 5.186zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.82m5.84-2.56a6 6 0 0 1-5.84 7.38v-4.82m5.84-2.56a6 6 0 0 1-5.84 7.38v-4.82m0 0a6 6 0 0 1 6-6h-4.82m0 0a6 6 0 0 1 6-6H9.75m0 0a6 6 0 0 1 6-6H9.75m0 0a6 6 0 0 1-6 6h4.82M9.75 9.75A6 6 0 0 1 3.75 3.75M9.75 9.75A6 6 0 0 1 3.75 3.75m0 0a6 6 0 0 1 6 6v-4.82m0 0a6 6 0 0 1 6 6v-4.82" />
     </svg>
 );
 
@@ -117,13 +147,43 @@ const YouTubeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }
 
 const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" className={className}>
-        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1 9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
     </svg>
 );
 
 const SearchIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+    </svg>
+);
+
+const ChevronLeftIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+);
+
+const ChevronRightIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+);
+
+const QuoteIcon: React.FC<{ className?: string }> = ({ className = "w-12 h-12" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className={className}>
+        <path d="M13.416 4.834C13.52 4.07 14.155 3.5 14.936 3.5c.895 0 1.584.793 1.584 1.584 0 .43-.168.832-.47 1.133l-1.923 1.916a2.016 2.016 0 00-1.04 1.76v.168c0 .235.19.42.42.42h.335c1.47 0 2.593 1.12 2.593 2.592V15c0 2.302-1.85 4.16-4.16 4.16-2.302 0-4.16-1.85-4.16-4.16 0-2.302 1.85-4.16 4.16-4.16a.42.42 0 01.42.42v3.083c0 .235-.19.42-.42.42-.562 0-1.012.45-1.012 1.011 0 .562.45 1.012 1.011 1.012.562 0 1.012-.45 1.012-1.012V11.5c0-1.218-.84-2.28-1.995-2.528a4.12 4.12 0 01-3.67-3.953C7.5 2.22 9.728 0 12.523 0c.39 0 .762.056 1.108.15a4.156 4.156 0 012.379 2.115l-2.593 2.57z" />
+    </svg>
+);
+
+const TrashIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.067-2.09 1.02-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+    </svg>
+);
+
+const FilterIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
     </svg>
 );
 
@@ -204,7 +264,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
     <section className="py-24 sm:py-32 text-center hero-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
-            <h2 className="text-amber-400 text-2xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}>Mr One Dollar International</h2>
+            <h2 className="text-amber-400 text-3xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}>Mr One Dollar International</h2>
             <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
                 The Blueprint to the 1% – <br /> Trade Smarter, Profit Bigger!!!
             </h1>
@@ -272,8 +332,99 @@ const PropFirms: React.FC = () => {
     );
 };
 
+const Testimonials: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const timeoutRef = useRef<number | null>(null);
+
+    const resetTimeout = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    };
+
+    useEffect(() => {
+        resetTimeout();
+        timeoutRef.current = window.setTimeout(
+            () =>
+                setCurrentIndex((prevIndex) =>
+                    prevIndex === testimonialsData.length - 1 ? 0 : prevIndex + 1
+                ),
+            5000 // Change slide every 5 seconds
+        );
+
+        return () => {
+            resetTimeout();
+        };
+    }, [currentIndex]);
+
+    const goToSlide = (slideIndex: number) => {
+        setCurrentIndex(slideIndex);
+    };
+    
+    const prevSlide = () => {
+        const isFirstSlide = currentIndex === 0;
+        const newIndex = isFirstSlide ? testimonialsData.length - 1 : currentIndex - 1;
+        setCurrentIndex(newIndex);
+    };
+
+    const nextSlide = () => {
+        const isLastSlide = currentIndex === testimonialsData.length - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex);
+    };
+
+    return (
+        <section className="py-20 bg-black animate-fadeIn">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white">What Our Traders Say</h2>
+                <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
+                    Real results from real members of the Mr$1 community.
+                </p>
+                <div className="mt-12 max-w-3xl mx-auto relative">
+                    <div className="overflow-hidden relative h-72">
+                        {testimonialsData.map((testimonial, index) => (
+                            <div
+                                key={index}
+                                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                            >
+                                <div className="glass-card p-8 rounded-lg h-full flex flex-col justify-center items-center text-center">
+                                    <QuoteIcon className="w-8 h-8 text-amber-400/50 mb-4" />
+                                    <p className="text-xl italic text-slate-300">"{testimonial.quote}"</p>
+                                    <div className="mt-6">
+                                        <p className="font-bold text-white text-lg">{testimonial.author}</p>
+                                        <p className="text-amber-400 text-sm">{testimonial.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {/* Left Arrow */}
+                    <button onClick={prevSlide} className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-12 bg-slate-800/50 hover:bg-slate-700/80 text-white rounded-full p-2 transition-colors z-10">
+                        <ChevronLeftIcon className="w-6 h-6" />
+                    </button>
+                    {/* Right Arrow */}
+                    <button onClick={nextSlide} className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-12 bg-slate-800/50 hover:bg-slate-700/80 text-white rounded-full p-2 transition-colors z-10">
+                        <ChevronRightIcon className="w-6 h-6" />
+                    </button>
+
+                    <div className="flex justify-center space-x-2 pt-6">
+                        {testimonialsData.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToSlide(index)}
+                                className={`w-3 h-3 rounded-full transition-colors ${currentIndex === index ? 'bg-amber-400' : 'bg-slate-700 hover:bg-slate-600'}`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
 const About: React.FC = () => (
-    <section id="about-us" className="py-20 bg-black animate-fadeIn">
+    <section id="about-us" className="py-20 bg-slate-900 animate-fadeIn">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white">About Mr One Dollar International</h2>
@@ -382,6 +533,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => (
     <>
         <Hero setCurrentPage={setCurrentPage} />
         <PropFirms />
+        <Testimonials />
         <About />
     </>
 );
@@ -552,8 +704,8 @@ const AboutPage: React.FC = () => (
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <FeatureCard icon={<ShieldCheckIcon className="w-12 h-12 text-amber-400"/>} title="Proven Track Record" />
-                    <FeatureCard icon={<ChatBubbleLeftRightIcon className="w-12 h-12 text-amber-400"/>} title="Thriving Community" />
-                    <FeatureCard icon={<GlobeAmericasIcon className="w-12 h-12 text-amber-400"/>} title="Exclusive Trade-Cations" />
+                    <FeatureCard icon={<UsersIcon className="w-12 h-12 text-amber-400"/>} title="Thriving Community" />
+                    <FeatureCard icon={<RocketLaunchIcon className="w-12 h-12 text-amber-400"/>} title="Exclusive Trade-Cations" />
                 </div>
             </div>
         </section>
@@ -697,7 +849,7 @@ const ContactPage: React.FC = () => {
 };
 
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => (
-    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-2xl hover:shadow-amber-500/5">
+    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02]">
         <div className="relative">
              <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -755,7 +907,19 @@ const ServicesPage: React.FC = () => {
     const [sortOption, setSortOption] = useState('default');
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const itemsPerPage = 12;
+
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isSidebarOpen]);
 
     const categories = useMemo(() => {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
@@ -856,13 +1020,145 @@ const ServicesPage: React.FC = () => {
         );
     };
 
+    const sidebarContent = (
+        <div className="space-y-8">
+             <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
+                <div className="relative">
+                    <input 
+                        type="search" 
+                        placeholder="Search products…" 
+                        value={searchTerm}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                            setCurrentPage(1);
+                        }}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all" 
+                    />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                       <SearchIcon className="text-slate-400" />
+                    </div>
+                </div>
+            </div>
+            <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
+                 <div className="flex items-center space-x-2 mb-4">
+                    <input 
+                        type="number" 
+                        placeholder="Min price" 
+                        value={priceRange.min}
+                        onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                    />
+                    <input 
+                        type="number" 
+                        placeholder="Max price" 
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                    />
+                </div>
+                <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
+            </div>
+            <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-2">Cart</h3>
+                {cart.length === 0 ? (
+                   <p className="text-slate-400">No products in the cart.</p>
+                ) : (
+                    <>
+                        <p className="text-sm text-slate-400 mb-4">Total items: {cart.length}</p>
+                        <ul className="space-y-3 mb-4 max-h-60 overflow-y-auto pr-2">
+                            {cart.map((item, index) => (
+                                <li key={`${item.id}-${index}`} className="flex justify-between items-center text-sm">
+                                    <span className="text-slate-300 flex-1 pr-2">{item.name}</span>
+                                    <div className="flex items-center">
+                                        <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
+                                        <button 
+                                            onClick={() => handleRemoveFromCart(item.id, index)} 
+                                            className="ml-4 text-slate-500 hover:text-red-500 transition-colors"
+                                            aria-label={`Remove ${item.name} from cart`}
+                                        >
+                                            <TrashIcon />
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="border-t border-slate-700 pt-4 flex justify-between font-bold text-white">
+                            <span>Total:</span>
+                            <span>${cartTotal.toFixed(2)}</span>
+                        </div>
+                    </>
+                )}
+            </div>
+            <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
+                <ul className="space-y-2">
+                    <li>
+                        <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
+                            <span>All</span>
+                            <span>({products.length})</span>
+                        </a>
+                    </li>
+                    {categories.map(cat => (
+                         <li key={cat.name}>
+                            <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
+                                <span>{cat.name}</span>
+                                <span>({cat.count})</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
 
     return (
         <div className="bg-black py-16 sm:py-24 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                 {/* Mobile Filter Button */}
+                <div className="lg:hidden mb-6">
+                    <button 
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="w-full flex items-center justify-center gap-2 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-amber-400"
+                    >
+                        <FilterIcon />
+                        <span>Filter & View Cart</span>
+                    </button>
+                </div>
+
                 <div className="flex flex-col lg:flex-row gap-12">
+                     {/* Sidebar (Off-canvas on mobile, static on desktop) */}
+                    {isSidebarOpen && (
+                        <div
+                            className="fixed inset-0 bg-black/70 z-40 lg:hidden"
+                            onClick={() => setIsSidebarOpen(false)}
+                            aria-hidden="true"
+                        ></div>
+                    )}
+                    <aside
+                        className={`
+                            fixed top-0 left-0 h-full w-full max-w-xs bg-slate-900 z-50 
+                            transform transition-transform duration-300 ease-in-out
+                            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+                            lg:relative lg:translate-x-0 lg:w-1/4 lg:max-w-none lg:bg-transparent lg:z-auto
+                            flex flex-col
+                        `}
+                        aria-labelledby="filters-heading"
+                    >
+                         <div className="flex-grow overflow-y-auto p-6 lg:p-0">
+                            <div className="flex justify-between items-center lg:hidden mb-6">
+                                <h2 id="filters-heading" className="text-xl font-bold text-white">Filters & Cart</h2>
+                                <button onClick={() => setIsSidebarOpen(false)} className="p-2 -m-2 text-slate-400 hover:text-white" aria-label="Close filters">
+                                    <CloseIcon />
+                                </button>
+                            </div>
+                            {sidebarContent}
+                         </div>
+                    </aside>
+
                     {/* Main Content */}
-                    <div className="lg:w-3/4">
+                    <main className="lg:w-3/4">
                         <h1 className="text-4xl font-extrabold text-white mb-4">Services</h1>
                         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 text-slate-400 gap-4">
                             <p>Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} results</p>
@@ -890,90 +1186,7 @@ const ServicesPage: React.FC = () => {
                         </div>
 
                         {renderPagination()}
-                    </div>
-
-                    {/* Sidebar */}
-                    <aside className="lg:w-1/4 space-y-8">
-                         <div className="glass-card p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
-                            <div className="relative">
-                                <input 
-                                    type="search" 
-                                    placeholder="Search products…" 
-                                    value={searchTerm}
-                                    onChange={(e) => {
-                                        setSearchTerm(e.target.value);
-                                        setCurrentPage(1);
-                                    }}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all" 
-                                />
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                   <SearchIcon className="text-slate-400" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="glass-card p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
-                             <div className="flex items-center space-x-2 mb-4">
-                                <input 
-                                    type="number" 
-                                    placeholder="Min price" 
-                                    value={priceRange.min}
-                                    onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
-                                />
-                                <input 
-                                    type="number" 
-                                    placeholder="Max price" 
-                                    value={priceRange.max}
-                                    onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
-                                />
-                            </div>
-                            <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
-                        </div>
-                        <div className="glass-card p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Cart</h3>
-                            {cart.length === 0 ? (
-                               <p className="text-slate-400">No products in the cart.</p>
-                            ) : (
-                                <>
-                                    <ul className="space-y-4 mb-4">
-                                        {cart.map((item, index) => (
-                                            <li key={`${item.id}-${index}`} className="flex justify-between items-start text-sm">
-                                                <span className="text-slate-300 flex-1 pr-2">{item.name}</span>
-                                                <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
-                                                <button onClick={() => handleRemoveFromCart(item.id, index)} className="ml-3 text-red-500 hover:text-red-400 text-xs">X</button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <div className="border-t border-slate-700 pt-4 flex justify-between font-bold text-white">
-                                        <span>Total:</span>
-                                        <span>${cartTotal.toFixed(2)}</span>
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                        <div className="glass-card p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
-                            <ul className="space-y-2">
-                                <li>
-                                    <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
-                                        <span>All</span>
-                                        <span>({products.length})</span>
-                                    </a>
-                                </li>
-                                {categories.map(cat => (
-                                     <li key={cat.name}>
-                                        <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
-                                            <span>{cat.name}</span>
-                                            <span>({cat.count})</span>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </aside>
+                    </main>
                 </div>
             </div>
         </div>
