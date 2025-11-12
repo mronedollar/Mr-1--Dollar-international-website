@@ -12,22 +12,23 @@ interface Product {
     category: string;
     imageUrl: string;
     description: string;
+    checkoutUrl?: string;
 }
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1611095965923-a535a6104334?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions." },
-    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1599050751538-34888211a76e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities." },
-    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1612152028834-883a4c07a44f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts." },
-    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1580519543953-c6a6171b3303?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only." },
-    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence." },
-    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy." },
-    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level." },
-    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader." },
-    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset." },
-    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional." },
-    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential." },
-    { id: 12, name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1639754391392-16715b703e8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading." },
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1611095965923-a535a6104334?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
+    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1599050751538-34888211a76e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities.", checkoutUrl: "https://whop.com/checkout/plan_j9dTqYMI4Ez1e?d2c=true" },
+    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1612152028834-883a4c07a44f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
+    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1580519543953-c6a6171b3303?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
+    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
+    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
+    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
+    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader.", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q?d2c=true" },
+    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
+    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
+    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
+    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1639754391392-16715b703e8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
     { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
     { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://images.unsplash.com/photo-1504754524776-8f4f37790774?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
     { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
@@ -66,21 +67,21 @@ const EnvelopeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" 
     </svg>
 );
 
-const AcademicCapIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const ShieldCheckIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H6.75Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622A11.959 11.959 0 0112 3.75z" />
     </svg>
 );
 
-const UsersIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const ChatBubbleLeftRightIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.542 2.72a3 3 0 0 1-4.682-2.72 9.094 9.094 0 0 1 3.741-.479m7.542 2.72a8.25 8.25 0 0 0-7.542 0m7.542 0a3 3 0 0 0-7.542 0M12 12.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Zm0 0a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5ZM12 12.75v.008Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193l-3.722.534a1.125 1.125 0 01-1.097-.727l-.452-1.44a1.125 1.125 0 00-1.097-.727H8.384a1.125 1.125 0 00-1.097.727l-.452 1.44a1.125 1.125 0 01-1.097.727L2.219 17.5c-1.133-.093-1.98-1.057-1.98-2.193V9.608c0-.97.616-1.813 1.5-2.097L6.6 6.49a1.125 1.125 0 011.25.392l.868 1.285a1.125 1.125 0 001.096.727h3.336a1.125 1.125 0 001.096-.727l.868-1.285a1.125 1.125 0 011.25-.392l2.6-1.043zM6.375 11.25a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12.375 11.25a.375.375 0 11-.75 0 .375.375 0 01.75 0zM18.375 11.25a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
     </svg>
 );
 
-const GlobeAltIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const GlobeAmericasIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0 1 12 13.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 3 12c0-.778.099-1.533.284-2.253m0 0a11.953 11.953 0 0 1 18.232 0" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.115 5.186a.75.75 0 011.06 0l1.06 1.06a.75.75 0 001.06 0l1.06-1.06a.75.75 0 011.06 0l1.06 1.06a.75.75 0 001.06 0l1.06-1.06a.75.75 0 011.06 0l1.06 1.06a.75.75 0 001.06 0l1.06-1.06a.75.75 0 011.06 0l3.182 3.182a.75.75 0 010 1.06l-3.182 3.182a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 00-1.06 0l-1.06 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 00-1.06 0l-1.06 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 00-1.06 0l-1.06 1.06a.75.75 0 01-1.06 0L.92 9.426a.75.75 0 010-1.06L4 5.186zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
 );
 
@@ -203,7 +204,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
     <section className="py-24 sm:py-32 text-center hero-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
-            <h2 className="text-amber-400 text-sm font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}>Mr One Dollar International</h2>
+            <h2 className="text-amber-400 text-2xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}>Mr One Dollar International</h2>
             <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
                 The Blueprint to the 1% – <br /> Trade Smarter, Profit Bigger!!!
             </h1>
@@ -227,7 +228,7 @@ const PropFirms: React.FC = () => {
     const partners = [
         {
             name: 'PrimeXBT',
-            logoUrl: 'https://i.imgur.com/qE1l5lM.png',
+            logoUrl: 'https://i.imgur.com/xO4A5QG.png',
             link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1'
         },
         {
@@ -550,9 +551,9 @@ const AboutPage: React.FC = () => (
         <section className="py-20 bg-black animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <FeatureCard icon={<AcademicCapIcon className="w-12 h-12 text-amber-400"/>} title="Proven Track Record" />
-                    <FeatureCard icon={<UsersIcon className="w-12 h-12 text-amber-400"/>} title="Thriving Community" />
-                    <FeatureCard icon={<GlobeAltIcon className="w-12 h-12 text-amber-400"/>} title="Exclusive Trade-Cations" />
+                    <FeatureCard icon={<ShieldCheckIcon className="w-12 h-12 text-amber-400"/>} title="Proven Track Record" />
+                    <FeatureCard icon={<ChatBubbleLeftRightIcon className="w-12 h-12 text-amber-400"/>} title="Thriving Community" />
+                    <FeatureCard icon={<GlobeAmericasIcon className="w-12 h-12 text-amber-400"/>} title="Exclusive Trade-Cations" />
                 </div>
             </div>
         </section>
@@ -563,9 +564,9 @@ const AboutPage: React.FC = () => (
         <section className="py-20 animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="glass-card rounded-lg p-10 text-center flex flex-col items-center">
-                    <h2 className="text-3xl font-bold text-white">Watch our Forex guide for beginners</h2>
+                    <h2 className="text-3xl font-bold text-white">Go Beyond the Charts with Mr One Dollar</h2>
                     <p className="mt-4 text-slate-400 max-w-2xl">
-                        Invest in Forex, Stocks, Bitcoin, Ethereum, USDT, and other cryptocurrencies . The Bitcoin and cryptocurrency markets have experienced a surge in volume recently, making it an exciting time to become a trader. Forex markets have seen an increase in volume in recent weeks, which is a great opportunity for new traders.
+                        Join our growing community on YouTube! From exclusive podcast episodes and in-depth trade reviews to beginner's guides and footage from our legendary Trade-Cations, we're pulling back the curtain. Subscribe to get the strategies and insights you won't find anywhere else.
                     </p>
                     <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
                         Watch on YouTube
@@ -723,9 +724,23 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
                 )}
             </div>
-            <button onClick={() => onAddToCart(product)} className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">
-                Buy product
-            </button>
+            {product.checkoutUrl ? (
+                <a 
+                    href={product.checkoutUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                >
+                    Buy product
+                </a>
+            ) : (
+                <button 
+                    onClick={() => onAddToCart(product)} 
+                    className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                >
+                    Add to cart
+                </button>
+            )}
         </div>
     </div>
 );
