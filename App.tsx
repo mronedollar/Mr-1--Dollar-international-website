@@ -1,8 +1,8 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'download' | 'about' | 'team' | 'contact' | 'shop';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
 interface Product {
     id: number;
     name: string;
@@ -10,7 +10,28 @@ interface Product {
     originalPrice?: number;
     category: string;
     imageUrl: string;
+    description: string;
 }
+
+// --- Centralized Data Source ---
+const servicesData: Product[] = [
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Gold', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions." },
+    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Platinum', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities." },
+    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Diamond', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts." },
+    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=VIP', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only." },
+    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Beginner', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence." },
+    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Intermediate', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy." },
+    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Advanced', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level." },
+    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Full+Course', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader." },
+    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mentorship', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset." },
+    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mentorship', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional." },
+    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mentorship', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential." },
+    { id: 12, name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Strategy', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading." },
+    { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Indicators', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
+    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=NFP+Event', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
+    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Merch', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+];
+
 
 // --- SVG Icon Components ---
 
@@ -45,21 +66,36 @@ const EnvelopeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" 
     </svg>
 );
 
-const ChartBarIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const AcademicCapIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125-1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125-1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+      <path d="M12 14l9-5-9-5-9 5 9 5z" />
+      <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M1 12l5.318-2.954a11.932 11.932 0 011.662-3.111l-3.35-1.861L1 12zm22 0l-5.318-2.954a11.932 11.932 0 00-1.662-3.111l3.35-1.861L23 12z" />
     </svg>
 );
 
-const ChatBubbleOvalLeftEllipsisIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const UsersIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.455.09-.934.09-1.425v-2.125c0-4.556 4.03-8.25 9-8.25 4.97 0 9 3.694 9 8.25Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 016-6h6a6 6 0 016 6v1h-3M15 21a3 3 0 01-6 0M21 21v-1a6 6 0 00-6-6h-1.5m1.5 6a3 3 0 01-3 3m-3-3a3 3 0 01-3-3m-3 3a3 3 0 01-3-3m0 0a3 3 0 013-3m3 3a3 3 0 013 3m-3-3a3 3 0 01-3-3" />
     </svg>
 );
 
-const SunIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+const GlobeAltIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.52 9.176l1.44 2.16m14.08 0l1.44-2.16M12 21V3m0 18c-3.182 0-6-1.6-6-3.5S8.818 14 12 14s6 1.6 6 3.5-2.818 3.5-6 3.5z" />
+    </svg>
+);
+
+const PlusIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>
+);
+
+const MinusIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
     </svg>
 );
 
@@ -77,7 +113,7 @@ const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = "w-8 h-8" 
 
 const YouTubeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" className={className}>
-        <path d="M549.655 124.083c-6.281-23.65-24.787-42.1-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.497-41.995 24.947-48.284 48.597-11.412 42.867-11.412 132.325-11.412 132.325s0 89.458 11.412 132.325c6.289 23.65 24.787 41.995 48.284 48.597C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.597 42.002-24.947 48.284-48.597 11.412-42.867 11.412-132.325 11.412-132.325s0-89.458-11.412-132.325zM232.615 354.46V157.54l132.738 98.46-132.738 98.46z"/>
+        <path d="M549.655 124.083c-6.281-23.65-24.787-42.1-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.497-41.995 24.947-48.284 48.597-11.412 42.867-11.412 132.325-11.412 132.325s0 89.458 11.412 132.325c6.289 23.65 24.787 41.995 48.284 48.597C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.597 42.002-24.947 48.284-48.597 11.412-42.867-11.412-132.325 11.412-132.325s0-89.458-11.412-132.325zM232.615 354.46V157.54l132.738 98.46-132.738 98.46z"/>
     </svg>
 );
 
@@ -106,11 +142,10 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     const navLinks: { name: string, page: Page }[] = [
         { name: "Home", page: 'home' },
         { name: "Events", page: 'events' },
-        { name: "Download App", page: 'download' },
+        { name: "Services", page: 'services' },
         { name: "About Us", page: 'about' },
         { name: "Our Team", page: 'team' },
         { name: "Contact Us", page: 'contact' },
-        { name: "Online Shop", page: 'shop' }
     ];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, page: Page) => {
@@ -132,8 +167,9 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                         <div className="ml-10 flex items-baseline space-x-4">
                             {navLinks.map(link => (
                                 <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                   className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-gray-300 hover:text-amber-400 hover:scale-105'}`}>
+                                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-gray-300 hover:text-amber-400 hover:scale-105'}`}>
                                     {link.name}
+                                     {currentPage === link.page && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-amber-400 rounded-full"></span>}
                                 </a>
                             ))}
                         </div>
@@ -152,7 +188,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {navLinks.map(link => (
                              <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === link.page ? 'bg-slate-700 text-white' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>
+                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === link.page ? 'bg-amber-400 text-black' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>
                                  {link.name}
                              </a>
                         ))}
@@ -163,7 +199,11 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     );
 };
 
-const Hero: React.FC = () => (
+interface HeroProps {
+    setCurrentPage: (page: Page) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
     <section className="py-24 sm:py-32 text-center bg-black">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
             <h2 className="text-amber-400 text-sm font-bold uppercase tracking-widest">Mr One Dollar International</h2>
@@ -174,16 +214,17 @@ const Hero: React.FC = () => (
                 “Designed for traders who refuse to be average. Learn the strategies that put us in the 1%, Stay Blue & Take Profit.”
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#" className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
+                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
                     Get Started
                 </a>
-                <a href="#" className="w-full sm:w-auto inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105">
+                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105">
                     Register with a Broker
                 </a>
             </div>
         </div>
     </section>
 );
+
 
 const PropFirms: React.FC = () => {
     const partners = [
@@ -247,7 +288,11 @@ const About: React.FC = () => (
     </section>
 );
 
-const Footer: React.FC = () => (
+interface FooterProps {
+    setCurrentPage: (page: Page) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
     <footer className="bg-black border-t border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -268,7 +313,10 @@ const Footer: React.FC = () => (
                         </li>
                         <li className="flex items-start text-gray-400">
                             <PhoneIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                            <span>+27626898567 / +27614267355</span>
+                            <div>
+                                <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a> / 
+                                <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors"> +27 61 426 7355</a>
+                            </div>
                         </li>
                         <li className="flex items-start text-gray-400">
                              <EnvelopeIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
@@ -293,12 +341,16 @@ const Footer: React.FC = () => (
                 </div>
             </div>
             <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
-                <p className="text-gray-400 text-sm">Copyright &copy; {new Date().getFullYear()} . All rights reserved.</p>
-                <div className="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Home</a>
-                    <a href="#" className="text-gray-400 hover:text-amber-400 text-sm transition-colors">About Us</a>
-                    <a href="#" className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Shop</a>
-                    <a href="#" className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Terms & Conditions</a>
+                 <div className="text-center md:text-left">
+                    <p className="text-gray-400 text-sm">Copyright &copy; {new Date().getFullYear()} . All rights reserved.</p>
+                    <p className="text-gray-400 text-xs mt-1">Trading Involves Risk, Past Performances does not guarantee Future Result</p>
+                </div>
+                <div className="flex flex-wrap justify-center space-x-4 mt-4 md:mt-0">
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Home</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">About Us</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Services</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Terms</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('privacy'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Privacy Policy</a>
                 </div>
             </div>
         </div>
@@ -324,9 +376,13 @@ const WhatsAppWidget: React.FC = () => (
 
 // --- Page Components ---
 
-const HomePage: React.FC = () => (
+interface HomePageProps {
+    setCurrentPage: (page: Page) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => (
     <>
-        <Hero />
+        <Hero setCurrentPage={setCurrentPage} />
         <PropFirms />
         <About />
     </>
@@ -419,7 +475,7 @@ const FAQ: React.FC = () => {
         },
         {
             question: "How do I get started with Mr$1 International?",
-            answer: "Getting started is simple. You can explore our courses on the 'Online Shop' page and choose the one that best fits your experience level. We also recommend registering with one of our trusted partner brokers through the links on our homepage to start your trading journey."
+            answer: "Getting started is simple. You can explore our courses on the 'Services' page and choose the one that best fits your experience level. We also recommend registering with one of our trusted partner brokers through the links on our homepage to start your trading journey."
         }
     ];
 
@@ -436,7 +492,7 @@ const FAQ: React.FC = () => {
                 </div>
                 <div className="space-y-4">
                     {faqData.map((faq, index) => (
-                        <div key={index} className="bg-slate-900 rounded-lg">
+                        <div key={index} className="bg-slate-900 rounded-lg overflow-hidden border border-transparent hover:border-amber-400/20 transition-colors">
                             <button
                                 onClick={() => toggleFAQ(index)}
                                 className="w-full flex justify-between items-center text-left p-5 focus:outline-none"
@@ -497,9 +553,9 @@ const AboutPage: React.FC = () => (
         <section className="py-20 bg-black animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <FeatureCard icon={<ChartBarIcon className="w-12 h-12 text-amber-400"/>} title="Track Record" />
-                    <FeatureCard icon={<ChatBubbleOvalLeftEllipsisIcon className="w-12 h-12 text-amber-400"/>} title="Testimonials" />
-                    <FeatureCard icon={<SunIcon className="w-12 h-12 text-amber-400"/>} title="Trade-Cations" />
+                    <FeatureCard icon={<AcademicCapIcon className="w-12 h-12 text-amber-400"/>} title="Proven Track Record" />
+                    <FeatureCard icon={<UsersIcon className="w-12 h-12 text-amber-400"/>} title="Thriving Community" />
+                    <FeatureCard icon={<GlobeAltIcon className="w-12 h-12 text-amber-400"/>} title="Exclusive Trade-Cations" />
                 </div>
             </div>
         </section>
@@ -514,8 +570,8 @@ const AboutPage: React.FC = () => (
                     <p className="mt-4 text-gray-400 max-w-2xl">
                         Invest in Forex, Stocks, Bitcoin, Ethereum, USDT, and other cryptocurrencies . The Bitcoin and cryptocurrency markets have experienced a surge in volume recently, making it an exciting time to become a trader. Forex markets have seen an increase in volume in recent weeks, which is a great opportunity for new traders.
                     </p>
-                    <a href="#" className="mt-8 inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
-                        Learn More
+                    <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
+                        Watch on YouTube
                     </a>
                 </div>
             </div>
@@ -601,14 +657,19 @@ const ContactPage: React.FC = () => {
                                 <MapPinIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Head office</h3>
-                                    <p className="text-gray-400">13 Fredman Drive<br />Fredman Towers<br />Sandton</p>
+                                    <p className="text-gray-400">8 Karen St, Lyme Park, Sandton, 2060</p>
                                 </div>
                             </li>
                             <li className="flex items-start">
                                 <PhoneIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Call us</h3>
-                                    <p className="text-gray-400">+27626898567 / +27614267355</p>
+                                    <p className="text-gray-400">
+                                        <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a>
+                                    </p>
+                                    <p className="text-gray-400">
+                                        <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
+                                    </p>
                                 </div>
                             </li>
                              <li className="flex items-start">
@@ -638,13 +699,25 @@ const ContactPage: React.FC = () => {
     );
 };
 
-const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; }> = ({ product, onAddToCart }) => (
-    <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col group transform hover:-translate-y-2 transition-transform duration-300">
-        <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
-            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => (
+    <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col group transition-all duration-300 border border-transparent hover:border-amber-400/30">
+        <div className="relative">
+             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
+                <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <button 
+                onClick={onToggle}
+                className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-amber-400 rounded-full p-2 hover:bg-black/70 transition-colors"
+                aria-label={isExpanded ? "Collapse" : "Expand"}
+            >
+                {isExpanded ? <MinusIcon /> : <PlusIcon />}
+            </button>
         </div>
         <div className="p-4 flex flex-col flex-grow">
-            <h3 className="text-lg font-semibold text-white flex-grow">{product.name}</h3>
+            <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
+                <p className="text-gray-400 text-sm">{product.description}</p>
+            </div>
             <div className="mt-2">
                 {product.originalPrice ? (
                     <p className="text-amber-400 text-xl font-bold">
@@ -661,25 +734,8 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     </div>
 );
 
-const ShopPage: React.FC = () => {
-    const [products] = useState<Product[]>([
-        { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 2, name: "Platinum Trade Ideas (Monthly Subscription)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 3, name: "Diamond Trade Ideas (Monthly Subscription)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 4, name: "Private Wealth VIP_Black Trade Ideas (Monthly Subscription)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 9, name: "Mr One Dollar Forex Trading Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 10, name: "Mr One Dollar Forex Trading Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 11, name: "Mr One Dollar Forex Trading Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 12, name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-    ]);
-
+const ServicesPage: React.FC = () => {
+    const [products] = useState<Product[]>(servicesData);
     const [cart, setCart] = useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState<{ min: number | string, max: number | string }>({ min: '', max: '' });
@@ -687,6 +743,7 @@ const ShopPage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [sortOption, setSortOption] = useState('default');
     const [currentPage, setCurrentPage] = useState(1);
+    const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
     const itemsPerPage = 12;
 
     const categories = useMemo(() => {
@@ -700,17 +757,14 @@ const ShopPage: React.FC = () => {
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = products;
 
-        // Search filter
         if (searchTerm) {
             filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
         }
 
-        // Category filter
         if (selectedCategory) {
             filtered = filtered.filter(p => p.category === selectedCategory);
         }
         
-        // Price filter
         if (appliedPriceRange.min !== null) {
             filtered = filtered.filter(p => p.price >= appliedPriceRange.min!);
         }
@@ -718,19 +772,19 @@ const ShopPage: React.FC = () => {
             filtered = filtered.filter(p => p.price <= appliedPriceRange.max!);
         }
 
-        // Sorting
+        const sorted = [...filtered];
         switch (sortOption) {
             case 'price-asc':
-                filtered.sort((a, b) => a.price - b.price);
+                sorted.sort((a, b) => a.price - b.price);
                 break;
             case 'price-desc':
-                filtered.sort((a, b) => b.price - a.price);
+                sorted.sort((a, b) => b.price - a.price);
                 break;
             default:
                 break;
         }
 
-        return filtered;
+        return sorted;
     }, [products, searchTerm, selectedCategory, appliedPriceRange, sortOption]);
 
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
@@ -742,16 +796,8 @@ const ShopPage: React.FC = () => {
         setCart(prevCart => [...prevCart, product]);
     };
     
-    const handleRemoveFromCart = (productId: number) => {
-        setCart(prevCart => {
-            const productIndex = prevCart.findIndex(p => p.id === productId);
-            if (productIndex > -1) {
-                const newCart = [...prevCart];
-                newCart.splice(productIndex, 1);
-                return newCart;
-            }
-            return prevCart;
-        });
+    const handleRemoveFromCart = (productId: number, index: number) => {
+        setCart(prevCart => prevCart.filter((p, i) => !(p.id === productId && i === index)));
     };
 
     const handlePriceFilter = () => {
@@ -806,7 +852,7 @@ const ShopPage: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
                     <div className="lg:w-3/4">
-                        <h1 className="text-4xl font-extrabold text-white mb-4">Shop</h1>
+                        <h1 className="text-4xl font-extrabold text-white mb-4">Services</h1>
                         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 text-gray-400 gap-4">
                             <p>Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} results</p>
                             <select 
@@ -822,7 +868,13 @@ const ShopPage: React.FC = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                             {paginatedProducts.map((product) => (
-                                <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
+                                <ProductCard 
+                                    key={product.id} 
+                                    product={product} 
+                                    onAddToCart={handleAddToCart}
+                                    isExpanded={expandedProductId === product.id}
+                                    onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                />
                             ))}
                         </div>
 
@@ -877,10 +929,10 @@ const ShopPage: React.FC = () => {
                                 <>
                                     <ul className="space-y-4 mb-4">
                                         {cart.map((item, index) => (
-                                            <li key={`${item.id}-${index}`} className="flex justify-between items-center text-sm">
+                                            <li key={`${item.id}-${index}`} className="flex justify-between items-start text-sm">
                                                 <span className="text-gray-300 flex-1 pr-2">{item.name}</span>
                                                 <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
-                                                <button onClick={() => handleRemoveFromCart(item.id)} className="ml-3 text-red-500 hover:text-red-400 text-xs">Remove</button>
+                                                <button onClick={() => handleRemoveFromCart(item.id, index)} className="ml-3 text-red-500 hover:text-red-400 text-xs">X</button>
                                             </li>
                                         ))}
                                     </ul>
@@ -910,15 +962,6 @@ const ShopPage: React.FC = () => {
                                 ))}
                             </ul>
                         </div>
-                         <div className="bg-slate-900 p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Product tags</h3>
-                            <div className="flex flex-wrap gap-2">
-                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">bag</a>
-                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">clothes</a>
-                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">colorful</a>
-                                <a href="#" className="bg-slate-800 text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-amber-400 hover:text-black transition-colors">stuff</a>
-                            </div>
-                        </div>
                     </aside>
                 </div>
             </div>
@@ -926,14 +969,118 @@ const ShopPage: React.FC = () => {
     );
 };
 
+const TermsPage: React.FC = () => (
+    <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <div className="text-center mb-12">
+                <h1 className="text-5xl font-extrabold text-white">Terms and Conditions</h1>
+                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
+                <p className="mt-4 text-gray-400">Last updated: {new Date().toLocaleDateString()}</p>
+            </div>
+            <div className="bg-slate-900 rounded-lg p-8 lg:p-12 text-gray-300 space-y-8">
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">1. Introduction</h2>
+                    <p>Welcome to Mr One Dollar International. These Terms and Conditions govern your use of our website and services. By accessing or using our service, you agree to be bound by these terms. If you disagree with any part of the terms, then you may not access the service.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">2. No Refunds Policy</h2>
+                    <p className="font-bold text-amber-400">All purchases of digital products, including but not limited to courses, trade ideas, mentorship programs, and strategies, are final. We do not offer refunds, exchanges, or credits for any purchases. Once a product is purchased and accessed, we cannot revoke access, and therefore, no refunds will be provided under any circumstances.</p>
+                    <p>Please ensure you have carefully reviewed your order before completing your purchase.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">3. Use of Our Services</h2>
+                    <p>You agree to use our services for lawful purposes only. You are prohibited from sharing, distributing, reselling, or reproducing any of our course materials, trade ideas, or other proprietary content without our express written consent. Your account is for your personal use only and may not be shared with others.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">4. Risk Disclaimer</h2>
+                    <p>Trading in financial markets, including Forex, involves substantial risk and is not suitable for every investor. An investor could potentially lose all or more than the initial investment. Risk capital is money that can be lost without jeopardizing one's financial security or lifestyle. Only risk capital should be used for trading, and only those with sufficient risk capital should consider trading. Past performance is not indicative of future results.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">5. Intellectual Property</h2>
+                    <p>All content included on this site, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the site, is the property of Mr One Dollar International or its suppliers and protected by copyright and other laws that protect intellectual property and proprietary rights.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">6. Limitation of Liability</h2>
+                    <p>Mr One Dollar International provides educational and informational content. We are not financial advisors. The information provided is not intended as investment advice. We shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services or for the cost of procurement of substitute services.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">7. Changes to Terms</h2>
+                    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will provide notice of any changes by posting the new Terms and Conditions on this page. Your continued use of the service after any such changes constitutes your acceptance of the new Terms.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
+                    <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
+const PrivacyPolicyPage: React.FC = () => (
+    <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <div className="text-center mb-12">
+                <h1 className="text-5xl font-extrabold text-white">Privacy Policy</h1>
+                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
+                <p className="mt-4 text-gray-400">Last updated: {new Date().toLocaleDateString()}</p>
+            </div>
+            <div className="bg-slate-900 rounded-lg p-8 lg:p-12 text-gray-300 space-y-8">
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">1. Information We Collect</h2>
+                    <p>We may collect personally identifiable information, such as your name, email address, and phone number, when you register for our services, purchase products, or contact us. We may also collect non-personal information, such as browser type and IP address, to improve our services.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">2. How We Use Your Information</h2>
+                    <p>We use the information we collect to provide and improve our services, process transactions, communicate with you, and for marketing purposes. We will not sell or rent your personal information to third parties without your consent, except as required by law.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">3. Cookies</h2>
+                    <p>Our website may use "cookies" to enhance your experience. You may choose to set your web browser to refuse cookies or to alert you when cookies are being sent. If you do so, note that some parts of the site may not function properly.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">4. Third-Party Links</h2>
+                    <p>Our website may contain links to third-party websites, such as our trusted brokers. We are not responsible for the privacy practices or the content of these third-party sites. We encourage you to read their privacy policies.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">5. Security</h2>
+                    <p>We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">6. Your Rights</h2>
+                    <p>You have the right to access, update, or delete your personal information. If you wish to exercise these rights, please contact us at the email address provided below.</p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">7. Changes to This Policy</h2>
+                    <p>We reserve the right to update this Privacy Policy at any time. We will notify you of any changes by posting the new policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
   const renderPage = () => {
     switch(currentPage) {
         case 'home':
-            return <HomePage />;
+            return <HomePage setCurrentPage={setCurrentPage} />;
         case 'events':
             return <EventsPage />;
         case 'about':
@@ -942,10 +1089,14 @@ const App: React.FC = () => {
             return <TeamPage />;
         case 'contact':
             return <ContactPage />;
-        case 'shop':
-            return <ShopPage />;
+        case 'services':
+            return <ServicesPage />;
+        case 'terms':
+            return <TermsPage />;
+        case 'privacy':
+            return <PrivacyPolicyPage />;
         default:
-            return <HomePage />;
+            return <HomePage setCurrentPage={setCurrentPage} />;
     }
   }
 
@@ -955,7 +1106,7 @@ const App: React.FC = () => {
       <main>
         {renderPage()}
       </main>
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
     </>
   );
