@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+
+import React, { useState, useMemo } from 'react';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'download' | 'about' | 'team' | 'contact' | 'shop';
 interface Product {
+    id: number;
     name: string;
     price: number;
     originalPrice?: number;
@@ -516,7 +518,7 @@ const ContactPage: React.FC = () => {
     );
 };
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; }> = ({ product, onAddToCart }) => (
     <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col">
         <div className="w-full h-48 bg-slate-800 flex items-center justify-center">
             <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
@@ -532,37 +534,151 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
                     <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
                 )}
             </div>
-            <a href="#" className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">
+            <button onClick={() => onAddToCart(product)} className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">
                 Buy product
-            </a>
+            </button>
         </div>
     </div>
 );
 
 const ShopPage: React.FC = () => {
-    const products: Product[] = [
-        { name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Platinum Trade Ideas (Monthly Subscription)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Diamond Trade Ideas (Monthly Subscription)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Private Wealth VIP_Black Trade Ideas (Monthly Subscription)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Mr One Dollar Forex Trading Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Mr One Dollar Forex Trading Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Mr One Dollar Forex Trading Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-        { name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
-    ];
+    const [products] = useState<Product[]>([
+        { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 2, name: "Platinum Trade Ideas (Monthly Subscription)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 3, name: "Diamond Trade Ideas (Monthly Subscription)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 4, name: "Private Wealth VIP_Black Trade Ideas (Monthly Subscription)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 9, name: "Mr One Dollar Forex Trading Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 10, name: "Mr One Dollar Forex Trading Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 11, name: "Mr One Dollar Forex Trading Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 12, name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+        { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mr%241' },
+    ]);
 
-    const categories = Array.from(new Set(products.map(p => p.category)))
-        .map(cat => ({
+    const [cart, setCart] = useState<Product[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [priceRange, setPriceRange] = useState<{ min: number | string, max: number | string }>({ min: '', max: '' });
+    const [appliedPriceRange, setAppliedPriceRange] = useState<{ min: number | null, max: number | null }>({ min: null, max: null });
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [sortOption, setSortOption] = useState('default');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 12;
+
+    const categories = useMemo(() => {
+        const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
+        return uniqueCategories.map(cat => ({
             name: cat,
             count: products.filter(p => p.category === cat).length
         }));
+    }, [products]);
+
+    const filteredAndSortedProducts = useMemo(() => {
+        let filtered = products;
+
+        // Search filter
+        if (searchTerm) {
+            filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        }
+
+        // Category filter
+        if (selectedCategory) {
+            filtered = filtered.filter(p => p.category === selectedCategory);
+        }
+        
+        // Price filter
+        if (appliedPriceRange.min !== null) {
+            filtered = filtered.filter(p => p.price >= appliedPriceRange.min!);
+        }
+        if (appliedPriceRange.max !== null) {
+            filtered = filtered.filter(p => p.price <= appliedPriceRange.max!);
+        }
+
+        // Sorting
+        switch (sortOption) {
+            case 'price-asc':
+                filtered.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-desc':
+                filtered.sort((a, b) => b.price - a.price);
+                break;
+            // Add other sorting cases like popularity or latest if data is available
+            default:
+                break;
+        }
+
+        return filtered;
+    }, [products, searchTerm, selectedCategory, appliedPriceRange, sortOption]);
+
+    const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
+    const paginatedProducts = filteredAndSortedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    
+    const cartTotal = cart.reduce((total, product) => total + product.price, 0);
+
+    const handleAddToCart = (product: Product) => {
+        setCart(prevCart => [...prevCart, product]);
+    };
+    
+    const handleRemoveFromCart = (productId: number) => {
+        setCart(prevCart => {
+            const productIndex = prevCart.findIndex(p => p.id === productId);
+            if (productIndex > -1) {
+                const newCart = [...prevCart];
+                newCart.splice(productIndex, 1);
+                return newCart;
+            }
+            return prevCart;
+        });
+    };
+
+    const handlePriceFilter = () => {
+        setCurrentPage(1);
+        setAppliedPriceRange({
+            min: priceRange.min === '' ? null : Number(priceRange.min),
+            max: priceRange.max === '' ? null : Number(priceRange.max),
+        });
+    };
+
+    const handleCategoryClick = (e: React.MouseEvent, category: string | null) => {
+        e.preventDefault();
+        setCurrentPage(1);
+        setSelectedCategory(category);
+    };
+
+    const handlePageChange = (page: number) => {
+        if (page > 0 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+    
+    const renderPagination = () => {
+        if (totalPages <= 1) return null;
+        const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+        
+        return (
+            <nav className="flex justify-center items-center space-x-2 mt-12">
+                 {currentPage > 1 && (
+                     <button onClick={() => handlePageChange(currentPage - 1)} className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">←</button>
+                 )}
+                {pageNumbers.map(number => (
+                     <button 
+                        key={number} 
+                        onClick={() => handlePageChange(number)} 
+                        className={`${currentPage === number ? 'bg-amber-400 text-black' : 'text-gray-300 hover:bg-slate-800'} font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors`}
+                    >
+                        {number}
+                    </button>
+                ))}
+                {currentPage < totalPages && (
+                     <button onClick={() => handlePageChange(currentPage + 1)} className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</button>
+                )}
+            </nav>
+        );
+    };
 
 
     return (
@@ -572,28 +688,26 @@ const ShopPage: React.FC = () => {
                     {/* Main Content */}
                     <div className="lg:w-3/4">
                         <h1 className="text-4xl font-extrabold text-white mb-4">Shop</h1>
-                        <div className="flex justify-between items-center mb-6 text-gray-400">
-                            <p>Showing 1–12 of 15 results</p>
-                            <select className="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                <option>Default sorting</option>
-                                <option>Sort by popularity</option>
-                                <option>Sort by latest</option>
-                                <option>Sort by price: low to high</option>
-                                <option>Sort by price: high to low</option>
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 text-gray-400 gap-4">
+                            <p>Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} results</p>
+                            <select 
+                                value={sortOption}
+                                onChange={(e) => setSortOption(e.target.value)}
+                                className="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            >
+                                <option value="default">Default sorting</option>
+                                <option value="price-asc">Sort by price: low to high</option>
+                                <option value="price-desc">Sort by price: high to low</option>
                             </select>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-                            {products.slice(0, 12).map((product, index) => (
-                                <ProductCard key={index} product={product} />
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                            {paginatedProducts.map((product) => (
+                                <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
                             ))}
                         </div>
 
-                        <nav className="flex justify-center items-center space-x-2 mt-12">
-                            <span aria-current="page" className="bg-amber-400 text-black font-bold w-10 h-10 flex items-center justify-center rounded-md">1</span>
-                            <a href="#" className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">2</a>
-                            <a href="#" className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</a>
-                        </nav>
+                        {renderPagination()}
                     </div>
 
                     {/* Sidebar */}
@@ -601,32 +715,72 @@ const ShopPage: React.FC = () => {
                          <div className="bg-slate-900 p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
                             <div className="relative">
-                                <input type="search" placeholder="Search products…" className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-4 pr-10 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" />
-                                <button className="absolute inset-y-0 right-0 px-3 flex items-center bg-amber-400 text-black rounded-r-md hover:bg-amber-300">
-                                    Search
-                                </button>
+                                <input 
+                                    type="search" 
+                                    placeholder="Search products…" 
+                                    value={searchTerm}
+                                    onChange={(e) => {
+                                        setSearchTerm(e.target.value);
+                                        setCurrentPage(1);
+                                    }}
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-4 pr-10 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                                />
                             </div>
                         </div>
                         <div className="bg-slate-900 p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
-                            {/* Simple input fields for price range */}
                              <div className="flex items-center space-x-2 mb-4">
-                                <input type="number" placeholder="Min price" className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" />
-                                <input type="number" placeholder="Max price" className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                                <input 
+                                    type="number" 
+                                    placeholder="Min price" 
+                                    value={priceRange.min}
+                                    onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                                />
+                                <input 
+                                    type="number" 
+                                    placeholder="Max price" 
+                                    value={priceRange.max}
+                                    onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                                />
                             </div>
-                            <button className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">Filter</button>
-                             <p className="text-gray-400 mt-4 text-sm">Price: $10 — $1,150</p>
+                            <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">Filter</button>
                         </div>
                         <div className="bg-slate-900 p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Cart</h3>
-                            <p className="text-gray-400">No products in the cart.</p>
+                            {cart.length === 0 ? (
+                               <p className="text-gray-400">No products in the cart.</p>
+                            ) : (
+                                <>
+                                    <ul className="space-y-4 mb-4">
+                                        {cart.map((item, index) => (
+                                            <li key={`${item.id}-${index}`} className="flex justify-between items-center text-sm">
+                                                <span className="text-gray-300 flex-1 pr-2">{item.name}</span>
+                                                <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
+                                                <button onClick={() => handleRemoveFromCart(item.id)} className="ml-3 text-red-500 hover:text-red-400 text-xs">Remove</button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="border-t border-slate-700 pt-4 flex justify-between font-bold text-white">
+                                        <span>Total:</span>
+                                        <span>${cartTotal.toFixed(2)}</span>
+                                    </div>
+                                </>
+                            )}
                         </div>
                         <div className="bg-slate-900 p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
                             <ul className="space-y-2">
+                                <li>
+                                    <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-gray-400 hover:text-amber-400'}`}>
+                                        <span>All</span>
+                                        <span>({products.length})</span>
+                                    </a>
+                                </li>
                                 {categories.map(cat => (
                                      <li key={cat.name}>
-                                        <a href="#" className="flex justify-between text-gray-400 hover:text-amber-400">
+                                        <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-gray-400 hover:text-amber-400'}`}>
                                             <span>{cat.name}</span>
                                             <span>({cat.count})</span>
                                         </a>
