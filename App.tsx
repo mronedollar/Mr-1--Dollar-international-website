@@ -1,7 +1,4 @@
 
-
-
-
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 
 // --- Types ---
@@ -177,7 +174,7 @@ const QuoteIcon: React.FC<{ className?: string }> = ({ className = "w-12 h-12" }
 
 const TrashIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.067-2.09 1.02-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 4.8.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.067-2.09 1.02-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
     </svg>
 );
 
@@ -217,8 +214,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
-                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="text-2xl font-bold tracking-wider cursor-pointer transform hover:scale-105 transition-transform duration-300">
-                            MR <span className="text-amber-400">ONE</span> DOLLAR
+                         <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="block cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                            <img src="https://mr1dollar.co.za/wp-content/uploads/2025/03/cropped-MR1Dollar_mERCHWhite-7.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
                         </a>
                     </div>
                     <div className="hidden md:block">
