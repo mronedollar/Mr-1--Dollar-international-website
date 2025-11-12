@@ -12,8 +12,6 @@ interface Product {
     imageUrl: string;
 }
 
-const LOGO_URL = 'https://storage.googleapis.com/aistudio-project-marketplace-assets/9a626a57-1907-4e9f-8551-789a42f63f52';
-
 // --- SVG Icon Components ---
 
 const MenuIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
@@ -126,11 +124,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
-                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="flex items-center gap-3 text-2xl font-bold tracking-wider cursor-pointer transform hover:scale-105 transition-transform duration-300">
-                           <img src={LOGO_URL} alt="Mr$1 International Logo" className="h-12 w-auto" />
-                           <span>
-                                MR <span className="text-amber-400">ONE</span> DOLLAR
-                           </span>
+                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="text-2xl font-bold tracking-wider cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                            MR <span className="text-amber-400">ONE</span> DOLLAR
                         </a>
                     </div>
                     <div className="hidden md:block">
@@ -257,7 +252,6 @@ const Footer: React.FC = () => (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-2">
-                    <img src={LOGO_URL} alt="Mr$1 International Logo" className="h-16 w-auto mb-4" />
                     <h3 className="text-xl font-bold text-white">Mr One Dollar International</h3>
                     <p className="mt-4 text-gray-400 text-sm leading-relaxed">
                         At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together.
