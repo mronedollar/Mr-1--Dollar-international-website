@@ -12,6 +12,8 @@ interface Product {
     imageUrl: string;
 }
 
+const LOGO_URL = 'https://storage.googleapis.com/aistudio-project-marketplace-assets/9a626a57-1907-4e9f-8551-789a42f63f52';
+
 // --- SVG Icon Components ---
 
 const MenuIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
@@ -45,13 +47,6 @@ const EnvelopeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" 
     </svg>
 );
 
-const ClockIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-);
-
-
 const ChartBarIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125-1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125-1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
@@ -79,6 +74,24 @@ const UserIcon: React.FC<{ className?: string }> = ({ className = "w-24 h-24" })
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = "w-8 h-8" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" className={className}>
         <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.8-28.2l-6.7-4-69.8 18.3L72 359.2l-4.5-7c-21.3-33.1-33.6-71.6-33.6-112.5 0-108.8 88.5-197.3 197.3-197.3 53.9 0 104.5 21.1 142.8 59.5 38.2 38.3 59.5 88.9 59.5 142.8 0 108.8-88.5 197.3-197.3 197.3zm88.6-114.8c-3.8-1.9-22.5-11.1-26-12.4-3.5-1.4-6-1.9-8.6 1.9s-9.8 12.4-12 14.9c-2.2 2.5-4.5 2.8-8.3 1s-16-5.9-30.4-18.7c-11.3-10-19-22.3-21.2-26.1-2.2-3.8-0.2-5.9 1.7-7.7 1.7-1.6 3.8-4.2 5.7-6.2 1.9-2.1 2.5-3.8 3.8-6.4 1.2-2.5 0.6-4.7-0.3-6.1-0.9-1.4-8.6-20.8-11.8-28.5-3.1-7.7-6.2-6.6-8.6-6.7-2.2-0.1-4.7-0.1-7.3-0.1s-6.7 1-10.2 4.7c-3.5 3.7-13.4 13.1-13.4 32 0 18.8 13.7 37.1 15.6 39.6 1.9 2.5 26.9 41.2 65.4 58 38.4 16.8 38.4 11.2 45.3 10.5 6.9-0.8 22.5-9.2 25.6-18.1 3.1-8.9 3.1-16.5 2.2-18.1-1-1.6-3.5-2.5-7.3-4.5z"/>
+    </svg>
+);
+
+const YouTubeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" className={className}>
+        <path d="M549.655 124.083c-6.281-23.65-24.787-42.1-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.497-41.995 24.947-48.284 48.597-11.412 42.867-11.412 132.325-11.412 132.325s0 89.458 11.412 132.325c6.289 23.65 24.787 41.995 48.284 48.597C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.597 42.002-24.947 48.284-48.597 11.412-42.867 11.412-132.325 11.412-132.325s0-89.458-11.412-132.325zM232.615 354.46V157.54l132.738 98.46-132.738 98.46z"/>
+    </svg>
+);
+
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" className={className}>
+        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+    </svg>
+);
+
+const SearchIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
     </svg>
 );
 
@@ -113,15 +126,18 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
-                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="text-2xl font-bold tracking-wider cursor-pointer">
-                            MR <span className="text-amber-400">ONE</span> DOLLAR
+                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="flex items-center gap-3 text-2xl font-bold tracking-wider cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                           <img src={LOGO_URL} alt="Mr$1 International Logo" className="h-12 w-auto" />
+                           <span>
+                                MR <span className="text-amber-400">ONE</span> DOLLAR
+                           </span>
                         </a>
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
                             {navLinks.map(link => (
                                 <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPage === link.page ? 'text-amber-400' : 'text-gray-300 hover:text-amber-400'}`}>
+                                   className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-gray-300 hover:text-amber-400 hover:scale-105'}`}>
                                     {link.name}
                                 </a>
                             ))}
@@ -154,7 +170,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 
 const Hero: React.FC = () => (
     <section className="py-24 sm:py-32 text-center bg-black">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
             <h2 className="text-amber-400 text-sm font-bold uppercase tracking-widest">Mr One Dollar International</h2>
             <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
                 The Blueprint to the 1% – <br /> Trade Smarter, Profit Bigger!!!
@@ -194,7 +210,7 @@ const PropFirms: React.FC = () => {
     ];
     
     return (
-        <section className="py-20 bg-slate-900">
+        <section className="py-20 bg-slate-900 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Trusted Partners</h2>
                 <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
@@ -223,7 +239,7 @@ const PropFirms: React.FC = () => {
 };
 
 const About: React.FC = () => (
-    <section id="about-us" className="py-20 bg-black">
+    <section id="about-us" className="py-20 bg-black animate-fadeIn">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white">About Mr One Dollar International</h2>
@@ -239,11 +255,12 @@ const About: React.FC = () => (
 const Footer: React.FC = () => (
     <footer className="bg-black border-t border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-2">
+                    <img src={LOGO_URL} alt="Mr$1 International Logo" className="h-16 w-auto mb-4" />
                     <h3 className="text-xl font-bold text-white">Mr One Dollar International</h3>
                     <p className="mt-4 text-gray-400 text-sm leading-relaxed">
-                        At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together. We are dedicated to providing top-notch training, valuable resources, and a supportive environment that fosters personal and professional development.
+                        At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together.
                     </p>
                 </div>
                 <div>
@@ -251,7 +268,7 @@ const Footer: React.FC = () => (
                     <ul className="mt-4 space-y-3 text-sm">
                         <li className="flex items-start text-gray-400">
                            <MapPinIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                           <a href="https://www.google.com/maps/place/8+Karen+St,+Lyme+Park,+Sandton,+2060/@-26.08077,28.0181538,3a,75y,95.22h,90t/data=!4m6!3m5!1s0x1e957482756d30af:0x89934465d22d0388!8m2!3d-26.0808!4d28.01852!16s%2Fg%2F11c5pnqdkl?entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400">
+                           <a href="https://www.google.com/maps/place/8+Karen+St,+Lyme+Park,+Sandton,+2060/@-26.08077,28.0181538,3a,75y,95.22h,90t/data=!4m6!3m5!1s0x1e957482756d30af:0x89934465d22d0388!8m2!3d-26.0808!4d28.01852!16s%2Fg%2F11c5pnqdkl?entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
                                 8 Karen St, Lyme Park, Sandton, 2060
                            </a>
                         </li>
@@ -261,12 +278,24 @@ const Footer: React.FC = () => (
                         </li>
                         <li className="flex items-start text-gray-400">
                              <EnvelopeIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                             <a href="mailto:info@mr1dollar.co.za" className="hover:text-amber-400">info@mr1dollar.co.za</a>
+                             <a href="mailto:info@mr1dollar.co.za" className="hover:text-amber-400 transition-colors">info@mr1dollar.co.za</a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    {/* Can be used for other links or info later */}
+                    <h3 className="text-xl font-bold text-white">Follow Us</h3>
+                    <div className="flex space-x-4 mt-4">
+                        <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <YouTubeIcon className="w-7 h-7" />
+                        </a>
+                        <a href="https://www.instagram.com/mr1dollarforextrading/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <InstagramIcon className="w-7 h-7" />
+                        </a>
+                        <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <WhatsAppIcon className="w-7 h-7" />
+                        </a>
+                    </div>
+                     <p className="mt-4 text-gray-400 text-sm">Join our WhatsApp Community!</p>
                 </div>
             </div>
             <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
@@ -288,7 +317,7 @@ const WhatsAppWidget: React.FC = () => (
       href="https://api.whatsapp.com/send?phone=27626898567"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors flex items-center group"
+      className="fixed bottom-5 right-5 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center group"
       aria-label="Chat with us on WhatsApp"
     >
       <WhatsAppIcon className="w-8 h-8"/>
@@ -317,7 +346,7 @@ const EventsPage: React.FC = () => {
     ];
 
     return (
-        <div className="bg-black py-16 sm:py-24">
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
@@ -374,11 +403,74 @@ const FeatureCard: React.FC<{icon: React.ReactNode, title: string}> = ({icon, ti
     </div>
 );
 
+const FAQ: React.FC = () => {
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+    const faqData = [
+        {
+            question: "What is Mr$1 International?",
+            answer: "Mr$1 International is a premier Forex education and trade idea provider. Our mission is to empower traders of all levels with the knowledge, strategies, and community support needed to achieve financial independence and join the top 1% of successful traders."
+        },
+        {
+            question: "Who are your courses designed for?",
+            answer: "Our courses cater to everyone, from absolute beginners with no prior knowledge to experienced traders looking to refine their strategies. We offer a structured learning path, including beginner, intermediate, and advanced courses, as well as specialized mentorship programs."
+        },
+        {
+            question: "What makes your trade ideas different?",
+            answer: "Our trade ideas are the result of rigorous analysis by our team of expert traders. We don't just provide signals; we offer insights into the market's direction, helping you make informed decisions. Our focus is on high-probability setups that align with our core 'Stay Blue & Take Profit' philosophy."
+        },
+        {
+            question: "Do I need any prior experience to start?",
+            answer: "Not at all! Our beginner's course is specifically designed to build a strong foundation from the ground up. We cover all the basics, from understanding Forex terminology to setting up your charts and executing your first trade in a supportive learning environment."
+        },
+        {
+            question: "How do I get started with Mr$1 International?",
+            answer: "Getting started is simple. You can explore our courses on the 'Online Shop' page and choose the one that best fits your experience level. We also recommend registering with one of our trusted partner brokers through the links on our homepage to start your trading journey."
+        }
+    ];
+
+    const toggleFAQ = (index: number) => {
+        setActiveIndex(activeIndex === index ? null : index);
+    };
+
+    return (
+        <section className="py-20 bg-black animate-fadeInUp">
+            <div className="container mx-auto px-4 max-w-4xl">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-white">Frequently Asked Questions</h2>
+                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto"></div>
+                </div>
+                <div className="space-y-4">
+                    {faqData.map((faq, index) => (
+                        <div key={index} className="bg-slate-900 rounded-lg">
+                            <button
+                                onClick={() => toggleFAQ(index)}
+                                className="w-full flex justify-between items-center text-left p-5 focus:outline-none"
+                            >
+                                <span className="text-lg font-medium text-white">{faq.question}</span>
+                                <span className={`transform transition-transform duration-300 ${activeIndex === index ? 'rotate-180' : ''}`}>
+                                    <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </span>
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeIndex === index ? 'max-h-screen' : 'max-h-0'}`}>
+                                <div className="p-5 pt-0 text-gray-400">
+                                    <p>{faq.answer}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+
 const AboutPage: React.FC = () => (
-    <div className="bg-black">
+    <div className="bg-black animate-fadeIn">
         {/* Page Header */}
         <section className="py-24 bg-slate-900">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container mx-auto px-4 text-center animate-fadeInUp">
                 <h1 className="text-5xl font-extrabold text-white">About Our Company</h1>
                 <p className="mt-4 text-amber-400 text-lg uppercase tracking-widest">Our Story</p>
                 <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto"></div>
@@ -386,7 +478,7 @@ const AboutPage: React.FC = () => (
         </section>
 
         {/* Story Content */}
-        <section className="py-20">
+        <section className="py-20 animate-fadeInUp">
             <div className="container mx-auto px-4 max-w-4xl text-center">
                 <p className="text-xl text-gray-300 leading-relaxed">
                     At Mr. One Dollar Forex Trading, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can Thrive, learn and grow together. We are dedicated to providing top-notch training, valuable resources, and a supportive environment that fosters personal and professional development.
@@ -395,7 +487,7 @@ const AboutPage: React.FC = () => (
         </section>
 
         {/* Mission Section */}
-        <section className="py-20 bg-slate-900">
+        <section className="py-20 bg-slate-900 animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="text-center">
                     <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Mission</h2>
@@ -408,7 +500,7 @@ const AboutPage: React.FC = () => (
         </section>
 
         {/* Features Grid */}
-        <section className="py-20 bg-black">
+        <section className="py-20 bg-black animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <FeatureCard icon={<ChartBarIcon className="w-12 h-12 text-amber-400"/>} title="Track Record" />
@@ -418,8 +510,10 @@ const AboutPage: React.FC = () => (
             </div>
         </section>
 
+        <FAQ />
+
         {/* For Beginners CTA */}
-        <section className="py-20">
+        <section className="py-20 animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="bg-slate-900 rounded-lg p-10 text-center flex flex-col items-center">
                     <h2 className="text-3xl font-bold text-white">Watch our Forex guide for beginners</h2>
@@ -464,16 +558,16 @@ const TeamPage: React.FC = () => {
     ];
 
     return (
-        <div className="bg-black py-16 sm:py-24">
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
+                <div className="text-center mb-16 animate-fadeInUp">
                     <h1 className="text-5xl font-extrabold text-white">Our Team</h1>
                     <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
                         Meet our Forex Trading experts. Our company was founded in 2020. We work daily to become better and we are ready to share best practices.
                     </p>
                     <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fadeInUp">
                     {teamMembers.map(member => (
                         <TeamMemberCard key={member.name} name={member.name} role={member.role} />
                     ))}
@@ -495,13 +589,13 @@ const ContactPage: React.FC = () => {
     ];
 
     return (
-        <div className="bg-black py-16 sm:py-24">
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
+                <div className="text-center mb-16 animate-fadeInUp">
                     <h1 className="text-5xl font-extrabold text-white">Get in touch</h1>
                     <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
                 </div>
-                <div className="bg-slate-900 rounded-lg p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="bg-slate-900 rounded-lg p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 animate-fadeInUp">
                     {/* Contact Information */}
                     <div>
                         <h2 className="text-3xl font-bold text-white">Contact information</h2>
@@ -551,9 +645,9 @@ const ContactPage: React.FC = () => {
 };
 
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; }> = ({ product, onAddToCart }) => (
-    <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col">
-        <div className="w-full h-48 bg-slate-800 flex items-center justify-center">
-            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+    <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col group transform hover:-translate-y-2 transition-transform duration-300">
+        <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
+            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
         </div>
         <div className="p-4 flex flex-col flex-grow">
             <h3 className="text-lg font-semibold text-white flex-grow">{product.name}</h3>
@@ -638,7 +732,6 @@ const ShopPage: React.FC = () => {
             case 'price-desc':
                 filtered.sort((a, b) => b.price - a.price);
                 break;
-            // Add other sorting cases like popularity or latest if data is available
             default:
                 break;
         }
@@ -714,7 +807,7 @@ const ShopPage: React.FC = () => {
 
 
     return (
-        <div className="bg-black py-16 sm:py-24">
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
@@ -755,8 +848,11 @@ const ShopPage: React.FC = () => {
                                         setSearchTerm(e.target.value);
                                         setCurrentPage(1);
                                     }}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-4 pr-10 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all" 
                                 />
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                   <SearchIcon className="text-gray-400" />
+                                </div>
                             </div>
                         </div>
                         <div className="bg-slate-900 p-6 rounded-lg">
