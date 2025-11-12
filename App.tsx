@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo, useEffect } from 'react';
 
 // --- Types ---
@@ -15,23 +16,22 @@ interface Product {
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Gold', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions." },
-    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Platinum', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities." },
-    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Diamond', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts." },
-    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=VIP', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only." },
-    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Beginner', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence." },
-    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Intermediate', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy." },
-    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Advanced', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level." },
-    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Full+Course', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader." },
-    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mentorship', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset." },
-    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mentorship', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional." },
-    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Mentorship', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential." },
-    { id: 12, name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Strategy', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading." },
-    { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Indicators', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
-    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=NFP+Event', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
-    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://placehold.co/400x300/1e293b/facc15?text=Merch', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1611095965923-a535a6104334?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions." },
+    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1599050751538-34888211a76e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities." },
+    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, originalPrice: 250.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1612152028834-883a4c07a44f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts." },
+    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1580519543953-c6a6171b3303?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only." },
+    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence." },
+    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy." },
+    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level." },
+    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader." },
+    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset." },
+    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional." },
+    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential." },
+    { id: 12, name: "Currencies Strategy", price: 429.00, originalPrice: 430.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1639754391392-16715b703e8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading." },
+    { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
+    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://images.unsplash.com/photo-1504754524776-8f4f37790774?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
+    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
 ];
-
 
 // --- SVG Icon Components ---
 
@@ -68,22 +68,19 @@ const EnvelopeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" 
 
 const AcademicCapIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path d="M12 14l9-5-9-5-9 5 9 5z" />
-      <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M1 12l5.318-2.954a11.932 11.932 0 011.662-3.111l-3.35-1.861L1 12zm22 0l-5.318-2.954a11.932 11.932 0 00-1.662-3.111l3.35-1.861L23 12z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.627 48.627 0 0 1 12 20.904a48.627 48.627 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.57 50.57 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.902 59.902 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H6.75Z" />
     </svg>
 );
 
 const UsersIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 016-6h6a6 6 0 016 6v1h-3M15 21a3 3 0 01-6 0M21 21v-1a6 6 0 00-6-6h-1.5m1.5 6a3 3 0 01-3 3m-3-3a3 3 0 01-3-3m-3 3a3 3 0 01-3-3m0 0a3 3 0 013-3m3 3a3 3 0 013 3m-3-3a3 3 0 01-3-3" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.542 2.72a3 3 0 0 1-4.682-2.72 9.094 9.094 0 0 1 3.741-.479m7.542 2.72a8.25 8.25 0 0 0-7.542 0m7.542 0a3 3 0 0 0-7.542 0M12 12.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Zm0 0a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5ZM12 12.75v.008Z" />
     </svg>
 );
 
 const GlobeAltIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zM3.52 9.176l1.44 2.16m14.08 0l1.44-2.16M12 21V3m0 18c-3.182 0-6-1.6-6-3.5S8.818 14 12 14s6 1.6 6 3.5-2.818 3.5-6 3.5z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0 1 12 13.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 3 12c0-.778.099-1.533.284-2.253m0 0a11.953 11.953 0 0 1 18.232 0" />
     </svg>
 );
 
@@ -155,7 +152,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     };
 
     return (
-        <header className="bg-black/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-800">
+        <header className="bg-black/70 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-800/50">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
@@ -167,15 +164,15 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                         <div className="ml-10 flex items-baseline space-x-4">
                             {navLinks.map(link => (
                                 <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-gray-300 hover:text-amber-400 hover:scale-105'}`}>
+                                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-slate-300 hover:text-amber-400'}`}>
                                     {link.name}
-                                     {currentPage === link.page && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-amber-400 rounded-full"></span>}
+                                     {currentPage === link.page && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-400 rounded-full shadow-[0_0_8px_theme(colors.amber.400)]"></span>}
                                 </a>
                             ))}
                         </div>
                     </div>
                     <div className="-mr-2 flex md:hidden">
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="bg-slate-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="bg-slate-900 inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
                             <span className="sr-only">Open main menu</span>
                             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
                         </button>
@@ -188,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {navLinks.map(link => (
                              <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === link.page ? 'bg-amber-400 text-black' : 'text-gray-300 hover:bg-slate-700 hover:text-white'}`}>
+                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === link.page ? 'bg-amber-400 text-black' : 'text-slate-300 hover:bg-slate-700 hover:text-white'}`}>
                                  {link.name}
                              </a>
                         ))}
@@ -204,20 +201,20 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
-    <section className="py-24 sm:py-32 text-center bg-black">
+    <section className="py-24 sm:py-32 text-center hero-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
-            <h2 className="text-amber-400 text-sm font-bold uppercase tracking-widest">Mr One Dollar International</h2>
-            <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
+            <h2 className="text-amber-400 text-sm font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}>Mr One Dollar International</h2>
+            <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
                 The Blueprint to the 1% – <br /> Trade Smarter, Profit Bigger!!!
             </h1>
-            <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-400">
+            <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-400" style={{'--delay': '0.3s'} as React.CSSProperties}>
                 “Designed for traders who refuse to be average. Learn the strategies that put us in the 1%, Stay Blue & Take Profit.”
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style={{'--delay': '0.4s'} as React.CSSProperties}>
+                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
                     Get Started
                 </a>
-                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105">
+                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary">
                     Register with a Broker
                 </a>
             </div>
@@ -230,7 +227,7 @@ const PropFirms: React.FC = () => {
     const partners = [
         {
             name: 'PrimeXBT',
-            logoUrl: 'https://i.imgur.com/00tGvAY.png',
+            logoUrl: 'https://i.imgur.com/qE1l5lM.png',
             link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1'
         },
         {
@@ -249,17 +246,17 @@ const PropFirms: React.FC = () => {
         <section className="py-20 bg-slate-900 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Trusted Partners</h2>
-                <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+                <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
                     Sign up with one of our trusted partners to get funded and start trading with the best brokers and prop-firms in the industry.
                 </p>
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {partners.map(partner => (
+                    {partners.map((partner, i) => (
                         <a 
                             key={partner.name}
                             href={partner.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-black p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-transform duration-300"
+                            className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50"
                         >
                             <img 
                                 src={partner.logoUrl} 
@@ -279,9 +276,9 @@ const About: React.FC = () => (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white">About Mr One Dollar International</h2>
-                <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto"></div>
+                <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
             </div>
-            <p className="mt-8 text-lg text-gray-400 max-w-3xl mx-auto text-center">
+            <p className="mt-8 text-lg text-slate-400 max-w-3xl mx-auto text-center">
                 At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together. We are dedicated to providing top-notch training, valuable resources, and a supportive environment that fosters personal and professional development.
             </p>
         </div>
@@ -297,28 +294,28 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-2">
-                    <h3 className="text-xl font-bold text-white">Mr One Dollar International</h3>
-                    <p className="mt-4 text-gray-400 text-sm leading-relaxed">
+                    <h3 className="text-xl font-bold text-white">MR <span className="text-amber-400">ONE</span> DOLLAR</h3>
+                    <p className="mt-4 text-slate-400 text-sm leading-relaxed">
                         At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together.
                     </p>
                 </div>
                 <div>
                     <h3 className="text-xl font-bold text-white">Contact Us</h3>
                     <ul className="mt-4 space-y-3 text-sm">
-                        <li className="flex items-start text-gray-400">
+                        <li className="flex items-start text-slate-400">
                            <MapPinIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
                            <a href="https://www.google.com/maps/place/8+Karen+St,+Lyme+Park,+Sandton,+2060/@-26.08077,28.0181538,3a,75y,95.22h,90t/data=!4m6!3m5!1s0x1e957482756d30af:0x89934465d22d0388!8m2!3d-26.0808!4d28.01852!16s%2Fg%2F11c5pnqdkl?entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
                                 8 Karen St, Lyme Park, Sandton, 2060
                            </a>
                         </li>
-                        <li className="flex items-start text-gray-400">
+                        <li className="flex items-start text-slate-400">
                             <PhoneIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
                             <div>
                                 <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a> / 
                                 <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors"> +27 61 426 7355</a>
                             </div>
                         </li>
-                        <li className="flex items-start text-gray-400">
+                        <li className="flex items-start text-slate-400">
                              <EnvelopeIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
                              <a href="mailto:info@mr1dollar.co.za" className="hover:text-amber-400 transition-colors">info@mr1dollar.co.za</a>
                         </li>
@@ -327,30 +324,30 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                 <div>
                     <h3 className="text-xl font-bold text-white">Follow Us</h3>
                     <div className="flex space-x-4 mt-4">
-                        <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <YouTubeIcon className="w-7 h-7" />
                         </a>
-                        <a href="https://www.instagram.com/mr1dollarforextrading/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://www.instagram.com/mr1dollarforextrading/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <InstagramIcon className="w-7 h-7" />
                         </a>
-                        <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <WhatsAppIcon className="w-7 h-7" />
                         </a>
                     </div>
-                     <p className="mt-4 text-gray-400 text-sm">Join our WhatsApp Community!</p>
+                     <p className="mt-4 text-slate-400 text-sm">Join our WhatsApp Community!</p>
                 </div>
             </div>
             <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
                  <div className="text-center md:text-left">
-                    <p className="text-gray-400 text-sm">Copyright &copy; {new Date().getFullYear()} . All rights reserved.</p>
-                    <p className="text-gray-400 text-xs mt-1">Trading Involves Risk, Past Performances does not guarantee Future Result</p>
+                    <p className="text-slate-400 text-sm">Copyright &copy; {new Date().getFullYear()} . All rights reserved.</p>
+                    <p className="text-slate-500 text-xs mt-1">Trading Involves Risk, Past Performances does not guarantee Future Result</p>
                 </div>
                 <div className="flex flex-wrap justify-center space-x-4 mt-4 md:mt-0">
-                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Home</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">About Us</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Services</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Terms</a>
-                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('privacy'); }} className="text-gray-400 hover:text-amber-400 text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Home</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">About Us</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Services</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Terms</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('privacy'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Privacy Policy</a>
                 </div>
             </div>
         </div>
@@ -363,7 +360,7 @@ const WhatsAppWidget: React.FC = () => (
       href="https://api.whatsapp.com/send?phone=27626898567"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center group"
+      className="fixed bottom-5 right-5 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center group animate-pulse-glow"
       aria-label="Chat with us on WhatsApp"
     >
       <WhatsAppIcon className="w-8 h-8"/>
@@ -401,18 +398,18 @@ const EventsPage: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
                     <div className="lg:w-2/3">
-                        <div className="bg-slate-900 p-6 sm:p-8 rounded-lg">
+                        <div className="glass-card p-6 sm:p-8 rounded-lg">
                            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                                Learn how to trade NFP Event with Mr One Dollar Forex Trading
                            </h1>
                            <p className="text-3xl font-bold text-amber-400 mb-6">$16.00</p>
-                           <a href="#" className="inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
+                           <a href="#" className="inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
                                 Buy product
                            </a>
                         </div>
-                        <div className="mt-8 bg-slate-900 p-6 sm:p-8 rounded-lg">
+                        <div className="mt-8 glass-card p-6 sm:p-8 rounded-lg">
                             <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">Description</h2>
-                            <div className="text-gray-400 space-y-4">
+                            <div className="text-slate-400 space-y-4">
                                <p className="text-lg font-semibold text-white">NON FARM PAYROLL 🚀</p>
                                <p>Join us Live on the 7th of March for NFP Trading Mastery! Get ready to elevate your trading skills as we teach you how to effectively trade the Non-Farm Payroll (NFP) data release before it hits the market.</p>
                                <p>Discover strategies, tips, and insights to make the most of this critical economic event. Don’t miss out on this opportunity to learn and profit! 💰</p>
@@ -421,25 +418,25 @@ const EventsPage: React.FC = () => {
                     </div>
 
                     {/* Sidebar */}
-                    <div className="lg:w-1/3">
-                        <div className="bg-slate-900 p-6 rounded-lg mb-8">
+                    <aside className="lg:w-1/3 space-y-8">
+                         <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Cart</h3>
-                            <p className="text-gray-400">No products in the cart.</p>
+                            <p className="text-slate-400">No products in the cart.</p>
                         </div>
-                        <div className="bg-slate-900 p-6 rounded-lg">
+                         <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Products</h3>
                             <ul className="space-y-4">
                                 {products.map((product, index) => (
                                     <li key={index} className="border-b border-slate-700 pb-4 last:border-b-0 last:pb-0">
                                         <a href="#" className="group">
-                                            <p className="text-gray-300 group-hover:text-amber-400 transition-colors">{product.name}</p>
+                                            <p className="text-slate-300 group-hover:text-amber-400 transition-colors">{product.name}</p>
                                             <p className="font-semibold text-amber-400">{product.price}</p>
                                         </a>
                                     </li>
                                 ))}
                             </ul>
                         </div>
-                    </div>
+                    </aside>
                 </div>
             </div>
         </div>
@@ -447,14 +444,14 @@ const EventsPage: React.FC = () => {
 };
 
 const FeatureCard: React.FC<{icon: React.ReactNode, title: string}> = ({icon, title}) => (
-    <div className="bg-slate-900 p-8 rounded-lg flex flex-col items-center text-center transform hover:scale-105 hover:bg-slate-800 transition-all duration-300">
+    <div className="glass-card p-8 rounded-lg flex flex-col items-center text-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300">
         {icon}
         <h3 className="mt-5 text-xl font-bold text-white">{title}</h3>
     </div>
 );
 
 const FAQ: React.FC = () => {
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
     const faqData = [
         {
@@ -488,11 +485,11 @@ const FAQ: React.FC = () => {
             <div className="container mx-auto px-4 max-w-4xl">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl sm:text-4xl font-bold text-white">Frequently Asked Questions</h2>
-                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto"></div>
+                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
                 </div>
                 <div className="space-y-4">
                     {faqData.map((faq, index) => (
-                        <div key={index} className="bg-slate-900 rounded-lg overflow-hidden border border-transparent hover:border-amber-400/20 transition-colors">
+                        <div key={index} className="glass-card rounded-lg overflow-hidden border border-transparent hover:border-amber-400/20 transition-colors">
                             <button
                                 onClick={() => toggleFAQ(index)}
                                 className="w-full flex justify-between items-center text-left p-5 focus:outline-none"
@@ -503,7 +500,7 @@ const FAQ: React.FC = () => {
                                 </span>
                             </button>
                             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeIndex === index ? 'max-h-screen' : 'max-h-0'}`}>
-                                <div className="p-5 pt-0 text-gray-400">
+                                <div className="p-5 pt-0 text-slate-400">
                                     <p>{faq.answer}</p>
                                 </div>
                             </div>
@@ -523,14 +520,14 @@ const AboutPage: React.FC = () => (
             <div className="container mx-auto px-4 text-center animate-fadeInUp">
                 <h1 className="text-5xl font-extrabold text-white">About Our Company</h1>
                 <p className="mt-4 text-amber-400 text-lg uppercase tracking-widest">Our Story</p>
-                <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto"></div>
+                <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
             </div>
         </section>
 
         {/* Story Content */}
         <section className="py-20 animate-fadeInUp">
             <div className="container mx-auto px-4 max-w-4xl text-center">
-                <p className="text-xl text-gray-300 leading-relaxed">
+                <p className="text-xl text-slate-300 leading-relaxed">
                     At Mr. One Dollar Forex Trading, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can Thrive, learn and grow together. We are dedicated to providing top-notch training, valuable resources, and a supportive environment that fosters personal and professional development.
                 </p>
             </div>
@@ -541,9 +538,9 @@ const AboutPage: React.FC = () => (
             <div className="container mx-auto px-4">
                 <div className="text-center">
                     <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Mission</h2>
-                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto"></div>
+                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
                 </div>
-                <p className="mt-8 text-lg text-gray-400 max-w-3xl mx-auto text-center">
+                <p className="mt-8 text-lg text-slate-400 max-w-3xl mx-auto text-center">
                     We are helping people to succeed in the Financial Markets. We understand that trading is not just about profit; it’s about building a sustainable future for you and your loved ones. Our goal is to help you unlock your potential, gain confidence, and take control of your financial destiny. Together, we can navigate the markets and turn dreams into reality. Why settle for ordinary when you can be extraordinary? Join us on this journey to success!
                 </p>
             </div>
@@ -565,12 +562,12 @@ const AboutPage: React.FC = () => (
         {/* For Beginners CTA */}
         <section className="py-20 animate-fadeInUp">
             <div className="container mx-auto px-4">
-                <div className="bg-slate-900 rounded-lg p-10 text-center flex flex-col items-center">
+                <div className="glass-card rounded-lg p-10 text-center flex flex-col items-center">
                     <h2 className="text-3xl font-bold text-white">Watch our Forex guide for beginners</h2>
-                    <p className="mt-4 text-gray-400 max-w-2xl">
+                    <p className="mt-4 text-slate-400 max-w-2xl">
                         Invest in Forex, Stocks, Bitcoin, Ethereum, USDT, and other cryptocurrencies . The Bitcoin and cryptocurrency markets have experienced a surge in volume recently, making it an exciting time to become a trader. Forex markets have seen an increase in volume in recent weeks, which is a great opportunity for new traders.
                     </p>
-                    <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
                         Watch on YouTube
                     </a>
                 </div>
@@ -580,12 +577,12 @@ const AboutPage: React.FC = () => (
 );
 
 const TeamMemberCard: React.FC<{ name: string, role: string }> = ({ name, role }) => (
-    <div className="bg-slate-900 rounded-lg p-6 text-center flex flex-col items-center transform hover:scale-105 hover:bg-slate-800 transition-all duration-300">
-        <div className="bg-slate-800 rounded-full p-4 mb-4">
-            <UserIcon className="w-20 h-20 text-gray-500"/>
+    <div className="glass-card rounded-lg p-6 text-center flex flex-col items-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300">
+        <div className="bg-slate-800 rounded-full p-2 mb-4 ring-2 ring-slate-700">
+             <UserIcon className="w-20 h-20 text-slate-500"/>
         </div>
         <h3 className="text-xl font-bold text-white">{name}</h3>
-        <p className="text-amber-400 mt-1">{role}</p>
+        <p className="text-amber-400 mt-1 text-sm">{role}</p>
     </div>
 );
 
@@ -603,7 +600,6 @@ const TeamPage: React.FC = () => {
         { name: "Tshego. R", role: "Sales & Marketing Director" },
         { name: "Jason. N", role: "Senior developer" },
         { name: "Lungelo. N", role: "IT Developer" },
-        { name: "Eddie. M", role: "IT Developer" },
         { name: "Yandisa. D", role: "Business Systems" },
     ];
 
@@ -612,10 +608,10 @@ const TeamPage: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16 animate-fadeInUp">
                     <h1 className="text-5xl font-extrabold text-white">Our Team</h1>
-                    <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
+                    <p className="mt-4 text-xl text-slate-400 max-w-3xl mx-auto">
                         Meet our Forex Trading experts. Our company was founded in 2020. We work daily to become better and we are ready to share best practices.
                     </p>
-                    <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
+                    <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fadeInUp">
                     {teamMembers.map(member => (
@@ -643,13 +639,13 @@ const ContactPage: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16 animate-fadeInUp">
                     <h1 className="text-5xl font-extrabold text-white">Get in touch</h1>
-                    <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
+                    <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
                 </div>
-                <div className="bg-slate-900 rounded-lg p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 animate-fadeInUp">
+                <div className="glass-card rounded-lg p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 animate-fadeInUp">
                     {/* Contact Information */}
                     <div>
                         <h2 className="text-3xl font-bold text-white">Contact information</h2>
-                        <p className="mt-4 text-gray-400">
+                        <p className="mt-4 text-slate-400">
                            Our company was founded in 2020. We work daily to become better and we are ready to share best practices.
                         </p>
                         <ul className="mt-8 space-y-6">
@@ -657,17 +653,17 @@ const ContactPage: React.FC = () => {
                                 <MapPinIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Head office</h3>
-                                    <p className="text-gray-400">8 Karen St, Lyme Park, Sandton, 2060</p>
+                                    <p className="text-slate-400">8 Karen St, Lyme Park, Sandton, 2060</p>
                                 </div>
                             </li>
                             <li className="flex items-start">
                                 <PhoneIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Call us</h3>
-                                    <p className="text-gray-400">
+                                    <p className="text-slate-400">
                                         <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a>
                                     </p>
-                                    <p className="text-gray-400">
+                                    <p className="text-slate-400">
                                         <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
                                     </p>
                                 </div>
@@ -676,7 +672,7 @@ const ContactPage: React.FC = () => {
                                 <EnvelopeIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Email us</h3>
-                                    <a href="mailto:info@mr1dollar.co.za" className="text-gray-400 hover:text-amber-400">info@mr1dollar.co.za</a>
+                                    <a href="mailto:info@mr1dollar.co.za" className="text-slate-400 hover:text-amber-400">info@mr1dollar.co.za</a>
                                 </div>
                             </li>
                         </ul>
@@ -684,7 +680,7 @@ const ContactPage: React.FC = () => {
                     {/* Opening Hours */}
                     <div>
                         <h2 className="text-3xl font-bold text-white">Opening hours</h2>
-                        <ul className="mt-8 space-y-3 text-gray-400">
+                        <ul className="mt-8 space-y-3 text-slate-400">
                            {openingHours.map(item => (
                                 <li key={item.day} className="flex justify-between border-b border-slate-700 pb-3 last:border-b-0">
                                     <span>{item.day}</span>
@@ -700,7 +696,7 @@ const ContactPage: React.FC = () => {
 };
 
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => (
-    <div className="bg-slate-900 rounded-lg overflow-hidden flex flex-col group transition-all duration-300 border border-transparent hover:border-amber-400/30">
+    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-2xl hover:shadow-amber-500/5">
         <div className="relative">
              <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -716,18 +712,18 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
         <div className="p-4 flex flex-col flex-grow">
             <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
-                <p className="text-gray-400 text-sm">{product.description}</p>
+                <p className="text-slate-400 text-sm">{product.description}</p>
             </div>
             <div className="mt-2">
                 {product.originalPrice ? (
                     <p className="text-amber-400 text-xl font-bold">
-                        <del className="text-gray-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
+                        <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
                     </p>
                 ) : (
                     <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
                 )}
             </div>
-            <button onClick={() => onAddToCart(product)} className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">
+            <button onClick={() => onAddToCart(product)} className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">
                 Buy product
             </button>
         </div>
@@ -827,19 +823,19 @@ const ServicesPage: React.FC = () => {
         return (
             <nav className="flex justify-center items-center space-x-2 mt-12">
                  {currentPage > 1 && (
-                     <button onClick={() => handlePageChange(currentPage - 1)} className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">←</button>
+                     <button onClick={() => handlePageChange(currentPage - 1)} className="text-slate-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">←</button>
                  )}
                 {pageNumbers.map(number => (
                      <button 
                         key={number} 
                         onClick={() => handlePageChange(number)} 
-                        className={`${currentPage === number ? 'bg-amber-400 text-black' : 'text-gray-300 hover:bg-slate-800'} font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors`}
+                        className={`${currentPage === number ? 'bg-amber-400 text-black' : 'text-slate-300 hover:bg-slate-800'} font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors`}
                     >
                         {number}
                     </button>
                 ))}
                 {currentPage < totalPages && (
-                     <button onClick={() => handlePageChange(currentPage + 1)} className="text-gray-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</button>
+                     <button onClick={() => handlePageChange(currentPage + 1)} className="text-slate-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</button>
                 )}
             </nav>
         );
@@ -853,7 +849,7 @@ const ServicesPage: React.FC = () => {
                     {/* Main Content */}
                     <div className="lg:w-3/4">
                         <h1 className="text-4xl font-extrabold text-white mb-4">Services</h1>
-                        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 text-gray-400 gap-4">
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 text-slate-400 gap-4">
                             <p>Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} results</p>
                             <select 
                                 value={sortOption}
@@ -883,7 +879,7 @@ const ServicesPage: React.FC = () => {
 
                     {/* Sidebar */}
                     <aside className="lg:w-1/4 space-y-8">
-                         <div className="bg-slate-900 p-6 rounded-lg">
+                         <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
                             <div className="relative">
                                 <input 
@@ -897,11 +893,11 @@ const ServicesPage: React.FC = () => {
                                     className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all" 
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                   <SearchIcon className="text-gray-400" />
+                                   <SearchIcon className="text-slate-400" />
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-slate-900 p-6 rounded-lg">
+                        <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
                              <div className="flex items-center space-x-2 mb-4">
                                 <input 
@@ -919,18 +915,18 @@ const ServicesPage: React.FC = () => {
                                     className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
                                 />
                             </div>
-                            <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors">Filter</button>
+                            <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
                         </div>
-                        <div className="bg-slate-900 p-6 rounded-lg">
+                        <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Cart</h3>
                             {cart.length === 0 ? (
-                               <p className="text-gray-400">No products in the cart.</p>
+                               <p className="text-slate-400">No products in the cart.</p>
                             ) : (
                                 <>
                                     <ul className="space-y-4 mb-4">
                                         {cart.map((item, index) => (
                                             <li key={`${item.id}-${index}`} className="flex justify-between items-start text-sm">
-                                                <span className="text-gray-300 flex-1 pr-2">{item.name}</span>
+                                                <span className="text-slate-300 flex-1 pr-2">{item.name}</span>
                                                 <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
                                                 <button onClick={() => handleRemoveFromCart(item.id, index)} className="ml-3 text-red-500 hover:text-red-400 text-xs">X</button>
                                             </li>
@@ -943,18 +939,18 @@ const ServicesPage: React.FC = () => {
                                 </>
                             )}
                         </div>
-                        <div className="bg-slate-900 p-6 rounded-lg">
+                        <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
                             <ul className="space-y-2">
                                 <li>
-                                    <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-gray-400 hover:text-amber-400'}`}>
+                                    <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
                                         <span>All</span>
                                         <span>({products.length})</span>
                                     </a>
                                 </li>
                                 {categories.map(cat => (
                                      <li key={cat.name}>
-                                        <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-gray-400 hover:text-amber-400'}`}>
+                                        <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
                                             <span>{cat.name}</span>
                                             <span>({cat.count})</span>
                                         </a>
@@ -974,10 +970,10 @@ const TermsPage: React.FC = () => (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <div className="text-center mb-12">
                 <h1 className="text-5xl font-extrabold text-white">Terms and Conditions</h1>
-                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
-                <p className="mt-4 text-gray-400">Last updated: {new Date().toLocaleDateString()}</p>
+                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                <p className="mt-4 text-slate-400">Last updated: {new Date().toLocaleDateString()}</p>
             </div>
-            <div className="bg-slate-900 rounded-lg p-8 lg:p-12 text-gray-300 space-y-8">
+            <div className="glass-card rounded-lg p-8 lg:p-12 text-slate-300 space-y-8">
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">1. Introduction</h2>
                     <p>Welcome to Mr One Dollar International. These Terms and Conditions govern your use of our website and services. By accessing or using our service, you agree to be bound by these terms. If you disagree with any part of the terms, then you may not access the service.</p>
@@ -1028,10 +1024,10 @@ const PrivacyPolicyPage: React.FC = () => (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <div className="text-center mb-12">
                 <h1 className="text-5xl font-extrabold text-white">Privacy Policy</h1>
-                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto"></div>
-                <p className="mt-4 text-gray-400">Last updated: {new Date().toLocaleDateString()}</p>
+                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                <p className="mt-4 text-slate-400">Last updated: {new Date().toLocaleDateString()}</p>
             </div>
-            <div className="bg-slate-900 rounded-lg p-8 lg:p-12 text-gray-300 space-y-8">
+            <div className="glass-card rounded-lg p-8 lg:p-12 text-slate-300 space-y-8">
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">1. Information We Collect</h2>
                     <p>We may collect personally identifiable information, such as your name, email address, and phone number, when you register for our services, purchase products, or contact us. We may also collect non-personal information, such as browser type and IP address, to improve our services.</p>
@@ -1101,14 +1097,14 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="bg-black">
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <main>
         {renderPage()}
       </main>
       <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
-    </>
+    </div>
   );
 };
 
