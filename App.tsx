@@ -174,21 +174,53 @@ const Hero: React.FC = () => (
     </section>
 );
 
-const PropFirms: React.FC = () => (
-    <section className="py-20 bg-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">Don't trade with your own funds</h2>
-            <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
-                Sign up here with one of our partners and get funded with the best Prop-firms in the industry. Trade with confidence and scale your profits without risking your own capital.
-            </p>
-             <div className="mt-8">
-                <a href="#" className="inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105">
-                    Sign Up With Our Partners
-                </a>
+const PropFirms: React.FC = () => {
+    const partners = [
+        {
+            name: 'PrimeXBT',
+            logoUrl: 'https://i.imgur.com/00tGvAY.png',
+            link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1'
+        },
+        {
+            name: 'FundedNext',
+            logoUrl: 'https://i.imgur.com/qK1gB1x.png',
+            link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55'
+        },
+        {
+            name: 'FTMO',
+            logoUrl: 'https://i.imgur.com/9C2rcyd.png',
+            link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH'
+        }
+    ];
+    
+    return (
+        <section className="py-20 bg-slate-900">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Trusted Partners</h2>
+                <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
+                    Sign up with one of our trusted partners to get funded and start trading with the best brokers and prop-firms in the industry.
+                </p>
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {partners.map(partner => (
+                        <a 
+                            key={partner.name}
+                            href={partner.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-black p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-transform duration-300"
+                        >
+                            <img 
+                                src={partner.logoUrl} 
+                                alt={`${partner.name} logo`} 
+                                className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
+                            />
+                        </a>
+                    ))}
+                </div>
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
 const About: React.FC = () => (
     <section id="about-us" className="py-20 bg-black">
