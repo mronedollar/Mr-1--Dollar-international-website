@@ -272,7 +272,8 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
                 <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
                     Get Started
                 </a>
-                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary">
+                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary">
+                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
                     Register with a Broker
                 </a>
             </div>
@@ -285,17 +286,17 @@ const PropFirms: React.FC = () => {
     const partners = [
         {
             name: 'PrimeXBT',
-            logoUrl: 'https://i.imgur.com/xO4A5QG.png',
+            logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
             link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1'
         },
         {
             name: 'FundedNext',
-            logoUrl: 'https://i.imgur.com/qK1gB1x.png',
+            logoUrl: 'https://i.ibb.co/svC6FzHN/Fundednext-Logo.png',
             link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55'
         },
         {
             name: 'FTMO',
-            logoUrl: 'https://i.imgur.com/9C2rcyd.png',
+            logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
             link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH'
         }
     ];
@@ -309,19 +310,27 @@ const PropFirms: React.FC = () => {
                 </p>
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
                     {partners.map((partner, i) => (
-                        <a 
-                            key={partner.name}
-                            href={partner.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50"
-                        >
-                            <img 
-                                src={partner.logoUrl} 
-                                alt={`${partner.name} logo`} 
-                                className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
-                            />
-                        </a>
+                        <div key={partner.name} className="flex flex-col items-center">
+                            <a 
+                                href={partner.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50 w-full"
+                            >
+                                <img 
+                                    src={partner.logoUrl} 
+                                    alt={`${partner.name} logo`} 
+                                    className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
+                                />
+                            </a>
+                            <span className={`mt-3 font-semibold ${
+                                partner.name === 'PrimeXBT' ? 'text-amber-500' : 
+                                partner.name === 'FundedNext' ? 'text-blue-500' : 
+                                'text-green-500'
+                            }`}>
+                                {partner.name}
+                            </span>
+                        </div>
                     ))}
                 </div>
             </div>
