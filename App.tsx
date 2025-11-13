@@ -1,5 +1,4 @@
-
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
@@ -347,46 +346,29 @@ const PropFirms: React.FC = () => {
 };
 
 const Testimonials: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const timeoutRef = useRef<number | null>(null);
-
-    const resetTimeout = () => {
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-    };
-
-    useEffect(() => {
-        resetTimeout();
-        timeoutRef.current = window.setTimeout(
-            () =>
-                setCurrentIndex((prevIndex) =>
-                    prevIndex === testimonialsData.length - 1 ? 0 : prevIndex + 1
-                ),
-            5000 // Change slide every 5 seconds
-        );
-
-        return () => {
-            resetTimeout();
-        };
-    }, [currentIndex]);
-
-    const goToSlide = (slideIndex: number) => {
-        setCurrentIndex(slideIndex);
-    };
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
     
-    const prevSlide = () => {
-        const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? testimonialsData.length - 1 : currentIndex - 1;
-        setCurrentIndex(newIndex);
-    };
-
-    const nextSlide = () => {
-        const isLastSlide = currentIndex === testimonialsData.length - 1;
-        const newIndex = isLastSlide ? 0 : currentIndex + 1;
-        setCurrentIndex(newIndex);
-    };
-
+    // Get all testimonial image files from the public directory
+    const testimonialImages = [
+        'WhatsApp Image 2025-11-03 at 14.53.22_1344b584.jpg',
+        'WhatsApp Image 2025-11-03 at 17.16.03_119b503d.jpg',
+        'WhatsApp Image 2025-11-03 at 17.17.11_57705a92.jpg',
+        'WhatsApp Image 2025-11-03 at 17.18.03_07fdb6eb.jpg',
+        'WhatsApp Image 2025-11-03 at 17.21.00_2b64be7d.jpg',
+        'WhatsApp Image 2025-11-03 at 17.34.02_20e3bebb.jpg',
+        'WhatsApp Image 2025-11-04 at 08.57.18_eb106dae.jpg',
+        'WhatsApp Image 2025-11-04 at 17.24.42_6c99cf04.jpg',
+        'WhatsApp Image 2025-11-06 at 21.37.54_3fe0f787.jpg',
+        'WhatsApp Image 2025-11-07 at 21.18.22_6d830380.jpg',
+        'WhatsApp Image 2025-11-07 at 21.19.45_9c8b041e.jpg',
+        'WhatsApp Image 2025-11-11 at 14.26.31_b730de11.jpg',
+        'WhatsApp Image 2025-11-11 at 14.26.32_f23f739c.jpg',
+        'WhatsApp Image 2025-11-11 at 14.44.38_a5e0cc99.jpg',
+        'WhatsApp Image 2025-11-11 at 15.39.25_0be34331.jpg',
+        'WhatsApp Image 2025-11-11 at 15.48.45_14350078.jpg'
+    ];
+    
     return (
         <section className="py-20 bg-black animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -394,62 +376,80 @@ const Testimonials: React.FC = () => {
                 <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
                     Real results from real members of the Mr$1 community.
                 </p>
-                <div className="mt-12 max-w-3xl mx-auto relative">
-                    <div className="overflow-hidden relative h-72">
-                        {testimonialsData.map((testimonial, index) => (
-                            <div
-                                key={index}
-                                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
-                            >
-                                <div className="glass-card p-8 rounded-lg h-full flex flex-col justify-center items-center text-center">
-                                    <QuoteIcon className="w-8 h-8 text-amber-400/50 mb-4" />
-                                    <p className="text-xl italic text-slate-300">"{testimonial.quote}"</p>
-                                    <div className="mt-6">
-                                        <p className="font-bold text-white text-lg">{testimonial.author}</p>
-                                        <p className="text-amber-400 text-sm">{testimonial.role}</p>
+                
+                <div className="mt-12">
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center mx-auto"
+                    >
+                        {isOpen ? 'Hide Testimonials' : 'View All Testimonials'}
+                        <svg 
+                            className={`w-5 h-5 ml-2 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    {isOpen && (
+                        <div className="mt-8">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                {testimonialImages.map((image, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="relative group cursor-pointer overflow-hidden rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                        onClick={() => setSelectedImage(image)}
+                                    >
+                                        <img 
+                                            src={`/mr$1 testimonials/${image}`}
+                                            alt={`Testimonial ${index + 1}`}
+                                            className="w-full h-48 object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    {/* Left Arrow */}
-                    <button onClick={prevSlide} className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-12 bg-slate-800/50 hover:bg-slate-700/80 text-white rounded-full p-2 transition-colors z-10">
-                        <ChevronLeftIcon className="w-6 h-6" />
-                    </button>
-                    {/* Right Arrow */}
-                    <button onClick={nextSlide} className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-12 bg-slate-800/50 hover:bg-slate-700/80 text-white rounded-full p-2 transition-colors z-10">
-                        <ChevronRightIcon className="w-6 h-6" />
-                    </button>
-
-                    <div className="flex justify-center space-x-2 pt-6">
-                        {testimonialsData.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => goToSlide(index)}
-                                className={`w-3 h-3 rounded-full transition-colors ${currentIndex === index ? 'bg-amber-400' : 'bg-slate-700 hover:bg-slate-600'}`}
-                                aria-label={`Go to slide ${index + 1}`}
-                            />
-                        ))}
-                    </div>
+                        </div>
+                    )}
                 </div>
+                
+                {/* Image Modal */}
+                {selectedImage && (
+                    <div 
+                        className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div className="relative max-w-4xl w-full">
+                            <button 
+                                className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedImage(null);
+                                }}
+                            >
+                                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <img 
+                                src={`/mr$1 testimonials/${selectedImage}`}
+                                alt="Full size testimonial"
+                                className="max-h-[80vh] max-w-full mx-auto rounded-lg"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </section>
     );
 };
-
-const About: React.FC = () => (
-    <section id="about-us" className="py-20 bg-slate-900 animate-fadeIn">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white">About Mr One Dollar International</h2>
-                <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
-            </div>
-            <p className="mt-8 text-lg text-slate-400 max-w-3xl mx-auto text-center">
-                At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together. We are dedicated to providing top-notch training, valuable resources, and a supportive environment that fosters personal and professional development.
-            </p>
-        </div>
-    </section>
-);
 
 interface FooterProps {
     setCurrentPage: (page: Page) => void;
@@ -497,7 +497,10 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                             <InstagramIcon className="w-7 h-7" />
                         </a>
                         <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
-                            <WhatsAppIcon className="w-7 h-7" />
+                            <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.5 3.5a10 10 0 1 0-15.6 11.7L2 22l6.8-2.9a10 10 0 0 0 4.8 1.2 10 10 0 0 0 6.9-16.8zm-8.5 16.3a8.4 8.4 0 0 1-4.3-1.2l-.3-.2-3.2.9.9-3.1-.2-.3a8.4 8.4 0 1 1 15.5-4.4 8.4 8.4 0 0 1-8.4 8.3z"/>
+                                <path d="M17.5 14.3c-.2-.1-1.5-.7-1.7-.8-.2-.1-.3-.1-.4.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.6-2-1.1-1.2-1-2-2.2-2.5-3.6-.1-.2 0-.3.1-.4.2-.2.5-.6.6-.8.1-.2.1-.3.1-.4 0-.2-.1-.3-.2-.4l-.5-.6c-.2-.2-.4-.3-.6-.3h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.2 0 1.3 1 2.6 1.1 2.8.1.2 1.8 2.7 4.4 3.7.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.5.2-1 0-1.4-.1-.2-.5-.4-.7-.5z"/>
+                            </svg>
                         </a>
                     </div>
                      <p className="mt-4 text-slate-400 text-sm">Join our WhatsApp Community!</p>
@@ -554,7 +557,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => (
         <Hero setCurrentPage={setCurrentPage} />
         <PropFirms />
         <Testimonials />
-        <About />
+        <AboutPage />
     </>
 );
 
