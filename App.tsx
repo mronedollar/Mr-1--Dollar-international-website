@@ -286,16 +286,19 @@ const PropFirms: React.FC = () => {
     const partners = [
         {
             name: 'PrimeXBT',
+            description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
             link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1'
         },
         {
             name: 'FundedNext',
-            logoUrl: 'https://i.ibb.co/svC6FzHN/Fundednext-Logo.png',
+            description: 'A proprietary trading firm providing funding for forex and crypto traders worldwide',
+            logoUrl: 'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
             link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55'
         },
         {
             name: 'FTMO',
+            description: 'A global prop trading firm offering capital to skilled traders through evaluation programs',
             logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
             link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH'
         }
@@ -323,13 +326,18 @@ const PropFirms: React.FC = () => {
                                     className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
                                 />
                             </a>
-                            <span className={`mt-3 font-semibold ${
-                                partner.name === 'PrimeXBT' ? 'text-amber-500' : 
-                                partner.name === 'FundedNext' ? 'text-blue-500' : 
-                                'text-green-500'
-                            }`}>
-                                {partner.name}
-                            </span>
+                            <div className="mt-3 text-center">
+                                <h3 className={`font-semibold ${
+                                    partner.name === 'PrimeXBT' ? 'text-amber-500' : 
+                                    partner.name === 'FundedNext' ? 'text-blue-500' : 
+                                    'text-green-500'
+                                }`}>
+                                    {partner.name}
+                                </h3>
+                                <p className="mt-1 text-sm text-gray-300">
+                                    {partner.description}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -514,18 +522,24 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 
 
 const WhatsAppWidget: React.FC = () => (
-    <a 
-      href="https://api.whatsapp.com/send?phone=27626898567"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center group animate-pulse-glow"
-      aria-label="Chat with us on WhatsApp"
-    >
-      <WhatsAppIcon className="w-8 h-8"/>
-      <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 whitespace-nowrap">
-        Need Help? Chat with us
-      </span>
-    </a>
+    <div className="fixed bottom-6 right-6 z-50">
+      <a 
+        href="https://api.whatsapp.com/send?phone=27626898567"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group"
+        aria-label="Chat with us on WhatsApp"
+      >
+        <img 
+          src="https://i.ibb.co/k62LSRsn/Whats-App-Logo.png" 
+          alt="WhatsApp" 
+          className="w-8 h-8 object-contain"
+        />
+        <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Chat with us
+        </span>
+      </a>
+    </div>
 );
 
 
