@@ -349,12 +349,12 @@ const PromoSection: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     
     return (
-        <section className="py-12 bg-gradient-to-br from-blue-900 to-black text-white">
+        <section className="py-12 bg-black text-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     <button 
                         onClick={() => setIsOpen(!isOpen)}
-                        className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between"
+                        className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between"
                     >
                         <span className="text-lg sm:text-xl">🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥</span>
                         <svg 
@@ -689,10 +689,59 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => (
 );
 
 const EventsPage: React.FC = () => {
-    const products = [
-        { name: "Gold High Voltage Trade Ideas", price: "$59.00" },
-        { name: "Learn how to trade NFP Event with Mr One Dollar Forex Trading", price: "$16.00" },
-        { name: "Full Course", price: "$879.00" },
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    
+    // Event data
+    const events = [
+        {
+            id: 1,
+            title: "Tradecation",
+            description: "Transform into a confident and profitable trader with our complete experience that combines education, mentorship, and lifestyle support all under one roof.\n\nWhat's included:\n• Complete Training Journey (Beginner to Advanced)\n• 3 Months of Premium Trade Ideas\n• $5,000 Prop Firm Account Setup / $50 funded account\n• Fully Paid Vacation with Accommodation (Private Residency Mon-Fri)\n• All Meals & Lifestyle Support (Breakfast, Lunch, Dinner, Snacks)\n• Morning Fitness with Health Coach (5 AM sessions)\n• Mindset Coaching with Life Coach (30 min/day)\n• Private Chef for Optimal Nutrition\n\nYou'll learn:\n• How the forex market truly works\n• Chart mastery and market structure\n• Risk management and trading psychology\n• How to develop winning strategies\n• How to trade like a funded pro",
+            price: "R15,354.99 (≈ $900)",
+            date: "Next Intake Coming Soon",
+            location: "Luxury Retreat Location",
+            image: "/mr$1 testimonials/trade cation poster.jpg",
+            whatsappMessage: "Hi, I'm interested in the Tradecation experience. Please send me more details.",
+            whatsappLink: "https://wa.me/27614267355?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
+        },
+        {
+            id: 2,
+            title: "NFP Trading Masterclass",
+            description: "Learn how to trade the Non-Farm Payroll (NFP) event like a pro. Our experts will guide you through pre-news analysis, entry strategies, and risk management.",
+            price: "$16.00 (≈ R300)",
+            date: "First Friday of Every Month",
+            time: "1:30 PM - 3:30 PM (SAST)",
+            location: "Online - USA Market Focus",
+            image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
+            whatsappMessage: "Hi, I'd like to register for the NFP Trading Masterclass.",
+            whatsappLink: "https://wa.me/27614267355?text=Hi%2C%20I'd%20like%20to%20register%20for%20the%20NFP%20Trading%20Masterclass."
+        }
+    ];
+
+    // Event gallery images with tags
+    const eventImages = [
+        // NFP Images
+        { url: '/Track%20record%20html%20file/nfp/nfp1.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp2.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp3.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp4.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp5.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp6.png', tag: '#NFP' },
+        // Tradecation Images
+        { url: '/Track%20record%20html%20file/Tradecation/1.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/2.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/3.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/4.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/5.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/6.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/7.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/8.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/9.png', tag: '#Tradecation' },
+        // Traders Fair Images
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024%20speakers.png', tag: '#Tradersfair' },
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024%20tk.png', tag: '#Tradersfair' },
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024.png', tag: '#Tradersfair' },
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202025.png', tag: '#Tradersfair' },
     ];
 
     return (
@@ -700,54 +749,159 @@ const EventsPage: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Main Content */}
-                    <div className="lg:w-2/3">
+                    <div className="lg:w-2/3 space-y-8">
+                        {events.map((event) => (
+                            <div key={event.id} className="glass-card p-6 sm:p-8 rounded-lg">
+                                <div className="flex flex-col md:flex-row gap-6">
+                                    <div className="md:w-1/3">
+                                        <div className="aspect-w-16 aspect-h-9 bg-slate-800 rounded-lg overflow-hidden cursor-pointer group" onClick={() => setSelectedImage(event.image)}>
+                                            <img 
+                                                src={event.image} 
+                                                alt={event.title}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.src = 'https://via.placeholder.com/400x225?text=Event+Image';
+                                                }}
+                                            />
+                                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="md:w-2/3">
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{event.title}</h2>
+                                        <p className="text-slate-300 mb-4">{event.description}</p>
+                                        
+                                        <div className="grid grid-cols-2 gap-4 mb-4">
+                                            <div>
+                                                <p className="text-sm text-slate-400">Date</p>
+                                                <p className="text-white font-medium">{event.date}</p>
+                                            </div>
+                                            {event.time && (
+                                                <div>
+                                                    <p className="text-sm text-slate-400">Time</p>
+                                                    <p className="text-white font-medium">{event.time}</p>
+                                                </div>
+                                            )}
+                                            <div>
+                                                <p className="text-sm text-slate-400">Location</p>
+                                                <p className="text-white font-medium">{event.location}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-400">Price</p>
+                                                <p className="text-2xl font-bold text-amber-400">{event.price}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <a 
+                                            href={event.whatsappLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                        >
+                                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17.498 14.382v3.3a1 1 0 01-.9 1.1c-5.2.5-10.4-2.4-11.8-7.3a11.6 11.6 0 011.7-8.1 1 1 0 011.6.2l2.1 3.5a1 1 0 01-.1 1.2l-1 1.2a8.1 8.1 0 003.9 3.4l1.2-1a1 1 0 011.3 0l3.5 2.1a1 1 0 01.3 1.1z"/>
+                                            </svg>
+                                            Enquire on WhatsApp
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+
+                        {/* Event Gallery */}
                         <div className="glass-card p-6 sm:p-8 rounded-lg">
-                           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                               Learn how to trade NFP Event with Mr One Dollar Forex Trading
-                           </h1>
-                           <p className="text-3xl font-bold text-amber-400 mb-6">$16.00</p>
-                           <a href="#" className="inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
-                                Buy product
-                           </a>
+                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-6">Event Gallery</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {eventImages.map((image, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="relative group cursor-pointer overflow-hidden rounded-lg aspect-square"
+                                        onClick={() => setSelectedImage(image.url)}
+                                    >
+                                        <img 
+                                            src={image.url} 
+                                            alt={`Event ${index + 1}`} 
+                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.src = 'https://via.placeholder.com/400x400?text=Event+Image';
+                                            }}
+                                        />
+                                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                        </div>
+                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                                            <span className="text-amber-400 text-sm font-semibold">{image.tag}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="mt-8 glass-card p-6 sm:p-8 rounded-lg">
-                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">Description</h2>
+
+                        {/* Event Description */}
+                        <div className="glass-card p-6 sm:p-8 rounded-lg">
+                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">Event Details</h2>
                             <div className="text-slate-400 space-y-4">
-                               <p className="text-lg font-semibold text-white">NON FARM PAYROLL 🚀</p>
-                               <p>Join us Live on the 7th of March for NFP Trading Mastery! Get ready to elevate your trading skills as we teach you how to effectively trade the Non-Farm Payroll (NFP) data release before it hits the market.</p>
-                               <p>Discover strategies, tips, and insights to make the most of this critical economic event. Don’t miss out on this opportunity to learn and profit! 💰</p>
+                                <p className="text-lg font-semibold text-white">NON FARM PAYROLL 🚀</p>
+                                <p>Join us Live on the 7th of March for NFP Trading Mastery! Get ready to elevate your trading skills as we teach you how to effectively trade the Non-Farm Payroll (NFP) data release before it hits the market.</p>
+                                <p>Discover strategies, tips, and insights to make the most of this critical economic event. Don't miss out on this opportunity to learn and profit! 💰</p>
                             </div>
                         </div>
                     </div>
 
                     {/* Sidebar */}
                     <aside className="lg:w-1/3 space-y-8">
-                         <div className="glass-card p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Cart</h3>
-                            <p className="text-slate-400">No products in the cart.</p>
-                        </div>
-                         <div className="glass-card p-6 rounded-lg">
-                            <h3 className="text-xl font-bold text-white mb-4">Products</h3>
-                            <ul className="space-y-4">
-                                {products.map((product, index) => (
-                                    <li key={index} className="border-b border-slate-700 pb-4 last:border-b-0 last:pb-0">
-                                        <a href="#" className="group">
-                                            <p className="text-slate-300 group-hover:text-amber-400 transition-colors">{product.name}</p>
-                                            <p className="font-semibold text-amber-400">{product.price}</p>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+                        <div className="glass-card p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Upcoming Events</h3>
+                            <p className="text-slate-400">Check out our exclusive Trade-Cation and NFP Trading Masterclass events.</p>
                         </div>
                     </aside>
                 </div>
             </div>
+
+            {/* Image Modal */}
+            {selectedImage && (
+                <div 
+                    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <div className="relative max-w-5xl w-full">
+                        <button 
+                            className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedImage(null);
+                            }}
+                        >
+                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <img 
+                            src={selectedImage} 
+                            alt="Full size event" 
+                            className="max-h-[80vh] w-auto mx-auto rounded-lg"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-const FeatureCard: React.FC<{icon: React.ReactNode, title: string}> = ({icon, title}) => (
-    <div className="glass-card p-8 rounded-lg flex flex-col items-center text-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300">
+const FeatureCard: React.FC<{icon: React.ReactNode, title: string, onClick?: () => void}> = ({icon, title, onClick}) => (
+    <div 
+        className="glass-card p-8 rounded-lg flex flex-col items-center text-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300 cursor-pointer"
+        onClick={onClick}
+    >
         {icon}
         <h3 className="mt-5 text-xl font-bold text-white">{title}</h3>
     </div>
@@ -815,8 +969,14 @@ const FAQ: React.FC = () => {
     );
 };
 
+const AboutPage: React.FC = () => {
+    const [activeTab, setActiveTab] = useState<string | null>(null);
 
-const AboutPage: React.FC = () => (
+    const handleFeatureClick = (tab: string) => {
+        setActiveTab(activeTab === tab ? null : tab);
+    };
+
+    return (
     <div className="bg-black animate-fadeIn">
         {/* Page Header */}
         <section className="py-24 bg-slate-900">
@@ -853,10 +1013,195 @@ const AboutPage: React.FC = () => (
         <section className="py-20 bg-black animate-fadeInUp">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <FeatureCard icon={<ShieldCheckIcon className="w-12 h-12 text-amber-400"/>} title="Proven Track Record" />
-                    <FeatureCard icon={<UsersIcon className="w-12 h-12 text-amber-400"/>} title="Thriving Community" />
-                    <FeatureCard icon={<RocketLaunchIcon className="w-12 h-12 text-amber-400"/>} title="Exclusive Trade-Cations" />
+                    <FeatureCard 
+                        icon={
+                            <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        } 
+                        title="Proven Track Record"
+                        onClick={() => handleFeatureClick('track-record')}
+                    />
+                    <FeatureCard 
+                        icon={
+                            <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        } 
+                        title="Thriving Community"
+                        onClick={() => handleFeatureClick('community')}
+                    />
+                    <FeatureCard 
+                        icon={
+                            <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        } 
+                        title="Exclusive Trade-Cations"
+                        onClick={() => handleFeatureClick('tradecations')}
+                    />
                 </div>
+
+                {/* Track Record Modal */}
+                {activeTab === 'track-record' && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                        <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                            <div className="p-6 sm:p-8">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h2 className="text-2xl font-bold text-white">Trading History</h2>
+                                    <button 
+                                        onClick={() => setActiveTab(null)}
+                                        className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                        aria-label="Close modal"
+                                    >
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-amber-400/20 overflow-hidden">
+                                    <div className="mb-4">
+                                        <h3 className="text-lg font-semibold text-white mb-2">Tinyiko Miyambo - $100 Account</h3>
+                                        <p className="text-slate-400 text-sm">View the detailed trading history below</p>
+                                    </div>
+                                    <div className="mt-6 flex justify-center">
+                                        <button 
+                                            onClick={() => setActiveTab(null)}
+                                            className="bg-amber-500 hover:bg-amber-400 text-black font-medium py-2 px-6 rounded-md transition-colors duration-200"
+                                        >
+                                            Close Trading History
+                                        </button>
+                                    </div>
+                                    <div className="relative w-full h-[500px] overflow-auto bg-white">
+                                        <iframe 
+                                            src="/Track%20record%20html%20file/Trading%20History%20Tinyiko%20Miyambo%20$100%20Account%20.html"
+                                            className="w-full h-full border-0"
+                                            title="Trading History"
+                                        ></iframe>
+                                    </div>
+                                    <div className="mt-4 text-xs text-slate-400">
+                                        <p>Data as of {new Date().toLocaleDateString()}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Community Modal */}
+                {activeTab === 'community' && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                        <div className="bg-slate-900 rounded-xl max-w-2xl w-full p-6 sm:p-8">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-2xl font-bold text-white">Join Our Thriving Community</h2>
+                                <button 
+                                    onClick={() => setActiveTab(null)}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="space-y-4 text-slate-300">
+                                <p>Connect with like-minded traders, share insights, and grow together in our exclusive community.</p>
+                                <div className="mt-6 flex flex-col space-y-4">
+                                    <a 
+                                        href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                                    >
+                                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
+                                            <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
+                                        </svg>
+                                        Join WhatsApp Group
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Trade-Cations Modal */}
+                {activeTab === 'tradecations' && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                        <div className="bg-slate-900 rounded-xl max-w-2xl w-full p-6 sm:p-8">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-2xl font-bold text-white">Exclusive Trade-Cations</h2>
+                                <button 
+                                    onClick={() => setActiveTab(null)}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="space-y-6">
+                                <div className="space-y-4 text-slate-300">
+                                    <p className="text-lg font-semibold text-amber-400">Transform Your Trading Journey with Our Full Course Trade-Cation Experience</p>
+                                    <p>At Mr One Dollar Forex Trading, we've designed the Full Course to completely transform you into a confident and profitable trader... whether you're starting from zero or looking to master the markets at an advanced level.</p>
+                                    <p>This is not just another online course. It's a complete experience that combines education, mentorship, and lifestyle support... all under one roof.</p>
+                                    <p className="font-medium">Price: R15,354.99 - All Inclusive</p>
+                                    <p>Ready to take your trading seriously? Contact us today to enroll and begin your transformation.</p>
+                                </div>
+                                
+                                {/* Trade-Cation Content */}
+                                <div className="space-y-4">
+                                    <div className="relative w-full overflow-hidden rounded-lg border border-amber-400/20 bg-white p-4">
+                                        <div className="flex items-center justify-center">
+                                            <div className="max-w-md w-full">
+                                                <div className="aspect-w-1 aspect-h-1 w-full">
+                                                    <div className="flex items-center justify-center h-96">
+                                                        <div className="text-center">
+                                                            <div className="mb-4">
+                                                                <svg className="w-16 h-16 mx-auto text-pink-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.415-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </div>
+                                                            <h3 className="text-xl font-semibold text-gray-900 mb-2">Trade-Cation Highlights</h3>
+                                                            <p className="text-gray-600 mb-4">Experience our exclusive trading retreats around the world</p>
+                                                            <a 
+                                                                href="https://www.instagram.com/mr1dollarforextrading/" 
+                                                                target="_blank" 
+                                                                rel="noopener noreferrer"
+                                                                className="inline-flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                                                            >
+                                                                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.415-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                                                                </svg>
+                                                                View on Instagram
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-sm text-slate-400 text-center">Click the button above to view our latest Trade-Cation highlights on Instagram</p>
+                                </div>
+                                
+                                {/* Instagram Button */}
+                                <div className="pt-2">
+                                    <a 
+                                        href="https://www.instagram.com/stories/highlights/18020884196578008/" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                                    >
+                                        <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.415-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                                        </svg>
+                                        View Trade-Cation Highlights on Instagram
+                                    </a>
+                                </div>
+                                <p>For more information, contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a></p>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </section>
 
@@ -877,7 +1222,8 @@ const AboutPage: React.FC = () => (
             </div>
         </section>
     </div>
-);
+  );
+};
 
 const TeamMemberCard: React.FC<{ name: string, role: string }> = ({ name, role }) => (
     <div className="glass-card rounded-lg p-6 text-center flex flex-col items-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300">
