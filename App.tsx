@@ -2,7 +2,12 @@ import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
-interface Product {
+interface OfferStep {
+    number: number;
+    text: string;
+}
+
+interface BaseProduct {
     id: number;
     name: string;
     price: number;
@@ -11,12 +16,36 @@ interface Product {
     imageUrl: string;
     description: string;
     checkoutUrl?: string;
+    isSpecialOffer?: boolean;
+    offerSteps?: OfferStep[];
+    whatsappLink?: string;
+}
+
+interface Product extends BaseProduct {
+    isPlatinumBenefit?: boolean;
+    platinumBenefitDescription?: string;
+    // Additional properties specific to Product can be added here
 }
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
-    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities.", checkoutUrl: "https://whop.com/checkout/plan_j9dTqYMI4Ez1e?d2c=true" },
+    { 
+        id: 2, 
+        name: "Platinum Trade Ideas (Monthly)", 
+        price: 0, 
+        category: 'Trade Ideas', 
+        imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', 
+        description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥",
+        isSpecialOffer: true,
+        offerSteps: [
+            { number: 1, text: "Register on PrimeXBT" },
+            { number: 2, text: "Complete KYC verification" },
+            { number: 3, text: "Deposit minimum $50 (R800) into your wallet" },
+            { number: 4, text: "WhatsApp Nomii with proof to claim your free month" }
+        ],
+        whatsappLink: "https://wa.me/27614267355?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]"
+    },
     { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
     { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
     { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
@@ -27,7 +56,6 @@ const servicesData: Product[] = [
     { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
     { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
     { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
-    { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
     { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
     { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
 ];
@@ -40,7 +68,7 @@ const testimonialsData = [
     },
     {
         quote: "Tebza made R5000 early in the morning while driving. When I see profits I get motivated to send more trade ideas!",
-        author: "Mr. $1 Team",
+        author: "Mr.$1 Team",
         role: "Community Update",
     },
     {
@@ -378,7 +406,7 @@ const PropFirms: React.FC = () => {
                                         </a>
                                         <div className="mt-3 text-center">
                                             <h3 className={`font-semibold ${
-                                                partner.name === 'Funded7' ? 'text-blue-400' :
+                                                partner.name === 'Funded7' ? 'text-red-500' :
                                                 partner.name === 'FundedNext' ? 'text-blue-500' : 
                                                 'text-green-500'
                                             }`}>
@@ -649,8 +677,8 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                     <ul className="mt-4 space-y-3 text-sm">
                         <li className="flex items-start text-slate-400">
                            <MapPinIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                           <a href="https://www.google.com/maps/place/8+Karen+St,+Lyme+Park,+Sandton,+2060/@-26.08077,28.0181538,3a,75y,95.22h,90t/data=!4m6!3m5!1s0x1e957482756d30af:0x89934465d22d0388!8m2!3d-26.0808!4d28.01852!16s%2Fg%2F11c5pnqdkl?entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
-                                4 Karen St, Lyme Park, Sandton, 2060
+                           <a href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
+                                4 Karen Street, Bryanston, Sandton, 2060
                            </a>
                         </li>
                         <li className="flex items-start text-slate-400">
@@ -711,11 +739,9 @@ const WhatsAppWidget: React.FC = () => (
         className="flex items-center justify-center w-14 h-14 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group"
         aria-label="Chat with us on WhatsApp"
       >
-        <img 
-          src="https://i.ibb.co/k62LSRsn/Whats-App-Logo.png" 
-          alt="WhatsApp" 
-          className="w-8 h-8 object-contain"
-        />
+        <svg className="w-8 h-8" viewBox="0 0 32 32" fill="#25D366">
+          <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1z"></path>
+        </svg>
         <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           Chat with us
         </span>
@@ -964,8 +990,8 @@ const FAQ: React.FC = () => {
 
     const faqData = [
         {
-            question: "What is Mr$1 International?",
-            answer: "Mr$1 International is a premier Forex education and trade idea provider. Our mission is to empower traders of all levels with the knowledge, strategies, and community support needed to achieve financial independence and join the top 1% of successful traders."
+            question: "What is Mr.$1 International?",
+            answer: "Mr.$1 International is a premier Forex education and trade idea provider. Our mission is to empower traders of all levels with the knowledge, strategies, and community support needed to achieve financial independence and join the top 1% of successful traders."
         },
         {
             question: "Who are your courses designed for?",
@@ -973,14 +999,14 @@ const FAQ: React.FC = () => {
         },
         {
             question: "What makes your trade ideas different?",
-            answer: "Our trade ideas are the result of rigorous analysis by our team of expert traders. We don't just provide signals; we offer insights into the market's direction, helping you make informed decisions. Our focus is on high-probability setups that align with our core 'Stay Blue & Take Profit' philosophy."
+            answer: "Our trade ideas are the result of rigorous analysis by our team of expert traders. We offer insights into the market's direction, helping you make informed decisions. Our focus is on high-probability setups that align with our core 'Stay Blue & Take Profit' philosophy."
         },
         {
             question: "Do I need any prior experience to start?",
             answer: "Not at all! Our beginner's course is specifically designed to build a strong foundation from the ground up. We cover all the basics, from understanding Forex terminology to setting up your charts and executing your first trade in a supportive learning environment."
         },
         {
-            question: "How do I get started with Mr$1 International?",
+            question: "How do I get started with Mr.$1 International?",
             answer: "Getting started is simple. You can explore our courses on the 'Services' page and choose the one that best fits your experience level. We also recommend registering with one of our trusted partner brokers through the links on our homepage to start your trading journey."
         }
     ];
@@ -1236,20 +1262,6 @@ const AboutPage: React.FC = () => {
                                 </div>
                                 
                                 {/* Instagram Button */}
-                                <div className="pt-2">
-                                    <a 
-                                        href="https://www.instagram.com/stories/highlights/18020884196578008/" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
-                                    >
-                                        <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.415-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
-                                        </svg>
-                                        View Trade-Cation Highlights on Instagram
-                                    </a>
-                                </div>
-                                <p>For more information, contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a></p>
                             </div>
                         </div>
                     </div>
@@ -1354,7 +1366,14 @@ const ContactPage: React.FC = () => {
                                 <MapPinIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Head office</h3>
-                                    <p className="text-slate-400">4 Karen St, Lyme Park, Sandton, 2060</p>
+                                    <a 
+                                        href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-slate-400 hover:text-amber-400 transition-colors"
+                                    >
+                                        4 karen street bryanston sandton
+                                    </a>
                                 </div>
                             </li>
                             <li className="flex items-start">
@@ -1396,8 +1415,22 @@ const ContactPage: React.FC = () => {
     );
 };
 
-const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => (
-    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02]">
+interface PlatinumProduct extends BaseProduct {
+    isPlatinumBenefit: true;
+    platinumBenefitDescription: string;
+}
+
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
+    // Check if the product is a mentorship package
+    const isMentorship = product.category === 'Mentorship';
+    
+    return (
+    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative">
+        {isMentorship && (
+            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
+                For Course Graduates Only
+            </div>
+        )}
         <div className="relative">
              <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -1413,10 +1446,46 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
         <div className="p-4 flex flex-col flex-grow">
             <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
-                <p className="text-slate-400 text-sm">{product.description}</p>
+                <p className="text-slate-400 text-sm mb-3">{product.description}</p>
+                {product.isSpecialOffer && product.offerSteps && (
+                    <div className="space-y-3 mt-3">
+                        <h4 className="text-amber-400 font-semibold">Follow These Simple Steps:</h4>
+                        <div className="space-y-2">
+                            {product.offerSteps.map((step, index) => (
+                                <div key={index} className="flex items-start">
+                                    <div className="flex-shrink-0 bg-amber-400 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2 mt-0.5">
+                                        {step.number}
+                                    </div>
+                                    <span className="text-slate-300 text-sm">{step.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
             <div className="mt-2">
-                {product.originalPrice ? (
+                {product.isPlatinumBenefit ? (
+                    <div>
+                        <p className="text-amber-400 text-xl font-bold">Free for Platinum+</p>
+                        <p className="text-green-400 text-sm mt-1">Included with Platinum Plan</p>
+                        <div className="mt-4 space-y-2">
+                            <a 
+                                href="#plans" 
+                                className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                            >
+                                Get Platinum Plan
+                            </a>
+                            <button 
+                                onClick={() => {
+                                    alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
+                                }}
+                                className="w-full text-center text-amber-400 text-sm hover:underline"
+                            >
+                                Already a Platinum member? Click here
+                            </button>
+                        </div>
+                    </div>
+                ) : product.originalPrice ? (
                     <p className="text-amber-400 text-xl font-bold">
                         <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
                     </p>
@@ -1424,15 +1493,51 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
                 )}
             </div>
-            {product.checkoutUrl ? (
+            {product.isSpecialOffer ? (
                 <a 
-                    href={product.checkoutUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                    href={product.whatsappLink || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-colors flex items-center justify-center space-x-2"
                 >
-                    Buy product
+                    <svg className="w-5 h-5" viewBox="0 0 32 32" fill="currentColor">
+                        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1z"></path>
+                    </svg>
+                    <span>Claim Your Free Month on WhatsApp</span>
                 </a>
+            ) : product.isPlatinumBenefit ? (
+                <div className="mt-4 space-y-2">
+                    <a 
+                        href="#plans" 
+                        className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                    >
+                        Get Platinum Plan
+                    </a>
+                    <button 
+                        onClick={() => {
+                            alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
+                        }}
+                        className="w-full text-center text-amber-400 text-sm hover:underline"
+                    >
+                        Already a Platinum member? Click here
+                    </button>
+                </div>
+            ) : product.checkoutUrl ? (
+                <div className="space-y-2">
+                    {isMentorship && (
+                        <div className="bg-blue-600/20 border border-blue-500/50 text-blue-100 text-xs p-2 rounded-md text-center">
+                            Only available to students who have completed our course
+                        </div>
+                    )}
+                    <a 
+                        href={product.checkoutUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
+                    >
+                        {isMentorship ? 'Enroll Now' : 'Buy product'}
+                    </a>
+                </div>
             ) : (
                 <button 
                     onClick={() => onAddToCart(product)} 
@@ -1444,7 +1549,8 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
         </div>
     </div>
 );
-
+}
+// ... (rest of the code remains the same)
 const ServicesPage: React.FC = () => {
     const [products] = useState<Product[]>(servicesData);
     const [cart, setCart] = useState<Product[]>([]);
@@ -1851,26 +1957,26 @@ const App: React.FC = () => {
 
   const renderPage = () => {
     switch(currentPage) {
-        case 'home':
-            return <HomePage setCurrentPage={setCurrentPage} />;
-        case 'events':
-            return <EventsPage />;
-        case 'about':
-            return <AboutPage />;
-        case 'team':
-            return <TeamPage />;
-        case 'contact':
-            return <ContactPage />;
-        case 'services':
-            return <ServicesPage />;
-        case 'terms':
-            return <TermsPage />;
-        case 'privacy':
-            return <PrivacyPolicyPage />;
-        default:
-            return <HomePage setCurrentPage={setCurrentPage} />;
+      case 'home':
+        return <HomePage setCurrentPage={setCurrentPage} />;
+      case 'events':
+        return <EventsPage />;
+      case 'about':
+        return <AboutPage />;
+      case 'team':
+        return <TeamPage />;
+      case 'contact':
+        return <ContactPage />;
+      case 'services':
+        return <ServicesPage />;
+      case 'terms':
+        return <TermsPage />;
+      case 'privacy':
+        return <PrivacyPolicyPage />;
+      default:
+        return <HomePage setCurrentPage={setCurrentPage} />;
     }
-  }
+  };
 
   return (
     <div className="bg-black">

@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e40af">
     <title>Statement: 50252699 - Tinyiko Miyambo</title>
     <meta name="generator" content="MetaQuotes Software Corp.">
     <link rel="help" href="http://www.metaquotes.net">
@@ -11,69 +12,203 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        -webkit-tap-highlight-color: transparent;
       }
       body {
-        font-family: Tahoma, Arial, sans-serif;
-        padding: 10px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        padding: 12px;
         width: 100%;
-        overflow-x: auto;
+        max-width: 100vw;
+        overflow-x: hidden;
         -webkit-text-size-adjust: 100%;
+        line-height: 1.4;
+        color: #333;
+        background-color: #f8f9fa;
       }
       .container {
         max-width: 100%;
         margin: 0 auto;
-        overflow-x: auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 16px;
+        overflow: hidden;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 12px;
       }
       h1 {
         font-size: 1.5rem;
-        text-align: center;
-        margin: 10px 0;
+        color: #1e40af;
+        margin: 0;
+        flex: 1;
+        min-width: 200px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+      }
+      .btn-download {
+        background-color: #1e40af;
+        color: white;
+      }
+      .btn-print {
+        background-color: #f1f5f9;
+        color: #1e40af;
+        border: 1px solid #dbeafe;
+      }
+      .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 12px 0;
+        border-radius: 6px;
+        border: 1px solid #e5e7eb;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        margin: 10px 0;
+        min-width: 800px;
         font-size: 0.9rem;
       }
       th, td {
-        padding: 6px 8px;
-        border: 1px solid #ddd;
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
         text-align: left;
         white-space: nowrap;
       }
       th {
-        background-color: #f5f5f5;
-        font-weight: bold;
+        background-color: #f3f4f6;
+        font-weight: 600;
+        color: #1f2937;
+        position: sticky;
+        top: 0;
       }
       tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: #f9fafb;
       }
+      tr:hover {
+        background-color: #f0f9ff;
+      }
+      .profit { color: #10b981; font-weight: 600; }
+      .loss { color: #ef4444; font-weight: 600; }
       @media (max-width: 768px) {
         body {
-          padding: 5px;
+          padding: 8px;
         }
-        table {
-          font-size: 0.8rem;
+        .container {
+          padding: 12px;
+          border-radius: 6px;
+        }
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .btn {
+          flex: 1;
+          justify-content: center;
+          padding: 10px 12px;
+          font-size: 0.85rem;
         }
         th, td {
-          padding: 4px 6px;
+          padding: 6px 8px;
+          font-size: 0.8rem;
+        }
+        h1 {
+          font-size: 1.3rem;
+          text-align: left;
+          width: 100%;
         }
       }
-      .profit { color: green; }
-      .loss { color: red; }
+      @media print {
+        body {
+          padding: 0;
+          background: white;
+        }
+        .container {
+          box-shadow: none;
+          padding: 0;
+        }
+        .actions {
+          display: none;
+        }
+        .table-container {
+          border: none;
+          overflow: visible;
+        }
+        table {
+          width: 100%;
+          min-width: 100%;
+        }
+      }
     </style>
     <style type="text/css">
-    /* Microsoft Office specific formatting */
+    /* Microsoft Office specific formatting - using data attributes for better compatibility */
+    /* MSO styles are only for Excel and are hidden from web browsers */
+    </style>
+    <!--[if gte mso 9]>
+    <style type="text/css">
     .msdate { mso-number-format:"General Date"; }
     .mspt   { mso-number-format:\#\,\#\#0\.00;  }
     </style>
+    <![endif]-->
   </head>
 <body>
 <div class="container">
-  <h1>BDS Ltd</h1>
+  <div class="header">
+    <h1>BDS Ltd - Trading History</h1>
+    <div class="actions">
+      <button onclick="window.print()" class="btn btn-print">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print
+      </button>
+      <a href="#" onclick="downloadCSV()" class="btn btn-download">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download CSV
+      </a>
+    </div>
+  </div>
 
 
-<table>
+    <div class="table-container">
+          <div class="table-container">
+      <table>
 <tr>
     <th>Account</th>
     <td>50252699</td>
@@ -234,17 +369,67 @@
     <td colspan=3><b>Free Margin:</b></td>
     <td colspan=2 class=mspt><b>213.99</b></td></tr>
 	
-</table>
-</div>
-<style>
-  @media (max-width: 768px) {
-    table {
-      font-size: 0.8rem;
-    }
-    th, td {
-      padding: 4px 6px;
-    }
-  }
-</style>
-</body>
-</html>
+            </table>
+          </div>
+        </div>
+        
+        <script>
+          function downloadCSV() {
+            // Get the table
+            const table = document.querySelector('table');
+            const rows = table.querySelectorAll('tr');
+            let csv = [];
+            
+            // Add headers
+            const headers = [];
+            rows[0].querySelectorAll('th').forEach(header => {
+              headers.push(`"${header.textContent.trim()}"`);
+            });
+            csv.push(headers.join(','));
+            
+            // Add data rows
+            for (let i = 1; i < rows.length; i++) {
+              const row = [];
+              const cols = rows[i].querySelectorAll('td');
+              
+              for (let j = 0; j < cols.length; j++) {
+                // Clean and escape the cell content
+                let text = cols[j].textContent.trim();
+                // Replace any quotes with double quotes and wrap in quotes
+                text = `"${text.replace(/"/g, '""')}"`;
+                row.push(text);
+              }
+              
+              csv.push(row.join(','));
+            }
+            
+            // Create CSV file
+            const csvContent = csv.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Trading_History_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+          
+          // Add touch event for better mobile interaction
+          document.addEventListener('DOMContentLoaded', function() {
+            // Make table rows more touch-friendly on mobile
+            if ('ontouchstart' in window) {
+              const rows = document.querySelectorAll('tr');
+              rows.forEach(row => {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', function() {
+                  this.classList.toggle('active');
+                });
+              });
+            }
+          });
+        </script>
+      </body>
+    </html>
