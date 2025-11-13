@@ -283,23 +283,35 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
 
 const PropFirms: React.FC = () => {
     const partners = [
+        // Brokers
         {
             name: 'PrimeXBT',
             description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
-            link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1'
+            link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1',
+            category: 'Brokers'
+        },
+        // Prop Firms
+        {
+            name: 'Funded7',
+            description: 'A proprietary trading firm providing funding for forex and crypto traders with flexible programs',
+            logoUrl: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
+            link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
+            category: 'Prop Firms'
         },
         {
             name: 'FundedNext',
             description: 'A proprietary trading firm providing funding for forex and crypto traders worldwide',
             logoUrl: 'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
-            link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55'
+            link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
+            category: 'Prop Firms'
         },
         {
             name: 'FTMO',
             description: 'A global prop trading firm offering capital to skilled traders through evaluation programs',
             logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
-            link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH'
+            link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
+            category: 'Prop Firms'
         }
     ];
     
@@ -310,35 +322,76 @@ const PropFirms: React.FC = () => {
                 <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
                     Sign up with one of our trusted partners to get funded and start trading with the best brokers and prop-firms in the industry.
                 </p>
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {partners.map((partner, i) => (
-                        <div key={partner.name} className="flex flex-col items-center">
-                            <a 
-                                href={partner.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50 w-full"
-                            >
-                                <img 
-                                    src={partner.logoUrl} 
-                                    alt={`${partner.name} logo`} 
-                                    className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
-                                />
-                            </a>
-                            <div className="mt-3 text-center">
-                                <h3 className={`font-semibold ${
-                                    partner.name === 'PrimeXBT' ? 'text-amber-500' : 
-                                    partner.name === 'FundedNext' ? 'text-blue-500' : 
-                                    'text-green-500'
-                                }`}>
-                                    {partner.name}
-                                </h3>
-                                <p className="mt-1 text-sm text-gray-300">
-                                    {partner.description}
-                                </p>
-                            </div>
+                <div className="mt-12 space-y-16">
+                    {/* Brokers Section */}
+                    <div>
+                        <h3 className="text-2xl font-bold text-white mb-8 text-center">Brokers</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {partners
+                                .filter(partner => partner.category === 'Brokers')
+                                .map((partner, i) => (
+                                    <div key={partner.name} className="flex flex-col items-center">
+                                        <a 
+                                            href={partner.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50 w-full"
+                                        >
+                                            <img 
+                                                src={partner.logoUrl} 
+                                                alt={`${partner.name} logo`} 
+                                                className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
+                                            />
+                                        </a>
+                                        <div className="mt-3 text-center">
+                                            <h3 className="font-semibold text-amber-500">
+                                                {partner.name}
+                                            </h3>
+                                            <p className="mt-1 text-sm text-gray-300">
+                                                {partner.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
                         </div>
-                    ))}
+                    </div>
+
+                    {/* Prop Firms Section */}
+                    <div>
+                        <h3 className="text-2xl font-bold text-white mb-8 text-center">Prop Firms</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {partners
+                                .filter(partner => partner.category === 'Prop Firms')
+                                .map((partner, i) => (
+                                    <div key={partner.name} className="flex flex-col items-center">
+                                        <a 
+                                            href={partner.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50 w-full"
+                                        >
+                                            <img 
+                                                src={partner.logoUrl} 
+                                                alt={`${partner.name} logo`} 
+                                                className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
+                                            />
+                                        </a>
+                                        <div className="mt-3 text-center">
+                                            <h3 className={`font-semibold ${
+                                                partner.name === 'Funded7' ? 'text-blue-400' :
+                                                partner.name === 'FundedNext' ? 'text-blue-500' : 
+                                                'text-green-500'
+                                            }`}>
+                                                {partner.name}
+                                            </h3>
+                                            <p className="mt-1 text-sm text-gray-300">
+                                                {partner.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -597,7 +650,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         <li className="flex items-start text-slate-400">
                            <MapPinIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
                            <a href="https://www.google.com/maps/place/8+Karen+St,+Lyme+Park,+Sandton,+2060/@-26.08077,28.0181538,3a,75y,95.22h,90t/data=!4m6!3m5!1s0x1e957482756d30af:0x89934465d22d0388!8m2!3d-26.0808!4d28.01852!16s%2Fg%2F11c5pnqdkl?entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
-                                8 Karen St, Lyme Park, Sandton, 2060
+                                4 Karen St, Lyme Park, Sandton, 2060
                            </a>
                         </li>
                         <li className="flex items-start text-slate-400">
@@ -624,8 +677,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         </a>
                         <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.5 3.5a10 10 0 1 0-15.6 11.7L2 22l6.8-2.9a10 10 0 0 0 4.8 1.2 10 10 0 0 0 6.9-16.8zm-8.5 16.3a8.4 8.4 0 0 1-4.3-1.2l-.3-.2-3.2.9.9-3.1-.2-.3a8.4 8.4 0 1 1 15.5-4.4 8.4 8.4 0 0 1-8.4 8.3z"/>
-                                <path d="M17.5 14.3c-.2-.1-1.5-.7-1.7-.8-.2-.1-.3-.1-.4.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.6-2-1.1-1.2-1-2-2.2-2.5-3.6-.1-.2 0-.3.1-.4.2-.2.5-.6.6-.8.1-.2.1-.3.1-.4 0-.2-.1-.3-.2-.4l-.5-.6c-.2-.2-.4-.3-.6-.3h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.2 0 1.3 1 2.6 1.1 2.8.1.2 1.8 2.7 4.4 3.7.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.5.2-1 0-1.4-.1-.2-.5-.4-.7-.5z"/>
+                                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.96.61 3.77 1.64 5.27L2 22l4.73-1.64A9.9 9.9 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-2 15l-1.5-1.5L13 13l-4.5-4.5L10 7l6 6-6 4z"/>
                             </svg>
                         </a>
                     </div>
@@ -1028,7 +1080,7 @@ const AboutPage: React.FC = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                         } 
-                        title="Thriving Community"
+                        title="Trading Community"
                         onClick={() => handleFeatureClick('community')}
                     />
                     <FeatureCard 
@@ -1093,7 +1145,7 @@ const AboutPage: React.FC = () => {
                     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
                         <div className="bg-slate-900 rounded-xl max-w-2xl w-full p-6 sm:p-8">
                             <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-2xl font-bold text-white">Join Our Thriving Community</h2>
+                                <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
                                 <button 
                                     onClick={() => setActiveTab(null)}
                                     className="text-slate-400 hover:text-white transition-colors"
@@ -1302,7 +1354,7 @@ const ContactPage: React.FC = () => {
                                 <MapPinIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Head office</h3>
-                                    <p className="text-slate-400">8 Karen St, Lyme Park, Sandton, 2060</p>
+                                    <p className="text-slate-400">4 Karen St, Lyme Park, Sandton, 2060</p>
                                 </div>
                             </li>
                             <li className="flex items-start">
