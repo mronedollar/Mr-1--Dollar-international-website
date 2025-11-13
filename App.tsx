@@ -15,21 +15,21 @@ interface Product {
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1611095965923-a535a6104334?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
-    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1599050751538-34888211a76e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities.", checkoutUrl: "https://whop.com/checkout/plan_j9dTqYMI4Ez1e?d2c=true" },
-    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1612152028834-883a4c07a44f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
-    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://images.unsplash.com/photo-1580519543953-c6a6171b3303?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
-    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
-    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
-    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
-    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader.", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q?d2c=true" },
-    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
-    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
-    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
-    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1639754391392-16715b703e8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
-    { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
-    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://images.unsplash.com/photo-1504754524776-8f4f37790774?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
-    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
+    { id: 2, name: "Platinum Trade Ideas (Monthly)", price: 106.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Gain consistent, exclusive access to our premium trade ideas with a monthly subscription. This package includes regular market analysis, entry/exit points, and risk management strategies across various currency pairs and commodities.", checkoutUrl: "https://whop.com/checkout/plan_j9dTqYMI4Ez1e?d2c=true" },
+    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
+    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
+    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
+    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
+    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
+    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader.", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q?d2c=true" },
+    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
+    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
+    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
+    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
+    { id: 13, name: "Advanced Indicators Pack", price: 150.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Gain a technical edge with our proprietary set of advanced indicators for TradingView or MT4/5. These tools are designed to help you identify key market levels, trends, and momentum shifts with greater accuracy." },
+    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
+    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
 ];
 
 const testimonialsData = [
@@ -345,6 +345,97 @@ const PropFirms: React.FC = () => {
     );
 };
 
+const PromoSection: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    
+    return (
+        <section className="py-12 bg-gradient-to-br from-blue-900 to-black text-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto">
+                    <button 
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between"
+                    >
+                        <span className="text-lg sm:text-xl">🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥</span>
+                        <svg 
+                            className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    {isOpen && (
+                        <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-amber-500/20 shadow-xl animate-fadeIn">
+                            <h3 className="text-xl font-bold text-amber-400 mb-6 text-center">
+                                Follow These Simple Steps:
+                            </h3>
+                            
+                            <div className="space-y-6">
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
+                                    <div>
+                                        <h4 className="font-semibold text-lg">Register Your Trading Account</h4>
+                                        <a 
+                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-block mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 flex items-center text-sm"
+                                        >
+                                            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.5 12.5h-9v-1h9v1z"/>
+                                            </svg>
+                                            Register on PrimeXBT
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">2</div>
+                                    <div>
+                                        <h4 className="font-semibold">Complete Registration</h4>
+                                        <p className="text-gray-300 text-sm">Enter your details and complete KYC verification</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3</div>
+                                    <div>
+                                        <h4 className="font-semibold">Fund Your Account</h4>
+                                        <p className="text-gray-300 text-sm">Deposit minimum $50 (R800) into your wallet</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">4</div>
+                                    <div>
+                                        <h4 className="font-semibold">Claim Your Free Month</h4>
+                                        <a 
+                                            href="https://wa.me/27626898567?text=Hi%20Nomii,%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funding.%20Here's%20my%20proof%20of%20funding:" 
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-300"
+                                        >
+                                            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
+                                                <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
+                                            </svg>
+                                            WhatsApp Nomii with Proof
+                                        </a>
+                                        <p className="text-xs text-gray-400 mt-1">Click to open WhatsApp with pre-filled message</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </section>
+    );
+};
+
 const Testimonials: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -421,13 +512,11 @@ const Testimonials: React.FC = () => {
                 
                 {/* Image Modal */}
                 {selectedImage && (
-                    <div 
-                        className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-                        onClick={() => setSelectedImage(null)}
-                    >
-                        <div className="relative max-w-4xl w-full">
+                    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
+                        <div className="relative max-w-4xl w-full mx-auto">
+                            {/* Close button */}
                             <button 
-                                className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
+                                className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors z-10"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setSelectedImage(null);
@@ -437,12 +526,49 @@ const Testimonials: React.FC = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
-                            <img 
-                                src={`/mr$1 testimonials/${selectedImage}`}
-                                alt="Full size testimonial"
-                                className="max-h-[80vh] max-w-full mx-auto rounded-lg"
-                                onClick={(e) => e.stopPropagation()}
-                            />
+                            
+                            {/* Left navigation arrow */}
+                            <button 
+                                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    const currentIndex = testimonialImages.indexOf(selectedImage);
+                                    const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                    setSelectedImage(testimonialImages[prevIndex]);
+                                }}
+                            >
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            
+                            {/* Main image */}
+                            <div className="relative">
+                                <img 
+                                    src={`/mr$1 testimonials/${selectedImage}`}
+                                    alt="Full size testimonial"
+                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl"
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                                <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
+                                    {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
+                                </div>
+                            </div>
+                            
+                            {/* Right navigation arrow */}
+                            <button 
+                                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    const currentIndex = testimonialImages.indexOf(selectedImage);
+                                    const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                    setSelectedImage(testimonialImages[nextIndex]);
+                                }}
+                            >
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 )}
@@ -555,6 +681,7 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => (
     <>
         <Hero setCurrentPage={setCurrentPage} />
+        <PromoSection />
         <PropFirms />
         <Testimonials />
         <AboutPage />
