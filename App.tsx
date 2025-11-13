@@ -375,39 +375,85 @@ const PropFirms: React.FC = () => {
         }
     ];
     
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+    
     return (
-        <section className="py-20 bg-slate-900 animate-fadeIn">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Trusted Partners</h2>
-                <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
+        <section ref={sectionRef} className="py-20 bg-slate-900 animate-fadeIn relative overflow-hidden">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden opacity-20">
+                <div className="absolute -top-1/2 -left-1/2 w-full h-[200%] bg-gradient-to-br from-amber-500/10 via-transparent to-blue-500/10 animate-spin-slow"></div>
+            </div>
+            
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                    <span className="relative inline-block">
+                        <span className="relative z-10">Our Trusted Partners</span>
+                        <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-blue-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                    </span>
+                </h2>
+                <p className="text-lg text-slate-300 max-w-3xl mx-auto">
                     Sign up with one of our trusted partners to get funded and start trading with the best brokers and prop-firms in the industry.
                 </p>
-                <div className="mt-12 space-y-16">
+                
+                <div className={`mt-16 space-y-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {/* Brokers Section */}
-                    <div>
-                        <h3 className="text-2xl font-bold text-white mb-8 text-center">Brokers</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="relative">
+                        <div className="absolute -top-8 -left-8 w-32 h-32 bg-amber-500/10 rounded-full filter blur-3xl -z-10"></div>
+                        <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
+                            <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-amber-500/30 shadow-lg shadow-amber-500/10">
+                                Brokers
+                            </span>
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
                             {partners
                                 .filter(partner => partner.category === 'Brokers')
                                 .map((partner, i) => (
-                                    <div key={partner.name} className="flex flex-col items-center">
+                                    <div key={partner.name} className="flex flex-col items-center group">
                                         <a 
                                             href={partner.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50 w-full"
+                                            className="glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-amber-400/50 group-hover:shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+                                            style={{
+                                                transition: 'all 0.3s ease',
+                                                animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
+                                            }}
                                         >
+                                            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                             <img 
                                                 src={partner.logoUrl} 
                                                 alt={`${partner.name} logo`} 
-                                                className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
+                                                className="relative z-10 max-h-12 sm:max-h-16 w-auto transition-transform duration-500 group-hover:scale-110" 
                                             />
                                         </a>
-                                        <div className="mt-3 text-center">
-                                            <h3 className="font-semibold text-amber-500">
+                                        <div className="mt-4 text-center px-2">
+                                            <h3 className="font-semibold text-amber-400 group-hover:text-amber-300 transition-colors">
                                                 {partner.name}
                                             </h3>
-                                            <p className="mt-1 text-sm text-gray-300">
+                                            <p className="mt-2 text-sm text-gray-300">
                                                 {partner.description}
                                             </p>
                                         </div>
@@ -417,39 +463,50 @@ const PropFirms: React.FC = () => {
                     </div>
 
                     {/* Prop Firms Section */}
-                    <div>
-                        <h3 className="text-2xl font-bold text-white mb-8 text-center">Prop Firms</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {partners
+                    <div className="relative pt-10">
+                        <div className="absolute -top-8 -right-8 w-40 h-40 bg-blue-500/10 rounded-full filter blur-3xl -z-10"></div>
+                        <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
+                            <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-blue-500/30 shadow-lg shadow-blue-500/10">
+                                Prop Firms
+                            </span>
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                          {partners
                                 .filter(partner => partner.category === 'Prop Firms')
-                                .map((partner, i) => (
-                                    <div key={partner.name} className="flex flex-col items-center">
-                                        <a 
-                                            href={partner.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="glass-card p-6 rounded-lg flex justify-center items-center group transform hover:-translate-y-2 transition-all duration-300 hover:border-amber-400/50 w-full"
-                                        >
-                                            <img 
-                                                src={partner.logoUrl} 
-                                                alt={`${partner.name} logo`} 
-                                                className="max-h-12 sm:max-h-16 w-auto transition-transform duration-300 group-hover:scale-110" 
-                                            />
-                                        </a>
-                                        <div className="mt-3 text-center">
-                                            <h3 className={`font-semibold ${
-                                                partner.name === 'Funded7' ? 'text-red-500' :
-                                                partner.name === 'FundedNext' ? 'text-blue-500' : 
-                                                'text-green-500'
-                                            }`}>
-                                                {partner.name}
-                                            </h3>
-                                            <p className="mt-1 text-sm text-gray-300">
-                                                {partner.description}
-                                            </p>
+                                .map((partner, i) => {
+                                    const colorClass = partner.name === 'Funded7' ? 'red' :
+                                                     partner.name === 'FundedNext' ? 'blue' : 'green';
+                                    
+                                    return (
+                                        <div key={partner.name} className="flex flex-col items-center group">
+                                            <a 
+                                                href={partner.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-${colorClass}-400/50 group-hover:shadow-[0_0_20px_${colorClass === 'red' ? 'rgba(239,68,68,0.3)' : colorClass === 'blue' ? 'rgba(59,130,246,0.3)' : 'rgba(34,197,94,0.3)'}]`}
+                                                style={{
+                                                    transition: 'all 0.3s ease',
+                                                    animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
+                                                }}
+                                            >
+                                                <div className={`absolute inset-0 bg-gradient-to-br from-${colorClass}-500/5 to-${colorClass === 'red' ? 'pink' : colorClass === 'blue' ? 'indigo' : 'teal'}-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                                                <img 
+                                                    src={partner.logoUrl} 
+                                                    alt={`${partner.name} logo`} 
+                                                    className={`relative z-10 max-h-12 sm:max-h-16 w-auto transition-transform duration-500 group-hover:scale-110`} 
+                                                />
+                                            </a>
+                                            <div className="mt-4 text-center px-2">
+                                                <h3 className={`font-semibold text-${colorClass}-400 group-hover:text-${colorClass}-300 transition-colors`}>
+                                                    {partner.name}
+                                                </h3>
+                                                <p className="mt-2 text-sm text-gray-300">
+                                                    {partner.description}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                         </div>
                     </div>
                 </div>
@@ -751,7 +808,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 }}
                             />
                         </a>
-                        <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
                                 src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
                                 alt="WhatsApp Community" 
@@ -791,34 +848,15 @@ const WhatsAppWidget: React.FC = () => (
         href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative"
+        className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
         aria-label="Join our WhatsApp Community"
       >
-        {/* Animated pulse effect */}
-        <div className="absolute inset-0 rounded-full bg-[#25D366] opacity-75 animate-ping"></div>
-        
-        <div className="relative z-10 flex items-center justify-center w-14 h-14 bg-white rounded-full m-1">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="#25D366"/>
-            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="url(#paint0_linear_1_2)" fill-opacity="0.2"/>
-            <path d="M25.6 21.2C25.2 22.4 23.6 23.6 22 24.4C20.8 25.2 18.8 26.4 16.4 26.4C12.8 26.4 8.8 23.6 6.4 20.4C4 17.2 4 13.6 4 13.6C4 12.4 4.4 11.2 5.6 10.4C6.4 9.6 7.6 9.6 8 9.6C8.4 9.6 8.8 9.6 9.2 9.6C9.6 9.6 10 9.6 10.4 10.8C10.8 12 11.2 13.6 11.2 14C11.2 14.4 11.2 14.8 10.8 15.2C10.4 15.6 10 16 9.6 16.4C9.2 16.8 8.8 17.2 9.2 18C9.6 18.8 10.8 20.4 12.4 21.6C14.4 23.2 16 23.6 16.8 24C17.2 24 17.6 24 18 24C18.8 24 19.6 23.6 20 23.2C20.4 22.8 21.2 22 21.6 21.6C22 21.2 22.4 21.2 22.8 21.2C23.2 21.2 23.6 21.2 24 21.2C24.4 21.2 25.2 21.2 25.6 22.4C26 23.2 26 24 26 24.4C26 24.8 25.6 26 24.8 26.8C24 27.6 23.2 28 22.8 28.4C22.4 28.8 22 28.8 21.6 28.8C21.2 28.8 20.8 28.8 20.4 28.8C19.6 28.8 18.8 28.8 17.6 28.4C16.4 28 15.2 27.6 14 26.8C12.4 25.6 11.2 24.4 10 23.2C8.8 22 8 20.8 7.2 19.6C6.4 18.4 6 17.2 6 16.4C6 15.6 6.4 15.2 6.8 14.8C7.2 14.4 7.6 14 8 14.4C8.4 14.4 8.8 14.8 9.2 15.2C9.6 15.6 10 16 10.4 16.4C10.8 16.8 11.2 17.2 11.2 17.6C11.2 18 11.2 18.4 10.8 18.8C10.4 19.2 10 19.6 9.6 20C9.2 20.4 8.8 20.8 9.2 21.6C9.6 22.4 10.8 24 12.4 25.2C14 26.4 15.2 27.2 16.4 27.2C17.2 27.2 18 27.2 18.8 27.2C19.6 27.2 20.4 27.2 21.2 26.8C22 26.4 22.8 25.6 23.6 24.8C24.4 24 25.2 22.8 25.6 21.6Z" fill="white"/>
-            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="url(#paint1_radial_1_2)" fill-opacity="0.3"/>
-            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="url(#paint2_radial_1_2)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_1_2" x1="16.4" y1="0" x2="16.4" y2="32.4" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white"/>
-                <stop offset="1" stop-color="white" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="paint1_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16.4 16.2) scale(24.1667)">
-                <stop stop-color="white"/>
-                <stop offset="1" stop-color="white" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="paint2_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(9.6 9.6) scale(22.5)">
-                <stop stop-color="white"/>
-                <stop offset="1" stop-color="white" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-          </svg>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <img 
+            src="https://i.ibb.co/S4KMyg8d/whatsapp.png" 
+            alt="WhatsApp" 
+            className="w-full h-full object-cover"
+          />
         </div>
         
         <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
