@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
 interface OfferStep {
     number: number;
-    text: string;
+    text: string | React.ReactNode;
 }
 
 interface BaseProduct {
@@ -39,7 +39,13 @@ const servicesData: Product[] = [
         description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥",
         isSpecialOffer: true,
         offerSteps: [
-            { number: 1, text: "Register on PrimeXBT" },
+            { 
+                number: 1, 
+                text: <span className="flex items-center">
+                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-4 w-auto object-contain mr-2" />
+                    Register on PrimeXBT
+                </span> 
+            },
             { number: 2, text: "Complete KYC verification" },
             { number: 3, text: "Deposit minimum $50 (R800) into your wallet" },
             { number: 4, text: "WhatsApp Nomii with proof to claim your free month" }
@@ -241,42 +247,68 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
-                         <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="block cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="block cursor-pointer transform hover:scale-105 transition-transform duration-300">
                             <img src="https://mr1dollar.co.za/wp-content/uploads/2025/03/cropped-MR1Dollar_mERCHWhite-7.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
                         </a>
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
                             {navLinks.map(link => (
-                                <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-slate-300 hover:text-amber-400'}`}>
+                                <a 
+                                    key={link.name} 
+                                    href="#" 
+                                    onClick={(e) => handleNavClick(e, link.page)} 
+                                    className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-slate-300 hover:text-amber-400'}`}
+                                >
                                     {link.name}
-                                     {currentPage === link.page && <span className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-400 rounded-full shadow-[0_0_8px_theme(colors.amber.400)]"></span>}
+                                    {currentPage === link.page && (
+                                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-400 rounded-full shadow-[0_0_8px_theme(colors.amber.400)]"></span>
+                                    )}
                                 </a>
                             ))}
                         </div>
                     </div>
                     <div className="-mr-2 flex md:hidden">
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="bg-slate-900 inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                            <span className="sr-only">Open main menu</span>
-                            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                        <button 
+                            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+                            className="bg-slate-900 inline-flex items-center justify-center p-3 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-amber-400 transition-all duration-200" 
+                            aria-controls="mobile-menu" 
+                            aria-expanded={isMenuOpen}
+                        >
+                            <span className="sr-only">{isMenuOpen ? 'Close' : 'Open'} main menu</span>
+                            {isMenuOpen ? <CloseIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                         </button>
                     </div>
                 </div>
-            </div>
 
-            {isMenuOpen && (
-                <div className="md:hidden" id="mobile-menu">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                {/* Mobile menu */}
+                <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`} id="mobile-menu">
+                    <div className="px-2 pt-2 pb-4 space-y-2 sm:px-4 bg-slate-900/95 backdrop-blur-sm">
                         {navLinks.map(link => (
-                             <a key={link.name} href="#" onClick={(e) => handleNavClick(e, link.page)} 
-                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${currentPage === link.page ? 'bg-amber-400 text-black' : 'text-slate-300 hover:bg-slate-700 hover:text-white'}`}>
-                                 {link.name}
-                             </a>
+                            <a 
+                                key={link.name} 
+                                href="#" 
+                                onClick={(e) => {
+                                    handleNavClick(e, link.page);
+                                    setIsMenuOpen(false);
+                                }} 
+                                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                                    currentPage === link.page 
+                                        ? 'bg-amber-400 text-black' 
+                                        : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+                                }`}
+                            >
+                                {link.name}
+                                {currentPage === link.page && (
+                                    <span className="ml-2 text-xs bg-black/20 px-2 py-0.5 rounded-full">
+                                        Active
+                                    </span>
+                                )}
+                            </a>
                         ))}
                     </div>
                 </div>
-            )}
+            </div>
         </header>
     );
 };
@@ -463,11 +495,9 @@ const PromoSection: React.FC = () => {
                                             href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            className="inline-block mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 flex items-center text-sm"
+                                            className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
                                         >
-                                            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.5 12.5h-9v-1h9v1z"/>
-                                            </svg>
+                                            <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
                                             Register on PrimeXBT
                                         </a>
                                     </div>
@@ -698,15 +728,40 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                     <h3 className="text-xl font-bold text-white">Follow Us</h3>
                     <div className="flex space-x-4 mt-4">
                         <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
-                            <YouTubeIcon className="w-7 h-7" />
+                            <img 
+                                src="https://i.ibb.co/Rkr61Kyn/youtube-icon.png" 
+                                alt="YouTube Channel" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik01NDkuNjU1IDEyNC4wODNjLTYuMjgxLTIzLjY1LTI0Ljc4Ny00Mi4xLTQ4LjI4NC00OC41OTdDNDU4Ljc4MSA2NCAyODggNjQgMjg4IDY0UzExNy4yMiA2NCA3NC42MjkgNzUuNDg2Yy0yMy40OTcgNi40OTctNDEuOTk1IDI0Ljk0Ny00OC4yODQgNDguNTk3LTExLjQxMiA0Mi44NjctMTEuNDEyIDEzMi4zMjUtMTEuNDEyIDEzMi4zMjVzMCA4OS40NTggMTEuNDEyIDEzMi4zMjVjNi4yODkgMjMuNjUgMjQuNzg3IDQxLjk5NSA0OC4yODQgNDguNTk3QzExNy4yMiA0NDggMjg4IDQ0OCAyODggNDQ4czE3MC43OCAwIDIxMy4zNzEtMTEuNDg2YzIzLjQ5Ny02LjU5NyA0Mi4wMDItMjQuOTQ3IDQ4LjI4NC00OC41OTcgMTEuNDEyLTQyLjg2Ny0xMS40MTItMTMyLjMyNSAxMS40MTItMTMyLjMyNXMwLTg5LjQ1OC0xMS40MTItMTMyLjMyNXpNMjMyLjYxNSAzNTQuNDZWMjU3Ljk5bDEzMi43MzggOTguNDYtMTMyLjczOCA5OC40NnoiLz48L3N2Zz4=';
+                                }}
+                            />
                         </a>
                         <a href="https://www.instagram.com/mr1dollarforextrading/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
-                            <InstagramIcon className="w-7 h-7" />
+                            <img 
+                                src="https://i.ibb.co/dwHV57BN/instagram-icon.png" 
+                                alt="Instagram Profile" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQuxIDMwLjgxYz0xMjEuNzIgMC0yMjQuMSA5OS4zLTIyNC4xIDIyMS43IDAgMTIyLjQgMTAyLjQgIDIyMS43IDIyNC4xIDIyMS43IDEyMS43IDAgMjI0LjEtOTkuMyAyMjQuMS0yMjEuN0M0NDguMSAxMzAuMSAzNDUuOCAzMC44MSAyMjQuMSAzMC44MXptMCAzNzMuNmMtODMuOSAwLTE1MS45LTY4LjgtMTUxLjktMTUxLjkgMC04My45IDY4LTE1MS45IDE1MS45LTE1MS45czE1MS45IDY4IDE1MS45IDE1MS45YzAgODMuMS02OCAxNTEuOS0xNTEuOSAxNTEuOXptMTI5LjctMzQ4LjJjLTE0LjkgMC0yNy4xLTEyLjItMjcuMS0yNy4xczEyLjItMjcuMSAyNy4xLTI3LjEgMjcuMSAxMi4yIDI3LjEgMjcuMWMwIDE0LjktMTIuMiAyNy4xLTI3LjEgMjcuMXptLTgxLjIgMTIuOGMtMjkuMyAwLTUzLjEgMjMuOS01My4xIDUzLjFzMjMuOSA1My4xIDUzLjEgNTMuMSA1My4xLTIzLjkgNTMuMS01My4xLTIzLjgtNTMuMS01My4xLTUzLjF6bTgxLjIgMTQzYy00OS45IDAtOTAuNS00MC41LTkwLjUtOTAuNXM0MC41LTkwLjUgOTAuNS05MC41IDkwLjUgNDAuNSA5MC41IDkwLjUtNDAuNSA5MC41LTkwLjUgOTAuNXptMC0xNjMuOWMtNDAuNSAwLTczLjQgMzIuOS03My40IDczLjRzMzIuOSA3My40IDczLjQgNzMuNCA3My40LTMyLjkgNzMuNC03My40LTMzLTczLjQtNzMuNC03My40eiIvPjwvc3ZnPg==';
+                                }}
+                            />
                         </a>
                         <a href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn1E1EL7FO3iZ_uz1G7rvT7i5utLGbx_QiodZH3Cz6oUTzpCjXkA-cqGgzZBs_aem_B7K4X-tf1bLXw6stzB3f4A" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
-                            <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.96.61 3.77 1.64 5.27L2 22l4.73-1.64A9.9 9.9 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-2 15l-1.5-1.5L13 13l-4.5-4.5L10 7l6 6-6 4z"/>
-                            </svg>
+                            <img 
+                                src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
+                                alt="WhatsApp Community" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMGg1di0yaC0xYy0xLjEgMC0yOS4yNC0zLjk1Ljk1LTMuMDFWjE0aC0yVjloDQuNTJMMTAgOC41SDRWNGg2bC0uMDEgMS45OWMxLjQ5LS4yIDIuNzUtLjc2IDMuOS0xLjY2bC0xLjQxLTEuNDFjLTEuOTUgMS42LTQuNCAyLjU4LTcuMDggMi41OHoiLz48L3N2Zz4=';
+                                }}
+                            />
                         </a>
                     </div>
                      <p className="mt-4 text-slate-400 text-sm">Join our WhatsApp Community!</p>
@@ -733,17 +788,41 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 const WhatsAppWidget: React.FC = () => (
     <div className="fixed bottom-6 right-6 z-50">
       <a 
-        href="https://api.whatsapp.com/send?phone=27626898567"
+        href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group"
-        aria-label="Chat with us on WhatsApp"
+        className="flex items-center justify-center w-16 h-16 rounded-full bg-[#25D366] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative"
+        aria-label="Join our WhatsApp Community"
       >
-        <svg className="w-8 h-8" viewBox="0 0 32 32" fill="#25D366">
-          <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1z"></path>
-        </svg>
-        <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Chat with us
+        {/* Animated pulse effect */}
+        <div className="absolute inset-0 rounded-full bg-[#25D366] opacity-75 animate-ping"></div>
+        
+        <div className="relative z-10 flex items-center justify-center w-14 h-14 bg-white rounded-full m-1">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="#25D366"/>
+            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="url(#paint0_linear_1_2)" fill-opacity="0.2"/>
+            <path d="M25.6 21.2C25.2 22.4 23.6 23.6 22 24.4C20.8 25.2 18.8 26.4 16.4 26.4C12.8 26.4 8.8 23.6 6.4 20.4C4 17.2 4 13.6 4 13.6C4 12.4 4.4 11.2 5.6 10.4C6.4 9.6 7.6 9.6 8 9.6C8.4 9.6 8.8 9.6 9.2 9.6C9.6 9.6 10 9.6 10.4 10.8C10.8 12 11.2 13.6 11.2 14C11.2 14.4 11.2 14.8 10.8 15.2C10.4 15.6 10 16 9.6 16.4C9.2 16.8 8.8 17.2 9.2 18C9.6 18.8 10.8 20.4 12.4 21.6C14.4 23.2 16 23.6 16.8 24C17.2 24 17.6 24 18 24C18.8 24 19.6 23.6 20 23.2C20.4 22.8 21.2 22 21.6 21.6C22 21.2 22.4 21.2 22.8 21.2C23.2 21.2 23.6 21.2 24 21.2C24.4 21.2 25.2 21.2 25.6 22.4C26 23.2 26 24 26 24.4C26 24.8 25.6 26 24.8 26.8C24 27.6 23.2 28 22.8 28.4C22.4 28.8 22 28.8 21.6 28.8C21.2 28.8 20.8 28.8 20.4 28.8C19.6 28.8 18.8 28.8 17.6 28.4C16.4 28 15.2 27.6 14 26.8C12.4 25.6 11.2 24.4 10 23.2C8.8 22 8 20.8 7.2 19.6C6.4 18.4 6 17.2 6 16.4C6 15.6 6.4 15.2 6.8 14.8C7.2 14.4 7.6 14 8 14.4C8.4 14.4 8.8 14.8 9.2 15.2C9.6 15.6 10 16 10.4 16.4C10.8 16.8 11.2 17.2 11.2 17.6C11.2 18 11.2 18.4 10.8 18.8C10.4 19.2 10 19.6 9.6 20C9.2 20.4 8.8 20.8 9.2 21.6C9.6 22.4 10.8 24 12.4 25.2C14 26.4 15.2 27.2 16.4 27.2C17.2 27.2 18 27.2 18.8 27.2C19.6 27.2 20.4 27.2 21.2 26.8C22 26.4 22.8 25.6 23.6 24.8C24.4 24 25.2 22.8 25.6 21.6Z" fill="white"/>
+            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="url(#paint1_radial_1_2)" fill-opacity="0.3"/>
+            <path d="M16 0C7.16344 0 0 7.16344 0 16C0 19.1844 1.03281 22.1438 2.8 24.6L0.8 32L8.8 30C11.2 31.6 14.0125 32.4 16.8 32.4C25.5562 32.4 32.8 25.1562 32.8 16.4C32.8 7.64375 25.7562 0.4 16.8 0.4H16V0Z" fill="url(#paint2_radial_1_2)" fill-opacity="0.2"/>
+            <defs>
+              <linearGradient id="paint0_linear_1_2" x1="16.4" y1="0" x2="16.4" y2="32.4" gradientUnits="userSpaceOnUse">
+                <stop stop-color="white"/>
+                <stop offset="1" stop-color="white" stop-opacity="0"/>
+              </linearGradient>
+              <radialGradient id="paint1_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16.4 16.2) scale(24.1667)">
+                <stop stop-color="white"/>
+                <stop offset="1" stop-color="white" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="paint2_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(9.6 9.6) scale(22.5)">
+                <stop stop-color="white"/>
+                <stop offset="1" stop-color="white" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+        
+        <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+          Join our Community
         </span>
       </a>
     </div>
@@ -1951,9 +2030,86 @@ const PrivacyPolicyPage: React.FC = () => (
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
 
+  // Smooth scroll to top on page change and add performance optimizations
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Smooth scroll to top when page changes
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Add passive event listeners for better scroll performance
+    const addPassiveScroll = () => {
+      try {
+        const options = Object.defineProperty({}, 'passive', {
+          get: () => {
+            passiveSupported = true;
+          }
+        });
+        window.addEventListener('test', () => {}, options);
+        window.removeEventListener('test', () => {}, options as any);
+      } catch (err) {}
+    };
+    
+    let passiveSupported = false;
+    addPassiveScroll();
+    
+    // Apply passive event listeners to all scrollable elements
+    const scrollableElements = document.querySelectorAll('*');
+    scrollableElements.forEach(element => {
+      const style = window.getComputedStyle(element);
+      if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+        element.addEventListener('scroll', () => {}, passiveSupported ? { passive: true } : false);
+      }
+    });
+    
+    // Cleanup function
+    return () => {
+      scrollableElements.forEach(element => {
+        element.removeEventListener('scroll', () => {});
+      });
+    };
   }, [currentPage]);
+  
+  // Add global styles for better performance
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #f59e0b rgba(0, 0, 0, 0.1);
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #f59e0b;
+        border-radius: 4px;
+      }
+      /* Optimize animations */
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const renderPage = () => {
     switch(currentPage) {
