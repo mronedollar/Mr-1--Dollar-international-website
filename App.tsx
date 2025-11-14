@@ -1000,8 +1000,8 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
 
                     {/* Track Record Modal */}
                     {activeTab === 'track-record' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-white">
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 pb-8 animate-fadeIn">
+                            <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-y-auto border border-white">
                                 <div className="p-5 sm:p-6">
                                     <div className="flex justify-between items-center mb-5">
                                         <h2 className="text-xl font-bold text-white">Trading History</h2>
@@ -1082,8 +1082,8 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
 
                     {/* Community Modal */}
                     {activeTab === 'community' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-white">
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 pb-8 animate-fadeIn">
+                            <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-y-auto border border-white">
                                 <div className="p-6 sm:p-8">
                                     <div className="flex justify-between items-center mb-6">
                                         <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
@@ -1129,8 +1129,8 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
 
                     {/* Trade-Cations Modal */}
                     {activeTab === 'tradecations' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-black rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto border border-white">
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 pb-8 animate-fadeIn">
+                            <div className="bg-black rounded-2xl max-w-3xl w-full max-h-[75vh] overflow-y-auto border border-white">
                                 <div className="p-5 sm:p-6">
                                     <div className="flex justify-between items-center mb-5">
                                         <h2 className="text-xl font-bold text-white">Exclusive Trade-Cations</h2>
