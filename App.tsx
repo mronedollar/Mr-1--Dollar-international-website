@@ -1004,7 +1004,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                             <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[70vh] md:max-h-[60vh] overflow-y-auto border border-white">
                                 <div className="p-5 sm:p-6">
                                     <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-bold text-white">Trading History</h2>
+                                        <h2 className="text-xl font-bold text-white">Trade Ideas Stats</h2>
                                         <button 
                                             onClick={() => setActiveTab(null)}
                                             className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
