@@ -885,13 +885,6 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 
 const WhatsAppWidget: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [showBanner, setShowBanner] = useState(() => {
-    // Only show banner if it hasn't been shown before in this session
-    if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem('disclaimerShown');
-    }
-    return true;
-  });
 
   useEffect(() => {
     // WhatsApp widget show/hide timer - toggle every minute
@@ -916,61 +909,28 @@ const WhatsAppWidget: React.FC = () => {
     };
   }, [isVisible]);
 
-  const handleCloseBanner = () => {
-    setShowBanner(false);
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('disclaimerShown', 'true');
-    }
-  };
-
   return (
-    <>
-      {/* WhatsApp Widget Container */}
-      <div className={`fixed right-6 bottom-6 z-50 flex flex-col items-end space-y-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        
-        {/* Financial Disclaimer Banner */}
-        {showBanner && (
-          <div className="bg-black border-l-4 border-green-500 text-white text-xs p-3 pr-10 rounded-r-lg shadow-[0_0_15px_2px_rgba(74,222,128,0.5)] relative transform transition-all duration-500 hover:shadow-[0_0_20px_5px_rgba(74,222,128,0.7)] animate-fadeInRight">
-            <button 
-              onClick={handleCloseBanner}
-              className="absolute top-1 right-1 text-gray-400 hover:text-white transition-colors"
-              aria-label="Close disclaimer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <div className="flex items-center">
-              <span className="font-medium mr-2 text-green-400">⚠️ Financial Risk Warning:</span>
-              <span className="text-gray-200">Trading involves risk. Only trade with money you can afford to lose.</span>
-            </div>
-          </div>
-        )}
-
-        {/* WhatsApp Button */}
-        <div className={`transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-30 hover:opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}>
-          <a 
-            href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
-            aria-label="Join our WhatsApp Community"
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img 
-                src="https://i.ibb.co/S4KMyg8d/whatsapp.png" 
-                alt="WhatsApp" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-              Join our Community
-            </span>
-          </a>
+    <div className={`fixed right-6 bottom-6 z-50 transition-all duration-1000 transform ${isVisible ? 'opacity-30 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <a 
+        href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
+        aria-label="Join our WhatsApp Community"
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <img 
+            src="https://i.ibb.co/S4KMyg8d/whatsapp.png" 
+            alt="WhatsApp" 
+            className="w-full h-full object-cover"
+          />
         </div>
-      </div>
-    </>
+        
+        <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+          Join our Community
+        </span>
+      </a>
+    </div>
   );
 };
 
