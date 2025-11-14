@@ -883,37 +883,78 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 );
 
 
-const FinancialDisclaimer: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(true);
+const WhatsAppWidget: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [showBanner, setShowBanner] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsVisible(false);
-        }, 60000); // Hide after 1 minute
+  useEffect(() => {
+    // WhatsApp widget show/hide timer
+    const widgetTimer = setInterval(() => {
+      setIsVisible(prev => !prev);
+    }, isVisible ? 60000 : 180000); // Show for 1 min, hide for 3 mins
 
-        return () => clearTimeout(timer);
-    }, []);
+    // Banner timer - show for 1 minute
+    const bannerTimer = setTimeout(() => {
+      setShowBanner(false);
+    }, 60000);
 
-    if (!isVisible) return null;
+    return () => {
+      clearInterval(widgetTimer);
+      clearTimeout(bannerTimer);
+    };
+  }, [isVisible]);
 
-    return (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-xs text-center py-1.5 px-4 shadow-lg animate-fadeInDown">
-            <div className="flex items-center justify-center space-x-2">
-                <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                </svg>
-                <span className="font-medium">FINANCIAL DISCLAIMER:</span>
-                <span className="flex-1">Trading involves risk. Past performance does not guarantee future results. Invest only what you can afford to lose.</span>
-            </div>
+  return (
+    <>
+      {/* Financial Disclaimer Banner */}
+      {showBanner && (
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 animate-fadeInUp">
+          <div className="bg-gradient-to-r from-red-600/90 to-amber-600/90 text-white text-xs p-2 px-4 rounded-full shadow-lg flex items-center">
+            <span className="font-medium mr-2">⚠️ Financial Risk Warning:</span>
+            <span>Trading involves risk. Only trade with money you can afford to lose.</span>
+          </div>
         </div>
-    );
+      )}
+
+      {/* WhatsApp Widget */}
+      <div className={`fixed bottom-6 right-6 z-50 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <a 
+          href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
+          aria-label="Join our WhatsApp Community"
+        >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img 
+              src="https://i.ibb.co/S4KMyg8d/whatsapp.png" 
+              alt="WhatsApp" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+            Join our Community
+          </span>
+        </a>
+      </div>
+    </>
+  );
 };
 
-// ...
+// --- Page Components ---
+
+interface HomePageProps {
+    setCurrentPage: (page: Page) => void;
+}
 
 const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
-    // ...
+    const [activeTab, setActiveTab] = useState<string | null>(null);
 
+    const handleFeatureClick = (tab: string) => {
+        setActiveTab(activeTab === tab ? null : tab);
+    };
+    
     return (
         <>
             <Hero setCurrentPage={setCurrentPage} />
@@ -2580,7 +2621,6 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
       <Footer setCurrentPage={setCurrentPage} />
-      <FinancialDisclaimer />
       <WhatsAppWidget />
     </div>
   );
