@@ -1527,7 +1527,7 @@ const FAQ: React.FC = () => {
     const faqData = [
         {
             question: "What is Mr.$1 International?",
-            answer: "Mr.$1 International is a premier Forex education and trade idea provider. Our mission is to empower traders of all levels with the knowledge, strategies, and community support needed to achieve financial independence and join the top 1% of successful traders."
+            answer: "Mr.$1 International is a premier Forex education and trade ideas provider. Our mission is to empower traders of all levels with the knowledge, strategies, and community support needed to achieve financial independence and join the top 1% of successful traders."
         },
         {
             question: "Who are your courses designed for?",
