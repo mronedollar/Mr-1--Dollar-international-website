@@ -474,7 +474,7 @@ const PropFirms: React.FC = () => {
                           {partners
                                 .filter(partner => partner.category === 'Prop Firms')
                                 .map((partner, i) => {
-                                    const colorClass = partner.name === 'Funded7' ? 'purple' :
+                                    const colorClass = partner.name === 'Funded7' ? 'red' :
                                                      partner.name === 'FundedNext' ? 'blue' : 'green';
                                     
                                     return (
@@ -483,13 +483,13 @@ const PropFirms: React.FC = () => {
                                                 href={partner.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className={`glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-${colorClass}-400/50 group-hover:shadow-[0_0_20px_${colorClass === 'purple' ? 'rgba(239,68,68,0.3)' : colorClass === 'blue' ? 'rgba(59,130,246,0.3)' : 'rgba(34,197,94,0.3)'}]`}
+                                                className={`glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-${colorClass}-400/50 group-hover:shadow-[0_0_20px_${colorClass === 'red' ? 'rgba(239,68,68,0.3)' : colorClass === 'blue' ? 'rgba(59,130,246,0.3)' : 'rgba(34,197,94,0.3)'}]`}
                                                 style={{
                                                     transition: 'all 0.3s ease',
                                                     animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
                                                 }}
                                             >
-                                                <div className={`absolute inset-0 bg-gradient-to-br from-${colorClass}-500/5 to-${colorClass === 'purple' ? 'pink' : colorClass === 'blue' ? 'indigo' : 'teal'}-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                                                <div className={`absolute inset-0 bg-gradient-to-br from-${colorClass}-500/5 to-${colorClass === 'red' ? 'pink' : colorClass === 'blue' ? 'indigo' : 'teal'}-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                                                 <img 
                                                     src={partner.logoUrl} 
                                                     alt={`${partner.name} logo`} 
@@ -607,11 +607,6 @@ const PromoSection: React.FC = () => {
 const Testimonials: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [touchStart, setTouchStart] = useState<number | null>(null);
-    const [touchEnd, setTouchEnd] = useState<number | null>(null);
-    
-    // Minimum swipe distance to trigger navigation (in pixels)
-    const minSwipeDistance = 50;
     
     // Get all testimonial image files from the public directory
     const testimonialImages = [
@@ -716,51 +711,15 @@ const Testimonials: React.FC = () => {
                             </button>
                             
                             {/* Main image */}
-                            <div 
-                                className="relative"
-                                onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
-                                onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
-                                onTouchEnd={() => {
-                                    if (!touchStart || !touchEnd) return;
-                                    const distance = touchStart - touchEnd;
-                                    const isLeftSwipe = distance > minSwipeDistance;
-                                    const isRightSwipe = distance < -minSwipeDistance;
-                                    
-                                    if (isLeftSwipe) {
-                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
-                                        const nextIndex = (currentIndex + 1) % testimonialImages.length;
-                                        setSelectedImage(testimonialImages[nextIndex]);
-                                    } else if (isRightSwipe) {
-                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
-                                        const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
-                                        setSelectedImage(testimonialImages[prevIndex]);
-                                    }
-                                    
-                                    setTouchStart(null);
-                                    setTouchEnd(null);
-                                }}
-                            >
+                            <div className="relative">
                                 <img 
                                     src={`/mr$1 testimonials/${selectedImage}`}
                                     alt="Full size testimonial"
-                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl select-none touch-none"
+                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl"
                                     onClick={(e) => e.stopPropagation()}
-                                    draggable={false}
                                 />
                                 <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
                                     {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
-                                </div>
-                                <div className="absolute top-1/2 left-4 right-4 flex justify-between pointer-events-none">
-                                    <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                        </svg>
-                                    </div>
-                                    <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </div>
                                 </div>
                             </div>
                             
@@ -914,274 +873,15 @@ interface HomePageProps {
     setCurrentPage: (page: Page) => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
-    const [activeTab, setActiveTab] = useState<string | null>(null);
-
-    const handleFeatureClick = (tab: string) => {
-        setActiveTab(activeTab === tab ? null : tab);
-    };
-    
-    return (
-        <>
-            <Hero setCurrentPage={setCurrentPage} />
-            <PromoSection />
-            
-            {/* Features Grid */}
-            <section className="py-20 bg-black animate-fadeInUp">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <FeatureCard 
-                            icon={
-                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                            } 
-                            title="Proven Track Record"
-                            onClick={() => handleFeatureClick('track-record')}
-                        />
-                        <FeatureCard 
-                            icon={
-                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            } 
-                            title="Trading Community"
-                            onClick={() => handleFeatureClick('community')}
-                        />
-                        <FeatureCard 
-                            icon={
-                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            } 
-                            title="Exclusive Trade-Cations"
-                            onClick={() => handleFeatureClick('tradecations')}
-                        />
-                    </div>
-
-                    {/* Track Record Modal */}
-                    {activeTab === 'track-record' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                                <div className="p-5 sm:p-6">
-                                    <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-bold text-white">Trading History</h2>
-                                        <button 
-                                            onClick={() => setActiveTab(null)}
-                                            className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                                            aria-label="Close modal"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div className="prose prose-invert max-w-none">
-                                        <p className="text-slate-300 text-sm mb-5">
-                                            Our premium trading community consistently delivers exceptional weekly performance, with win rates ranging between 70% to 100% across all trading sessions. Here's a glimpse of our recent trading statistics:
-                                        </p>
-                                        
-                                        {/* YouTube Videos Grid */}
-                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-                                            {[
-                                                { id: 'vfX0Y106iK0', title: 'Trade Analysis' },
-                                                { id: 'CVLyno-oktw', title: 'Market Update' },
-                                                { id: 'Zg1VAV2xzSQ', title: 'Trading Session' },
-                                                { id: 'L_9QwGiHKrw', title: 'Strategy Breakdown' },
-                                                { id: '71Ez4STWkkE', title: 'Market Review' },
-                                                { id: 'xxc5MLIwSSE', title: 'Live Trading' },
-                                                { id: 'EXhbQfl6uVw', title: 'Tutorial' }
-                                            ].map((video, index) => (
-                                                <a
-                                                    key={video.id}
-                                                    href={`https://www.youtube.com/watch?v=${video.id}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="group relative rounded-lg overflow-hidden aspect-video bg-slate-800/50 border border-slate-700/50 hover:border-amber-400/50 transition-all duration-300"
-                                                >
-                                                    <img
-                                                        src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
-                                                        alt={video.title}
-                                                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                                                    />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                                                        <p className="text-xs text-white font-medium line-clamp-2">{video.title}</p>
-                                                    </div>
-                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                        <div className="w-10 h-10 bg-red-500/90 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
-                                                            <svg className="w-5 h-5 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M8 5v14l11-7z" />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            ))}
-                                        </div>
-
-                                        <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                                            <h3 className="text-lg font-semibold text-amber-400 mb-2">More Trading Content</h3>
-                                            <p className="text-slate-300 text-sm mb-3">
-                                                Subscribe to our YouTube channel for the latest trade ideas, market analysis, and educational content.
-                                            </p>
-                                            <a 
-                                                href="https://www.youtube.com/@MrOneDollarInternational" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center text-amber-400 hover:text-amber-300 text-sm font-medium transition-colors group"
-                                            >
-                                                <span className="border-b border-transparent group-hover:border-amber-300">Visit Our YouTube Channel</span>
-                                                <svg className="w-4 h-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Community Modal */}
-                    {activeTab === 'community' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                                <div className="p-6 sm:p-8">
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
-                                        <button 
-                                            onClick={() => setActiveTab(null)}
-                                            className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                                            aria-label="Close modal"
-                                        >
-                                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div className="prose prose-invert max-w-none">
-                                        <p className="text-slate-300 mb-4">
-                                            Our trading community is a vibrant space where traders of all levels come together to share insights, strategies, and support each other's growth.
-                                        </p>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                                            <div className="bg-slate-800/50 p-6 rounded-lg">
-                                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
-                                                <p className="text-slate-300 mb-4">
-                                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
-                                                </p>
-                                            </div>
-                                            <div className="bg-slate-800/50 p-6 rounded-lg">
-                                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
-                                                <p className="text-slate-300 mb-4">
-                                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
-                                                </p>
-                                                <a 
-                                                    href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300"
-                                                >
-                                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
-                                                        <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
-                                                    </svg>
-                                                    Join Our WhatsApp Group
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Trade-Cations Modal */}
-                    {activeTab === 'tradecations' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-slate-900 rounded-xl max-w-3xl w-full max-h-[85vh] overflow-y-auto">
-                                <div className="p-5 sm:p-6">
-                                    <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-bold text-white">Exclusive Trade-Cations</h2>
-                                        <button 
-                                            onClick={() => setActiveTab(null)}
-                                            className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                                            aria-label="Close"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div className="prose prose-invert max-w-none">
-                                        <p className="text-slate-300 text-sm mb-5">
-                                            Combine your passion for trading with the joy of travel. Our exclusive Trade-Cations provide immersive trading experiences in beautiful locations.
-                                        </p>
-                                        <div className="space-y-5">
-                                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                                    <div>
-                                                        <h4 className="font-medium text-white text-base">Cayley Resort Trading Retreat</h4>
-                                                        <p className="text-xs text-slate-400">February 23-27, 2026 (5 days)</p>
-                                                    </div>
-                                                    <span className="bg-amber-500/20 text-amber-400 text-xs font-medium px-2.5 py-1 rounded-full self-start sm:self-center">Drakensburg, South Africa</span>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                                                <h3 className="text-lg font-semibold text-amber-400 mb-3">What's Included</h3>
-                                                <ul className="space-y-2 text-sm text-slate-300">
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>Daily trading sessions with experts</span>
-                                                    </li>
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>Luxury accommodation & meals</span>
-                                                    </li>
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>One-on-one mentorship</span>
-                                                    </li>
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>Networking events & excursions</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            
-                                            <a 
-                                                href="#" 
-                                                onClick={(e) => { 
-                                                    e.preventDefault(); 
-                                                    setCurrentPage('events'); 
-                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                }} 
-                                                className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-300 hover:shadow-lg text-sm text-center"
-                                            >
-                                                Learn More About Trade-Cations
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </section>
-            
-            <PropFirms />
-            <Testimonials />
-            <AboutPage />
-        </>
-    );
-};
+const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => (
+    <>
+        <Hero setCurrentPage={setCurrentPage} />
+        <PromoSection />
+        <PropFirms />
+        <Testimonials />
+        <AboutPage />
+    </>
+);
 
 const EventsPage: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -1190,43 +890,8 @@ const EventsPage: React.FC = () => {
     const events = [
         {
             id: 1,
-            title: "🚀 Exclusive Tradecation Experience",
-            description: "Transform from beginner to funded trader in just 7 days with our immersive trading retreat. This all-inclusive experience combines expert trading education with luxury accommodation and lifestyle optimization.",
-            details: [
-                {
-                    title: "🔥 What's Included",
-                    items: [
-                        "🏆 Complete Trading Education (Beginner to Advanced)",
-                        "💡 3 Months of Premium Trade Ideas ($1,000+ value)",
-                        "💼 $5,000 Prop Firm Account Setup (or $50 funded account)",
-                        "🏨 Luxury Accommodation (Private Residency, Mon-Fri)",
-                        "🍽️ All Meals Included (Breakfast, Lunch, Dinner + Snacks)",
-                        "💪 Morning Fitness Sessions with Certified Coach (5 AM)",
-                        "🧠 Daily Mindset Coaching (30 min 1-on-1 sessions)",
-                        "👨‍🍳 Private Chef for Optimal Nutrition & Performance"
-                    ]
-                },
-                {
-                    title: "📈 Trading Education",
-                    items: [
-                        "🔍 Market Structure & Price Action Mastery",
-                        "📊 Advanced Chart Patterns & Technical Analysis",
-                        "💵 Risk Management Strategies (1-2% Rule)",
-                        "🧠 Trading Psychology & Discipline",
-                        "📱 Live Trading Sessions & Q&A"
-                    ]
-                },
-                {
-                    title: "💰 What You'll Achieve",
-                    items: [
-                        "✅ Develop a Profitable Trading Strategy",
-                        "✅ Learn to Analyze Markets Like a Pro",
-                        "✅ Build Unshakable Trading Discipline",
-                        "✅ Join Our Exclusive Trader Community",
-                        "✅ Leave with a Clear Path to Financial Freedom"
-                    ]
-                }
-            ],
+            title: "Tradecation",
+            description: "Transform into a confident and profitable trader with our complete experience that combines education, mentorship, and lifestyle support all under one roof.\n\nWhat's included:\n• Complete Training Journey (Beginner to Advanced)\n• 3 Months of Premium Trade Ideas\n• $5,000 Prop Firm Account Setup / $50 funded account\n• Fully Paid Vacation with Accommodation (Private Residency Mon-Fri)\n• All Meals & Lifestyle Support (Breakfast, Lunch, Dinner, Snacks)\n• Morning Fitness with Health Coach (5 AM sessions)\n• Mindset Coaching with Life Coach (30 min/day)\n• Private Chef for Optimal Nutrition\n\nYou'll learn:\n• How the forex market truly works\n• Chart mastery and market structure\n• Risk management and trading psychology\n• How to develop winning strategies\n• How to trade like a funded pro",
             price: "R15,354.99 (≈ $900)",
             date: "Next Intake Coming Soon",
             location: "Luxury Retreat Location",
@@ -1236,10 +901,10 @@ const EventsPage: React.FC = () => {
         },
         {
             id: 2,
-            title: "🎯 NFP Trading Masterclass",
-            description: "Master the most volatile trading day of the month with our expert-led NFP trading session. Learn to profit from the biggest market-moving economic report.",
+            title: "NFP Trading Masterclass",
+            description: "Learn how to trade the Non-Farm Payroll (NFP) event like a pro. Our experts will guide you through pre-news analysis, entry strategies, and risk management.",
             price: "$16.00 (≈ R300)",
-            date: "Join us on the next NFP event",
+            date: "First Friday of Every Month",
             time: "1:30 PM - 3:30 PM (SAST)",
             location: "Online - USA Market Focus",
             image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
@@ -1377,62 +1042,11 @@ const EventsPage: React.FC = () => {
 
                         {/* Event Description */}
                         <div className="glass-card p-6 sm:p-8 rounded-lg">
-                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">📅 Event Details</h2>
-                            <div className="space-y-6">
-                                <div className="bg-slate-800/50 p-4 rounded-lg border-l-4 border-amber-400">
-                                    <h3 className="text-lg font-semibold text-amber-400 mb-2">NEXT NFP TRADING SESSION</h3>
-                                    <p className="text-slate-300 mb-3">Join our expert traders as we navigate the most volatile trading day of the month. Learn to profit from the Non-Farm Payroll report with our proven strategies.</p>
-                                    <div className="grid grid-cols-2 gap-4 text-sm">
-                                        <div>
-                                            <p className="text-slate-400">When</p>
-                                            <p className="text-white font-medium">Next NFP Release</p>
-                                            <p className="text-slate-400 text-xs">(First Friday of each month)</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-slate-400">Time</p>
-                                            <p className="text-white font-medium">1:30 PM - 3:30 PM (SAST)</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-slate-400">Where</p>
-                                            <p className="text-white font-medium">Online via Zoom</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-slate-400">Price</p>
-                                            <p className="text-amber-400 font-bold">$16.00 (≈ R300)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div className="mt-6">
-                                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
-                                    <ul className="space-y-2 text-slate-300">
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Pre-news analysis and market preparation</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Optimal entry and exit strategies</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Risk management techniques for high volatility</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Live trading demonstration</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Q&A with professional traders</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <div className="bg-gradient-to-r from-amber-500/10 to-transparent p-4 rounded-lg border border-amber-500/20 mt-6">
-                                    <h4 className="text-lg font-semibold text-amber-400 mb-2">Special Bonus</h4>
-                                    <p className="text-slate-300 text-sm">All participants will receive a free NFP Trading Guide and access to our private trading community for 1 month.</p>
-                                </div>
+                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">Event Details</h2>
+                            <div className="text-slate-400 space-y-4">
+                                <p className="text-lg font-semibold text-white">NON FARM PAYROLL 🚀</p>
+                                <p>Join us Live on the 7th of March for NFP Trading Mastery! Get ready to elevate your trading skills as we teach you how to effectively trade the Non-Farm Payroll (NFP) data release before it hits the market.</p>
+                                <p>Discover strategies, tips, and insights to make the most of this critical economic event. Don't miss out on this opportunity to learn and profit! 💰</p>
                             </div>
                         </div>
                     </div>
@@ -1551,98 +1165,245 @@ const FAQ: React.FC = () => {
 };
 
 const AboutPage: React.FC = () => {
+    const [activeTab, setActiveTab] = useState<string | null>(null);
+
+    const handleFeatureClick = (tab: string) => {
+        setActiveTab(activeTab === tab ? null : tab);
+    };
+
     return (
-        <div className="bg-black animate-fadeIn">
-            {/* Simple About header */}
-            <section className="py-24 bg-slate-900">
-                <div className="container mx-auto px-4 text-center animate-fadeInUp">
-                    <h1 className="text-5xl font-extrabold text-white">About Our Company</h1>
-                    <p className="mt-4 text-amber-400 text-lg uppercase tracking-widest">Our Story</p>
-                    <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+    <div className="bg-black animate-fadeIn">
+        {/* Page Header */}
+        <section className="py-24 bg-slate-900">
+            <div className="container mx-auto px-4 text-center animate-fadeInUp">
+                <h1 className="text-5xl font-extrabold text-white">About Our Company</h1>
+                <p className="mt-4 text-amber-400 text-lg uppercase tracking-widest">Our Story</p>
+                <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+            </div>
+        </section>
+
+        {/* Story Content */}
+        <section className="py-20 animate-fadeInUp">
+            <div className="container mx-auto px-4 max-w-4xl text-center">
+                <p className="text-xl text-slate-300 leading-relaxed">
+                    At Mr. One Dollar Forex Trading, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can Thrive, learn and grow together. We are dedicated to providing top-notch training, valuable resources, and a supportive environment that fosters personal and professional development.
+                </p>
+            </div>
+        </section>
+
+        {/* Mission Section */}
+        <section className="py-20 bg-slate-900 animate-fadeInUp">
+            <div className="container mx-auto px-4">
+                <div className="text-center">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-white">Our Mission</h2>
+                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
                 </div>
-            </section>
+                <p className="mt-8 text-lg text-slate-400 max-w-3xl mx-auto text-center">
+                    We are helping people to succeed in the Financial Markets. We understand that trading is not just about profit; it’s about building a sustainable future for you and your loved ones. Our goal is to help you unlock your potential, gain confidence, and take control of your financial destiny. Together, we can navigate the markets and turn dreams into reality. Why settle for ordinary when you can be extraordinary? Join us on this journey to success!
+                </p>
+            </div>
+        </section>
 
-            {/* Mission Section */}
-            <section className="py-20 bg-slate-900 animate-fadeInUp">
-                <div className="container mx-auto px-4 max-w-4xl text-center">
-                    <p className="text-xl text-slate-300 leading-relaxed">
-                        At Mr One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn and grow together.
-                    </p>
+        {/* Features Grid */}
+        <section className="py-20 bg-black animate-fadeInUp">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <FeatureCard 
+                        icon={
+                            <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        } 
+                        title="Proven Track Record"
+                        onClick={() => handleFeatureClick('track-record')}
+                    />
+                    <FeatureCard 
+                        icon={
+                            <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        } 
+                        title="Trading Community"
+                        onClick={() => handleFeatureClick('community')}
+                    />
+                    <FeatureCard 
+                        icon={
+                            <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        } 
+                        title="Exclusive Trade-Cations"
+                        onClick={() => handleFeatureClick('tradecations')}
+                    />
                 </div>
-            </section>
 
-            <FAQ />
-
-            {/* YouTube Channel Section */}
-            <section className="py-20 animate-fadeInUp">
-                <div className="container mx-auto px-4">
-                    <div className="glass-card rounded-lg p-8 md:p-10 text-center">
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                            {/* YouTube Profile Picture */}
-                            <div className="flex-shrink-0">
-                                <a 
-                                    href="https://www.youtube.com/@mr1dollar572" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="block group"
-                                >
-                                    <div className="relative">
-                                        <img 
-                                            src="https://i.ibb.co/5hr3HpLW/IMG-20241107-151334-1.jpg" 
-                                            alt="Mr One Dollar YouTube Channel" 
-                                            className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-amber-400/30 hover:border-amber-400/70 transition-all duration-300 transform group-hover:scale-105 object-cover"
-                                            onError={(e) => {
-                                                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/200/1a1a2e/ffffff?text=Mr$1';
-                                            }}
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <div className="bg-red-600 rounded-full p-3 transform group-hover:scale-110 transition-transform">
-                                                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                </svg>
-                                            </div>
-                                        </div>
+                {/* Track Record Modal */}
+                {activeTab === 'track-record' && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                        <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                            <div className="p-6 sm:p-8">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h2 className="text-2xl font-bold text-white">Trading History</h2>
+                                    <button 
+                                        onClick={() => setActiveTab(null)}
+                                        className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                        aria-label="Close modal"
+                                    >
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div className="bg-slate-800/50 p-4 rounded-lg border border-amber-400/20 overflow-hidden">
+                                    <div className="mb-4">
+                                        <h3 className="text-lg font-semibold text-white mb-2">Tinyiko Miyambo - $100 Account</h3>
+                                        <p className="text-slate-400 text-sm">View the detailed trading history below</p>
                                     </div>
-                                </a>
+                                    <div className="mt-6 flex justify-center">
+                                        <button 
+                                            onClick={() => setActiveTab(null)}
+                                            className="bg-amber-500 hover:bg-amber-400 text-black font-medium py-2 px-6 rounded-md transition-colors duration-200"
+                                        >
+                                            Close Trading History
+                                        </button>
+                                    </div>
+                                    <div className="relative w-full h-[500px] overflow-auto bg-white">
+                                        <iframe 
+                                            src="/Track%20record%20html%20file/Trading%20History%20Tinyiko%20Miyambo%20$100%20Account%20.html"
+                                            className="w-full h-full border-0"
+                                            title="Trading History"
+                                        ></iframe>
+                                    </div>
+                                    <div className="mt-4 text-xs text-slate-400">
+                                        <p>Data as of {new Date().toLocaleDateString()}</p>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            {/* Channel Info */}
-                            <div className="max-w-2xl">
-                                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Go Beyond the Charts with Mr One Dollar</h2>
-                                <p className="text-slate-300 mb-6">
-                                    Join our growing community on YouTube! From exclusive podcast episodes and in-depth trade reviews to beginner's guides and footage from our legendary Trade-Cations, we're pulling back the curtain. Subscribe to get the strategies and insights you won't find anywhere else.
-                                </p>
-                                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                        </div>
+                    </div>
+                )}
+
+                {/* Community Modal */}
+                {activeTab === 'community' && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                        <div className="bg-slate-900 rounded-xl max-w-2xl w-full p-6 sm:p-8">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
+                                <button 
+                                    onClick={() => setActiveTab(null)}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="space-y-4 text-slate-300">
+                                <p>Connect with like-minded traders, share insights, and grow together in our exclusive community.</p>
+                                <div className="mt-6 flex flex-col space-y-4">
                                     <a 
-                                        href="https://www.youtube.com/@mr1dollar572" 
+                                        href="https://chat.whatsapp.com/EEGdXmPHokd0qzbQqd28SS" 
                                         target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
                                     >
-                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
+                                            <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
                                         </svg>
-                                        Subscribe on YouTube
-                                    </a>
-                                    <a 
-                                        href="https://www.youtube.com/@mr1dollar572/videos" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
-                                    >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                        </svg>
-                                        View Videos
+                                        Join WhatsApp Group
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                )}
+
+                {/* Trade-Cations Modal */}
+                {activeTab === 'tradecations' && (
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                        <div className="bg-slate-900 rounded-xl max-w-2xl w-full p-6 sm:p-8">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-2xl font-bold text-white">Exclusive Trade-Cations</h2>
+                                <button 
+                                    onClick={() => setActiveTab(null)}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="space-y-6">
+                                <div className="space-y-4 text-slate-300">
+                                    <p className="text-lg font-semibold text-amber-400">Transform Your Trading Journey with Our Full Course Trade-Cation Experience</p>
+                                    <p>At Mr One Dollar Forex Trading, we've designed the Full Course to completely transform you into a confident and profitable trader... whether you're starting from zero or looking to master the markets at an advanced level.</p>
+                                    <p>This is not just another online course. It's a complete experience that combines education, mentorship, and lifestyle support... all under one roof.</p>
+                                    <p className="font-medium">Price: R15,354.99 - All Inclusive</p>
+                                    <p>Ready to take your trading seriously? Contact us today to enroll and begin your transformation.</p>
+                                </div>
+                                
+                                {/* Trade-Cation Content */}
+                                <div className="space-y-4">
+                                    <div className="relative w-full overflow-hidden rounded-lg border border-amber-400/20 bg-white p-4">
+                                        <div className="flex items-center justify-center">
+                                            <div className="max-w-md w-full">
+                                                <div className="aspect-w-1 aspect-h-1 w-full">
+                                                    <div className="flex items-center justify-center h-96">
+                                                        <div className="text-center">
+                                                            <div className="mb-4">
+                                                                <svg className="w-16 h-16 mx-auto text-pink-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.415-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </div>
+                                                            <h3 className="text-xl font-semibold text-gray-900 mb-2">Trade-Cation Highlights</h3>
+                                                            <p className="text-gray-600 mb-4">Experience our exclusive trading retreats around the world</p>
+                                                            <a 
+                                                                href="https://www.instagram.com/mr1dollarforextrading/" 
+                                                                target="_blank" 
+                                                                rel="noopener noreferrer"
+                                                                className="inline-flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                                                            >
+                                                                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                                    <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.415-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                                                                </svg>
+                                                                View on Instagram
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-sm text-slate-400 text-center">Click the button above to view our latest Trade-Cation highlights on Instagram</p>
+                                </div>
+                                
+                                {/* Instagram Button */}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </section>
+
+        <FAQ />
+
+        {/* For Beginners CTA */}
+        <section className="py-20 animate-fadeInUp">
+            <div className="container mx-auto px-4">
+                <div className="glass-card rounded-lg p-10 text-center flex flex-col items-center">
+                    <h2 className="text-3xl font-bold text-white">Go Beyond the Charts with Mr One Dollar</h2>
+                    <p className="mt-4 text-slate-400 max-w-2xl">
+                        Join our growing community on YouTube! From exclusive podcast episodes and in-depth trade reviews to beginner's guides and footage from our legendary Trade-Cations, we're pulling back the curtain. Subscribe to get the strategies and insights you won't find anywhere else.
+                    </p>
+                    <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="mt-8 inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
+                        Watch on YouTube
+                    </a>
                 </div>
-            </section>
-        </div>
-    );
+            </div>
+        </section>
+    </div>
+  );
 };
 
 const TeamMemberCard: React.FC<{ name: string, role: string }> = ({ name, role }) => (
@@ -1812,19 +1573,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     <div className="flex-shrink-0 bg-amber-400 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2 mt-0.5">
                                         {step.number}
                                     </div>
-                                    {step.number === 1 && product.id === 2 ? (
-                                        <a 
-                                            href="https://primexbt.com/sign-up?ref=MR1DOLLAR" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-amber-400 hover:underline text-sm"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            {step.text} <span className="text-xs text-slate-400">(Press here to register)</span>
-                                        </a>
-                                    ) : (
-                                        <span className="text-slate-300 text-sm">{step.text}</span>
-                                    )}
+                                    <span className="text-slate-300 text-sm">{step.text}</span>
                                 </div>
                             ))}
                         </div>
@@ -1928,51 +1677,9 @@ const ServicesPage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [sortOption, setSortOption] = useState('default');
     const [currentPage, setCurrentPage] = useState(1);
-    const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
+    const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const itemsPerPage = 12;
-    
-    // Get Platinum package (ID: 2)
-    const platinumPackage = products.find(p => p.id === 2);
-    
-    // Categorize products
-    const tradeIdeas = products.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
-    const mentorship = products.filter(p => p.category === 'Mentorship');
-    const courses = products.filter(p => p.category === 'Courses');
-    const otherProducts = products.filter(p => 
-        p.category !== 'Trade Ideas' && 
-        p.category !== 'Courses' && 
-        p.category !== 'Mentorship' &&
-        p.id !== 2
-    );
-    
-    // Update Platinum package with new WhatsApp link and broker link
-    const updatedPlatinumPackage = platinumPackage ? {
-        ...platinumPackage,
-        offerSteps: [
-            { 
-                number: 1, 
-                text: <span className="flex items-center">
-                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-4 w-auto object-contain mr-2" />
-                    <a href="https://primexbt.com/?signup=1&r=7JY4G1" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
-                        Register on PrimeXBT
-                    </a>
-                </span> 
-            },
-            ...(platinumPackage.offerSteps?.slice(1, -1) || []),
-            { 
-                number: 5, 
-                text: <a 
-                    href="https://wa.me/27626898567?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-green-400 hover:text-green-300 transition-colors"
-                >
-                    WhatsApp us with your proof
-                </a> 
-            }
-        ]
-    } : null;
 
     useEffect(() => {
         if (isSidebarOpen) {
@@ -2223,146 +1930,31 @@ const ServicesPage: React.FC = () => {
 
                     {/* Main Content */}
                     <main className="lg:w-3/4">
-                        <h1 className="text-4xl font-extrabold text-white mb-8">Our Services</h1>
-                        
-                        {/* Platinum Package - Featured */}
-                        {updatedPlatinumPackage && (
-                            <div className="mb-12">
-                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                    <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">🔥 Featured Offer</span>
-                                </h2>
-                                <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-6 shadow-xl transform hover:scale-[1.005] transition-all duration-300">
-                                    <div className="flex flex-col lg:flex-row gap-8">
-                                        <div className="lg:w-1/3">
-                                            <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-6 rounded-xl backdrop-blur-sm border border-slate-700/50">
-                                                <h3 className="text-2xl font-bold text-white text-center">FREE PLATINUM TRADE IDEAS</h3>
-                                                <p className="text-center text-blue-200 text-sm mt-2 mb-6">Limited Time Exclusive Offer</p>
-                                                <div className="h-40 w-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg flex items-center justify-center border border-slate-700/50">
-                                                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                                                        <span className="text-purple-300">Follow the </span> <span className="text-purple-400">Steps:</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="lg:w-2/3">
-                                            <div className="space-y-6">
-                                                <p className="text-slate-300 text-lg leading-relaxed">
-                                                    Join our premium trading community and get <span className="font-bold text-blue-300">1 month of Platinum Trade Ideas absolutely FREE</span>. Experience professional Mr.$1 trade ideas and market analysis.
-                                                </p>
-                                                
-                                                <div className="space-y-4">
-                                                    {updatedPlatinumPackage.offerSteps?.map((step, index) => (
-                                                        <div key={index} className="flex items-start group">
-                                                            <span className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-sm flex-shrink-0 mt-0.5 transform group-hover:scale-110 transition-transform">
-                                                                {step.number}
-                                                            </span>
-                                                            <div className="ml-4">
-                                                                <div className="text-slate-300 group-hover:text-white transition-colors">
-                                                                    {step.text}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                
-                                                <div className="pt-4">
-                                                    <a 
-                                                        href="https://wa.me/27626898567?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]"
-                                                        target="_blank" 
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-green-500/20"
-                                                    >
-                                                        <WhatsAppIcon className="w-5 h-5 mr-2" />
-                                                        Claim Your Free Month Now
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Trade Ideas Section */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                                Trade Ideas
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {tradeIdeas.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                    />
-                                ))}
-                            </div>
+                        <h1 className="text-4xl font-extrabold text-white mb-4">Services</h1>
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 text-slate-400 gap-4">
+                            <p>Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} results</p>
+                            <select 
+                                value={sortOption}
+                                onChange={(e) => setSortOption(e.target.value)}
+                                className="bg-slate-800 border border-slate-700 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                            >
+                                <option value="default">Default sorting</option>
+                                <option value="price-asc">Sort by price: low to high</option>
+                                <option value="price-desc">Sort by price: high to low</option>
+                            </select>
                         </div>
 
-                        {/* Courses Section */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                Trading Courses
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {courses.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                    />
-                                ))}
-                            </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                            {paginatedProducts.map((product) => (
+                                <ProductCard 
+                                    key={product.id} 
+                                    product={product} 
+                                    onAddToCart={handleAddToCart}
+                                    isExpanded={expandedProductId === product.id}
+                                    onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                />
+                            ))}
                         </div>
-
-                        {/* Mentorship Section - Moved to second position */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span className="text-white">Mentorship Programs</span>
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {mentorship.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Other Products */}
-                        {otherProducts.length > 0 && (
-                            <div className="mb-12">
-                                <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {otherProducts.map((product) => (
-                                        <ProductCard 
-                                            key={product.id}
-                                            product={product}
-                                            onAddToCart={handleAddToCart}
-                                            isExpanded={expandedProductId === product.id}
-                                            onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        )}
 
                         {renderPagination()}
                     </main>

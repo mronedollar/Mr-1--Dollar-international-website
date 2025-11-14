@@ -883,14 +883,116 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 );
 
 
-const WhatsAppWidget: React.FC = () => (
-    <div className="fixed bottom-6 right-6 z-50">
+const WhatsAppWidget: React.FC = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  const widgetRef = useRef<HTMLDivElement>(null);
+
+  // Handle mouse down for dragging
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+    setStartPos(position);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  // Handle mouse move for dragging
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+    
+    const dx = e.clientX - dragStart.x;
+    const dy = e.clientY - dragStart.y;
+    
+    setPosition({
+      x: startPos.x + dx,
+      y: startPos.y + dy
+    });
+  };
+
+  // Handle mouse up to finish dragging
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+    
+    // Check if widget should be hidden (dragged left or up significantly)
+    if (position.x < -30 || position.y < -30) {
+      setIsVisible(false);
+      // Auto-show after 10 seconds
+      setTimeout(() => setIsVisible(true), 10000);
+    }
+  };
+
+  // Handle touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+    setStartPos(position);
+    document.addEventListener('touchmove', handleTouchMove as any, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
+    if (!isDragging) return;
+    
+    const touch = e.touches[0];
+    const dx = touch.clientX - dragStart.x;
+    const dy = touch.clientY - dragStart.y;
+    
+    setPosition({
+      x: startPos.x + dx,
+      y: startPos.y + dy
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    document.removeEventListener('touchmove', handleTouchMove as any);
+    document.removeEventListener('touchend', handleTouchEnd);
+    
+    // Check if widget should be hidden (dragged left or up significantly)
+    if (position.x < -30 || position.y < -30) {
+      setIsVisible(false);
+      // Auto-show after 10 seconds
+      setTimeout(() => setIsVisible(true), 10000);
+    }
+  };
+
+  // Don't render if not visible
+  if (!isVisible) return null;
+
+  return (
+    <div 
+      ref={widgetRef}
+      className="fixed z-50 cursor-grab active:cursor-grabbing select-none"
+      style={{
+        right: '1.5rem',
+        bottom: '1.5rem',
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+        touchAction: 'none'
+      }}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
+    >
       <a 
         href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
         aria-label="Join our WhatsApp Community"
+        onClick={(e) => {
+          // Only prevent default if we're dragging
+          if (isDragging) {
+            e.preventDefault();
+          }
+        }}
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <img 
@@ -1869,7 +1971,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-colors flex items-center justify-center space-x-2"
                 >
                     <svg className="w-5 h-5" viewBox="0 0 32 32" fill="currentColor">
-                        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1z"></path>
+                        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1.1z"></path>
                     </svg>
                     <span>Claim Your Free Month on WhatsApp</span>
                 </a>
