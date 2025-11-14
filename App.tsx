@@ -63,7 +63,7 @@ const servicesData: Product[] = [
     { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
     { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
     { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
-    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
 ];
 
 const testimonialsData = [
@@ -421,7 +421,7 @@ const PropFirms: React.FC = () => {
                 <div className={`mt-16 space-y-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {/* Brokers Section */}
                     <div className="relative">
-                        <div className="absolute -top-8 -left-8 w-32 h-32 bg-amber-500/10 rounded-full filter blur-3xl -z-10"></div>
+                        <div className="absolute -top-8 -left-8 w-32 h-32 bg-white-500/10 rounded-full filter blur-3xl -z-10"></div>
                         <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
                             <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-amber-500/30 shadow-lg shadow-amber-500/10">
                                 Brokers
@@ -464,7 +464,7 @@ const PropFirms: React.FC = () => {
 
                     {/* Prop Firms Section */}
                     <div className="relative pt-10">
-                        <div className="absolute -top-8 -right-8 w-40 h-40 bg-blue-500/10 rounded-full filter blur-3xl -z-10"></div>
+                        <div className="absolute -top-8 -right-8 w-40 h-40 bg-white-500/10 rounded-full filter blur-3xl -z-10"></div>
                         <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
                             <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-blue-500/30 shadow-lg shadow-blue-500/10">
                                 Prop Firms
@@ -638,7 +638,7 @@ const Testimonials: React.FC = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white">What Our Traders Say</h2>
                 <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
-                    Real results from real members of the Mr$1 community.
+                    Real results from real members of the Mr.$1 community.
                 </p>
                 
                 <div className="mt-12">
@@ -646,7 +646,7 @@ const Testimonials: React.FC = () => {
                         onClick={() => setIsOpen(!isOpen)}
                         className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center mx-auto"
                     >
-                        {isOpen ? 'Hide Testimonials' : 'View All Testimonials'}
+                        {isOpen ? 'Hide Testimonials' : 'View Mr.$1 Premium Members Testimonials'}
                         <svg 
                             className={`w-5 h-5 ml-2 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} 
                             fill="none" 
@@ -678,6 +678,19 @@ const Testimonials: React.FC = () => {
                                         </div>
                                     </div>
                                 ))}
+                            </div>
+                            <div className="mt-10 text-center">
+                                <a 
+                                    href="https://www.instagram.com/stories/highlights/18022507268519783/" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+                                >
+                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                    View More Testimonials on Instagram
+                                </a>
                             </div>
                         </div>
                     )}
