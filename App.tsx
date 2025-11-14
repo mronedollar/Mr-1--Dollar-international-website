@@ -1001,7 +1001,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                     {/* Track Record Modal */}
                     {activeTab === 'track-record' && (
                         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-slate-700/50">
+                            <div className="bg-slate-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                                 <div className="p-5 sm:p-6">
                                     <div className="flex justify-between items-center mb-5">
                                         <h2 className="text-xl font-bold text-white">Trading History</h2>
@@ -1083,7 +1083,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                     {/* Community Modal */}
                     {activeTab === 'community' && (
                         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-slate-700/50">
+                            <div className="bg-slate-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                                 <div className="p-6 sm:p-8">
                                     <div className="flex justify-between items-center mb-6">
                                         <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
@@ -1101,43 +1101,25 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                         <p className="text-slate-300 mb-4">
                                             Our trading community is a vibrant space where traders of all levels come together to share insights, strategies, and support each other's growth.
                                         </p>
-                                        <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
-                                            <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
-                                            <p className="text-slate-300 mb-4">
-                                                Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment. Our community offers:
-                                            </p>
-                                            <ul className="space-y-2 mb-6">
-                                                <li className="flex items-start">
-                                                    <svg className="w-4 h-4 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        <div className="grid grid-cols-1 gap-6 mt-6">
+                                            <div className="bg-slate-800/50 p-6 rounded-lg">
+                                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
+                                                <p className="text-slate-300 mb-4">
+                                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
+                                                </p>
+                                                <a 
+                                                    href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300"
+                                                >
+                                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
+                                                        <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
                                                     </svg>
-                                                    <span>Daily trade ideas and market analysis</span>
-                                                </li>
-                                                <li className="flex items-start">
-                                                    <svg className="w-4 h-4 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    <span>Live trading sessions with experts</span>
-                                                </li>
-                                                <li className="flex items-start">
-                                                    <svg className="w-4 h-4 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    <span>Exclusive educational content</span>
-                                                </li>
-                                            </ul>
-                                            <a 
-                                                href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300"
-                                            >
-                                                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
-                                                    <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
-                                                </svg>
-                                                Join Our WhatsApp Group
-                                            </a>
+                                                    Join Our WhatsApp Group
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1148,7 +1130,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                     {/* Trade-Cations Modal */}
                     {activeTab === 'tradecations' && (
                         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
-                            <div className="bg-slate-900 rounded-xl max-w-3xl w-full max-h-[85vh] overflow-y-auto">
+                            <div className="bg-slate-900 rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto">
                                 <div className="p-5 sm:p-6">
                                     <div className="flex justify-between items-center mb-5">
                                         <h2 className="text-xl font-bold text-white">Exclusive Trade-Cations</h2>
