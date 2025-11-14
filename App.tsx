@@ -1191,7 +1191,7 @@ const EventsPage: React.FC = () => {
         {
             id: 1,
             title: "🚀 Exclusive Tradecation Experience",
-            description: "Transform from beginner to funded trader in just 7 days with our immersive trading retreat. This all-inclusive experience combines expert trading education with luxury accommodation and lifestyle optimization.",
+            description: "You can transform from beginner to advanced trader in just 5 days with our immersive trading retreat. This all-inclusive experience combines expert trading education with luxury accommodation and lifestyle optimization.",
             details: [
                 {
                     title: "🔥 What's Included",
@@ -1394,7 +1394,7 @@ const EventsPage: React.FC = () => {
                                         </div>
                                         <div>
                                             <p className="text-slate-400">Where</p>
-                                            <p className="text-white font-medium">Online via Zoom</p>
+                                            <p className="text-white font-medium">Physical or Online </p>
                                         </div>
                                         <div>
                                             <p className="text-slate-400">Price</p>
@@ -1431,7 +1431,7 @@ const EventsPage: React.FC = () => {
                                 
                                 <div className="bg-gradient-to-r from-amber-500/10 to-transparent p-4 rounded-lg border border-amber-500/20 mt-6">
                                     <h4 className="text-lg font-semibold text-amber-400 mb-2">Special Bonus</h4>
-                                    <p className="text-slate-300 text-sm">All participants will receive a free NFP Trading Guide and access to our private trading community for 1 month.</p>
+                                    <p className="text-slate-300 text-sm">All participants will receive a NFP Trading Guide | Nicely prepared food and drinks will be provided for those attending physically.</p>
                                 </div>
                             </div>
                         </div>
