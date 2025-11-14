@@ -888,36 +888,36 @@ const WhatsAppWidget: React.FC = () => {
   const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
-    // WhatsApp widget show/hide timer
-    const widgetTimer = setInterval(() => {
-      setIsVisible(prev => !prev);
-    }, isVisible ? 60000 : 180000); // Show for 1 min, hide for 3 mins
+    // WhatsApp widget show/hide timer - hide after 15 seconds
+    const widgetTimer = setTimeout(() => {
+      setIsVisible(false);
+    }, 15000);
 
-    // Banner timer - show for 1 minute
+    // Banner timer - show for 10 seconds
     const bannerTimer = setTimeout(() => {
       setShowBanner(false);
-    }, 60000);
+    }, 10000);
 
     return () => {
-      clearInterval(widgetTimer);
+      clearTimeout(widgetTimer);
       clearTimeout(bannerTimer);
     };
-  }, [isVisible]);
+  }, []);
 
   return (
     <>
       {/* Financial Disclaimer Banner */}
       {showBanner && (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 animate-fadeInUp">
-          <div className="bg-gradient-to-r from-red-600/90 to-amber-600/90 text-white text-xs p-2 px-4 rounded-full shadow-lg flex items-center">
-            <span className="font-medium mr-2">⚠️ Financial Risk Warning:</span>
-            <span>Trading involves risk. Only trade with money you can afford to lose.</span>
+        <div className="fixed bottom-6 left-6 z-50 animate-fadeInRight">
+          <div className="bg-black border-l-4 border-green-500 text-white text-xs p-3 pr-6 rounded-r-lg shadow-[0_0_15px_2px_rgba(74,222,128,0.5)] flex items-center transform transition-all duration-500 hover:shadow-[0_0_20px_5px_rgba(74,222,128,0.7)]">
+            <span className="font-medium mr-2 text-green-400">⚠️ Financial Risk Warning:</span>
+            <span className="text-gray-200">Trading involves risk. Only trade with money you can afford to lose.</span>
           </div>
         </div>
       )}
 
       {/* WhatsApp Widget */}
-      <div className={`fixed bottom-6 right-6 z-50 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`fixed bottom-6 right-6 z-50 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none scale-95'} transform hover:scale-105`}>
         <a 
           href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
           target="_blank"
@@ -2509,6 +2509,31 @@ const PrivacyPolicyPage: React.FC = () => (
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  
+  // Add animation styles to document head
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .animate-fadeInRight {
+        animation: fadeInRight 0.5s ease-out forwards;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   // Smooth scroll to top on page change and add performance optimizations
   useEffect(() => {
