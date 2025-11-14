@@ -885,21 +885,42 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 
 const WhatsAppWidget: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(() => {
+    // Only show banner if it hasn't been shown before in this session
+    if (typeof window !== 'undefined') {
+      return !sessionStorage.getItem('disclaimerShown');
+    }
+    return true;
+  });
 
   useEffect(() => {
-    // WhatsApp widget show/hide timer - hide after 15 seconds
-    const widgetTimer = setTimeout(() => {
+    // WhatsApp widget show/hide timer - toggle every minute
+    const interval = setInterval(() => {
+      setIsVisible(prev => !prev);
+      if (!isVisible) {
+        // Hide after 15 seconds if visible
+        setTimeout(() => {
+          setIsVisible(false);
+        }, 15000);
+      }
+    }, 60000); // Toggle every minute
+
+    // Initial hide after 15 seconds
+    const initialHide = setTimeout(() => {
       setIsVisible(false);
     }, 15000);
 
     return () => {
-      clearTimeout(widgetTimer);
+      clearInterval(interval);
+      clearTimeout(initialHide);
     };
-  }, []);
+  }, [isVisible]);
 
   const handleCloseBanner = () => {
     setShowBanner(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('disclaimerShown', 'true');
+    }
   };
 
   return (
@@ -927,7 +948,7 @@ const WhatsAppWidget: React.FC = () => {
         )}
 
         {/* WhatsApp Button */}
-        <div className={`transition-all duration-1000 transform ${isVisible ? 'scale-100' : 'scale-95'}`}>
+        <div className={`transition-all duration-1000 transform ${isVisible ? 'scale-100 opacity-30 hover:opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}>
           <a 
             href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
             target="_blank"
