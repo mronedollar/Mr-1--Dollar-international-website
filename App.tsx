@@ -548,15 +548,28 @@ const PromoSection: React.FC = () => {
                                     <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
                                     <div>
                                         <h4 className="font-semibold text-lg">Register Your Trading Account</h4>
-                                        <a 
-                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
-                                            <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
-                                            Register on PrimeXBT
-                                        </a>
+                                        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                                            <a 
+                                                href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
+                                            >
+                                                <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
+                                                Register on PrimeXBT
+                                            </a>
+                                            <a 
+                                                href="https://youtu.be/xaTeSbbXn9g" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                            >
+                                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                </svg>
+                                                Watch Video Guide
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -573,6 +586,25 @@ const PromoSection: React.FC = () => {
                                     <div>
                                         <h4 className="font-semibold">Fund Your Account</h4>
                                         <p className="text-gray-300 text-sm">Deposit minimum $50 (R800) into your wallet</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3.5</div>
+                                    <div>
+                                        <h4 className="font-semibold">Link to MetaTrader</h4>
+                                        <p className="text-gray-300 text-sm mb-2">Download and connect MetaTrader 5 for advanced trading</p>
+                                        <a 
+                                            href="https://youtu.be/zXvOnW12mhY" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                        >
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                            </svg>
+                                            Watch MetaTrader Setup Guide
+                                        </a>
                                     </div>
                                 </div>
                                 
@@ -861,6 +893,11 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                     target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQuxIDMwLjgxYz0xMjEuNzIgMC0yMjQuMSA5OS4zLTIyNC4xIDIyMS43IDAgMTIyLjQgMTAyLjQgIDIyMS43IDIyNC4xIDIyMS43IDEyMS43IDAgMjI0LjEtOTkuMyAyMjQuMS0yMjEuN0M0NDguMSAxMzAuMSAzNDUuOCAzMC44MSAyMjQuMSAzMC44MXptMCAzNzMuNmMtODMuOSAwLTE1MS45LTY4LjgtMTUxLjktMTUxLjkgMC04My45IDY4LTE1MS45IDE1MS45LTE1MS45czE1MS45IDY4IDE1MS45IDE1MS45YzAgODMuMS02OCAxNTEuOS0xNTEuOSAxNTEuOXptMTI5LjctMzQ4LjJjLTE0LjkgMC0yNy4xLTEyLjItMjcuMS0yNy4xczEyLjItMjcuMSAyNy4xLTI3LjEgMjcuMSAxMi4yIDI3LjEgMjcuMWMwIDE0LjktMTIuMiAyNy4xLTI3LjEgMjcuMXptLTgxLjIgMTIuOGMtMjkuMyAwLTUzLjEgMjMuOS01My4xIDUzLjFzMjMuOSA1My4xIDUzLjEgNTMuMSA1My4xLTIzLjkgNTMuMS01My4xLTIzLjgtNTMuMS01My4xLTUzLjF6bTgxLjIgMTQzYy00OS45IDAtOTAuNS00MC41LTkwLjUtOTAuNXM0MC41LTkwLjUgOTAuNS05MC41IDkwLjUgNDAuNSA5MC41IDkwLjUtNDAuNSA5MC41LTkwLjUgOTAuNXptMC0xNjMuOWMtNDAuNSAwLTczLjQgMzIuOS03My40IDczLjRzMzIuOSA3My40IDczLjQgNzMuNCA3My40LTMyLjkgNzMuNC03My40LTMzLTczLjQtNzMuNC03My40eiIvPjwvc3ZnPg==';
                                 }}
                             />
+                        </a>
+                        <a href="https://www.metatrader5.com/en/download" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300" title="Download MetaTrader 5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+                                <text x="12" y="16" textAnchor="middle" className="text-current font-bold text-lg">MT5</text>
+                            </svg>
                         </a>
                         <a href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
