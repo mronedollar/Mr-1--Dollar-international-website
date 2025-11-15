@@ -548,15 +548,28 @@ const PromoSection: React.FC = () => {
                                     <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
                                     <div>
                                         <h4 className="font-semibold text-lg">Register Your Trading Account</h4>
-                                        <a 
-                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
-                                            <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
-                                            Register on PrimeXBT
-                                        </a>
+                                        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                                            <a 
+                                                href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
+                                            >
+                                                <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
+                                                Register on PrimeXBT
+                                            </a>
+                                            <a 
+                                                href="https://youtu.be/xaTeSbbXn9g" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                            >
+                                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                </svg>
+                                                Watch Video Guide
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -572,7 +585,18 @@ const PromoSection: React.FC = () => {
                                     <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3</div>
                                     <div>
                                         <h4 className="font-semibold">Fund Your Account</h4>
-                                        <p className="text-gray-300 text-sm">Deposit minimum $50 (R800) into your wallet</p>
+                                        <p className="text-gray-300 text-sm mb-2">Deposit minimum $50 (R800) into your wallet</p>
+                                        <a 
+                                            href="https://youtu.be/zXvOnW12mhY" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                        >
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                            </svg>
+                                            Watch MetaTrader Setup
+                                        </a>
                                     </div>
                                 </div>
                                 
