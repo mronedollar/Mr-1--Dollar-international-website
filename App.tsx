@@ -1834,7 +1834,7 @@ interface PlatinumProduct extends BaseProduct {
     platinumBenefitDescription: string;
 }
 
-const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; onImageClick: (imageUrl: string, alt: string) => void; }> = ({ product, onAddToCart, isExpanded, onToggle, onImageClick }) => {
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
     
@@ -1846,8 +1846,16 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             </div>
         )}
         <div className="relative">
-             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
+             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer" onClick={() => onImageClick(product.imageUrl, product.name)}>
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" />
+                {/* Overlay to indicate clickability */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                        </svg>
+                    </div>
+                </div>
             </div>
             <button 
                 onClick={onToggle}
@@ -2000,16 +2008,19 @@ const ServicesPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    // Add state for image lightbox
+    const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+    const [lightboxAlt, setLightboxAlt] = useState<string>('');
     const itemsPerPage = 12;
     
     // Get Platinum package (ID: 2)
     const platinumPackage = products.find(p => p.id === 2);
     
-    // Categorize products
-    const tradeIdeas = products.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
-    const mentorship = products.filter(p => p.category === 'Mentorship');
-    const courses = products.filter(p => p.category === 'Courses');
-    const otherProducts = products.filter(p => 
+    // Categorize products from filtered results
+    const tradeIdeas = filteredAndSortedProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
+    const mentorship = filteredAndSortedProducts.filter(p => p.category === 'Mentorship');
+    const courses = filteredAndSortedProducts.filter(p => p.category === 'Courses');
+    const otherProducts = filteredAndSortedProducts.filter(p => 
         p.category !== 'Trade Ideas' && 
         p.category !== 'Courses' && 
         p.category !== 'Mentorship' &&
@@ -2109,6 +2120,17 @@ const ServicesPage: React.FC = () => {
         setCart(prevCart => prevCart.filter((p, i) => !(p.id === productId && i === index)));
     };
 
+    // Add lightbox handlers
+    const openLightbox = (imageUrl: string, alt: string) => {
+        setLightboxImage(imageUrl);
+        setLightboxAlt(alt);
+    };
+
+    const closeLightbox = () => {
+        setLightboxImage(null);
+        setLightboxAlt('');
+    };
+
     const handlePriceFilter = () => {
         setCurrentPage(1);
         setAppliedPriceRange({
@@ -2195,7 +2217,7 @@ const ServicesPage: React.FC = () => {
                 <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
             </div>
             <div className="glass-card p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-white mb-2">Cart</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">Cart</h3>
                 {cart.length === 0 ? (
                    <p className="text-slate-400">No products in the cart.</p>
                 ) : (
@@ -2246,6 +2268,39 @@ const ServicesPage: React.FC = () => {
             </div>
         </div>
     );
+
+    // Image Lightbox Modal
+    const ImageLightbox: React.FC = () => {
+        if (!lightboxImage) return null;
+
+        return (
+            <div 
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+                onClick={closeLightbox}
+            >
+                <div className="relative max-w-4xl max-h-screen p-4">
+                    {/* Close button */}
+                    <button
+                        onClick={closeLightbox}
+                        className="absolute top-2 right-2 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
+                        aria-label="Close lightbox"
+                    >
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    
+                    {/* Image */}
+                    <img
+                        src={lightboxImage}
+                        alt={lightboxAlt}
+                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="bg-black py-16 sm:py-24 animate-fadeIn">
@@ -2387,14 +2442,15 @@ const ServicesPage: React.FC = () => {
                                 </svg>
                                 Trade Ideas
                             </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {tradeIdeas.map((product) => (
+                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {tradeIdeasFiltered.map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
                                         onAddToCart={handleAddToCart}
                                         isExpanded={expandedProductId === product.id}
                                         onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                        onImageClick={openLightbox}
                                     />
                                 ))}
                             </div>
@@ -2408,14 +2464,15 @@ const ServicesPage: React.FC = () => {
                                 </svg>
                                 Trading Courses
                             </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {courses.map((product) => (
+                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {coursesFiltered.map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
                                         onAddToCart={handleAddToCart}
                                         isExpanded={expandedProductId === product.id}
                                         onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                        onImageClick={openLightbox}
                                     />
                                 ))}
                             </div>
@@ -2429,31 +2486,33 @@ const ServicesPage: React.FC = () => {
                                 </svg>
                                 <span className="text-white">Mentorship Programs</span>
                             </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {mentorship.map((product) => (
+                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {mentorshipFiltered.map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
                                         onAddToCart={handleAddToCart}
                                         isExpanded={expandedProductId === product.id}
                                         onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                        onImageClick={openLightbox}
                                     />
                                 ))}
                             </div>
                         </div>
 
                         {/* Other Products */}
-                        {otherProducts.length > 0 && (
+                        {otherProductsFiltered.length > 0 && (
                             <div className="mb-12">
                                 <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {otherProducts.map((product) => (
+                                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {otherProductsFiltered.map((product) => (
                                         <ProductCard 
                                             key={product.id}
                                             product={product}
                                             onAddToCart={handleAddToCart}
                                             isExpanded={expandedProductId === product.id}
                                             onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                            onImageClick={openLightbox}
                                         />
                                     ))}
                                 </div>
@@ -2464,6 +2523,7 @@ const ServicesPage: React.FC = () => {
                     </main>
                 </div>
             </div>
+            <ImageLightbox />
         </div>
     );
 };
