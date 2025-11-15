@@ -548,28 +548,15 @@ const PromoSection: React.FC = () => {
                                     <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
                                     <div>
                                         <h4 className="font-semibold text-lg">Register Your Trading Account</h4>
-                                        <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                                            <a 
-                                                href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
-                                            >
-                                                <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
-                                                Register on PrimeXBT
-                                            </a>
-                                            <a 
-                                                href="https://youtu.be/xaTeSbbXn9g" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                                            >
-                                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                </svg>
-                                                Watch Video Guide
-                                            </a>
-                                        </div>
+                                        <a 
+                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
+                                        >
+                                            <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
+                                            Register on PrimeXBT
+                                        </a>
                                     </div>
                                 </div>
                                 
@@ -586,25 +573,6 @@ const PromoSection: React.FC = () => {
                                     <div>
                                         <h4 className="font-semibold">Fund Your Account</h4>
                                         <p className="text-gray-300 text-sm">Deposit minimum $50 (R800) into your wallet</p>
-                                    </div>
-                                </div>
-                                
-                                <div className="flex items-start">
-                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3.5</div>
-                                    <div>
-                                        <h4 className="font-semibold">Link to MetaTrader</h4>
-                                        <p className="text-gray-300 text-sm mb-2">Download and connect MetaTrader 5 for advanced trading</p>
-                                        <a 
-                                            href="https://youtu.be/zXvOnW12mhY" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
-                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                            </svg>
-                                            Watch MetaTrader Setup Guide
-                                        </a>
                                     </div>
                                 </div>
                                 
@@ -894,10 +862,18 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 }}
                             />
                         </a>
-                        <a href="https://www.metatrader5.com/en/download" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300" title="Download MetaTrader 5">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-                                <text x="12" y="16" textAnchor="middle" className="text-current font-bold text-lg">MT5</text>
-                            </svg>
+                        <a href="https://www.metatrader5.com/en/download" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300 flex flex-col items-center mr-8">
+                            <img 
+                                src="https://logos-world.net/wp-content/uploads/2021/11/MetaTrader-5-Logo.png" 
+                                alt="MetaTrader 5 Download" 
+                                className="w-7 h-7 object-contain mb-1"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48dGV4dCB4PSIxMiIgeT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGNsYXNzPSJ0ZXh0LWN1cnJlbnQgZm9udC1ib2xkIHRleHQtbGciPk1UNTwvdGV4dD48L3N2Zz4=';
+                                }}
+                            />
+                            <span className="text-xs text-slate-500 hover:text-amber-400/70 transition-colors text-center leading-tight">Download MT5</span>
                         </a>
                         <a href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
@@ -2301,7 +2277,7 @@ const ServicesPage: React.FC = () => {
                                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                                     <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">🔥 Featured Offer</span>
                                 </h2>
-                                <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-6 shadow-xl transform hover:scale-[1.005] transition-all duration-300">
+                                <div className="bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-xl transform hover:scale-[1.005] transition-all duration-300">
                                     <div className="flex flex-col lg:flex-row gap-8">
                                         <div className="lg:w-1/3">
                                             <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-6 rounded-xl backdrop-blur-sm border border-slate-700/50">
@@ -2330,6 +2306,32 @@ const ServicesPage: React.FC = () => {
                                                                 <div className="text-slate-300 group-hover:text-white transition-colors">
                                                                     {step.text}
                                                                 </div>
+                                                                {step.number === 1 && (
+                                                                    <a 
+                                                                        href="https://youtu.be/xaTeSbbXn9g" 
+                                                                        target="_blank" 
+                                                                        rel="noopener noreferrer"
+                                                                        className="inline-flex items-center justify-center gap-2 mt-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 text-sm"
+                                                                    >
+                                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                                        </svg>
+                                                                        Watch Registration Guide
+                                                                    </a>
+                                                                )}
+                                                                {step.number === 3 && (
+                                                                    <a 
+                                                                        href="https://youtu.be/zXvOnW12mhY" 
+                                                                        target="_blank" 
+                                                                        rel="noopener noreferrer"
+                                                                        className="inline-flex items-center justify-center gap-2 mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 text-sm"
+                                                                    >
+                                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                                        </svg>
+                                                                        Watch MetaTrader Setup
+                                                                    </a>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     ))}
