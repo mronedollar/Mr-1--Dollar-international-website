@@ -1646,7 +1646,7 @@ const AboutPage: React.FC = () => {
                                 >
                                     <div className="relative">
                                         <img 
-                                            src="https://i.ibb.co/5hr3HpLW/IMG-20241107-151334-1.jpg" 
+                                            src="https://i.ibb.co/gZ0jkq0V/mr-one-dollar-profile.jpg" 
                                             alt="Mr One Dollar YouTube Channel" 
                                             className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-amber-400/30 hover:border-amber-400/70 transition-all duration-300 transform group-hover:scale-105 object-cover"
                                             onError={(e) => {
@@ -1837,6 +1837,27 @@ interface PlatinumProduct extends BaseProduct {
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    
+    // Handle click on image to open modal
+    const handleImageClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setIsImageModalOpen(true);
+    };
+    
+    // Close modal when clicking outside the image
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isImageModalOpen) {
+                setIsImageModalOpen(false);
+            }
+        };
+        
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isImageModalOpen]);
     
     return (
     <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative">
@@ -1846,8 +1867,21 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             </div>
         )}
         <div className="relative">
-             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
-                <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" />
+             <div 
+                className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer"
+                onClick={handleImageClick}
+                aria-label="Click to view full size"
+             >
+                <img 
+                    src={product.imageUrl} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" 
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <svg className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                    </svg>
+                </div>
             </div>
             <button 
                 onClick={onToggle}
@@ -1988,7 +2022,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     </div>
 );
 }
-// ... (rest of the code remains the same)
+
 const ServicesPage: React.FC = () => {
     const [products] = useState<Product[]>(servicesData);
     const [cart, setCart] = useState<Product[]>([]);
@@ -1997,6 +2031,7 @@ const ServicesPage: React.FC = () => {
     const [appliedPriceRange, setAppliedPriceRange] = useState<{ min: number | null, max: number | null }>({ min: null, max: null });
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [sortOption, setSortOption] = useState('default');
+    const [isFilterApplied, setIsFilterApplied] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -2111,362 +2146,346 @@ const ServicesPage: React.FC = () => {
 
     const handlePriceFilter = () => {
         setCurrentPage(1);
-        setAppliedPriceRange({
-            min: priceRange.min === '' ? null : Number(priceRange.min),
-            max: priceRange.max === '' ? null : Number(priceRange.max),
-        });
-    };
-
-    const handleCategoryClick = (e: React.MouseEvent, category: string | null) => {
-        e.preventDefault();
-        setCurrentPage(1);
-        setSelectedCategory(category);
-    };
-
-    const handlePageChange = (page: number) => {
-        if (page > 0 && page <= totalPages) {
-            setCurrentPage(page);
-        }
+        const min = priceRange.min === '' ? null : Number(priceRange.min);
+        const max = priceRange.max === '' ? null : Number(priceRange.max);
+        setAppliedPriceRange({ min, max });
+        setIsFilterApplied(true);
     };
     
-    const renderPagination = () => {
-        if (totalPages <= 1) return null;
-        const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-        
-        return (
-            <nav className="flex justify-center items-center space-x-2 mt-12">
-                 {currentPage > 1 && (
-                     <button onClick={() => handlePageChange(currentPage - 1)} className="text-slate-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">←</button>
-                 )}
-                {pageNumbers.map(number => (
-                     <button 
-                        key={number} 
-                        onClick={() => handlePageChange(number)} 
-                        className={`${currentPage === number ? 'bg-amber-400 text-black' : 'text-slate-300 hover:bg-slate-800'} font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors`}
-                    >
-                        {number}
-                    </button>
-                ))}
-                {currentPage < totalPages && (
-                     <button onClick={() => handlePageChange(currentPage + 1)} className="text-slate-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</button>
-                )}
-            </nav>
-        );
+    // Clear all filters and reset to default state
+    const clearAllFilters = () => {
+        setSearchTerm('');
+        setPriceRange({ min: '', max: '' });
+        setAppliedPriceRange({ min: null, max: null });
+        setSelectedCategory(null);
+        setSortOption('default');
+        setCurrentPage(1);
+        setIsFilterApplied(false);
     };
 
-    const sidebarContent = (
-        <div className="space-y-8">
-             <div className="glass-card p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
-                <div className="relative">
-                    <input 
-                        type="search" 
-                        placeholder="Search products…" 
+    // Render filter section with search and category filters
+    const renderFilterSection = () => (
+        <div className="mb-8 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                <div className="relative flex-1">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <SearchIcon className="h-5 w-5 text-slate-400" />
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search products..."
                         value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10 w-full bg-slate-800 border border-slate-700 rounded-lg text-white p-2.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    />
+                </div>
+                <div className="flex items-center gap-2">
+                    <select
+                        value={selectedCategory || ''}
                         onChange={(e) => {
-                            setSearchTerm(e.target.value);
+                            setSelectedCategory(e.target.value || null);
                             setCurrentPage(1);
                         }}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all" 
-                    />
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                       <SearchIcon className="text-slate-400" />
-                    </div>
+                        className="bg-slate-800 border border-slate-700 text-white text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block p-2.5"
+                    >
+                        <option value="">All Categories</option>
+                        {categories.map((cat) => (
+                            <option key={cat.name} value={cat.name}>
+                                {cat.name} ({cat.count})
+                            </option>
+                        ))}
+                    </select>
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-lg border border-slate-700 transition-colors"
+                    >
+                        <FilterIcon className="w-5 h-5" />
+                        <span className="hidden sm:inline">Filters</span>
+                    </button>
                 </div>
             </div>
-            <div className="glass-card p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
-                 <div className="flex items-center space-x-2 mb-4">
-                    <input 
-                        type="number" 
-                        placeholder="Min price" 
+
+            {/* Price Range Filter */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-1">Min Price ($)</label>
+                    <input
+                        type="number"
+                        placeholder="Min"
                         value={priceRange.min}
-                        onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
-                    />
-                    <input 
-                        type="number" 
-                        placeholder="Max price" 
-                        value={priceRange.max}
-                        onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                        onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-lg text-white p-2.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                 </div>
-                <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
-            </div>
-            <div className="glass-card p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-white mb-2">Cart</h3>
-                {cart.length === 0 ? (
-                   <p className="text-slate-400">No products in the cart.</p>
-                ) : (
-                    <>
-                        <p className="text-sm text-slate-400 mb-4">Total items: {cart.length}</p>
-                        <ul className="space-y-3 mb-4 max-h-60 overflow-y-auto pr-2">
-                            {cart.map((item, index) => (
-                                <li key={`${item.id}-${index}`} className="flex justify-between items-center text-sm">
-                                    <span className="text-slate-300 flex-1 pr-2">{item.name}</span>
-                                    <div className="flex items-center">
-                                        <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
-                                        <button 
-                                            onClick={() => handleRemoveFromCart(item.id, index)} 
-                                            className="ml-4 text-slate-500 hover:text-red-500 transition-colors"
-                                            aria-label={`Remove ${item.name} from cart`}
-                                        >
-                                            <TrashIcon />
-                                        </button>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="border-t border-slate-700 pt-4 flex justify-between font-bold text-white">
-                            <span>Total:</span>
-                            <span>${cartTotal.toFixed(2)}</span>
-                        </div>
-                    </>
-                )}
-            </div>
-            <div className="glass-card p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
-                <ul className="space-y-2">
-                    <li>
-                        <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
-                            <span>All</span>
-                            <span>({products.length})</span>
-                        </a>
-                    </li>
-                    {categories.map(cat => (
-                         <li key={cat.name}>
-                            <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
-                                <span>{cat.name}</span>
-                                <span>({cat.count})</span>
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-1">Max Price ($)</label>
+                    <input
+                        type="number"
+                        placeholder="Max"
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-lg text-white p-2.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    />
+                </div>
+                <div className="flex gap-2">
+                    <button
+                        onClick={handlePriceFilter}
+                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-2.5 px-4 rounded-lg transition-colors"
+                    >
+                        Apply Price Filter
+                    </button>
+                    {isFilterApplied && (
+                        <button
+                            onClick={clearAllFilters}
+                            className="bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
+                        >
+                            Clear All
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     );
 
-    return (
-        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                 {/* Mobile Filter Button */}
-                <div className="lg:hidden mb-6">
-                    <button 
-                        onClick={() => setIsSidebarOpen(true)}
-                        className="w-full flex items-center justify-center gap-2 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-amber-400"
-                    >
-                        <FilterIcon />
-                        <span>Filter & View Cart</span>
-                    </button>
-                </div>
-
-                <div className="flex flex-col lg:flex-row gap-12">
-                     {/* Sidebar (Off-canvas on mobile, static on desktop) */}
-                    {isSidebarOpen && (
-                        <div
-                            className="fixed inset-0 bg-black/70 z-40 lg:hidden"
-                            onClick={() => setIsSidebarOpen(false)}
-                            aria-hidden="true"
-                        ></div>
+    const renderProductGrid = (products: Product[]) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+                <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={handleAddToCart}
+                    isExpanded={expandedProductId === product.id}
+                    onToggle={() => setExpandedProductId(
+                        expandedProductId === product.id ? null : product.id
                     )}
-                    <aside
-                        className={`
-                            fixed top-0 left-0 h-full w-full max-w-xs bg-slate-900 z-50 
-                            transform transition-transform duration-300 ease-in-out
-                            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-                            lg:relative lg:translate-x-0 lg:w-1/4 lg:max-w-none lg:bg-transparent lg:z-auto
-                            flex flex-col
-                        `}
-                        aria-labelledby="filters-heading"
-                    >
-                         <div className="flex-grow overflow-y-auto p-6 lg:p-0">
-                            <div className="flex justify-between items-center lg:hidden mb-6">
-                                <h2 id="filters-heading" className="text-xl font-bold text-white">Filters & Cart</h2>
-                                <button onClick={() => setIsSidebarOpen(false)} className="p-2 -m-2 text-slate-400 hover:text-white" aria-label="Close filters">
-                                    <CloseIcon />
+                />
+            ))}
+        </div>
+    );
+
+    const renderPagination = () => (
+        totalPages > 1 && (
+            <div className="flex justify-center mt-8 space-x-2">
+                <button
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border border-slate-700 rounded-lg text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800"
+                >
+                    Previous
+                </button>
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    const pageNum = Math.max(1, Math.min(
+                        currentPage - 2,
+                        totalPages - 4
+                    )) + i;
+                    if (pageNum > totalPages) return null;
+                    return (
+                        <button
+                            key={pageNum}
+                            onClick={() => setCurrentPage(pageNum)}
+                            className={`w-10 h-10 rounded-lg ${
+                                currentPage === pageNum
+                                    ? 'bg-amber-500 text-black font-bold'
+                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                            }`}
+                        >
+                            {pageNum}
+                        </button>
+                    );
+                })}
+                <button
+                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 border border-slate-700 rounded-lg text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800"
+                >
+                    Next
+                </button>
+            </div>
+        )
+    );
+
+    return (
+        <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+            {/* Mobile Filter Sidebar */}
+            {isSidebarOpen && (
+                <div className="fixed inset-0 z-50 overflow-hidden">
+                    <div 
+                        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                        onClick={() => setIsSidebarOpen(false)}
+                    ></div>
+                    <div className="absolute inset-y-0 right-0 max-w-full flex">
+                        <div className="relative w-screen max-w-md bg-slate-900 border-l border-slate-800 overflow-y-auto">
+                            <div className="p-4 border-b border-slate-800 flex justify-between items-center">
+                                <h3 className="text-lg font-semibold">Filters</h3>
+                                <button 
+                                    onClick={() => setIsSidebarOpen(false)}
+                                    className="text-slate-400 hover:text-white"
+                                >
+                                    <CloseIcon className="w-6 h-6" />
                                 </button>
                             </div>
-                            {sidebarContent}
-                         </div>
-                    </aside>
-
-                    {/* Main Content */}
-                    <main className="lg:w-3/4">
-                        <h1 className="text-4xl font-extrabold text-white mb-8">Our Services</h1>
-                        
-                        {/* Platinum Package - Featured */}
-                        {updatedPlatinumPackage && (
-                            <div className="mb-12">
-                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                    <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">🔥 Featured Offer</span>
-                                </h2>
-                                <div className="bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-xl transform hover:scale-[1.005] transition-all duration-300">
-                                    <div className="flex flex-col lg:flex-row gap-8">
-                                        <div className="lg:w-1/3">
-                                            <div className="bg-slate-800/50 p-6 rounded-xl backdrop-blur-sm border border-slate-700/50">
-                                                <h3 className="text-2xl font-bold text-white text-center">FREE PLATINUM TRADE IDEAS</h3>
-                                                <p className="text-center text-blue-200 text-sm mt-2 mb-6">Limited Time Exclusive Offer</p>
-                                                <div className="h-40 w-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg flex items-center justify-center border border-slate-700/50">
-                                                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                                                        <span className="text-purple-300">Follow the </span> <span className="text-purple-400">Steps:</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="lg:w-2/3">
-                                            <div className="space-y-6">
-                                                <p className="text-slate-300 text-lg leading-relaxed">
-                                                    Join our premium trading community and get <span className="font-bold text-blue-300">1 month of Platinum Trade Ideas absolutely FREE</span>. Experience professional Mr.$1 trade ideas and market analysis.
-                                                </p>
-                                                
-                                                <div className="space-y-4">
-                                                    {updatedPlatinumPackage.offerSteps?.map((step, index) => (
-                                                        <div key={index} className="flex items-start group">
-                                                            <span className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-sm flex-shrink-0 mt-0.5 transform group-hover:scale-110 transition-transform">
-                                                                {step.number}
-                                                            </span>
-                                                            <div className="ml-4">
-                                                                <div className="text-slate-300 group-hover:text-white transition-colors">
-                                                                    {step.text}
-                                                                </div>
-                                                                {step.number === 1 && (
-                                                                    <a 
-                                                                        href="https://youtu.be/xaTeSbbXn9g" 
-                                                                        target="_blank" 
-                                                                        rel="noopener noreferrer"
-                                                                        className="inline-flex items-center justify-center gap-2 mt-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 text-sm"
-                                                                    >
-                                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                                        </svg>
-                                                                        Watch Registration Guide
-                                                                    </a>
-                                                                )}
-                                                                {step.number === 3 && (
-                                                                    <a 
-                                                                        href="https://youtu.be/zXvOnW12mhY" 
-                                                                        target="_blank" 
-                                                                        rel="noopener noreferrer"
-                                                                        className="inline-flex items-center justify-center gap-2 mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 text-sm"
-                                                                    >
-                                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                                        </svg>
-                                                                        Watch MetaTrader Setup
-                                                                    </a>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                
-                                                <div className="pt-4">
-                                                    <a 
-                                                        href="https://wa.me/27626898567?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]"
-                                                        target="_blank" 
-                                                        rel="noopener noreferrer"
-                                                        className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-green-500/20"
-                                                    >
-                                                        <WhatsAppIcon className="w-5 h-5 mr-2" />
-                                                        Claim Your Free Month Now
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div className="p-4 space-y-6">
+                                <div>
+                                    <h4 className="font-medium mb-2">Categories</h4>
+                                    <div className="space-y-2">
+                                        {categories.map((cat) => (
+                                            <label key={cat.name} className="flex items-center">
+                                                <input
+                                                    type="radio"
+                                                    name="category"
+                                                    checked={selectedCategory === cat.name}
+                                                    onChange={() => {
+                                                        setSelectedCategory(
+                                                            selectedCategory === cat.name ? null : cat.name
+                                                        );
+                                                        setCurrentPage(1);
+                                                    }}
+                                                    className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-slate-700"
+                                                />
+                                                <span className="ml-2 text-slate-300">
+                                                    {cat.name} ({cat.count})
+                                                </span>
+                                            </label>
+                                        ))}
                                     </div>
                                 </div>
-                            </div>
-                        )}
-
-                        {/* Trade Ideas Section */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                                Trade Ideas
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {tradeIdeas.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Courses Section */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                Trading Courses
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {courses.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Mentorship Section - Moved to second position */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span className="text-white">Mentorship Programs</span>
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {mentorship.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Other Products */}
-                        {otherProducts.length > 0 && (
-                            <div className="mb-12">
-                                <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {otherProducts.map((product) => (
-                                        <ProductCard 
-                                            key={product.id}
-                                            product={product}
-                                            onAddToCart={handleAddToCart}
-                                            isExpanded={expandedProductId === product.id}
-                                            onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                        />
-                                    ))}
+                                <div>
+                                    <h4 className="font-medium mb-2">Price Range</h4>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-sm text-slate-400 mb-1">Min ($)</label>
+                                            <input
+                                                type="number"
+                                                value={priceRange.min}
+                                                onChange={(e) => setPriceRange({
+                                                    ...priceRange,
+                                                    min: e.target.value
+                                                })}
+                                                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white"
+                                                placeholder="Min"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm text-slate-400 mb-1">Max ($)</label>
+                                            <input
+                                                type="number"
+                                                value={priceRange.max}
+                                                onChange={(e) => setPriceRange({
+                                                    ...priceRange,
+                                                    max: e.target.value
+                                                })}
+                                                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white"
+                                                placeholder="Max"
+                                            />
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            handlePriceFilter();
+                                            setIsSidebarOpen(false);
+                                        }}
+                                        className="mt-4 w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-2 px-4 rounded-lg transition-colors"
+                                    >
+                                        Apply Filters
+                                    </button>
                                 </div>
                             </div>
-                        )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
-                        {renderPagination()}
+            <div className="container mx-auto px-4 py-8">
+                <div className="flex flex-col md:flex-row gap-8">
+                    {/* Main Content */}
+                    <main className="flex-1">
+                        {/* Filter Section */}
+                        {renderFilterSection()}
+
+                        {/* Products Grid */}
+                        {filteredAndSortedProducts.length === 0 ? (
+                            <div className="text-center py-16">
+                                <svg
+                                    className="mx-auto h-16 w-16 text-slate-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={1.5}
+                                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                                <h3 className="mt-4 text-lg font-medium text-white">No products found</h3>
+                                <p className="mt-1 text-slate-400">
+                                    Try adjusting your search or filter to find what you're looking for.
+                                </p>
+                                <button
+                                    onClick={clearAllFilters}
+                                    className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+                                >
+                                    Clear all filters
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                {/* Trade Ideas Section */}
+                                <div className="mb-12">
+                                    <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                        <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        </svg>
+                                        Trade Ideas
+                                    </h2>
+                                    {renderProductGrid(tradeIdeas)}
+                                </div>
+
+                                {/* Courses Section */}
+                                {courses.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                            </svg>
+                                            Trading Courses
+                                        </h2>
+                                        {renderProductGrid(courses)}
+                                    </div>
+                                )}
+
+                                {/* Mentorship Section */}
+                                {mentorship.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                                            Mentorship Programs
+                                        </h2>
+                                        {renderProductGrid(mentorship)}
+                                    </div>
+                                )}
+
+                                {/* Other Products */}
+                                {otherProducts.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
+                                        {renderProductGrid(otherProducts)}
+                                    </div>
+                                )}
+
+                                {/* Pagination */}
+                                {renderPagination()}
+                            </>
+                        )}
                     </main>
                 </div>
             </div>
         </div>
     );
-};
+}
 
 const TermsPage: React.FC = () => (
     <div className="bg-black py-16 sm:py-24 animate-fadeIn">
