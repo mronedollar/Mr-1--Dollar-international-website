@@ -30,9 +30,10 @@ interface Product extends BaseProduct {
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
+    { id: 13, name: "Synthetics trade ideas", price: 60.00, category: 'Trade Ideas', imageUrl: '/App file (23 commit)/service pictures/Synthetics trade ideas.png', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_xyz123?d2c=true" },
     { 
         id: 2, 
-        name: "Platinum Trade Ideas (Monthly)", 
+        name: "Platinum Trade Ideas", 
         price: 0, 
         category: 'Trade Ideas', 
         imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', 
@@ -52,8 +53,8 @@ const servicesData: Product[] = [
         ],
         whatsappLink: "https://wa.me/27614267355?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]"
     },
-    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
-    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
+    { id: 3, name: "Diamond Trade Ideas", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
+    { id: 4, name: "Private Wealth VIP_Black Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
     { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
     { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
     { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
@@ -1911,11 +1912,23 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                         </div>
                     </div>
                 ) : product.originalPrice ? (
-                    <p className="text-amber-400 text-xl font-bold">
+                    <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
                         <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
+                        {product.category === 'Trade Ideas' && product.price > 0 && (
+                            <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                monthly
+                            </span>
+                        )}
                     </p>
                 ) : (
-                    <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
+                    <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
+                        ${product.price.toFixed(2)}
+                        {product.category === 'Trade Ideas' && product.price > 0 && (
+                            <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                monthly
+                            </span>
+                        )}
+                    </p>
                 )}
             </div>
             {product.isSpecialOffer ? (
