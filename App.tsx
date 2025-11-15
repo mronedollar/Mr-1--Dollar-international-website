@@ -862,19 +862,6 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 }}
                             />
                         </a>
-                        <a href="https://www.metatrader5.com/en/download" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300 flex flex-col items-center mr-8">
-                            <img 
-                                src="https://logos-world.net/wp-content/uploads/2021/11/MetaTrader-5-Logo.png" 
-                                alt="MetaTrader 5 Download" 
-                                className="w-7 h-7 object-contain mb-1"
-                                onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.onerror = null;
-                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48dGV4dCB4PSIxMiIgeT0iMTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGNsYXNzPSJ0ZXh0LWN1cnJlbnQgZm9udC1ib2xkIHRleHQtbGciPk1UNTwvdGV4dD48L3N2Zz4=';
-                                }}
-                            />
-                            <span className="text-xs text-slate-500 hover:text-amber-400/70 transition-colors text-center leading-tight">Download MT5</span>
-                        </a>
                         <a href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
                                 src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
