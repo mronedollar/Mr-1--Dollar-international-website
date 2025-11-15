@@ -1834,11 +1834,13 @@ interface PlatinumProduct extends BaseProduct {
     platinumBenefitDescription: string;
 }
 
-const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; onImageClick: (imageUrl: string, alt: string) => void; }> = ({ product, onAddToCart, isExpanded, onToggle, onImageClick }) => {
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     
     return (
+    <>
     <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative">
         {isMentorship && (
             <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
@@ -1846,13 +1848,12 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             </div>
         )}
         <div className="relative">
-             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer" onClick={() => onImageClick(product.imageUrl, product.name)}>
+             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer" onClick={() => setIsImageModalOpen(true)}>
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" />
-                {/* Overlay to indicate clickability */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-full p-3">
                         <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
                 </div>
@@ -1992,10 +1993,29 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     Add to cart
                 </button>
             )}
-        </div>
     </div>
+    {/* Image Modal */}
+    {isImageModalOpen && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setIsImageModalOpen(false)}>
+            <div className="relative max-w-4xl max-h-full">
+                <img 
+                    src={product.imageUrl} 
+                    alt={product.name} 
+                    className="max-w-full max-h-full object-contain"
+                    onClick={(e) => e.stopPropagation()}
+                />
+                <button 
+                    onClick={() => setIsImageModalOpen(false)}
+                    className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white rounded-full p-2 hover:bg-black/70 transition-colors"
+                    aria-label="Close image"
+                >
+                    <CloseIcon className="w-6 h-6" />
+                </button>
+            </div>
+        </div>
+    )}
+</>
 );
-}
 // ... (rest of the code remains the same)
 const ServicesPage: React.FC = () => {
     const [products] = useState<Product[]>(servicesData);
@@ -2008,19 +2028,16 @@ const ServicesPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    // Add state for image lightbox
-    const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-    const [lightboxAlt, setLightboxAlt] = useState<string>('');
     const itemsPerPage = 12;
     
     // Get Platinum package (ID: 2)
     const platinumPackage = products.find(p => p.id === 2);
     
-    // Categorize products from filtered results
-    const tradeIdeas = filteredAndSortedProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
-    const mentorship = filteredAndSortedProducts.filter(p => p.category === 'Mentorship');
-    const courses = filteredAndSortedProducts.filter(p => p.category === 'Courses');
-    const otherProducts = filteredAndSortedProducts.filter(p => 
+    // Categorize products
+    const tradeIdeas = products.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
+    const mentorship = products.filter(p => p.category === 'Mentorship');
+    const courses = products.filter(p => p.category === 'Courses');
+    const otherProducts = products.filter(p => 
         p.category !== 'Trade Ideas' && 
         p.category !== 'Courses' && 
         p.category !== 'Mentorship' &&
@@ -2070,9 +2087,9 @@ const ServicesPage: React.FC = () => {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
         return uniqueCategories.map(cat => ({
             name: cat,
-            count: products.filter(p => p.category === cat).length
+            count: filteredAndSortedProducts.filter(p => p.category === cat).length
         }));
-    }, [products]);
+    }, [products, filteredAndSortedProducts]);
 
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = products;
@@ -2118,17 +2135,6 @@ const ServicesPage: React.FC = () => {
     
     const handleRemoveFromCart = (productId: number, index: number) => {
         setCart(prevCart => prevCart.filter((p, i) => !(p.id === productId && i === index)));
-    };
-
-    // Add lightbox handlers
-    const openLightbox = (imageUrl: string, alt: string) => {
-        setLightboxImage(imageUrl);
-        setLightboxAlt(alt);
-    };
-
-    const closeLightbox = () => {
-        setLightboxImage(null);
-        setLightboxAlt('');
     };
 
     const handlePriceFilter = () => {
@@ -2217,7 +2223,7 @@ const ServicesPage: React.FC = () => {
                 <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
             </div>
             <div className="glass-card p-6 rounded-lg">
-                <h3 className="text-2xl font-bold text-white mb-2">Cart</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Cart</h3>
                 {cart.length === 0 ? (
                    <p className="text-slate-400">No products in the cart.</p>
                 ) : (
@@ -2268,39 +2274,6 @@ const ServicesPage: React.FC = () => {
             </div>
         </div>
     );
-
-    // Image Lightbox Modal
-    const ImageLightbox: React.FC = () => {
-        if (!lightboxImage) return null;
-
-        return (
-            <div 
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
-                onClick={closeLightbox}
-            >
-                <div className="relative max-w-4xl max-h-screen p-4">
-                    {/* Close button */}
-                    <button
-                        onClick={closeLightbox}
-                        className="absolute top-2 right-2 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
-                        aria-label="Close lightbox"
-                    >
-                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                    
-                    {/* Image */}
-                    <img
-                        src={lightboxImage}
-                        alt={lightboxAlt}
-                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                    />
-                </div>
-            </div>
-        );
-    };
 
     return (
         <div className="bg-black py-16 sm:py-24 animate-fadeIn">
@@ -2434,88 +2407,31 @@ const ServicesPage: React.FC = () => {
                             </div>
                         )}
 
-                        {/* Trade Ideas Section */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                                Trade Ideas
-                            </h2>
-                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {tradeIdeasFiltered.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                        onImageClick={openLightbox}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Courses Section */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                Trading Courses
-                            </h2>
-                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {coursesFiltered.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                        onImageClick={openLightbox}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Mentorship Section - Moved to second position */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span className="text-white">Mentorship Programs</span>
-                            </h2>
-                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {mentorshipFiltered.map((product) => (
-                                    <ProductCard 
-                                        key={product.id}
-                                        product={product}
-                                        onAddToCart={handleAddToCart}
-                                        isExpanded={expandedProductId === product.id}
-                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                        onImageClick={openLightbox}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Other Products */}
-                        {otherProductsFiltered.length > 0 && (
+                        {/* Filtered Products Display */}
+                        {paginatedProducts.length > 0 ? (
                             <div className="mb-12">
-                                <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
-                                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {otherProductsFiltered.map((product) => (
+                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                    <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                    {selectedCategory ? `${selectedCategory} Services` : 'All Services'}
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {paginatedProducts.map((product) => (
                                         <ProductCard 
                                             key={product.id}
                                             product={product}
                                             onAddToCart={handleAddToCart}
                                             isExpanded={expandedProductId === product.id}
                                             onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
-                                            onImageClick={openLightbox}
                                         />
                                     ))}
                                 </div>
+                            </div>
+                        ) : (
+                            <div className="mb-12 text-center">
+                                <h2 className="text-2xl font-bold text-white mb-6">No services found</h2>
+                                <p className="text-slate-400">Try adjusting your search or filter criteria.</p>
                             </div>
                         )}
 
@@ -2523,7 +2439,6 @@ const ServicesPage: React.FC = () => {
                     </main>
                 </div>
             </div>
-            <ImageLightbox />
         </div>
     );
 };
