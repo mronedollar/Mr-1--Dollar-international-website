@@ -1837,7 +1837,6 @@ interface PlatinumProduct extends BaseProduct {
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
-    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     
     return (
     <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative">
@@ -1847,15 +1846,8 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             </div>
         )}
         <div className="relative">
-             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer" onClick={() => setIsImageModalOpen(true)}>
+             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                        </svg>
-                    </div>
-                </div>
             </div>
             <button 
                 onClick={onToggle}
@@ -1994,31 +1986,8 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             )}
         </div>
     </div>
-
-    {/* Image Modal */}
-    {isImageModalOpen && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setIsImageModalOpen(false)}>
-            <div className="relative max-w-4xl max-h-full">
-                <img 
-                    src={product.imageUrl} 
-                    alt={product.name} 
-                    className="max-w-full max-h-full object-contain"
-                    onClick={(e) => e.stopPropagation()}
-                />
-                <button 
-                    onClick={() => setIsImageModalOpen(false)}
-                    className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white rounded-full p-3 hover:bg-black/70 transition-colors"
-                    aria-label="Close image"
-                >
-                    <CloseIcon className="w-6 h-6" />
-                </button>
-                <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-lg">
-                    <h3 className="font-semibold">{product.name}</h3>
-                </div>
-            </div>
-        </div>
-    )}
 );
+}
 // ... (rest of the code remains the same)
 const ServicesPage: React.FC = () => {
     const [products] = useState<Product[]>(servicesData);
@@ -2090,9 +2059,9 @@ const ServicesPage: React.FC = () => {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
         return uniqueCategories.map(cat => ({
             name: cat,
-            count: filteredAndSortedProducts.filter(p => p.category === cat).length
+            count: products.filter(p => p.category === cat).length
         }));
-    }, [products, filteredAndSortedProducts]);
+    }, [products]);
 
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = products;
@@ -2419,7 +2388,7 @@ const ServicesPage: React.FC = () => {
                                 Trade Ideas
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {paginatedProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2).map((product) => (
+                                {tradeIdeas.map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
@@ -2440,7 +2409,7 @@ const ServicesPage: React.FC = () => {
                                 Trading Courses
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {paginatedProducts.filter(p => p.category === 'Courses').map((product) => (
+                                {courses.map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
@@ -2461,7 +2430,7 @@ const ServicesPage: React.FC = () => {
                                 <span className="text-white">Mentorship Programs</span>
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {paginatedProducts.filter(p => p.category === 'Mentorship').map((product) => (
+                                {mentorship.map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
@@ -2474,21 +2443,11 @@ const ServicesPage: React.FC = () => {
                         </div>
 
                         {/* Other Products */}
-                        {paginatedProducts.filter(p => 
-                            p.category !== 'Trade Ideas' && 
-                            p.category !== 'Courses' && 
-                            p.category !== 'Mentorship' &&
-                            p.id !== 2
-                        ).length > 0 && (
+                        {otherProducts.length > 0 && (
                             <div className="mb-12">
                                 <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {paginatedProducts.filter(p => 
-                                        p.category !== 'Trade Ideas' && 
-                                        p.category !== 'Courses' && 
-                                        p.category !== 'Mentorship' &&
-                                        p.id !== 2
-                                    ).map((product) => (
+                                    {otherProducts.map((product) => (
                                         <ProductCard 
                                             key={product.id}
                                             product={product}
