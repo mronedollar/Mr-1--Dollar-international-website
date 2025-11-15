@@ -30,7 +30,7 @@ interface Product extends BaseProduct {
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
-    { id: 13, name: "Synthetics trade ideas", price: 60.00, category: 'Trade Ideas', imageUrl: './App file (23 commit)/service pictures/Synthetics trade ideas.png', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_xyz123?d2c=true" },
+    { id: 13, name: "Synthetics trade ideas", price: 60.00, category: 'Trade Ideas', imageUrl: '/images/Synthetics trade ideas.png', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_xyz123?d2c=true" },
     { 
         id: 2, 
         name: "Platinum Trade Ideas", 
