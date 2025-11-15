@@ -2090,9 +2090,9 @@ const ServicesPage: React.FC = () => {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
         return uniqueCategories.map(cat => ({
             name: cat,
-            count: products.filter(p => p.category === cat).length
+            count: filteredAndSortedProducts.filter(p => p.category === cat).length
         }));
-    }, [products]);
+    }, [products, filteredAndSortedProducts]);
 
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = products;
@@ -2419,7 +2419,7 @@ const ServicesPage: React.FC = () => {
                                 Trade Ideas
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {tradeIdeas.map((product) => (
+                                {paginatedProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2).map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
@@ -2440,7 +2440,7 @@ const ServicesPage: React.FC = () => {
                                 Trading Courses
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {courses.map((product) => (
+                                {paginatedProducts.filter(p => p.category === 'Courses').map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
@@ -2461,7 +2461,7 @@ const ServicesPage: React.FC = () => {
                                 <span className="text-white">Mentorship Programs</span>
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {mentorship.map((product) => (
+                                {paginatedProducts.filter(p => p.category === 'Mentorship').map((product) => (
                                     <ProductCard 
                                         key={product.id}
                                         product={product}
@@ -2474,11 +2474,21 @@ const ServicesPage: React.FC = () => {
                         </div>
 
                         {/* Other Products */}
-                        {otherProducts.length > 0 && (
+                        {paginatedProducts.filter(p => 
+                            p.category !== 'Trade Ideas' && 
+                            p.category !== 'Courses' && 
+                            p.category !== 'Mentorship' &&
+                            p.id !== 2
+                        ).length > 0 && (
                             <div className="mb-12">
                                 <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {otherProducts.map((product) => (
+                                    {paginatedProducts.filter(p => 
+                                        p.category !== 'Trade Ideas' && 
+                                        p.category !== 'Courses' && 
+                                        p.category !== 'Mentorship' &&
+                                        p.id !== 2
+                                    ).map((product) => (
                                         <ProductCard 
                                             key={product.id}
                                             product={product}
