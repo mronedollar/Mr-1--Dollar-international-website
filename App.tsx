@@ -1993,6 +1993,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     Add to cart
                 </button>
             )}
+        </div>
     </div>
     {/* Image Modal */}
     {isImageModalOpen && (
