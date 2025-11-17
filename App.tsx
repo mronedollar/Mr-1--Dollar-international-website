@@ -357,7 +357,15 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
                 >
                     Free Trade Ideas | Unlimited
                 </a>
-                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary">
+                <a 
+                    href="/services" 
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage('services');
+                        sessionStorage.setItem('expandProductId', '3'); // ID of Diamond Trade Ideas
+                    }}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary"
+                >
                     💎 Diamond Trade Ideas at $179
                 </a>
             </div>
@@ -1958,7 +1966,12 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     }, [isImageModalOpen]);
     
     return (
-    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative">
+    <div 
+        id={`product-${product.id}`}
+        className={`glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative ${
+            isExpanded ? 'ring-2 ring-amber-400 shadow-lg shadow-amber-500/20' : ''
+        }`}
+    >
         {isMentorship && (
             <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
                 For Course Graduates Only
@@ -2133,6 +2146,25 @@ const ServicesPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    // Check if we need to expand a specific product when component mounts
+    useEffect(() => {
+        const expandProductId = sessionStorage.getItem('expandProductId');
+        if (expandProductId) {
+            const productId = Number(expandProductId);
+            setExpandedProductId(productId);
+            // Clear the stored ID so it doesn't affect future visits
+            sessionStorage.removeItem('expandProductId');
+            
+            // Scroll to the product section after a short delay to allow rendering
+            setTimeout(() => {
+                const element = document.getElementById(`product-${productId}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+    }, []);
     const itemsPerPage = 12;
     
     // Get Platinum package (ID: 2)
@@ -2351,11 +2383,20 @@ const ServicesPage: React.FC = () => {
                 <ProductCard
                     key={product.id}
                     product={product}
-                    onAddToCart={handleAddToCart}
                     isExpanded={expandedProductId === product.id}
-                    onToggle={() => setExpandedProductId(
-                        expandedProductId === product.id ? null : product.id
-                    )}
+                    onToggle={() => {
+                        setExpandedProductId(expandedProductId === product.id ? null : product.id);
+                        // Scroll to the product when expanded
+                        if (expandedProductId !== product.id) {
+                            setTimeout(() => {
+                                const element = document.getElementById(`product-${product.id}`);
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }, 100);
+                        }
+                    }}
+                    onAddToCart={handleAddToCart}
                 />
             ))}
         </div>
