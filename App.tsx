@@ -546,10 +546,57 @@ interface PromoSectionProps {
 const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [completedSteps, setCompletedSteps] = useState<number[]>([]);
-    
+    const [activeStep, setActiveStep] = useState<number>(1);
+    const [kycCompleted, setKycCompleted] = useState<boolean>(false);
+    const step2Ref = useRef<HTMLDivElement>(null);
+
+    // Check for return_to parameter on component mount
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const returnTo = urlParams.get('return_to');
+        
+        if (returnTo === 'step2') {
+            // Open the section and scroll to it
+            setIsOpen(true);
+            // Mark step 1 as completed
+            if (!completedSteps.includes(1)) {
+                setCompletedSteps(prev => [...prev, 1]);
+            }
+            setActiveStep(2);
+            
+            // Scroll to step 2 after a short delay to allow the section to open
+            setTimeout(() => {
+                step2Ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            
+            // Clean up the URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }, []);
+
     const handleStepComplete = (stepNumber: number) => {
+        if (stepNumber === 2 && !completedSteps.includes(1)) return; // Can't skip step 1
+        if (stepNumber === 3 && !completedSteps.includes(2)) return; // Can't skip step 2
+        if (stepNumber === 4 && !completedSteps.includes(3)) return; // Can't skip step 3
+        
         if (!completedSteps.includes(stepNumber)) {
             setCompletedSteps([...completedSteps, stepNumber]);
+        }
+        
+        if (stepNumber === 1) {
+            setActiveStep(2);
+        } else if (stepNumber === 2 && kycCompleted) {
+            setActiveStep(3);
+        } else if (stepNumber === 3) {
+            setActiveStep(4);
+        }
+    };
+    
+    const handleKYCResponse = (completed: boolean) => {
+        setKycCompleted(completed);
+        if (completed) {
+            handleStepComplete(2);
+            setActiveStep(3);
         }
     };
     
@@ -563,7 +610,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                         onClick={() => setIsOpen(!isOpen)}
                         className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between cursor-pointer"
                     >
-                        <span className="text-lg sm:text-xl">🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥</span>
+                        <span className="text-lg sm:text-xl">GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🥈</span>
                         <svg 
                             className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
                             fill="none" 
@@ -577,7 +624,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                     {isOpen && (
                         <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-amber-500/20 shadow-xl animate-fadeIn">
                             <h3 className="text-xl font-bold text-amber-400 mb-6 text-center">
-                                Follow These Simple Steps:
+                                Follow These Simple Steps to Get Your Free Platinum Trade Ideas:
                             </h3>
                             <div className="w-full bg-gray-800 rounded-full h-2.5 mb-6">
                                 <div 
@@ -589,107 +636,167 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                 {completedSteps.length} of 5 steps completed
                             </div>
                             
-                            <div className="space-y-6">
-                                <div className="flex items-start">
-                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
-                                    <div>
-                                        <h4 className="font-semibold">Fill Out Contact Details</h4>
-                                        <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
-                                        <a 
-                                            href="https://form.fillout.com/t/69dxiDrK4kus"
-                                            onClick={() => handleStepComplete(1)}
-                                            className="inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
-                                            Fill Out Contact Form
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start">
-                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">2</div>
-                                    <div>
-                                        <h4 className="font-semibold">Register Your Trading Account</h4>
-                                        <div className="flex flex-col gap-3">
-                                            <div className="flex flex-col sm:flex-row gap-3">
+                            <div className="flex flex-col md:flex-row gap-8">
+                                <div className="space-y-6 flex-1">
+                                    <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 1 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+                                        <div className="flex items-start">
+                                            <div className={`${activeStep >= 1 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>1</div>
+                                            <div className="flex-1">
+                                                <h4 className="font-semibold">Fill Out Contact Details</h4>
+                                                <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
                                                 <a 
-                                                    href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
-                                                    target="_blank" 
+                                                    href={`https://form.fillout.com/t/69dxiDrK4kus?returnTo=${encodeURIComponent(window.location.href.split('?')[0] + '?return_to=step2')}`}
+                                                    onClick={() => handleStepComplete(1)}
+                                                    className={`inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105`}
+                                                    target="_blank"
                                                     rel="noopener noreferrer"
-                                                    onClick={() => handleStepComplete(2)}
-                                                    className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-2 px-4 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
                                                 >
-                                                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
-                                                    Register on PrimeXBT
-                                                </a>
-                                            </div>
-                                            <div className="flex flex-col sm:flex-row gap-3">
-                                                <a 
-                                                    href="https://youtu.be/xaTeSbbXn9g" 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-1.5 px-3 rounded transition-colors duration-200"
-                                                >
-                                                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                    </svg>
-                                                    Watch How to Register on PrimeXBT Guide
-                                                </a>
-                                                <span className="hidden sm:inline-flex items-center text-gray-400">|</span>
-                                                <a 
-                                                    href="https://youtube.com/shorts/zNg7CH8sZl0" 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded transition-colors duration-200"
-                                                >
-                                                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                    </svg>
-                                                    How to Transfer Funds From Wallet Guide
+                                                    Fill Out Contact Form
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div className="flex items-start">
-                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">2</div>
-                                    <div>
-                                        <h4 className="font-semibold">Complete Registration</h4>
-                                        <p className="text-gray-300 text-sm">Enter your details and complete KYC verification</p>
+
+                                    <div ref={step2Ref} className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 2 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+                                        <div className="flex items-start">
+                                            <div className={`${activeStep >= 2 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>2</div>
+                                            <div className="flex-1">
+                                                <h4 className="font-semibold">Register Your Trading Account</h4>
+                                                <div className="flex flex-col gap-3">
+                                                    <div className="flex flex-col sm:flex-row gap-3">
+                                                        <a 
+                                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                                            target="_blank" 
+                                                            rel="noopener noreferrer"
+                                                            onClick={() => handleStepComplete(2)}
+                                                            className={`inline-flex items-center justify-center gap-2 ${activeStep >= 2 ? 'bg-transparent border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black' : 'bg-gray-600 border-2 border-gray-600 text-gray-400 cursor-not-allowed'} font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out ${activeStep >= 2 ? 'hover:scale-105' : 'opacity-50 cursor-not-allowed'}`}
+                                                            onClick={(e) => {
+                                                                if (activeStep < 2) {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    return false;
+                                                                }
+                                                                handleStepComplete(2);
+                                                            }}
+                                                            disabled={activeStep < 2}
+                                                        >
+                                                            <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
+                                                            Register on PrimeXBT
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 3 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+                                        <div className="flex items-start">
+                                            <div className={`${activeStep >= 3 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>3</div>
+                                            <div className="flex-1">
+                                                <h4 className="font-semibold">Complete KYC Verification</h4>
+                                                <p className="text-gray-300 text-sm mb-2">Have you completed the broker's KYC verification?</p>
+                                                <div className="flex gap-3">
+                                                    <button 
+                                                        onClick={() => handleKYCResponse(true)}
+                                                        className={`px-4 py-2 rounded-md font-medium ${activeStep >= 2 ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 cursor-not-allowed'} text-white`}
+                                                        disabled={activeStep < 2}
+                                                    >
+                                                        Yes, I've completed KYC
+                                                    </button>
+                                                    <a 
+                                                        href="#" 
+                                                        className="px-4 py-2 rounded-md font-medium bg-red-600 hover:bg-red-700 text-white"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            window.open('https://youtu.be/xaTeSbbXn9g', '_blank');
+                                                        }}
+                                                    >
+                                                        No, show me how
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
+
+                                {/* Vertical Divider */}
+                                <div className="hidden md:block w-px bg-gray-700 my-4"></div>
+
+                                {/* Videos Section */}
+                                <div className="space-y-4 w-full md:w-1/3">
+                                    <h4 className="font-semibold text-amber-400">Helpful Videos</h4>
+                                    <div className="space-y-4">
+                                        <a 
+                                            href="https://youtu.be/xaTeSbbXn9g" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                                        >
+                                            <div className="bg-red-600 p-1 rounded">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                </svg>
+                                            </div>
+                                            <span className="text-sm">How to Register on PrimeXBT</span>
+                                        </a>
+                                        <a 
+                                            href="https://youtube.com/shorts/zNg7CH8sZl0" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                                        >
+                                            <div className="bg-blue-600 p-1 rounded">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                </svg>
+                                            </div>
+                                            <span className="text-sm">How to Transfer Funds</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 4 ? 'bg-gray-800/50' : 'opacity-50'}`}>
                                 <div className="flex items-start">
-                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3</div>
-                                    <div>
+                                    <div className={`${activeStep >= 4 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>4</div>
+                                    <div className="flex-1">
                                         <h4 className="font-semibold">Fund Your Account</h4>
-                                        <p className="text-gray-300 text-sm mb-2">Deposit minimum $10 (R200) into your wallet</p>
-                                        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                                        <div className="flex justify-between items-center w-full">
+                                            <span className="text-gray-300 text-sm">Deposit minimum $10 (R200) into your wallet</span>
                                             <a 
                                                 href="https://youtu.be/zXvOnW12mhY" 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-medium py-1.5 px-3 rounded transition-colors duration-200 text-sm"
+                                                onClick={() => handleStepComplete(3)}
                                             >
                                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8 5v14l11-7z" />
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                                                 </svg>
                                                 Watch MetaTrader Setup Guide
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                
+                            </div>
+                            <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 5 ? 'bg-gray-800/50' : 'opacity-50'}`}>
                                 <div className="flex items-start">
-                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">4</div>
-                                    <div>
+                                    <div className={`${activeStep >= 5 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>5</div>
+                                    <div className="flex-1">
                                         <h4 className="font-semibold">Claim Your Free Month</h4>
                                         <a 
                                             href="https://wa.me/27686108003?text=Hi%20Nomii,%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20$10.%20Here's%20my%20proof%20of%20funding:" 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            onClick={() => handleStepComplete(3)}
-                                            className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                            onClick={() => handleStepComplete(4)}
+                                            className={`inline-flex items-center justify-center gap-2 ${activeStep >= 4 ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out ${activeStep >= 4 ? 'hover:scale-105' : 'opacity-50'}`}
+                                            onClick={(e) => {
+                                                if (activeStep < 4) {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    return false;
+                                                }
+                                                handleStepComplete(4);
+                                            }}
                                         >
                                             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
