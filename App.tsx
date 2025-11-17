@@ -330,29 +330,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style={{'--delay': '0.4s'} as React.CSSProperties}>
                 <a 
-                    href="#" 
-                    onClick={(e) => { 
-                        e.preventDefault();
-                        const filloutForm = document.createElement('div');
-                        filloutForm.innerHTML = `
-                            <div 
-                                data-fillout-id="69dxiDrK4kus" 
-                                data-fillout-embed-type="slider" 
-                                data-fillout-button-text="Click here to fill up a Mr.$1 contact form and get unlimited trade ideas." 
-                                data-fillout-button-color="#FCB900" 
-                                data-fillout-button-size="small" 
-                                data-fillout-button-float="bottom-left" 
-                                data-fillout-slider-direction="left" 
-                                data-fillout-inherit-parameters 
-                                data-fillout-popup-size="medium">
-                            </div>
-                        `;
-                        document.body.appendChild(filloutForm);
-                        const script = document.createElement('script');
-                        script.src = 'https://server.fillout.com/embed/v1/';
-                        script.async = true;
-                        document.body.appendChild(script);
-                    }} 
+                    href="https://form.fillout.com/t/69dxiDrK4kus"
                     className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary"
                 >
                     Free Trade Ideas | Unlimited
@@ -600,34 +578,13 @@ const PromoSection: React.FC = () => {
                                     <div>
                                         <h4 className="font-semibold">Fill Out Contact Details</h4>
                                         <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
-                                        <button 
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                handleStepComplete(1);
-                                                const filloutForm = document.createElement('div');
-                                                filloutForm.innerHTML = `
-                                                    <div 
-                                                        data-fillout-id="69dxiDrK4kus" 
-                                                        data-fillout-embed-type="slider" 
-                                                        data-fillout-button-text="Click here to fill up a Mr.$1 contact form and get unlimited trade ideas." 
-                                                        data-fillout-button-color="#FCB900" 
-                                                        data-fillout-button-size="small" 
-                                                        data-fillout-button-float="bottom-left" 
-                                                        data-fillout-slider-direction="left" 
-                                                        data-fillout-inherit-parameters 
-                                                        data-fillout-popup-size="medium">
-                                                    </div>
-                                                `;
-                                                document.body.appendChild(filloutForm);
-                                                const script = document.createElement('script');
-                                                script.src = 'https://server.fillout.com/embed/v1/';
-                                                script.async = true;
-                                                document.body.appendChild(script);
-                                            }}
+                                        <a 
+                                            href="https://form.fillout.com/t/69dxiDrK4kus"
+                                            onClick={() => handleStepComplete(1)}
                                             className="inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
                                         >
                                             Fill Out Contact Form
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
 
