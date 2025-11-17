@@ -330,7 +330,20 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style={{'--delay': '0.4s'} as React.CSSProperties}>
                 <a 
-                    href="https://form.fillout.com/t/69dxiDrK4kus"
+                    href="#platinum-promo"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById('platinum-promo');
+                        if (element) {
+                            // Open the promo section
+                            const button = element.querySelector('button');
+                            if (button && !button.getAttribute('aria-expanded') === true) {
+                                button.click();
+                            }
+                            // Scroll to the section
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
                     className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary"
                 >
                     Free Trade Ideas | Unlimited
@@ -526,7 +539,11 @@ const PropFirms: React.FC = () => {
     );
 };
 
-const PromoSection: React.FC = () => {
+interface PromoSectionProps {
+    id?: string;
+}
+
+const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [completedSteps, setCompletedSteps] = useState<number[]>([]);
     
@@ -539,7 +556,7 @@ const PromoSection: React.FC = () => {
     const progressPercentage = (completedSteps.length / 5) * 100; // 5 total steps
     
     return (
-        <section className="py-12 bg-black text-white">
+        <section id={id} className="py-12 bg-black text-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     <button 
@@ -655,7 +672,7 @@ const PromoSection: React.FC = () => {
                                                 className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
                                             >
                                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                    <path d="M8 5v14l11-7z" />
                                                 </svg>
                                                 Watch MetaTrader Setup Guide
                                             </a>
@@ -934,7 +951,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.onerror = null;
-                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik01NDkuNjU1IDEyNC4wODNjLTYuMjgxLTIzLjY1LTI0Ljc4Ny00Mi4xLTQ4LjI4NC00OC41OTdDNDU4Ljc4MSA2NCAyODggNjQgMjg4IDY0UzExNy4yMiA2NCA3NC42MjkgNzUuNDg2Yy0yMy40OTcgNi40OTctNDEuOTk1IDI0Ljk0Ny00OC4yODQgNDguNTk3LTExLjQxMiA0Mi44NjctMTEuNDEyIDEzMi4zMjUtMTEuNDEyIDEzMi4zMjVzMCA4OS40NTggMTEuNDEyIDEzMi4zMjVjNi4yODkgMjMuNjUgMjQuNzg3IDQxLjk5NSA0OC4yODQgNDguNTk3QzExNy4yMiA0NDggMjg4IDQ0OCAyODggNDQ4czE3MC43OCAwIDIxMy4zNzEtMTEuNDg2YzIzLjQ5Ny02LjU5NyA0Mi4wMDItMjQuOTQ3IDQ4LjI4NC00OC41OTcgMTEuNDEyLTQyLjg2Ny0xMS40MTItMTMyLjMyNSAxMS40MTItMTMyLjMyNXMwLTg5LjQ1OC0xMS40MTItMTMyLjMyNXpNMjMyLjYxNSAzNTQuNDZWMjU3Ljk5bDEzMi43MzggOTguNDYtMTMyLjczOCA5OC40NnoiLz48L3N2Zz4=';
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik01NDkuNjU1IDEyNC4wODNjLTYuMjgxLTIzLjY1LTI0Ljc4Ny00Mi4xLTQ4LjI4NC00OC41OTdDNDU4Ljc4MSA2NCAyODggNjQgMjg4IDY0UzExNy4yMiA2NCA3NC42MjkgNzUuNDg2Yy0yMy40OTcgNi40OTctNDEuOTk1IDI0Ljk0Ny00OC4yODQgNDguNTk3LTExLjQxMiA0Mi44NjctMTEuNDEyIDEzMi4zMjUtMTEuNDEyIDEzMi4zMjVzMCA4OS40NTggMTEuNDEyIDEzMi4zMjVjNi4yODkgMjMuNjUgMjQuNzg3IDQxLjk5NSA0OC4yODQgNDguNTk3QzExNy4yMiA0NDggMjg4IDQ0OCAyODggNDQ4czE3MC43OCAwIDIxMy4zNzItMTEuNDg2YzIzLjQ5Ny02LjU5NyA0Mi4wMDItMjQuOTQ3IDQ4LjI4NC00OC41OTcgMTEuNDEyLTQyLjg2Ny0xMS40MTItMTMyLjMyNSAxMS40MTItMTMyLjMyNXMwLTg5LjQ1OC0xMS40MTItMTMyLjMyNXpNMjMyLjYxNSAzNTQuNDZWMjU3Ljk5bDEzMi43MzggOTguNDYtMTMyLjczOCA5OC40NnoiLz48L3N2Zz4=';
                                 }}
                             />
                         </a>
@@ -1051,7 +1068,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
     return (
         <>
             <Hero setCurrentPage={setCurrentPage} />
-            <PromoSection />
+            <PromoSection id="platinum-promo" />
             
             {/* Features Grid */}
             <section className="py-20 bg-black animate-fadeInUp">
