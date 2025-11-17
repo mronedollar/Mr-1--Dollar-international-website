@@ -1,0 +1,2697 @@
+import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
+
+// --- Types ---
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
+interface OfferStep {
+    number: number;
+    text: string | React.ReactNode;
+}
+
+interface BaseProduct {
+    id: number;
+    name: string;
+    price: number;
+    originalPrice?: number;
+    category: string;
+    imageUrl: string;
+    description: string;
+    checkoutUrl?: string;
+    isSpecialOffer?: boolean;
+    offerSteps?: OfferStep[];
+    whatsappLink?: string;
+}
+
+interface Product extends BaseProduct {
+    isPlatinumBenefit?: boolean;
+    platinumBenefitDescription?: string;
+    // Additional properties specific to Product can be added here
+}
+
+// --- Centralized Data Source ---
+const servicesData: Product[] = [
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
+    { 
+        id: 2, 
+        name: "Platinum Trade Ideas (Monthly)", 
+        price: 0, 
+        category: 'Trade Ideas', 
+        imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', 
+        description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥",
+        isSpecialOffer: true,
+        offerSteps: [
+            { 
+                number: 1, 
+                text: <span className="flex items-center">
+                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-4 w-auto object-contain mr-2" />
+                    Register on PrimeXBT
+                </span> 
+            },
+            { number: 2, text: "Complete KYC verification" },
+            { number: 3, text: "Deposit minimum $50 (R800) into your wallet" },
+            { number: 4, text: "WhatsApp Nomii with proof to claim your free month" }
+        ],
+        whatsappLink: "https://wa.me/27614267355?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]"
+    },
+    { id: 3, name: "Diamond Trade Ideas (Monthly)", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
+    { id: 4, name: "Private Wealth VIP_Black Ideas (Monthly)", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
+    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
+    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
+    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
+    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader.", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q?d2c=true" },
+    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
+    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
+    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
+    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
+    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
+    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Represent the Mr$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+];
+
+const testimonialsData = [
+    {
+        quote: "High Voltage is something else... We woke up in deep profits!",
+        author: "Lungelo C.",
+        role: "Gold Member",
+    },
+    {
+        quote: "Tebza made R5000 early in the morning while driving. When I see profits I get motivated to send more trade ideas!",
+        author: "Mr.$1 Team",
+        role: "Community Update",
+    },
+    {
+        quote: "We thank you alpha as we were comfortable in our waiting process, because we know when it's time we eat and get full.",
+        author: "Prince Mofokeng",
+        role: "Platinum Member",
+    },
+    {
+        quote: "No worries at all, we trust this family!",
+        author: "Siphelele H.",
+        role: "Community Member",
+    },
+    {
+        quote: "I am surviving because I know for as long as you are still alive, I will succeed!",
+        author: "Grace Ranyane",
+        role: "Gold Member",
+    },
+];
+
+// --- SVG Icon Components ---
+
+const MenuIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+  </svg>
+);
+
+const CloseIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>
+);
+
+const MapPinIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+    </svg>
+);
+
+const PhoneIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6.75Z" />
+    </svg>
+);
+
+const EnvelopeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25-2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+    </svg>
+);
+
+const ShieldCheckIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M12 21.75c2.435-1.122 4.633-2.618 6.42-4.357C20.142 15.66 21 12.76 21 9.75c0-3.01-0.858-5.91-2.58-7.643a13.363 13.363 0 0 0-6.42-3.643 1.5 1.5 0 0 0-1.018 0 13.363 13.363 0 0 0-6.42 3.643C2.858 3.84 2 6.74 2 9.75c0 3.01 0.858 5.91 2.58 7.643A13.363 13.363 0 0 0 11 21.75a1.5 1.5 0 0 0 1 0Z" />
+    </svg>
+);
+
+const UsersIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962c.57-1.01 1.255-1.883 2.06-2.634.804-.75 1.72-1.34 2.696-1.763M12 3c2.755 0 5 2.245 5 5s-2.245 5-5 5-5-2.245-5-5 2.245-5 5-5Zm-7.268 9.062a8.952 8.952 0 0 0-2.432 2.432 8.952 8.952 0 0 0 2.432 2.432M12 21a9.094 9.094 0 0 0-3.741-.479 3 3 0 0 0-4.682-2.72M3.055 12.312a8.952 8.952 0 0 1 2.432-2.432 8.952 8.952 0 0 1 2.432 2.432" />
+    </svg>
+);
+
+const RocketLaunchIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.82m5.84-2.56a6 6 0 0 1-5.84 7.38v-4.82m5.84-2.56a6 6 0 0 1-5.84 7.38v-4.82m0 0a6 6 0 0 1 6-6h-4.82m0 0a6 6 0 0 1 6-6H9.75m0 0a6 6 0 0 1 6-6H9.75m0 0a6 6 0 0 1-6 6h4.82M9.75 9.75A6 6 0 0 1 3.75 3.75M9.75 9.75A6 6 0 0 1 3.75 3.75m0 0a6 6 0 0 1 6 6v-4.82m0 0a6 6 0 0 1 6 6v-4.82" />
+    </svg>
+);
+
+const PlusIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>
+);
+
+const MinusIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+    </svg>
+);
+
+const UserIcon: React.FC<{ className?: string }> = ({ className = "w-24 h-24" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+    </svg>
+);
+
+const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = "w-8 h-8" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" className={className}>
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.8-28.2l-6.7-4-69.8 18.3L72 359.2l-4.5-7c-21.3-33.1-33.6-71.6-33.6-112.5 0-108.8 88.5-197.3 197.3-197.3 53.9 0 104.5 21.1 142.8 59.5 38.2 38.3 59.5 88.9 59.5 142.8 0 108.8-88.5 197.3-197.3 197.3zm88.6-114.8c-3.8-1.9-22.5-11.1-26-12.4-3.5-1.4-6-1.9-8.6 1.9s-9.8 12.4-12 14.9c-2.2 2.5-4.5 2.8-8.3 1s-16-5.9-30.4-18.7c-11.3-10-19-22.3-21.2-26.1-2.2-3.8-0.2-5.9 1.7-7.7 1.7-1.6 3.8-4.2 5.7-6.2 1.9-2.1 2.5-3.8 3.8-6.4 1.2-2.5 0.6-4.7-0.3-6.1-0.9-1.4-8.6-20.8-11.8-28.5-3.1-7.7-6.2-6.6-8.6-6.7-2.2-0.1-4.7-0.1-7.3-0.1s-6.7 1-10.2 4.7c-3.5 3.7-13.4 13.1-13.4 32 0 18.8 13.7 37.1 15.6 39.6 1.9 2.5 26.9 41.2 65.4 58 38.4 16.8 38.4 11.2 45.3 10.5 6.9-0.8 22.5-9.2 25.6-18.1 3.1-8.9 3.1-16.5 2.2-18.1-1-1.6-3.5-2.5-7.3-4.5z"/>
+    </svg>
+);
+
+const YouTubeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor" className={className}>
+        <path d="M549.655 124.083c-6.281-23.65-24.787-42.1-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.497-41.995 24.947-48.284 48.597-11.412 42.867-11.412 132.325-11.412 132.325s0 89.458 11.412 132.325c6.289 23.65 24.787 41.995 48.284 48.597C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.597 42.002-24.947 48.284-48.597 11.412-42.867-11.412-132.325 11.412-132.325s0-89.458-11.412-132.325zM232.615 354.46V157.54l132.738 98.46-132.738 98.46z"/>
+    </svg>
+);
+
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" className={className}>
+        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1 9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+    </svg>
+);
+
+const SearchIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+    </svg>
+);
+
+const ChevronLeftIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+);
+
+const ChevronRightIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+);
+
+const QuoteIcon: React.FC<{ className?: string }> = ({ className = "w-12 h-12" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className={className}>
+        <path d="M13.416 4.834C13.52 4.07 14.155 3.5 14.936 3.5c.895 0 1.584.793 1.584 1.584 0 .43-.168.832-.47 1.133l-1.923 1.916a2.016 2.016 0 00-1.04 1.76v.168c0 .235.19.42.42.42h.335c1.47 0 2.593 1.12 2.593 2.592V15c0 2.302-1.85 4.16-4.16 4.16-2.302 0-4.16-1.85-4.16-4.16 0-2.302 1.85-4.16 4.16-4.16a.42.42 0 01.42.42v3.083c0 .235-.19.42-.42.42-.562 0-1.012.45-1.012 1.011 0 .562.45 1.012 1.011 1.012.562 0 1.012-.45 1.012-1.012V11.5c0-1.218-.84-2.28-1.995-2.528a4.12 4.12 0 01-3.67-3.953C7.5 2.22 9.728 0 12.523 0c.39 0 .762.056 1.108.15a4.156 4.156 0 012.379 2.115l-2.593 2.57z" />
+    </svg>
+);
+
+const TrashIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 4.8.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.067-2.09 1.02-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+    </svg>
+);
+
+const FilterIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+    </svg>
+);
+
+
+// --- Page Section Components ---
+
+interface HeaderProps {
+    currentPage: Page;
+    setCurrentPage: (page: Page) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navLinks: { name: string, page: Page }[] = [
+        { name: "Home", page: 'home' },
+        { name: "Events", page: 'events' },
+        { name: "Services", page: 'services' },
+        { name: "About Us", page: 'about' },
+        { name: "Our Team", page: 'team' },
+        { name: "Contact Us", page: 'contact' },
+    ];
+
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, page: Page) => {
+        e.preventDefault();
+        setCurrentPage(page);
+        setIsMenuOpen(false);
+    };
+
+    return (
+        <header className="bg-black/70 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-800/50">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-20">
+                    <div className="flex-shrink-0">
+                        <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="block cursor-pointer transform hover:scale-105 transition-transform duration-300">
+                            <img src="https://mr1dollar.co.za/wp-content/uploads/2025/03/cropped-MR1Dollar_mERCHWhite-7.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
+                        </a>
+                    </div>
+                    <div className="hidden md:block">
+                        <div className="ml-10 flex items-baseline space-x-4">
+                            {navLinks.map(link => (
+                                <a 
+                                    key={link.name} 
+                                    href="#" 
+                                    onClick={(e) => handleNavClick(e, link.page)} 
+                                    className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-slate-300 hover:text-amber-400'}`}
+                                >
+                                    {link.name}
+                                    {currentPage === link.page && (
+                                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-400 rounded-full shadow-[0_0_8px_theme(colors.amber.400)]"></span>
+                                    )}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="-mr-2 flex md:hidden">
+                        <button 
+                            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+                            className="bg-slate-900 inline-flex items-center justify-center p-3 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-amber-400 transition-all duration-200" 
+                            aria-controls="mobile-menu" 
+                            aria-expanded={isMenuOpen}
+                        >
+                            <span className="sr-only">{isMenuOpen ? 'Close' : 'Open'} main menu</span>
+                            {isMenuOpen ? <CloseIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile menu */}
+                <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`} id="mobile-menu">
+                    <div className="px-2 pt-2 pb-4 space-y-2 sm:px-4 bg-slate-900/95 backdrop-blur-sm">
+                        {navLinks.map(link => (
+                            <a 
+                                key={link.name} 
+                                href="#" 
+                                onClick={(e) => {
+                                    handleNavClick(e, link.page);
+                                    setIsMenuOpen(false);
+                                }} 
+                                className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                                    currentPage === link.page 
+                                        ? 'bg-amber-400 text-black' 
+                                        : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+                                }`}
+                            >
+                                {link.name}
+                                {currentPage === link.page && (
+                                    <span className="ml-2 text-xs bg-black/20 px-2 py-0.5 rounded-full">
+                                        Active
+                                    </span>
+                                )}
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </header>
+    );
+};
+
+interface HeroProps {
+    setCurrentPage: (page: Page) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
+    <section className="py-24 sm:py-32 text-center hero-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
+            <h2 className="text-amber-400 text-3xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}>Mr One Dollar International</h2>
+            <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
+                The Blueprint to the 1% – <br /> Trade Smarter, Profit Bigger!!!
+            </h1>
+            <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-400" style={{'--delay': '0.3s'} as React.CSSProperties}>
+                “Designed for traders who refuse to be average. Learn the strategies that put us in the 1%, Stay Blue & Take Profit.”
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style={{'--delay': '0.4s'} as React.CSSProperties}>
+                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary">
+                    Get Started
+                </a>
+                <a href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary">
+                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
+                    Register with a Broker
+                </a>
+            </div>
+        </div>
+    </section>
+);
+
+
+const PropFirms: React.FC = () => {
+    const partners = [
+        // Brokers
+        {
+            name: 'PrimeXBT',
+            description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
+            logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
+            link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1',
+            category: 'Brokers'
+        },
+        // Prop Firms
+        {
+            name: 'Funded7',
+            description: 'A proprietary trading firm providing funding for forex and crypto traders with flexible programs',
+            logoUrl: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
+            link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
+            category: 'Prop Firms'
+        },
+        {
+            name: 'FundedNext',
+            description: 'A proprietary trading firm providing funding for forex and crypto traders worldwide',
+            logoUrl: 'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
+            link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
+            category: 'Prop Firms'
+        },
+        {
+            name: 'FTMO',
+            description: 'A global prop trading firm offering capital to skilled traders through evaluation programs',
+            logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
+            link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
+            category: 'Prop Firms'
+        }
+    ];
+    
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+    
+    return (
+        <section ref={sectionRef} className="py-20 bg-slate-900 animate-fadeIn relative overflow-hidden">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden opacity-20">
+                <div className="absolute -top-1/2 -left-1/2 w-full h-[200%] bg-gradient-to-br from-amber-500/10 via-transparent to-blue-500/10 animate-spin-slow"></div>
+            </div>
+            
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                    <span className="relative inline-block">
+                        <span className="relative z-10">Our Trusted Partners</span>
+                        <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-blue-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                    </span>
+                </h2>
+                <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+                    Sign up with one of our trusted partners to get funded and start trading with the best brokers and prop-firms in the industry.
+                </p>
+                
+                <div className={`mt-16 space-y-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    {/* Brokers Section */}
+                    <div className="relative">
+                        <div className="absolute -top-8 -left-8 w-32 h-32 bg-amber-500/10 rounded-full filter blur-3xl -z-10"></div>
+                        <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
+                            <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-amber-500/30 shadow-lg shadow-amber-500/10">
+                                Brokers
+                            </span>
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                            {partners
+                                .filter(partner => partner.category === 'Brokers')
+                                .map((partner, i) => (
+                                    <div key={partner.name} className="flex flex-col items-center group">
+                                        <a 
+                                            href={partner.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-amber-400/50 group-hover:shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+                                            style={{
+                                                transition: 'all 0.3s ease',
+                                                animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
+                                            }}
+                                        >
+                                            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                            <img 
+                                                src={partner.logoUrl} 
+                                                alt={`${partner.name} logo`} 
+                                                className="relative z-10 max-h-12 sm:max-h-16 w-auto transition-transform duration-500 group-hover:scale-110" 
+                                            />
+                                        </a>
+                                        <div className="mt-4 text-center px-2">
+                                            <h3 className="font-semibold text-amber-400 group-hover:text-amber-300 transition-colors">
+                                                {partner.name}
+                                            </h3>
+                                            <p className="mt-2 text-sm text-gray-300">
+                                                {partner.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
+
+                    {/* Prop Firms Section */}
+                    <div className="relative pt-10">
+                        <div className="absolute -top-8 -right-8 w-40 h-40 bg-blue-500/10 rounded-full filter blur-3xl -z-10"></div>
+                        <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
+                            <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-blue-500/30 shadow-lg shadow-blue-500/10">
+                                Prop Firms
+                            </span>
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                          {partners
+                                .filter(partner => partner.category === 'Prop Firms')
+                                .map((partner, i) => {
+                                    const colorClass = partner.name === 'Funded7' ? 'purple' :
+                                                     partner.name === 'FundedNext' ? 'blue' : 'green';
+                                    
+                                    return (
+                                        <div key={partner.name} className="flex flex-col items-center group">
+                                            <a 
+                                                href={partner.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-${colorClass}-400/50 group-hover:shadow-[0_0_20px_${colorClass === 'purple' ? 'rgba(239,68,68,0.3)' : colorClass === 'blue' ? 'rgba(59,130,246,0.3)' : 'rgba(34,197,94,0.3)'}]`}
+                                                style={{
+                                                    transition: 'all 0.3s ease',
+                                                    animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
+                                                }}
+                                            >
+                                                <div className={`absolute inset-0 bg-gradient-to-br from-${colorClass}-500/5 to-${colorClass === 'purple' ? 'pink' : colorClass === 'blue' ? 'indigo' : 'teal'}-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                                                <img 
+                                                    src={partner.logoUrl} 
+                                                    alt={`${partner.name} logo`} 
+                                                    className={`relative z-10 max-h-12 sm:max-h-16 w-auto transition-transform duration-500 group-hover:scale-110`} 
+                                                />
+                                            </a>
+                                            <div className="mt-4 text-center px-2">
+                                                <h3 className={`font-semibold text-${colorClass}-400 group-hover:text-${colorClass}-300 transition-colors`}>
+                                                    {partner.name}
+                                                </h3>
+                                                <p className="mt-2 text-sm text-gray-300">
+                                                    {partner.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const PromoSection: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    
+    return (
+        <section className="py-12 bg-black text-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto">
+                    <button 
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between"
+                    >
+                        <span className="text-lg sm:text-xl">🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥</span>
+                        <svg 
+                            className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    {isOpen && (
+                        <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-amber-500/20 shadow-xl animate-fadeIn">
+                            <h3 className="text-xl font-bold text-amber-400 mb-6 text-center">
+                                Follow These Simple Steps:
+                            </h3>
+                            
+                            <div className="space-y-6">
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">1</div>
+                                    <div>
+                                        <h4 className="font-semibold text-lg">Register Your Trading Account</h4>
+                                        <a 
+                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105"
+                                        >
+                                            <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
+                                            Register on PrimeXBT
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">2</div>
+                                    <div>
+                                        <h4 className="font-semibold">Complete Registration</h4>
+                                        <p className="text-gray-300 text-sm">Enter your details and complete KYC verification</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">3</div>
+                                    <div>
+                                        <h4 className="font-semibold">Fund Your Account</h4>
+                                        <p className="text-gray-300 text-sm">Deposit minimum $50 (R800) into your wallet</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-amber-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">4</div>
+                                    <div>
+                                        <h4 className="font-semibold">Claim Your Free Month</h4>
+                                        <a 
+                                            href="https://wa.me/27626898567?text=Hi%20Nomii,%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funding.%20Here's%20my%20proof%20of%20funding:" 
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-300"
+                                        >
+                                            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
+                                                <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
+                                            </svg>
+                                            WhatsApp Nomii with Proof
+                                        </a>
+                                        <p className="text-xs text-gray-400 mt-1">Click to open WhatsApp with pre-filled message</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const Testimonials: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    
+    // Minimum swipe distance to trigger navigation (in pixels)
+    const minSwipeDistance = 50;
+    
+    // Get all testimonial image files from the public directory
+    const testimonialImages = [
+        'WhatsApp Image 2025-11-03 at 14.53.22_1344b584.jpg',
+        'WhatsApp Image 2025-11-03 at 17.16.03_119b503d.jpg',
+        'WhatsApp Image 2025-11-03 at 17.17.11_57705a92.jpg',
+        'WhatsApp Image 2025-11-03 at 17.18.03_07fdb6eb.jpg',
+        'WhatsApp Image 2025-11-03 at 17.21.00_2b64be7d.jpg',
+        'WhatsApp Image 2025-11-03 at 17.34.02_20e3bebb.jpg',
+        'WhatsApp Image 2025-11-04 at 08.57.18_eb106dae.jpg',
+        'WhatsApp Image 2025-11-04 at 17.24.42_6c99cf04.jpg',
+        'WhatsApp Image 2025-11-06 at 21.37.54_3fe0f787.jpg',
+        'WhatsApp Image 2025-11-07 at 21.18.22_6d830380.jpg',
+        'WhatsApp Image 2025-11-07 at 21.19.45_9c8b041e.jpg',
+        'WhatsApp Image 2025-11-11 at 14.26.31_b730de11.jpg',
+        'WhatsApp Image 2025-11-11 at 14.26.32_f23f739c.jpg',
+        'WhatsApp Image 2025-11-11 at 14.44.38_a5e0cc99.jpg',
+        'WhatsApp Image 2025-11-11 at 15.39.25_0be34331.jpg',
+        'WhatsApp Image 2025-11-11 at 15.48.45_14350078.jpg'
+    ];
+    
+    return (
+        <section className="py-20 bg-black animate-fadeIn">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white">What Our Traders Say</h2>
+                <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
+                    Real results from real members of the Mr$1 community.
+                </p>
+                
+                <div className="mt-12">
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center mx-auto"
+                    >
+                        {isOpen ? 'Hide Testimonials' : 'View All Testimonials'}
+                        <svg 
+                            className={`w-5 h-5 ml-2 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    {isOpen && (
+                        <div className="mt-8">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                {testimonialImages.map((image, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="relative group cursor-pointer overflow-hidden rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                        onClick={() => setSelectedImage(image)}
+                                    >
+                                        <img 
+                                            src={`/mr$1 testimonials/${image}`}
+                                            alt={`Testimonial ${index + 1}`}
+                                            className="w-full h-48 object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+                
+                {/* Image Modal */}
+                {selectedImage && (
+                    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
+                        <div className="relative max-w-4xl w-full mx-auto">
+                            {/* Close button */}
+                            <button 
+                                className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors z-10"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedImage(null);
+                                }}
+                            >
+                                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            
+                            {/* Left navigation arrow */}
+                            <button 
+                                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    const currentIndex = testimonialImages.indexOf(selectedImage);
+                                    const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                    setSelectedImage(testimonialImages[prevIndex]);
+                                }}
+                            >
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            
+                            {/* Main image */}
+                            <div 
+                                className="relative"
+                                onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
+                                onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+                                onTouchEnd={() => {
+                                    if (!touchStart || !touchEnd) return;
+                                    const distance = touchStart - touchEnd;
+                                    const isLeftSwipe = distance > minSwipeDistance;
+                                    const isRightSwipe = distance < -minSwipeDistance;
+                                    
+                                    if (isLeftSwipe) {
+                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
+                                        const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                        setSelectedImage(testimonialImages[nextIndex]);
+                                    } else if (isRightSwipe) {
+                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
+                                        const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                        setSelectedImage(testimonialImages[prevIndex]);
+                                    }
+                                    
+                                    setTouchStart(null);
+                                    setTouchEnd(null);
+                                }}
+                            >
+                                <img 
+                                    src={`/mr$1 testimonials/${selectedImage}`}
+                                    alt="Full size testimonial"
+                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl select-none touch-none"
+                                    onClick={(e) => e.stopPropagation()}
+                                    draggable={false}
+                                />
+                                <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
+                                    {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
+                                </div>
+                                <div className="absolute top-1/2 left-4 right-4 flex justify-between pointer-events-none">
+                                    <div className="bg-black/50 text-white p-2 rounded-full">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                    </div>
+                                    <div className="bg-black/50 text-white p-2 rounded-full">
+                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Right navigation arrow */}
+                            <button 
+                                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    const currentIndex = testimonialImages.indexOf(selectedImage);
+                                    const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                    setSelectedImage(testimonialImages[nextIndex]);
+                                }}
+                            >
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </section>
+    );
+};
+
+interface FooterProps {
+    setCurrentPage: (page: Page) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
+    <footer className="bg-black border-t border-slate-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-2">
+                    <h3 className="text-xl font-bold text-white">MR <span className="text-amber-400">ONE</span> DOLLAR</h3>
+                    <p className="mt-4 text-slate-400 text-sm leading-relaxed">
+                        At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together.
+                    </p>
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold text-white">Contact Us</h3>
+                    <ul className="mt-4 space-y-3 text-sm">
+                        <li className="flex items-start text-slate-400">
+                           <MapPinIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
+                           <a href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
+                                4 Karen Street, Bryanston, Sandton, 2060
+                           </a>
+                        </li>
+                        <li className="flex items-start text-slate-400">
+                            <PhoneIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
+                            <div>
+                                <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a> / 
+                                <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors"> +27 61 426 7355</a>
+                            </div>
+                        </li>
+                        <li className="flex items-start text-slate-400">
+                             <EnvelopeIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
+                             <a href="mailto:info@mr1dollar.co.za" className="hover:text-amber-400 transition-colors">info@mr1dollar.co.za</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold text-white">Follow Us</h3>
+                    <div className="flex space-x-4 mt-4">
+                        <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <img 
+                                src="https://i.ibb.co/Rkr61Kyn/youtube-icon.png" 
+                                alt="YouTube Channel" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik01NDkuNjU1IDEyNC4wODNjLTYuMjgxLTIzLjY1LTI0Ljc4Ny00Mi4xLTQ4LjI4NC00OC41OTdDNDU4Ljc4MSA2NCAyODggNjQgMjg4IDY0UzExNy4yMiA2NCA3NC42MjkgNzUuNDg2Yy0yMy40OTcgNi40OTctNDEuOTk1IDI0Ljk0Ny00OC4yODQgNDguNTk3LTExLjQxMiA0Mi44NjctMTEuNDEyIDEzMi4zMjUtMTEuNDEyIDEzMi4zMjVzMCA4OS40NTggMTEuNDEyIDEzMi4zMjVjNi4yODkgMjMuNjUgMjQuNzg3IDQxLjk5NSA0OC4yODQgNDguNTk3QzExNy4yMiA0NDggMjg4IDQ0OCAyODggNDQ4czE3MC43OCAwIDIxMy4zNzEtMTEuNDg2YzIzLjQ5Ny02LjU5NyA0Mi4wMDItMjQuOTQ3IDQ4LjI4NC00OC41OTcgMTEuNDEyLTQyLjg2Ny0xMS40MTItMTMyLjMyNSAxMS40MTItMTMyLjMyNXMwLTg5LjQ1OC0xMS40MTItMTMyLjMyNXpNMjMyLjYxNSAzNTQuNDZWMjU3Ljk5bDEzMi43MzggOTguNDYtMTMyLjczOCA5OC40NnoiLz48L3N2Zz4=';
+                                }}
+                            />
+                        </a>
+                        <a href="https://www.instagram.com/mr1dollarforextrading/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <img 
+                                src="https://i.ibb.co/dwHV57BN/instagram-icon.png" 
+                                alt="Instagram Profile" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQuxIDMwLjgxYz0xMjEuNzIgMC0yMjQuMSA5OS4zLTIyNC4xIDIyMS43IDAgMTIyLjQgMTAyLjQgIDIyMS43IDIyNC4xIDIyMS43IDEyMS43IDAgMjI0LjEtOTkuMyAyMjQuMS0yMjEuN0M0NDguMSAxMzAuMSAzNDUuOCAzMC44MSAyMjQuMSAzMC44MXptMCAzNzMuNmMtODMuOSAwLTE1MS45LTY4LjgtMTUxLjktMTUxLjkgMC04My45IDY4LTE1MS45IDE1MS45LTE1MS45czE1MS45IDY4IDE1MS45IDE1MS45YzAgODMuMS02OCAxNTEuOS0xNTEuOSAxNTEuOXptMTI5LjctMzQ4LjJjLTE0LjkgMC0yNy4xLTEyLjItMjcuMS0yNy4xczEyLjItMjcuMSAyNy4xLTI3LjEgMjcuMSAxMi4yIDI3LjEgMjcuMWMwIDE0LjktMTIuMiAyNy4xLTI3LjEgMjcuMXptLTgxLjIgMTIuOGMtMjkuMyAwLTUzLjEgMjMuOS01My4xIDUzLjFzMjMuOSA1My4xIDUzLjEgNTMuMSA1My4xLTIzLjkgNTMuMS01My4xLTIzLjgtNTMuMS01My4xLTUzLjF6bTgxLjIgMTQzYy00OS45IDAtOTAuNS00MC41LTkwLjUtOTAuNXM0MC41LTkwLjUgOTAuNS05MC41IDkwLjUgNDAuNSA5MC41IDkwLjUtNDAuNSA5MC41LTkwLjUgOTAuNXptMC0xNjMuOWMtNDAuNSAwLTczLjQgMzIuOS03My40IDczLjRzMzIuOSA3My40IDczLjQgNzMuNCA3My40LTMyLjkgNzMuNC03My40LTMzLTczLjQtNzMuNC03My40eiIvPjwvc3ZnPg==';
+                                }}
+                            />
+                        </a>
+                        <a href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <img 
+                                src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
+                                alt="WhatsApp Community" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMGg1di0yaC0xYy0xLjEgMC0yOS4yNC0zLjk1Ljk1LTMuMDFWjE0aC0yVjloDQuNTJMMTAgOC41SDRWNGg2bC0uMDEgMS45OWMxLjQ5LS4yIDIuNzUtLjc2IDMuOS0xLjY2bC0xLjQxLTEuNDFjLTEuOTUgMS42LTQuNCAyLjU4LTcuMDggMi41OHoiLz48L3N2Zz4=';
+                                }}
+                            />
+                        </a>
+                    </div>
+                     <p className="mt-4 text-slate-400 text-sm">Join our WhatsApp Community!</p>
+                </div>
+            </div>
+            <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
+                 <div className="text-center md:text-left">
+                    <p className="text-slate-400 text-sm">Copyright &copy; {new Date().getFullYear()} . All rights reserved.</p>
+                    <p className="text-slate-500 text-xs mt-1">Trading Involves Risk, Past Performances does not guarantee Future Result</p>
+                </div>
+                <div className="flex flex-wrap justify-center space-x-4 mt-4 md:mt-0">
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Home</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">About Us</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('services'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Services</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('terms'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Terms</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('privacy'); }} className="text-slate-400 hover:text-amber-400 text-sm transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+);
+
+
+const WhatsAppWidget: React.FC = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  const widgetRef = useRef<HTMLDivElement>(null);
+
+  // Handle mouse down for dragging
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+    setStartPos(position);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  // Handle mouse move for dragging
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+    
+    const dx = e.clientX - dragStart.x;
+    const dy = e.clientY - dragStart.y;
+    
+    setPosition({
+      x: startPos.x + dx,
+      y: startPos.y + dy
+    });
+  };
+
+  // Handle mouse up to finish dragging
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+    
+    // Check if widget should be hidden (dragged left or up significantly)
+    if (position.x < -30 || position.y < -30) {
+      setIsVisible(false);
+      // Auto-show after 10 seconds
+      setTimeout(() => setIsVisible(true), 10000);
+    }
+  };
+
+  // Handle touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+    setStartPos(position);
+    document.addEventListener('touchmove', handleTouchMove as any, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
+    if (!isDragging) return;
+    
+    const touch = e.touches[0];
+    const dx = touch.clientX - dragStart.x;
+    const dy = touch.clientY - dragStart.y;
+    
+    setPosition({
+      x: startPos.x + dx,
+      y: startPos.y + dy
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    document.removeEventListener('touchmove', handleTouchMove as any);
+    document.removeEventListener('touchend', handleTouchEnd);
+    
+    // Check if widget should be hidden (dragged left or up significantly)
+    if (position.x < -30 || position.y < -30) {
+      setIsVisible(false);
+      // Auto-show after 10 seconds
+      setTimeout(() => setIsVisible(true), 10000);
+    }
+  };
+
+  // Don't render if not visible
+  if (!isVisible) return null;
+
+  return (
+    <div 
+      ref={widgetRef}
+      className="fixed z-50 cursor-grab active:cursor-grabbing select-none"
+      style={{
+        right: '1.5rem',
+        bottom: '1.5rem',
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+        touchAction: 'none'
+      }}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
+    >
+      <a 
+        href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
+        aria-label="Join our WhatsApp Community"
+        onClick={(e) => {
+          // Only prevent default if we're dragging
+          if (isDragging) {
+            e.preventDefault();
+          }
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <img 
+            src="https://i.ibb.co/S4KMyg8d/whatsapp.png" 
+            alt="WhatsApp" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
+        <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+          Join our Community
+        </span>
+      </a>
+    </div>
+);
+
+
+// --- Page Components ---
+
+interface HomePageProps {
+    setCurrentPage: (page: Page) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
+    const [activeTab, setActiveTab] = useState<string | null>(null);
+
+    const handleFeatureClick = (tab: string) => {
+        setActiveTab(activeTab === tab ? null : tab);
+    };
+    
+    return (
+        <>
+            <Hero setCurrentPage={setCurrentPage} />
+            <PromoSection />
+            
+            {/* Features Grid */}
+            <section className="py-20 bg-black animate-fadeInUp">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <FeatureCard 
+                            icon={
+                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            } 
+                            title="Proven Track Record"
+                            onClick={() => handleFeatureClick('track-record')}
+                        />
+                        <FeatureCard 
+                            icon={
+                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            } 
+                            title="Trading Community"
+                            onClick={() => handleFeatureClick('community')}
+                        />
+                        <FeatureCard 
+                            icon={
+                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            } 
+                            title="Exclusive Trade-Cations"
+                            onClick={() => handleFeatureClick('tradecations')}
+                        />
+                    </div>
+
+                    {/* Track Record Modal */}
+                    {activeTab === 'track-record' && (
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                            <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                                <div className="p-5 sm:p-6">
+                                    <div className="flex justify-between items-center mb-5">
+                                        <h2 className="text-xl font-bold text-white">Trading History</h2>
+                                        <button 
+                                            onClick={() => setActiveTab(null)}
+                                            className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                            aria-label="Close modal"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div className="prose prose-invert max-w-none">
+                                        <p className="text-slate-300 text-sm mb-5">
+                                            Our premium trading community consistently delivers exceptional weekly performance, with win rates ranging between 70% to 100% across all trading sessions. Here's a glimpse of our recent trading statistics:
+                                        </p>
+                                        
+                                        {/* YouTube Videos Grid */}
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+                                            {[
+                                                { id: 'vfX0Y106iK0', title: 'Trade Analysis' },
+                                                { id: 'CVLyno-oktw', title: 'Market Update' },
+                                                { id: 'Zg1VAV2xzSQ', title: 'Trading Session' },
+                                                { id: 'L_9QwGiHKrw', title: 'Strategy Breakdown' },
+                                                { id: '71Ez4STWkkE', title: 'Market Review' },
+                                                { id: 'xxc5MLIwSSE', title: 'Live Trading' },
+                                                { id: 'EXhbQfl6uVw', title: 'Tutorial' }
+                                            ].map((video, index) => (
+                                                <a
+                                                    key={video.id}
+                                                    href={`https://www.youtube.com/watch?v=${video.id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="group relative rounded-lg overflow-hidden aspect-video bg-slate-800/50 border border-slate-700/50 hover:border-amber-400/50 transition-all duration-300"
+                                                >
+                                                    <img
+                                                        src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                                                        alt={video.title}
+                                                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                                                        <p className="text-xs text-white font-medium line-clamp-2">{video.title}</p>
+                                                    </div>
+                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                        <div className="w-10 h-10 bg-red-500/90 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
+                                                            <svg className="w-5 h-5 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                                                                <path d="M8 5v14l11-7z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            ))}
+                                        </div>
+
+                                        <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+                                            <h3 className="text-lg font-semibold text-amber-400 mb-2">More Trading Content</h3>
+                                            <p className="text-slate-300 text-sm mb-3">
+                                                Subscribe to our YouTube channel for the latest trade ideas, market analysis, and educational content.
+                                            </p>
+                                            <a 
+                                                href="https://www.youtube.com/@MrOneDollarInternational" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center text-amber-400 hover:text-amber-300 text-sm font-medium transition-colors group"
+                                            >
+                                                <span className="border-b border-transparent group-hover:border-amber-300">Visit Our YouTube Channel</span>
+                                                <svg className="w-4 h-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Community Modal */}
+                    {activeTab === 'community' && (
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                            <div className="bg-slate-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                                <div className="p-6 sm:p-8">
+                                    <div className="flex justify-between items-center mb-6">
+                                        <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
+                                        <button 
+                                            onClick={() => setActiveTab(null)}
+                                            className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                            aria-label="Close modal"
+                                        >
+                                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div className="prose prose-invert max-w-none">
+                                        <p className="text-slate-300 mb-4">
+                                            Our trading community is a vibrant space where traders of all levels come together to share insights, strategies, and support each other's growth.
+                                        </p>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                                            <div className="bg-slate-800/50 p-6 rounded-lg">
+                                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
+                                                <p className="text-slate-300 mb-4">
+                                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
+                                                </p>
+                                            </div>
+                                            <div className="bg-slate-800/50 p-6 rounded-lg">
+                                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
+                                                <p className="text-slate-300 mb-4">
+                                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
+                                                </p>
+                                                <a 
+                                                    href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300"
+                                                >
+                                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
+                                                        <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
+                                                    </svg>
+                                                    Join Our WhatsApp Group
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Trade-Cations Modal */}
+                    {activeTab === 'tradecations' && (
+                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+                            <div className="bg-slate-900 rounded-xl max-w-3xl w-full max-h-[85vh] overflow-y-auto">
+                                <div className="p-5 sm:p-6">
+                                    <div className="flex justify-between items-center mb-5">
+                                        <h2 className="text-xl font-bold text-white">Exclusive Trade-Cations</h2>
+                                        <button 
+                                            onClick={() => setActiveTab(null)}
+                                            className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                            aria-label="Close"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div className="prose prose-invert max-w-none">
+                                        <p className="text-slate-300 text-sm mb-5">
+                                            Combine your passion for trading with the joy of travel. Our exclusive Trade-Cations provide immersive trading experiences in beautiful locations.
+                                        </p>
+                                        <div className="space-y-5">
+                                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+                                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                                    <div>
+                                                        <h4 className="font-medium text-white text-base">Cayley Resort Trading Retreat</h4>
+                                                        <p className="text-xs text-slate-400">February 23-27, 2026 (5 days)</p>
+                                                    </div>
+                                                    <span className="bg-amber-500/20 text-amber-400 text-xs font-medium px-2.5 py-1 rounded-full self-start sm:self-center">Drakensburg, South Africa</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+                                                <h3 className="text-lg font-semibold text-amber-400 mb-3">What's Included</h3>
+                                                <ul className="space-y-2 text-sm text-slate-300">
+                                                    <li className="flex items-start">
+                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span>Daily trading sessions with experts</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span>Luxury accommodation & meals</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span>One-on-one mentorship</span>
+                                                    </li>
+                                                    <li className="flex items-start">
+                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span>Networking events & excursions</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <a 
+                                                href="#" 
+                                                onClick={(e) => { 
+                                                    e.preventDefault(); 
+                                                    setCurrentPage('events'); 
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                }} 
+                                                className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-300 hover:shadow-lg text-sm text-center"
+                                            >
+                                                Learn More About Trade-Cations
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </section>
+            
+            <PropFirms />
+            <Testimonials />
+            <AboutPage />
+        </>
+    );
+};
+
+const EventsPage: React.FC = () => {
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    
+    // Event data
+    const events = [
+        {
+            id: 1,
+            title: "🚀 Exclusive Tradecation Experience",
+            description: "Transform from beginner to funded trader in just 7 days with our immersive trading retreat. This all-inclusive experience combines expert trading education with luxury accommodation and lifestyle optimization.",
+            details: [
+                {
+                    title: "🔥 What's Included",
+                    items: [
+                        "🏆 Complete Trading Education (Beginner to Advanced)",
+                        "💡 3 Months of Premium Trade Ideas ($1,000+ value)",
+                        "💼 $5,000 Prop Firm Account Setup (or $50 funded account)",
+                        "🏨 Luxury Accommodation (Private Residency, Mon-Fri)",
+                        "🍽️ All Meals Included (Breakfast, Lunch, Dinner + Snacks)",
+                        "💪 Morning Fitness Sessions with Certified Coach (5 AM)",
+                        "🧠 Daily Mindset Coaching (30 min 1-on-1 sessions)",
+                        "👨‍🍳 Private Chef for Optimal Nutrition & Performance"
+                    ]
+                },
+                {
+                    title: "📈 Trading Education",
+                    items: [
+                        "🔍 Market Structure & Price Action Mastery",
+                        "📊 Advanced Chart Patterns & Technical Analysis",
+                        "💵 Risk Management Strategies (1-2% Rule)",
+                        "🧠 Trading Psychology & Discipline",
+                        "📱 Live Trading Sessions & Q&A"
+                    ]
+                },
+                {
+                    title: "💰 What You'll Achieve",
+                    items: [
+                        "✅ Develop a Profitable Trading Strategy",
+                        "✅ Learn to Analyze Markets Like a Pro",
+                        "✅ Build Unshakable Trading Discipline",
+                        "✅ Join Our Exclusive Trader Community",
+                        "✅ Leave with a Clear Path to Financial Freedom"
+                    ]
+                }
+            ],
+            price: "R15,354.99 (≈ $900)",
+            date: "Next Intake Coming Soon",
+            location: "Luxury Retreat Location",
+            image: "/mr$1 testimonials/trade cation poster.jpg",
+            whatsappMessage: "Hi, I'm interested in the Tradecation experience. Please send me more details.",
+            whatsappLink: "https://wa.me/27614267355?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
+        },
+        {
+            id: 2,
+            title: "🎯 NFP Trading Masterclass",
+            description: "Master the most volatile trading day of the month with our expert-led NFP trading session. Learn to profit from the biggest market-moving economic report.",
+            price: "$16.00 (≈ R300)",
+            date: "Join us on the next NFP event",
+            time: "1:30 PM - 3:30 PM (SAST)",
+            location: "Online - USA Market Focus",
+            image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
+            whatsappMessage: "Hi, I'd like to register for the NFP Trading Masterclass.",
+            whatsappLink: "https://wa.me/27614267355?text=Hi%2C%20I'd%20like%20to%20register%20for%20the%20NFP%20Trading%20Masterclass."
+        }
+    ];
+
+    // Event gallery images with tags
+    const eventImages = [
+        // NFP Images
+        { url: '/Track%20record%20html%20file/nfp/nfp1.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp2.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp3.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp4.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp5.png', tag: '#NFP' },
+        { url: '/Track%20record%20html%20file/nfp/nfp6.png', tag: '#NFP' },
+        // Tradecation Images
+        { url: '/Track%20record%20html%20file/Tradecation/1.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/2.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/3.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/4.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/5.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/6.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/7.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/8.png', tag: '#Tradecation' },
+        { url: '/Track%20record%20html%20file/Tradecation/9.png', tag: '#Tradecation' },
+        // Traders Fair Images
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024%20speakers.png', tag: '#Tradersfair' },
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024%20tk.png', tag: '#Tradersfair' },
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024.png', tag: '#Tradersfair' },
+        { url: '/Track%20record%20html%20file/nfp/tradesfair%202025.png', tag: '#Tradersfair' },
+    ];
+
+    return (
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex flex-col lg:flex-row gap-12">
+                    {/* Main Content */}
+                    <div className="lg:w-2/3 space-y-8">
+                        {events.map((event) => (
+                            <div key={event.id} className="glass-card p-6 sm:p-8 rounded-lg">
+                                <div className="flex flex-col md:flex-row gap-6">
+                                    <div className="md:w-1/3">
+                                        <div className="aspect-w-16 aspect-h-9 bg-slate-800 rounded-lg overflow-hidden cursor-pointer group" onClick={() => setSelectedImage(event.image)}>
+                                            <img 
+                                                src={event.image} 
+                                                alt={event.title}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.src = 'https://via.placeholder.com/400x225?text=Event+Image';
+                                                }}
+                                            />
+                                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="md:w-2/3">
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{event.title}</h2>
+                                        <p className="text-slate-300 mb-4">{event.description}</p>
+                                        
+                                        <div className="grid grid-cols-2 gap-4 mb-4">
+                                            <div>
+                                                <p className="text-sm text-slate-400">Date</p>
+                                                <p className="text-white font-medium">{event.date}</p>
+                                            </div>
+                                            {event.time && (
+                                                <div>
+                                                    <p className="text-sm text-slate-400">Time</p>
+                                                    <p className="text-white font-medium">{event.time}</p>
+                                                </div>
+                                            )}
+                                            <div>
+                                                <p className="text-sm text-slate-400">Location</p>
+                                                <p className="text-white font-medium">{event.location}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-slate-400">Price</p>
+                                                <p className="text-2xl font-bold text-amber-400">{event.price}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <a 
+                                            href={event.whatsappLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                                        >
+                                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17.498 14.382v3.3a1 1 0 01-.9 1.1c-5.2.5-10.4-2.4-11.8-7.3a11.6 11.6 0 011.7-8.1 1 1 0 011.6.2l2.1 3.5a1 1 0 01-.1 1.2l-1 1.2a8.1 8.1 0 003.9 3.4l1.2-1a1 1 0 011.3 0l3.5 2.1a1 1 0 01.3 1.1z"/>
+                                            </svg>
+                                            Enquire on WhatsApp
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+
+                        {/* Event Gallery */}
+                        <div className="glass-card p-6 sm:p-8 rounded-lg">
+                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-6">Event Gallery</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {eventImages.map((image, index) => (
+                                    <div 
+                                        key={index} 
+                                        className="relative group cursor-pointer overflow-hidden rounded-lg aspect-square"
+                                        onClick={() => setSelectedImage(image.url)}
+                                    >
+                                        <img 
+                                            src={image.url} 
+                                            alt={`Event ${index + 1}`} 
+                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.src = 'https://via.placeholder.com/400x400?text=Event+Image';
+                                            }}
+                                        />
+                                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                        </div>
+                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                                            <span className="text-amber-400 text-sm font-semibold">{image.tag}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Event Description */}
+                        <div className="glass-card p-6 sm:p-8 rounded-lg">
+                            <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">📅 Event Details</h2>
+                            <div className="space-y-6">
+                                <div className="bg-slate-800/50 p-4 rounded-lg border-l-4 border-amber-400">
+                                    <h3 className="text-lg font-semibold text-amber-400 mb-2">NEXT NFP TRADING SESSION</h3>
+                                    <p className="text-slate-300 mb-3">Join our expert traders as we navigate the most volatile trading day of the month. Learn to profit from the Non-Farm Payroll report with our proven strategies.</p>
+                                    <div className="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <p className="text-slate-400">When</p>
+                                            <p className="text-white font-medium">Next NFP Release</p>
+                                            <p className="text-slate-400 text-xs">(First Friday of each month)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-400">Time</p>
+                                            <p className="text-white font-medium">1:30 PM - 3:30 PM (SAST)</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-400">Where</p>
+                                            <p className="text-white font-medium">Online via Zoom</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-slate-400">Price</p>
+                                            <p className="text-amber-400 font-bold">$16.00 (≈ R300)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="mt-6">
+                                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
+                                    <ul className="space-y-2 text-slate-300">
+                                        <li className="flex items-start">
+                                            <span className="text-amber-400 mr-2">•</span>
+                                            <span>Pre-news analysis and market preparation</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-amber-400 mr-2">•</span>
+                                            <span>Optimal entry and exit strategies</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-amber-400 mr-2">•</span>
+                                            <span>Risk management techniques for high volatility</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-amber-400 mr-2">•</span>
+                                            <span>Live trading demonstration</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="text-amber-400 mr-2">•</span>
+                                            <span>Q&A with professional traders</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="bg-gradient-to-r from-amber-500/10 to-transparent p-4 rounded-lg border border-amber-500/20 mt-6">
+                                    <h4 className="text-lg font-semibold text-amber-400 mb-2">Special Bonus</h4>
+                                    <p className="text-slate-300 text-sm">All participants will receive a free NFP Trading Guide and access to our private trading community for 1 month.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Sidebar */}
+                    <aside className="lg:w-1/3 space-y-8">
+                        <div className="glass-card p-6 rounded-lg">
+                            <h3 className="text-xl font-bold text-white mb-4">Upcoming Events</h3>
+                            <p className="text-slate-400">Check out our exclusive Trade-Cation and NFP Trading Masterclass events.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            {/* Image Modal */}
+            {selectedImage && (
+                <div 
+                    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <div className="relative max-w-5xl w-full">
+                        <button 
+                            className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedImage(null);
+                            }}
+                        >
+                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <img 
+                            src={selectedImage} 
+                            alt="Full size event" 
+                            className="max-h-[80vh] w-auto mx-auto rounded-lg"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+const FeatureCard: React.FC<{icon: React.ReactNode, title: string, onClick?: () => void}> = ({icon, title, onClick}) => (
+    <div 
+        className="glass-card p-8 rounded-lg flex flex-col items-center text-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300 cursor-pointer"
+        onClick={onClick}
+    >
+        {icon}
+        <h3 className="mt-5 text-xl font-bold text-white">{title}</h3>
+    </div>
+);
+
+const FAQ: React.FC = () => {
+    const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
+    const faqData = [
+        {
+            question: "What is Mr.$1 International?",
+            answer: "Mr.$1 International is a premier Forex education and trade idea provider. Our mission is to empower traders of all levels with the knowledge, strategies, and community support needed to achieve financial independence and join the top 1% of successful traders."
+        },
+        {
+            question: "Who are your courses designed for?",
+            answer: "Our courses cater to everyone, from absolute beginners with no prior knowledge to experienced traders looking to refine their strategies. We offer a structured learning path, including beginner, intermediate, and advanced courses, as well as specialized mentorship programs."
+        },
+        {
+            question: "What makes your trade ideas different?",
+            answer: "Our trade ideas are the result of rigorous analysis by our team of expert traders. We offer insights into the market's direction, helping you make informed decisions. Our focus is on high-probability setups that align with our core 'Stay Blue & Take Profit' philosophy."
+        },
+        {
+            question: "Do I need any prior experience to start?",
+            answer: "Not at all! Our beginner's course is specifically designed to build a strong foundation from the ground up. We cover all the basics, from understanding Forex terminology to setting up your charts and executing your first trade in a supportive learning environment."
+        },
+        {
+            question: "How do I get started with Mr.$1 International?",
+            answer: "Getting started is simple. You can explore our courses on the 'Services' page and choose the one that best fits your experience level. We also recommend registering with one of our trusted partner brokers through the links on our homepage to start your trading journey."
+        }
+    ];
+
+    const toggleFAQ = (index: number) => {
+        setActiveIndex(activeIndex === index ? null : index);
+    };
+
+    return (
+        <section className="py-20 bg-black animate-fadeInUp">
+            <div className="container mx-auto px-4 max-w-4xl">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-white">Frequently Asked Questions</h2>
+                    <div className="mt-3 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                </div>
+                <div className="space-y-4">
+                    {faqData.map((faq, index) => (
+                        <div key={index} className="glass-card rounded-lg overflow-hidden border border-transparent hover:border-amber-400/20 transition-colors">
+                            <button
+                                onClick={() => toggleFAQ(index)}
+                                className="w-full flex justify-between items-center text-left p-5 focus:outline-none"
+                            >
+                                <span className="text-lg font-medium text-white">{faq.question}</span>
+                                <span className={`transform transition-transform duration-300 ${activeIndex === index ? 'rotate-180' : ''}`}>
+                                    <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </span>
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeIndex === index ? 'max-h-screen' : 'max-h-0'}`}>
+                                <div className="p-5 pt-0 text-slate-400">
+                                    <p>{faq.answer}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const AboutPage: React.FC = () => {
+    return (
+        <div className="bg-black animate-fadeIn">
+            {/* Simple About header */}
+            <section className="py-24 bg-slate-900">
+                <div className="container mx-auto px-4 text-center animate-fadeInUp">
+                    <h1 className="text-5xl font-extrabold text-white">About Our Company</h1>
+                    <p className="mt-4 text-amber-400 text-lg uppercase tracking-widest">Our Story</p>
+                    <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                </div>
+            </section>
+
+            {/* Mission Section */}
+            <section className="py-20 bg-slate-900 animate-fadeInUp">
+                <div className="container mx-auto px-4 max-w-4xl text-center">
+                    <p className="text-xl text-slate-300 leading-relaxed">
+                        At Mr One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn and grow together.
+                    </p>
+                </div>
+            </section>
+
+            <FAQ />
+
+            {/* YouTube Channel Section */}
+            <section className="py-20 animate-fadeInUp">
+                <div className="container mx-auto px-4">
+                    <div className="glass-card rounded-lg p-8 md:p-10 text-center">
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+                            {/* YouTube Profile Picture */}
+                            <div className="flex-shrink-0">
+                                <a 
+                                    href="https://www.youtube.com/@mr1dollar572" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="block group"
+                                >
+                                    <div className="relative">
+                                        <img 
+                                            src="https://i.ibb.co/5hr3HpLW/IMG-20241107-151334-1.jpg" 
+                                            alt="Mr One Dollar YouTube Channel" 
+                                            className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-amber-400/30 hover:border-amber-400/70 transition-all duration-300 transform group-hover:scale-105 object-cover"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).src = 'https://via.placeholder.com/200/1a1a2e/ffffff?text=Mr$1';
+                                            }}
+                                        />
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="bg-red-600 rounded-full p-3 transform group-hover:scale-110 transition-transform">
+                                                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            {/* Channel Info */}
+                            <div className="max-w-2xl">
+                                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Go Beyond the Charts with Mr One Dollar</h2>
+                                <p className="text-slate-300 mb-6">
+                                    Join our growing community on YouTube! From exclusive podcast episodes and in-depth trade reviews to beginner's guides and footage from our legendary Trade-Cations, we're pulling back the curtain. Subscribe to get the strategies and insights you won't find anywhere else.
+                                </p>
+                                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                    <a 
+                                        href="https://www.youtube.com/@mr1dollar572" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                        </svg>
+                                        Subscribe on YouTube
+                                    </a>
+                                    <a 
+                                        href="https://www.youtube.com/@mr1dollar572/videos" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                        </svg>
+                                        View Videos
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+};
+
+const TeamMemberCard: React.FC<{ name: string, role: string }> = ({ name, role }) => (
+    <div className="glass-card rounded-lg p-6 text-center flex flex-col items-center transform hover:scale-105 hover:border-amber-400/30 transition-all duration-300">
+        <div className="bg-slate-800 rounded-full p-2 mb-4 ring-2 ring-slate-700">
+             <UserIcon className="w-20 h-20 text-slate-500"/>
+        </div>
+        <h3 className="text-xl font-bold text-white">{name}</h3>
+        <p className="text-amber-400 mt-1 text-sm">{role}</p>
+    </div>
+);
+
+const TeamPage: React.FC = () => {
+    const teamMembers = [
+        { name: "Tinyiko. M", role: "Founder & C.E.O" },
+        { name: "Mangalani. M", role: "Co-Founder and Research Specialist" },
+        { name: "Nomphiwo. C", role: "Master Female Trader" },
+        { name: "Goldie. L", role: "Beginners Conductor" },
+        { name: "Nathaniel. P", role: "Intermediate Conductor" },
+        { name: "Mohau. C", role: "Media Specialist" },
+        { name: "Paul. H", role: "Regulatory & Compliance" },
+        { name: "Edward. M", role: "Senior developer" },
+        { name: "Nkosi. K", role: "Senior developer" },
+        { name: "Tshego. R", role: "Sales & Marketing Director" },
+        { name: "Jason. N", role: "Senior developer" },
+        { name: "Lungelo. N", role: "IT Developer" },
+        { name: "Yandisa. D", role: "Business Systems" },
+    ];
+
+    return (
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-16 animate-fadeInUp">
+                    <h1 className="text-5xl font-extrabold text-white">Our Team</h1>
+                    <p className="mt-4 text-xl text-slate-400 max-w-3xl mx-auto">
+                        Meet our Forex Trading experts. Our company was founded in 2020. We work daily to become better and we are ready to share best practices.
+                    </p>
+                    <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fadeInUp">
+                    {teamMembers.map(member => (
+                        <TeamMemberCard key={member.name} name={member.name} role={member.role} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const ContactPage: React.FC = () => {
+    const openingHours = [
+        { day: "Monday", time: "8:00 – 17:00" },
+        { day: "Tuesday", time: "8:00 – 17:00" },
+        { day: "Wednesday", time: "8:00 – 17:00" },
+        { day: "Thursday", time: "8:00 – 17:00" },
+        { day: "Friday", time: "8:00 – 17:00" },
+        { day: "Saturday", time: "10:00 – 16:00" },
+        { day: "Sunday", time: "CLOSED" },
+    ];
+
+    return (
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-16 animate-fadeInUp">
+                    <h1 className="text-5xl font-extrabold text-white">Get in touch</h1>
+                    <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                </div>
+                <div className="glass-card rounded-lg p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 animate-fadeInUp">
+                    {/* Contact Information */}
+                    <div>
+                        <h2 className="text-3xl font-bold text-white">Contact information</h2>
+                        <p className="mt-4 text-slate-400">
+                           Our company was founded in 2020. We work daily to become better and we are ready to share best practices.
+                        </p>
+                        <ul className="mt-8 space-y-6">
+                            <li className="flex items-start">
+                                <MapPinIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
+                                <div>
+                                    <h3 className="text-lg font-semibold text-white">Head office</h3>
+                                    <a 
+                                        href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-slate-400 hover:text-amber-400 transition-colors"
+                                    >
+                                        4 karen street bryanston sandton
+                                    </a>
+                                </div>
+                            </li>
+                            <li className="flex items-start">
+                                <PhoneIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
+                                <div>
+                                    <h3 className="text-lg font-semibold text-white">Call us</h3>
+                                    <p className="text-slate-400">
+                                        <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a>
+                                    </p>
+                                    <p className="text-slate-400">
+                                        <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
+                                    </p>
+                                </div>
+                            </li>
+                             <li className="flex items-start">
+                                <EnvelopeIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
+                                <div>
+                                    <h3 className="text-lg font-semibold text-white">Email us</h3>
+                                    <a href="mailto:info@mr1dollar.co.za" className="text-slate-400 hover:text-amber-400">info@mr1dollar.co.za</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    {/* Opening Hours */}
+                    <div>
+                        <h2 className="text-3xl font-bold text-white">Opening hours</h2>
+                        <ul className="mt-8 space-y-3 text-slate-400">
+                           {openingHours.map(item => (
+                                <li key={item.day} className="flex justify-between border-b border-slate-700 pb-3 last:border-b-0">
+                                    <span>{item.day}</span>
+                                    <span className={item.time === "CLOSED" ? "text-red-500 font-semibold" : "text-amber-400 font-semibold"}>{item.time}</span>
+                                </li>
+                           ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+interface PlatinumProduct extends BaseProduct {
+    isPlatinumBenefit: true;
+    platinumBenefitDescription: string;
+}
+
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
+    // Check if the product is a mentorship package
+    const isMentorship = product.category === 'Mentorship';
+    
+    return (
+    <div className="glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative">
+        {isMentorship && (
+            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
+                For Course Graduates Only
+            </div>
+        )}
+        <div className="relative">
+             <div className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
+                <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <button 
+                onClick={onToggle}
+                className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-amber-400 rounded-full p-2 hover:bg-black/70 transition-colors"
+                aria-label={isExpanded ? "Collapse" : "Expand"}
+            >
+                {isExpanded ? <MinusIcon /> : <PlusIcon />}
+            </button>
+        </div>
+        <div className="p-4 flex flex-col flex-grow">
+            <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
+                <p className="text-slate-400 text-sm mb-3">{product.description}</p>
+                {product.isSpecialOffer && product.offerSteps && (
+                    <div className="space-y-3 mt-3">
+                        <h4 className="text-amber-400 font-semibold">Follow These Simple Steps:</h4>
+                        <div className="space-y-2">
+                            {product.offerSteps.map((step, index) => (
+                                <div key={index} className="flex items-start">
+                                    <div className="flex-shrink-0 bg-amber-400 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2 mt-0.5">
+                                        {step.number}
+                                    </div>
+                                    {step.number === 1 && product.id === 2 ? (
+                                        <a 
+                                            href="https://primexbt.com/sign-up?ref=MR1DOLLAR" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="text-amber-400 hover:underline text-sm"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            {step.text} <span className="text-xs text-slate-400">(Press here to register)</span>
+                                        </a>
+                                    ) : (
+                                        <span className="text-slate-300 text-sm">{step.text}</span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+            <div className="mt-2">
+                {product.isPlatinumBenefit ? (
+                    <div>
+                        <p className="text-amber-400 text-xl font-bold">Free for Platinum+</p>
+                        <p className="text-green-400 text-sm mt-1">Included with Platinum Plan</p>
+                        <div className="mt-4 space-y-2">
+                            <a 
+                                href="#plans" 
+                                className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                            >
+                                Get Platinum Plan
+                            </a>
+                            <button 
+                                onClick={() => {
+                                    alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
+                                }}
+                                className="w-full text-center text-amber-400 text-sm hover:underline"
+                            >
+                                Already a Platinum member? Click here
+                            </button>
+                        </div>
+                    </div>
+                ) : product.originalPrice ? (
+                    <p className="text-amber-400 text-xl font-bold">
+                        <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
+                    </p>
+                ) : (
+                    <p className="text-amber-400 text-xl font-bold">${product.price.toFixed(2)}</p>
+                )}
+            </div>
+            {product.isSpecialOffer ? (
+                <a 
+                    href={product.whatsappLink || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-colors flex items-center justify-center space-x-2"
+                >
+                    <svg className="w-5 h-5" viewBox="0 0 32 32" fill="currentColor">
+                        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1.1z"></path>
+                    </svg>
+                    <span>Claim Your Free Month on WhatsApp</span>
+                </a>
+            ) : product.isPlatinumBenefit ? (
+                <div className="mt-4 space-y-2">
+                    <a 
+                        href="#plans" 
+                        className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                    >
+                        Get Platinum Plan
+                    </a>
+                    <button 
+                        onClick={() => {
+                            alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
+                        }}
+                        className="w-full text-center text-amber-400 text-sm hover:underline"
+                    >
+                        Already a Platinum member? Click here
+                    </button>
+                </div>
+            ) : product.checkoutUrl ? (
+                <div className="space-y-2">
+                    {isMentorship && (
+                        <div className="bg-blue-600/20 border border-blue-500/50 text-blue-100 text-xs p-2 rounded-md text-center">
+                            Only available to students who have completed our course
+                        </div>
+                    )}
+                    <a 
+                        href={product.checkoutUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
+                    >
+                        {isMentorship ? 'Enroll Now' : 'Buy product'}
+                    </a>
+                </div>
+            ) : (
+                <button 
+                    onClick={() => onAddToCart(product)} 
+                    className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                >
+                    Add to cart
+                </button>
+            )}
+        </div>
+    </div>
+);
+}
+// ... (rest of the code remains the same)
+const ServicesPage: React.FC = () => {
+    const [products] = useState<Product[]>(servicesData);
+    const [cart, setCart] = useState<Product[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [priceRange, setPriceRange] = useState<{ min: number | string, max: number | string }>({ min: '', max: '' });
+    const [appliedPriceRange, setAppliedPriceRange] = useState<{ min: number | null, max: number | null }>({ min: null, max: null });
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [sortOption, setSortOption] = useState('default');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const itemsPerPage = 12;
+    
+    // Get Platinum package (ID: 2)
+    const platinumPackage = products.find(p => p.id === 2);
+    
+    // Categorize products
+    const tradeIdeas = products.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
+    const mentorship = products.filter(p => p.category === 'Mentorship');
+    const courses = products.filter(p => p.category === 'Courses');
+    const otherProducts = products.filter(p => 
+        p.category !== 'Trade Ideas' && 
+        p.category !== 'Courses' && 
+        p.category !== 'Mentorship' &&
+        p.id !== 2
+    );
+    
+    // Update Platinum package with new WhatsApp link and broker link
+    const updatedPlatinumPackage = platinumPackage ? {
+        ...platinumPackage,
+        offerSteps: [
+            { 
+                number: 1, 
+                text: <span className="flex items-center">
+                    <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-4 w-auto object-contain mr-2" />
+                    <a href="https://primexbt.com/?signup=1&r=7JY4G1" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">
+                        Register on PrimeXBT
+                    </a>
+                </span> 
+            },
+            ...(platinumPackage.offerSteps?.slice(1, -1) || []),
+            { 
+                number: 5, 
+                text: <a 
+                    href="https://wa.me/27626898567?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-green-400 hover:text-green-300 transition-colors"
+                >
+                    WhatsApp us with your proof
+                </a> 
+            }
+        ]
+    } : null;
+
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isSidebarOpen]);
+
+    const categories = useMemo(() => {
+        const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
+        return uniqueCategories.map(cat => ({
+            name: cat,
+            count: products.filter(p => p.category === cat).length
+        }));
+    }, [products]);
+
+    const filteredAndSortedProducts = useMemo(() => {
+        let filtered = products;
+
+        if (searchTerm) {
+            filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        }
+
+        if (selectedCategory) {
+            filtered = filtered.filter(p => p.category === selectedCategory);
+        }
+        
+        if (appliedPriceRange.min !== null) {
+            filtered = filtered.filter(p => p.price >= appliedPriceRange.min!);
+        }
+        if (appliedPriceRange.max !== null) {
+            filtered = filtered.filter(p => p.price <= appliedPriceRange.max!);
+        }
+
+        const sorted = [...filtered];
+        switch (sortOption) {
+            case 'price-asc':
+                sorted.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-desc':
+                sorted.sort((a, b) => b.price - a.price);
+                break;
+            default:
+                break;
+        }
+
+        return sorted;
+    }, [products, searchTerm, selectedCategory, appliedPriceRange, sortOption]);
+
+    const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
+    const paginatedProducts = filteredAndSortedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    
+    const cartTotal = cart.reduce((total, product) => total + product.price, 0);
+
+    const handleAddToCart = (product: Product) => {
+        setCart(prevCart => [...prevCart, product]);
+    };
+    
+    const handleRemoveFromCart = (productId: number, index: number) => {
+        setCart(prevCart => prevCart.filter((p, i) => !(p.id === productId && i === index)));
+    };
+
+    const handlePriceFilter = () => {
+        setCurrentPage(1);
+        setAppliedPriceRange({
+            min: priceRange.min === '' ? null : Number(priceRange.min),
+            max: priceRange.max === '' ? null : Number(priceRange.max),
+        });
+    };
+
+    const handleCategoryClick = (e: React.MouseEvent, category: string | null) => {
+        e.preventDefault();
+        setCurrentPage(1);
+        setSelectedCategory(category);
+    };
+
+    const handlePageChange = (page: number) => {
+        if (page > 0 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+    
+    const renderPagination = () => {
+        if (totalPages <= 1) return null;
+        const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+        
+        return (
+            <nav className="flex justify-center items-center space-x-2 mt-12">
+                 {currentPage > 1 && (
+                     <button onClick={() => handlePageChange(currentPage - 1)} className="text-slate-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">←</button>
+                 )}
+                {pageNumbers.map(number => (
+                     <button 
+                        key={number} 
+                        onClick={() => handlePageChange(number)} 
+                        className={`${currentPage === number ? 'bg-amber-400 text-black' : 'text-slate-300 hover:bg-slate-800'} font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors`}
+                    >
+                        {number}
+                    </button>
+                ))}
+                {currentPage < totalPages && (
+                     <button onClick={() => handlePageChange(currentPage + 1)} className="text-slate-300 hover:bg-slate-800 font-bold w-10 h-10 flex items-center justify-center rounded-md transition-colors">→</button>
+                )}
+            </nav>
+        );
+    };
+
+    const sidebarContent = (
+        <div className="space-y-8">
+             <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-4">Search by products</h3>
+                <div className="relative">
+                    <input 
+                        type="search" 
+                        placeholder="Search products…" 
+                        value={searchTerm}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                            setCurrentPage(1);
+                        }}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-all" 
+                    />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                       <SearchIcon className="text-slate-400" />
+                    </div>
+                </div>
+            </div>
+            <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-4">Filter by price</h3>
+                 <div className="flex items-center space-x-2 mb-4">
+                    <input 
+                        type="number" 
+                        placeholder="Min price" 
+                        value={priceRange.min}
+                        onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                    />
+                    <input 
+                        type="number" 
+                        placeholder="Max price" 
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
+                        className="w-full bg-slate-800 border border-slate-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-400" 
+                    />
+                </div>
+                <button onClick={handlePriceFilter} className="w-full bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary">Filter</button>
+            </div>
+            <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-2">Cart</h3>
+                {cart.length === 0 ? (
+                   <p className="text-slate-400">No products in the cart.</p>
+                ) : (
+                    <>
+                        <p className="text-sm text-slate-400 mb-4">Total items: {cart.length}</p>
+                        <ul className="space-y-3 mb-4 max-h-60 overflow-y-auto pr-2">
+                            {cart.map((item, index) => (
+                                <li key={`${item.id}-${index}`} className="flex justify-between items-center text-sm">
+                                    <span className="text-slate-300 flex-1 pr-2">{item.name}</span>
+                                    <div className="flex items-center">
+                                        <span className="font-semibold text-amber-400">${item.price.toFixed(2)}</span>
+                                        <button 
+                                            onClick={() => handleRemoveFromCart(item.id, index)} 
+                                            className="ml-4 text-slate-500 hover:text-red-500 transition-colors"
+                                            aria-label={`Remove ${item.name} from cart`}
+                                        >
+                                            <TrashIcon />
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="border-t border-slate-700 pt-4 flex justify-between font-bold text-white">
+                            <span>Total:</span>
+                            <span>${cartTotal.toFixed(2)}</span>
+                        </div>
+                    </>
+                )}
+            </div>
+            <div className="glass-card p-6 rounded-lg">
+                <h3 className="text-xl font-bold text-white mb-4">Product categories</h3>
+                <ul className="space-y-2">
+                    <li>
+                        <a href="#" onClick={(e) => handleCategoryClick(e, null)} className={`flex justify-between ${selectedCategory === null ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
+                            <span>All</span>
+                            <span>({products.length})</span>
+                        </a>
+                    </li>
+                    {categories.map(cat => (
+                         <li key={cat.name}>
+                            <a href="#" onClick={(e) => handleCategoryClick(e, cat.name)} className={`flex justify-between ${selectedCategory === cat.name ? 'text-amber-400' : 'text-slate-400 hover:text-amber-400'}`}>
+                                <span>{cat.name}</span>
+                                <span>({cat.count})</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+
+    return (
+        <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                 {/* Mobile Filter Button */}
+                <div className="lg:hidden mb-6">
+                    <button 
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="w-full flex items-center justify-center gap-2 bg-slate-800 border border-slate-700 rounded-md px-4 py-3 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-amber-400"
+                    >
+                        <FilterIcon />
+                        <span>Filter & View Cart</span>
+                    </button>
+                </div>
+
+                <div className="flex flex-col lg:flex-row gap-12">
+                     {/* Sidebar (Off-canvas on mobile, static on desktop) */}
+                    {isSidebarOpen && (
+                        <div
+                            className="fixed inset-0 bg-black/70 z-40 lg:hidden"
+                            onClick={() => setIsSidebarOpen(false)}
+                            aria-hidden="true"
+                        ></div>
+                    )}
+                    <aside
+                        className={`
+                            fixed top-0 left-0 h-full w-full max-w-xs bg-slate-900 z-50 
+                            transform transition-transform duration-300 ease-in-out
+                            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+                            lg:relative lg:translate-x-0 lg:w-1/4 lg:max-w-none lg:bg-transparent lg:z-auto
+                            flex flex-col
+                        `}
+                        aria-labelledby="filters-heading"
+                    >
+                         <div className="flex-grow overflow-y-auto p-6 lg:p-0">
+                            <div className="flex justify-between items-center lg:hidden mb-6">
+                                <h2 id="filters-heading" className="text-xl font-bold text-white">Filters & Cart</h2>
+                                <button onClick={() => setIsSidebarOpen(false)} className="p-2 -m-2 text-slate-400 hover:text-white" aria-label="Close filters">
+                                    <CloseIcon />
+                                </button>
+                            </div>
+                            {sidebarContent}
+                         </div>
+                    </aside>
+
+                    {/* Main Content */}
+                    <main className="lg:w-3/4">
+                        <h1 className="text-4xl font-extrabold text-white mb-8">Our Services</h1>
+                        
+                        {/* Platinum Package - Featured */}
+                        {updatedPlatinumPackage && (
+                            <div className="mb-12">
+                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                    <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">🔥 Featured Offer</span>
+                                </h2>
+                                <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-6 shadow-xl transform hover:scale-[1.005] transition-all duration-300">
+                                    <div className="flex flex-col lg:flex-row gap-8">
+                                        <div className="lg:w-1/3">
+                                            <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-6 rounded-xl backdrop-blur-sm border border-slate-700/50">
+                                                <h3 className="text-2xl font-bold text-white text-center">FREE PLATINUM TRADE IDEAS</h3>
+                                                <p className="text-center text-blue-200 text-sm mt-2 mb-6">Limited Time Exclusive Offer</p>
+                                                <div className="h-40 w-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg flex items-center justify-center border border-slate-700/50">
+                                                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                                                        <span className="text-purple-300">Follow the </span> <span className="text-purple-400">Steps:</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="lg:w-2/3">
+                                            <div className="space-y-6">
+                                                <p className="text-slate-300 text-lg leading-relaxed">
+                                                    Join our premium trading community and get <span className="font-bold text-blue-300">1 month of Platinum Trade Ideas absolutely FREE</span>. Experience professional Mr.$1 trade ideas and market analysis.
+                                                </p>
+                                                
+                                                <div className="space-y-4">
+                                                    {updatedPlatinumPackage.offerSteps?.map((step, index) => (
+                                                        <div key={index} className="flex items-start group">
+                                                            <span className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center text-sm flex-shrink-0 mt-0.5 transform group-hover:scale-110 transition-transform">
+                                                                {step.number}
+                                                            </span>
+                                                            <div className="ml-4">
+                                                                <div className="text-slate-300 group-hover:text-white transition-colors">
+                                                                    {step.text}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                
+                                                <div className="pt-4">
+                                                    <a 
+                                                        href="https://wa.me/27626898567?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]"
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center justify-center w-full md:w-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-green-500/20"
+                                                    >
+                                                        <WhatsAppIcon className="w-5 h-5 mr-2" />
+                                                        Claim Your Free Month Now
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Trade Ideas Section */}
+                        <div className="mb-12">
+                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                Trade Ideas
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {tradeIdeas.map((product) => (
+                                    <ProductCard 
+                                        key={product.id}
+                                        product={product}
+                                        onAddToCart={handleAddToCart}
+                                        isExpanded={expandedProductId === product.id}
+                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Courses Section */}
+                        <div className="mb-12">
+                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                <svg className="w-6 h-6 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                                Trading Courses
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {courses.map((product) => (
+                                    <ProductCard 
+                                        key={product.id}
+                                        product={product}
+                                        onAddToCart={handleAddToCart}
+                                        isExpanded={expandedProductId === product.id}
+                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Mentorship Section - Moved to second position */}
+                        <div className="mb-12">
+                            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <span className="text-white">Mentorship Programs</span>
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {mentorship.map((product) => (
+                                    <ProductCard 
+                                        key={product.id}
+                                        product={product}
+                                        onAddToCart={handleAddToCart}
+                                        isExpanded={expandedProductId === product.id}
+                                        onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Other Products */}
+                        {otherProducts.length > 0 && (
+                            <div className="mb-12">
+                                <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {otherProducts.map((product) => (
+                                        <ProductCard 
+                                            key={product.id}
+                                            product={product}
+                                            onAddToCart={handleAddToCart}
+                                            isExpanded={expandedProductId === product.id}
+                                            onToggle={() => setExpandedProductId(expandedProductId === product.id ? null : product.id)}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {renderPagination()}
+                    </main>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const TermsPage: React.FC = () => (
+    <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <div className="text-center mb-12">
+                <h1 className="text-5xl font-extrabold text-white">Terms and Conditions</h1>
+                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                <p className="mt-4 text-slate-400">Last updated: {new Date().toLocaleDateString()}</p>
+            </div>
+            <div className="glass-card rounded-lg p-8 lg:p-12 text-slate-300 space-y-8">
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">1. Introduction</h2>
+                    <p>Welcome to Mr One Dollar International. These Terms and Conditions govern your use of our website and services. By accessing or using our service, you agree to be bound by these terms. If you disagree with any part of the terms, then you may not access the service.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">2. No Refunds Policy</h2>
+                    <p className="font-bold text-amber-400">All purchases of digital products, including but not limited to courses, trade ideas, mentorship programs, and strategies, are final. We do not offer refunds, exchanges, or credits for any purchases. Once a product is purchased and accessed, we cannot revoke access, and therefore, no refunds will be provided under any circumstances.</p>
+                    <p>Please ensure you have carefully reviewed your order before completing your purchase.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">3. Use of Our Services</h2>
+                    <p>You agree to use our services for lawful purposes only. You are prohibited from sharing, distributing, reselling, or reproducing any of our course materials, trade ideas, or other proprietary content without our express written consent. Your account is for your personal use only and may not be shared with others.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">4. Risk Disclaimer</h2>
+                    <p>Trading in financial markets, including Forex, involves substantial risk and is not suitable for every investor. An investor could potentially lose all or more than the initial investment. Risk capital is money that can be lost without jeopardizing one's financial security or lifestyle. Only risk capital should be used for trading, and only those with sufficient risk capital should consider trading. Past performance is not indicative of future results.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">5. Intellectual Property</h2>
+                    <p>All content included on this site, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the site, is the property of Mr One Dollar International or its suppliers and protected by copyright and other laws that protect intellectual property and proprietary rights.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">6. Limitation of Liability</h2>
+                    <p>Mr One Dollar International provides educational and informational content. We are not financial advisors. The information provided is not intended as investment advice. We shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services or for the cost of procurement of substitute services.</p>
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">7. Changes to Terms</h2>
+                    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will provide notice of any changes by posting the new Terms and Conditions on this page. Your continued use of the service after any such changes constitutes your acceptance of the new Terms.</p>
+                </div>
+                
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
+                    <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
+const PrivacyPolicyPage: React.FC = () => (
+    <div className="bg-black py-16 sm:py-24 animate-fadeIn">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <div className="text-center mb-12">
+                <h1 className="text-5xl font-extrabold text-white">Privacy Policy</h1>
+                <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+                <p className="mt-4 text-slate-400">Last updated: {new Date().toLocaleDateString()}</p>
+            </div>
+            <div className="glass-card rounded-lg p-8 lg:p-12 text-slate-300 space-y-8">
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">1. Information We Collect</h2>
+                    <p>We may collect personally identifiable information, such as your name, email address, and phone number, when you register for our services, purchase products, or contact us. We may also collect non-personal information, such as browser type and IP address, to improve our services.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">2. How We Use Your Information</h2>
+                    <p>We use the information we collect to provide and improve our services, process transactions, communicate with you, and for marketing purposes. We will not sell or rent your personal information to third parties without your consent, except as required by law.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">3. Cookies</h2>
+                    <p>Our website may use "cookies" to enhance your experience. You may choose to set your web browser to refuse cookies or to alert you when cookies are being sent. If you do so, note that some parts of the site may not function properly.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">4. Third-Party Links</h2>
+                    <p>Our website may contain links to third-party websites, such as our trusted brokers. We are not responsible for the privacy practices or the content of these third-party sites. We encourage you to read their privacy policies.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">5. Security</h2>
+                    <p>We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+                </div>
+                 <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">6. Your Rights</h2>
+                    <p>You have the right to access, update, or delete your personal information. If you wish to exercise these rights, please contact us at the email address provided below.</p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">7. Changes to This Policy</h2>
+                    <p>We reserve the right to update this Privacy Policy at any time. We will notify you of any changes by posting the new policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
+
+const App: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<Page>('home');
+
+  // Smooth scroll to top on page change and add performance optimizations
+  useEffect(() => {
+    // Smooth scroll to top when page changes
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Add passive event listeners for better scroll performance
+    const addPassiveScroll = () => {
+      try {
+        const options = Object.defineProperty({}, 'passive', {
+          get: () => {
+            passiveSupported = true;
+          }
+        });
+        window.addEventListener('test', () => {}, options);
+        window.removeEventListener('test', () => {}, options as any);
+      } catch (err) {}
+    };
+    
+    let passiveSupported = false;
+    addPassiveScroll();
+    
+    // Apply passive event listeners to all scrollable elements
+    const scrollableElements = document.querySelectorAll('*');
+    scrollableElements.forEach(element => {
+      const style = window.getComputedStyle(element);
+      if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+        element.addEventListener('scroll', () => {}, passiveSupported ? { passive: true } : false);
+      }
+    });
+    
+    // Cleanup function
+    return () => {
+      scrollableElements.forEach(element => {
+        element.removeEventListener('scroll', () => {});
+      });
+    };
+  }, [currentPage]);
+  
+  // Add global styles for better performance
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #f59e0b rgba(0, 0, 0, 0.1);
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #f59e0b;
+        border-radius: 4px;
+      }
+      /* Optimize animations */
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  const renderPage = () => {
+    switch(currentPage) {
+      case 'home':
+        return <HomePage setCurrentPage={setCurrentPage} />;
+      case 'events':
+        return <EventsPage />;
+      case 'about':
+        return <AboutPage />;
+      case 'team':
+        return <TeamPage />;
+      case 'contact':
+        return <ContactPage />;
+      case 'services':
+        return <ServicesPage />;
+      case 'terms':
+        return <TermsPage />;
+      case 'privacy':
+        return <PrivacyPolicyPage />;
+      default:
+        return <HomePage setCurrentPage={setCurrentPage} />;
+    }
+  };
+
+  return (
+    <div className="bg-black">
+      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <main>
+        {renderPage()}
+      </main>
+      <Footer setCurrentPage={setCurrentPage} />
+      <WhatsAppWidget />
+    </div>
+  );
+};
+
+export default App;
