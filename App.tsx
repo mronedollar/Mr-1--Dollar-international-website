@@ -373,7 +373,8 @@ const PropFirms: React.FC = () => {
             description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
             link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1',
-            category: 'Brokers'
+            category: 'Brokers',
+            color: 'amber'
         },
         // Prop Firms
         {
@@ -381,21 +382,24 @@ const PropFirms: React.FC = () => {
             description: 'A proprietary trading firm providing funding for forex and crypto traders with flexible programs',
             logoUrl: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
             link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
-            category: 'Prop Firms'
+            category: 'Prop Firms',
+            color: 'purple'
         },
         {
             name: 'FundedNext',
             description: 'A proprietary trading firm providing funding for forex and crypto traders worldwide',
             logoUrl: 'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
             link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
-            category: 'Prop Firms'
+            category: 'Prop Firms',
+            color: 'blue'
         },
         {
             name: 'FTMO',
             description: 'A global prop trading firm offering capital to skilled traders through evaluation programs',
             logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
             link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
-            category: 'Prop Firms'
+            category: 'Prop Firms',
+            color: 'green'
         }
     ];
     
@@ -423,111 +427,193 @@ const PropFirms: React.FC = () => {
             }
         };
     }, []);
+
+    // PrimeXBT Competition Card
+    const CompetitionCard = () => (
+        <div className="relative group overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 p-6 transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:border-amber-400/50 h-full">
+            <div className="absolute inset-0">
+                <img 
+                    src="https://i.ibb.co/B2sbNZRc/trophy.png" 
+                    alt="Trophy" 
+                    className="absolute right-0 bottom-0 h-32 w-auto opacity-20 transform translate-x-4 translate-y-4"
+                />
+            </div>
+            <div className="relative z-10">
+                <div className="flex items-center mb-4">
+                    <img 
+                        src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" 
+                        alt="PrimeXBT Logo" 
+                        className="h-8 mr-3"
+                    />
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
+                        Trading Competition
+                    </h3>
+                </div>
+                <p className="text-slate-300 text-sm mb-6">
+                    The time has come!!! The one with the highest score in trading volume takes the cup home and joins us at the next Trade-Cation 
+                </p>
+                <div className="space-y-3">
+                    <a 
+                        href="https://primexbt.me/competitions/MrOneDollar" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300 transform hover:scale-[1.02]"
+                    >
+                        Join Competition
+                    </a>
+                    <a 
+                        href="#" 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="block w-full bg-transparent border border-amber-500/30 hover:border-amber-400/50 text-amber-400 hover:text-amber-300 font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300"
+                    >
+                        Learn More about Trade-Cations
+                    </a>
+                </div>
+                <div className="mt-4 text-amber-400/80 text-sm font-medium">
+                    
+                </div>
+            </div>
+        </div>
+    );
     
     return (
-        <section ref={sectionRef} className="py-20 bg-slate-900 animate-fadeIn relative overflow-hidden">
+        <section ref={sectionRef} className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 animate-fadeIn relative overflow-hidden">
             {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden opacity-20">
-                <div className="absolute -top-1/2 -left-1/2 w-full h-[200%] bg-gradient-to-br from-amber-500/10 via-transparent to-blue-500/10 animate-spin-slow"></div>
+            <div className="absolute inset-0 overflow-hidden opacity-30">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-5"></div>
+                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-amber-500/5 via-transparent to-blue-500/5 animate-spin-slow"></div>
             </div>
             
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                    <span className="relative inline-block">
-                        <span className="relative z-10">Our Trusted Partners</span>
-                        <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-blue-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="text-center mb-16">
+                    <span className="inline-block px-3 py-1 text-sm font-medium bg-amber-500/10 text-amber-400 rounded-full mb-4">
+                        Our Partners
                     </span>
-                </h2>
-                <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-                    Sign up with one of our trusted partners to get funded and start trading with the best brokers and prop-firms in the industry.
-                </p>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                        Trusted by Leading <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">Brokers & Prop Firms</span>
+                    </h2>
+                    <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+                        We partner with the industry's most reliable brokers and prop firms to bring you the best trading opportunities.
+                    </p>
+                </div>
                 
-                <div className={`mt-16 space-y-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                <div className={`space-y-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {/* Brokers Section */}
                     <div className="relative">
-                        <div className="absolute -top-8 -left-8 w-32 h-32 bg-white-500/10 rounded-full filter blur-3xl -z-10"></div>
-                        <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
-                            <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-amber-500/30 shadow-lg shadow-amber-500/10">
-                                Brokers
-                            </span>
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                            {partners
-                                .filter(partner => partner.category === 'Brokers')
-                                .map((partner, i) => (
-                                    <div key={partner.name} className="flex flex-col items-center group">
-                                        <a 
-                                            href={partner.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-amber-400/50 group-hover:shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+                        <div className="flex flex-col md:flex-row gap-8 items-stretch">
+                            {/* Brokers List */}
+                            <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                {partners
+                                    .filter(partner => partner.category === 'Brokers')
+                                    .map((partner, i) => (
+                                        <div 
+                                            key={partner.name}
+                                            className={`bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full`}
                                             style={{
-                                                transition: 'all 0.3s ease',
                                                 animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
                                             }}
                                         >
-                                            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                            <img 
-                                                src={partner.logoUrl} 
-                                                alt={`${partner.name} logo`} 
-                                                className="relative z-10 max-h-12 sm:max-h-16 w-auto transition-transform duration-500 group-hover:scale-110" 
-                                            />
-                                        </a>
-                                        <div className="mt-4 text-center px-2">
-                                            <h3 className="font-semibold text-amber-400 group-hover:text-amber-300 transition-colors">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <img 
+                                                    src={partner.logoUrl} 
+                                                    alt={`${partner.name} logo`} 
+                                                    className="h-8 w-auto"
+                                                />
+                                                <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-700/50 text-slate-300">
+                                                    Broker
+                                                </span>
+                                            </div>
+                                            <h3 className="text-xl font-bold mb-2 text-amber-400">
                                                 {partner.name}
                                             </h3>
-                                            <p className="mt-2 text-sm text-gray-300">
+                                            <p className="text-slate-300 text-sm mb-4">
                                                 {partner.description}
                                             </p>
-                                        </div>
-                                    </div>
-                                ))}
-                        </div>
-                    </div>
-
-                    {/* Prop Firms Section */}
-                    <div className="relative pt-10">
-                        <div className="absolute -top-8 -right-8 w-40 h-40 bg-white-500/10 rounded-full filter blur-3xl -z-10"></div>
-                        <h3 className="text-2xl font-bold text-white mb-10 text-center relative">
-                            <span className="relative z-10 px-4 py-2 bg-slate-900 rounded-lg border border-blue-500/30 shadow-lg shadow-blue-500/10">
-                                Prop Firms
-                            </span>
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                          {partners
-                                .filter(partner => partner.category === 'Prop Firms')
-                                .map((partner, i) => {
-                                    const colorClass = partner.name === 'Funded7' ? 'purple' :
-                                                     partner.name === 'FundedNext' ? 'blue' : 'green';
-                                    
-                                    return (
-                                        <div key={partner.name} className="flex flex-col items-center group">
                                             <a 
                                                 href={partner.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className={`glass-card p-6 rounded-xl flex justify-center items-center transform transition-all duration-500 hover:-translate-y-2 w-full h-full relative overflow-hidden border border-slate-700 hover:border-${colorClass}-400/50 group-hover:shadow-[0_0_20px_${colorClass === 'purple' ? 'rgba(239,68,68,0.3)' : colorClass === 'blue' ? 'rgba(59,130,246,0.3)' : 'rgba(34,197,94,0.3)'}]`}
-                                                style={{
-                                                    transition: 'all 0.3s ease',
-                                                    animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
-                                                }}
+                                                className="inline-flex items-center text-sm font-medium text-amber-400 hover:underline"
                                             >
-                                                <div className={`absolute inset-0 bg-gradient-to-br from-${colorClass}-500/5 to-${colorClass === 'purple' ? 'pink' : colorClass === 'blue' ? 'indigo' : 'teal'}-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                                                Start Trading
+                                                <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    ))}
+                            </div>
+                            
+                            {/* PrimeXBT Competition Card */}
+                            <div className="md:w-1/3">
+                                <CompetitionCard />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Prop Firms Section */}
+                    <div className="pt-8">
+                        <div className="flex justify-between items-center mb-8">
+                            <h3 className="text-2xl font-bold text-white">Prop Trading Firms</h3>
+                            <span className="text-slate-400 text-sm">Get funded by top proprietary trading firms</span>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {partners
+                                .filter(partner => partner.category === 'Prop Firms')
+                                .map((partner, i) => {
+                                    const colorMap = {
+                                        purple: 'from-purple-500/10 to-purple-600/20 border-purple-500/30 hover:border-purple-400/50',
+                                        blue: 'from-blue-500/10 to-blue-600/20 border-blue-500/30 hover:border-blue-400/50',
+                                        green: 'from-green-500/10 to-green-600/20 border-green-500/30 hover:border-green-400/50',
+                                        amber: 'from-amber-500/10 to-amber-600/20 border-amber-500/30 hover:border-amber-400/50'
+                                    };
+                                    
+                                    const textColorMap = {
+                                        purple: 'text-purple-400',
+                                        blue: 'text-blue-400',
+                                        green: 'text-green-400',
+                                        amber: 'text-amber-400'
+                                    };
+                                    
+                                    return (
+                                        <div 
+                                            key={partner.name}
+                                            className={`bg-gradient-to-br ${colorMap[partner.color as keyof typeof colorMap]} border rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full`}
+                                            style={{
+                                                animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
+                                            }}
+                                        >
+                                            <div className="flex items-center justify-between mb-4">
                                                 <img 
                                                     src={partner.logoUrl} 
                                                     alt={`${partner.name} logo`} 
-                                                    className={`relative z-10 max-h-12 sm:max-h-16 w-auto transition-transform duration-500 group-hover:scale-110`} 
+                                                    className="h-8 w-auto"
                                                 />
-                                            </a>
-                                            <div className="mt-4 text-center px-2">
-                                                <h3 className={`font-semibold text-${colorClass}-400 group-hover:text-${colorClass}-300 transition-colors`}>
-                                                    {partner.name}
-                                                </h3>
-                                                <p className="mt-2 text-sm text-gray-300">
-                                                    {partner.description}
-                                                </p>
+                                                <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-700/50 text-slate-300">
+                                                    Prop Firm
+                                                </span>
                                             </div>
+                                            <h3 className={`text-xl font-bold mb-2 ${textColorMap[partner.color as keyof typeof textColorMap]}`}>
+                                                {partner.name}
+                                            </h3>
+                                            <p className="text-slate-300 text-sm mb-4">
+                                                {partner.description}
+                                            </p>
+                                            <a 
+                                                href={partner.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`inline-flex items-center text-sm font-medium ${textColorMap[partner.color as keyof typeof textColorMap]} hover:underline`}
+                                            >
+                                                Get Funded
+                                                <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
                                         </div>
                                     );
                                 })}
@@ -1177,6 +1263,9 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
             <Hero setCurrentPage={setCurrentPage} />
             <PromoSection id="platinum-promo" />
             
+            {/* Our Trusted Partners */}
+            <PropFirms />
+            
             {/* Features Grid */}
             <section className="py-20 bg-black animate-fadeInUp">
                 <div className="container mx-auto px-4">
@@ -1421,7 +1510,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                 </div>
             </section>
             
-            <PropFirms />
             <Testimonials />
             <AboutPage />
         </>
