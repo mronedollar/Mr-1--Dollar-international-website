@@ -365,7 +365,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
 );
 
 
-const PropFirms: React.FC = () => {
+const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurrentPage }) => {
     const partners = [
         // Brokers
         {
@@ -465,7 +465,8 @@ const PropFirms: React.FC = () => {
                         href="#" 
                         onClick={(e) => {
                             e.preventDefault();
-                            document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' });
+                            setCurrentPage('events');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
                         className="block w-full bg-transparent border border-amber-500/30 hover:border-amber-400/50 text-amber-400 hover:text-amber-300 font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300"
                     >
@@ -632,8 +633,8 @@ interface PromoSectionProps {
 const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [completedSteps, setCompletedSteps] = useState<number[]>([]);
-    const [activeStep, setActiveStep] = useState<number>(1);
-    const [kycCompleted, setKycCompleted] = useState<boolean>(false);
+    const [activeStep, setActiveStep] = useState<number>(1); // highest visually unlocked step
+    const [whatsAppBounce, setWhatsAppBounce] = useState<boolean>(false);
     const step2Ref = useRef<HTMLDivElement>(null);
 
     // Check for return_to parameter on component mount
@@ -645,9 +646,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
             // Open the section and scroll to it
             setIsOpen(true);
             // Mark step 1 as completed
-            if (!completedSteps.includes(1)) {
-                setCompletedSteps(prev => [...prev, 1]);
-            }
+            setCompletedSteps(prev => (prev.includes(1) ? prev : [...prev, 1]));
             setActiveStep(2);
             
             // Scroll to step 2 after a short delay to allow the section to open
@@ -660,34 +659,34 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
         }
     }, []);
 
-    const handleStepComplete = (stepNumber: number) => {
-        if (stepNumber === 2 && !completedSteps.includes(1)) return; // Can't skip step 1
-        if (stepNumber === 3 && !completedSteps.includes(2)) return; // Can't skip step 2
-        if (stepNumber === 4 && !completedSteps.includes(3)) return; // Can't skip step 3
-        
-        if (!completedSteps.includes(stepNumber)) {
-            setCompletedSteps([...completedSteps, stepNumber]);
-        }
-        
-        if (stepNumber === 1) {
-            setActiveStep(2);
-        } else if (stepNumber === 2 && kycCompleted) {
-            setActiveStep(3);
-        } else if (stepNumber === 3) {
-            setActiveStep(4);
-        }
+    const hasStep = (step: number) => completedSteps.includes(step);
+
+    const markStepCompleted = (step: number) => {
+        setCompletedSteps(prev => (prev.includes(step) ? prev : [...prev, step]));
     };
-    
-    const handleKYCResponse = (completed: boolean) => {
-        setKycCompleted(completed);
-        if (completed) {
-            handleStepComplete(2);
-            setActiveStep(3);
-        }
+
+    const unlockUpTo = (step: number) => {
+        setActiveStep(prev => (step > prev ? step : prev));
     };
-    
+
+    const canUseStep2 = hasStep(1);
+    const canUseStep3 = hasStep(2);
+    const canUseStep4 = hasStep(3);
+    const canUseWhatsApp = hasStep(4);
+
+    const handleKYCYes = () => {
+        if (!canUseStep3) return;
+        // Mark step 3 as completed and visually unlock steps 4 and 5
+        markStepCompleted(3);
+        unlockUpTo(5);
+        setWhatsAppBounce(true);
+    };
+
     const progressPercentage = (completedSteps.length / 5) * 100; // 5 total steps
-    
+    const cardBase = 'p-4 rounded-lg transition-all duration-300';
+    const cardActive = 'bg-gray-800/50';
+    const cardInactive = 'opacity-50';
+
     return (
         <section id={id} className="py-12 bg-black text-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -724,7 +723,8 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                             
                             <div className="flex flex-col md:flex-row gap-8">
                                 <div className="space-y-6 flex-1">
-                                    <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 1 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+                                    {/* Step 1 */}
+                                    <div className={`${cardBase} ${activeStep >= 1 ? cardActive : cardInactive}`}>
                                         <div className="flex items-start">
                                             <div className={`${activeStep >= 1 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>1</div>
                                             <div className="flex-1">
@@ -732,8 +732,11 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                 <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
                                                 <a 
                                                     href={`https://forms.fillout.com/t/69dxiDrK4kus?MrOneDollar_International_Contact_form=xxxxx&id=${Date.now()}&returnTo=${encodeURIComponent('https://mr-1-international.vercel.app/?return_to=step2')}`}
-                                                    onClick={() => handleStepComplete(1)}
-                                                    className={`inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105`}
+                                                    onClick={() => {
+                                                        markStepCompleted(1);
+                                                        unlockUpTo(2);
+                                                    }}
+                                                    className="inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
@@ -743,7 +746,8 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         </div>
                                     </div>
 
-                                    <div ref={step2Ref} className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 2 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+                                    {/* Step 2 */}
+                                    <div ref={step2Ref} className={`${cardBase} ${activeStep >= 2 ? cardActive : cardInactive}`}>
                                         <div className="flex items-start">
                                             <div className={`${activeStep >= 2 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>2</div>
                                             <div className="flex-1">
@@ -754,17 +758,16 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                             href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
                                                             target="_blank" 
                                                             rel="noopener noreferrer"
-                                                            onClick={() => handleStepComplete(2)}
-                                                            className={`inline-flex items-center justify-center gap-2 ${activeStep >= 2 ? 'bg-transparent border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black' : 'bg-gray-600 border-2 border-gray-600 text-gray-400 cursor-not-allowed'} font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out ${activeStep >= 2 ? 'hover:scale-105' : 'opacity-50 cursor-not-allowed'}`}
                                                             onClick={(e) => {
-                                                                if (activeStep < 2) {
+                                                                if (!canUseStep2) {
                                                                     e.preventDefault();
                                                                     e.stopPropagation();
-                                                                    return false;
+                                                                    return;
                                                                 }
-                                                                handleStepComplete(2);
+                                                                markStepCompleted(2);
+                                                                unlockUpTo(3);
                                                             }}
-                                                            disabled={activeStep < 2}
+                                                            className={`inline-flex items-center justify-center gap-2 ${canUseStep2 ? 'bg-transparent border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black' : 'bg-gray-600 border-2 border-gray-600 text-gray-400 cursor-not-allowed'} font-bold py-2 px-4 rounded-md transition-colors duration-200 text-sm`}
                                                         >
                                                             <img src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" alt="PrimeXBT" className="h-5 w-auto object-contain" />
                                                             Register on PrimeXBT
@@ -775,7 +778,8 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         </div>
                                     </div>
 
-                                    <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 3 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+                                    {/* Step 3 */}
+                                    <div className={`${cardBase} ${activeStep >= 3 ? cardActive : cardInactive}`}>
                                         <div className="flex items-start">
                                             <div className={`${activeStep >= 3 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>3</div>
                                             <div className="flex-1">
@@ -783,9 +787,9 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                 <p className="text-gray-300 text-sm mb-2">Have you completed the broker's KYC verification?</p>
                                                 <div className="flex gap-3">
                                                     <button 
-                                                        onClick={() => handleKYCResponse(true)}
-                                                        className={`px-4 py-2 rounded-md font-medium ${activeStep >= 2 ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 cursor-not-allowed'} text-white`}
-                                                        disabled={activeStep < 2}
+                                                        onClick={handleKYCYes}
+                                                        className={`px-4 py-2 rounded-md font-medium ${canUseStep3 ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 cursor-not-allowed'} text-white`}
+                                                        disabled={!canUseStep3}
                                                     >
                                                         Yes, I've completed KYC
                                                     </button>
@@ -804,9 +808,6 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* Vertical Divider */}
-                                <div className="hidden md:block w-px bg-gray-700 my-4"></div>
 
                                 {/* Videos Section */}
                                 <div className="space-y-4 w-full md:w-1/3">
@@ -841,7 +842,9 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 4 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+
+                            {/* Step 4 */}
+                            <div className={`${cardBase} ${activeStep >= 4 ? cardActive : cardInactive} mt-6`}>
                                 <div className="flex items-start">
                                     <div className={`${activeStep >= 4 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>4</div>
                                     <div className="flex-1">
@@ -852,11 +855,20 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                 href="https://youtu.be/zXvOnW12mhY" 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-medium py-1.5 px-3 rounded transition-colors duration-200 text-sm"
-                                                onClick={() => handleStepComplete(3)}
+                                                onClick={(e) => {
+                                                    if (!canUseStep4) {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        return;
+                                                    }
+                                                    markStepCompleted(4);
+                                                    unlockUpTo(5);
+                                                }}
+                                                className={`inline-flex items-center justify-center gap-2 ${canUseStep4 ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 cursor-not-allowed'} text-white font-medium py-1.5 px-3 rounded transition-colors duration-200 text-sm`}
                                             >
                                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                    <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
                                                 </svg>
                                                 Watch MetaTrader Setup Guide
                                             </a>
@@ -864,7 +876,9 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={`p-4 rounded-lg transition-all duration-300 ${activeStep >= 5 ? 'bg-gray-800/50' : 'opacity-50'}`}>
+
+                            {/* Step 5 */}
+                            <div className={`${cardBase} ${activeStep >= 5 ? cardActive : cardInactive} mt-4`}>
                                 <div className="flex items-start">
                                     <div className={`${activeStep >= 5 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>5</div>
                                     <div className="flex-1">
@@ -873,16 +887,16 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                             href="https://wa.me/27686108003?text=Hi%20Nomii,%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20$10.%20Here's%20my%20proof%20of%20funding:" 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            onClick={() => handleStepComplete(4)}
-                                            className={`inline-flex items-center justify-center gap-2 ${activeStep >= 4 ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out ${activeStep >= 4 ? 'hover:scale-105' : 'opacity-50'}`}
                                             onClick={(e) => {
-                                                if (activeStep < 4) {
+                                                if (!canUseWhatsApp) {
                                                     e.preventDefault();
                                                     e.stopPropagation();
-                                                    return false;
+                                                    return;
                                                 }
-                                                handleStepComplete(4);
+                                                setWhatsAppBounce(false);
+                                                markStepCompleted(5);
                                             }}
+                                            className={`inline-flex items-center justify-center gap-2 ${activeStep >= 5 ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out ${whatsAppBounce ? 'animate-bounce' : ''}`}
                                         >
                                             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
@@ -1264,7 +1278,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
             <PromoSection id="platinum-promo" />
             
             {/* Our Trusted Partners */}
-            <PropFirms />
+            <PropFirms setCurrentPage={setCurrentPage} />
             
             {/* Features Grid */}
             <section className="py-20 bg-black animate-fadeInUp">
@@ -2844,6 +2858,24 @@ const TermsPage: React.FC = () => (
                     <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
                     <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
                 </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">9. Data Protection &amp; Third-Party Platforms</h2>
+                    <p>
+                        We use reputable third-party platforms (such as payment providers, form tools and communication platforms) to securely store and process certain contact and account details. These service providers act as data processors on our behalf and are required to protect your information, use it only for the purposes we specify, and handle it in line with applicable data-protection principles.
+                    </p>
+                    <p>
+                        We do not sell your personal information. We only share it with third parties where it is necessary to provide our services, to comply with legal or regulatory obligations, or where you have given us clear consent. By using our services, you consent to this use of third-party platforms as described here and in our Privacy Policy.
+                    </p>
+                    <p>
+                        To the maximum extent permitted by applicable law, we are not liable for any loss arising from unauthorised access, use or disclosure of your information by such third parties, provided we have taken reasonable steps to select and monitor those providers and to safeguard your information.
+                    </p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">10. Legal Compliance</h2>
+                    <p>
+                        Nothing in these Terms is intended to exclude or limit any rights you may have under applicable law. Where any part of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in full force and effect. You are responsible for ensuring that your use of our services complies with the laws of your country or jurisdiction, including any tax, reporting or regulatory requirements.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -2889,6 +2921,24 @@ const PrivacyPolicyPage: React.FC = () => (
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
                     <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">9. Data Storage &amp; Third-Party Service Providers</h2>
+                    <p>
+                        We securely store contact details and other personal information using trusted third-party platforms, including form providers, payment processors and communication tools. These providers act as data processors and are contracted to keep your information confidential, implement appropriate security measures and process data only on our documented instructions.
+                    </p>
+                    <p>
+                        While we take reasonable steps to vet and monitor these providers, their handling of information is also governed by their own privacy policies and terms. We encourage you to review those policies when interacting with their services through our website.
+                    </p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">10. Data Retention &amp; Legal Protection</h2>
+                    <p>
+                        We retain personal information only for as long as necessary to provide our services, meet our legal, accounting or reporting obligations, or resolve disputes. When information is no longer required, we take reasonable steps to delete or anonymise it.
+                    </p>
+                    <p>
+                        To the fullest extent permitted by law, Mr One Dollar International disclaims liability for any indirect or consequential loss arising from unauthorised access to or misuse of your data, provided we have complied with our legal obligations and taken reasonable security measures as described in this Policy.
+                    </p>
                 </div>
             </div>
         </div>
