@@ -505,9 +505,15 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     {/* Brokers Section */}
                     <div className="relative">
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent uppercase">Broker</h3>
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-amber-400/40 shadow-[0_0_12px_rgba(251,191,36,0.25)]">
+                                <svg className="w-4 h-4 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10.5l9-7.5 9 7.5V19.5A1.5 1.5 0 0 1 19.5 21h-15A1.5 1.5 0 0 1 3 19.5V10.5z" />
+                                </svg>
+                                <span className="text-sm font-semibold tracking-wide text-white uppercase">Broker</span>
+                            </div>
                             <span className="text-slate-400 text-sm">Trade with the best broker with instant withdrawals</span>
                         </div>
+                        
                         <div className="flex flex-col md:flex-row gap-6 items-start">
                             <div className="w-full">
                                 <div className="grid grid-cols-1 gap-6">
@@ -566,7 +572,12 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     {/* Prop Firms Section */}
                     <div className="pt-8">
                         <div className="flex justify-between items-center mb-8">
-                            <h3 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent uppercase">Prop-firms</h3>
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-emerald-400/40 shadow-[0_0_12px_rgba(52,211,153,0.25)]">
+                                <svg className="w-4 h-4 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 19h16M5 11h14M7 5h10" />
+                                </svg>
+                                <span className="text-sm font-semibold tracking-wide text-white uppercase">Prop-firms</span>
+                            </div>
                             <span className="text-slate-400 text-sm">Get funded by top proprietary trading firms</span>
                         </div>
                         
