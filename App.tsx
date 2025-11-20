@@ -505,7 +505,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     {/* Brokers Section */}
                     <div className="relative">
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-2xl font-bold text-white">Broker</h3>
+                            <h3 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent uppercase">Broker</h3>
                             <span className="text-slate-400 text-sm">Trade with the best broker with instant withdrawals</span>
                         </div>
                         <div className="flex flex-col md:flex-row gap-6 items-start">
@@ -566,7 +566,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     {/* Prop Firms Section */}
                     <div className="pt-8">
                         <div className="flex justify-between items-center mb-8">
-                            <h3 className="text-2xl font-bold text-white">Prop-firms</h3>
+                            <h3 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent uppercase">Prop-firms</h3>
                             <span className="text-slate-400 text-sm">Get funded by top proprietary trading firms</span>
                         </div>
                         
@@ -871,7 +871,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                     <div className="flex-1">
                                         <h4 className="font-semibold">Fund Your Account</h4>
                                         <div className="flex justify-between items-center w-full">
-                                            <span className="text-gray-300 text-sm">Deposit minimum $10 (R200) into your wallet</span>
+                                            <span className="text-gray-300 text-sm">Deposit minimum $10 (R179) into your wallet</span>
                                                                                     </div>
                                     </div>
                                 </div>
@@ -1416,7 +1416,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                             </div>
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                                 <p className="text-sm md:text-base text-white font-medium flex items-center">
-                                                    <span className="mr-2">Watch Preview</span>
+                                                    <span className="mr-2">MetaTrader 5 Tutorial (Beginners Tour)</span>
                                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                     </svg>
