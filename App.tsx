@@ -37,7 +37,7 @@ const servicesData: Product[] = [
         price: 0, 
         category: 'Trade Ideas', 
         imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', 
-        description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🔥",
+        description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A LIFETIME 🔥",
         isSpecialOffer: true,
         offerSteps: [
             { 
@@ -714,7 +714,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                         onClick={() => setIsOpen(!isOpen)}
                         className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between cursor-pointer"
                     >
-                        <span className="text-lg sm:text-xl">GET FREE PLATINUM TRADE IDEAS FOR A MONTH 🥈</span>
+                        <span className="text-lg sm:text-xl">GET FREE PLATINUM TRADE IDEAS FOR A LIFETIME 🥈</span>
                         <svg 
                             className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
                             fill="none" 
@@ -1220,38 +1220,13 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
 
 
 const WhatsAppWidget: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    // WhatsApp widget show/hide timer - toggle every minute
-    const interval = setInterval(() => {
-      setIsVisible(prev => !prev);
-      if (!isVisible) {
-        // Hide after 15 seconds if visible
-        setTimeout(() => {
-          setIsVisible(false);
-        }, 15000);
-      }
-    }, 60000); // Toggle every minute
-
-    // Initial hide after 15 seconds
-    const initialHide = setTimeout(() => {
-      setIsVisible(false);
-    }, 15000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(initialHide);
-    };
-  }, [isVisible]);
-
   return (
-    <div className={`fixed right-6 bottom-6 z-50 transition-all duration-1000 transform ${isVisible ? 'opacity-30 hover:opacity-100' : 'opacity-0 pointer-events-none'}`}>
+    <div className="fixed right-5 bottom-5 z-50 transition-all duration-300 transform hover:translate-y-[-2px]">
       <a 
         href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative overflow-hidden"
+        className="flex items-center justify-center w-11 h-11 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
         aria-label="Join our WhatsApp Community"
       >
         <div className="absolute inset-0 flex items-center justify-center">
@@ -1262,7 +1237,7 @@ const WhatsAppWidget: React.FC = () => {
           />
         </div>
         
-        <span className="absolute right-16 bg-white text-gray-800 text-sm font-medium px-3 py-1.5 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+        <span className="absolute right-14 bg-white text-gray-800 text-xs font-medium px-2.5 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
           Join our Community
         </span>
       </a>
@@ -1419,7 +1394,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
                                             />
                                             <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="w-14 h-14 bg-red-500/90 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
+                                                <div className="w-14 h-14 bg-red-500/60 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
                                                     <svg className="w-7 h-7 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
                                                         <path d="M8 5v14l11-7z" />
                                                     </svg>
@@ -1427,7 +1402,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                             </div>
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                                 <p className="text-sm md:text-base text-white font-medium flex items-center">
-                                                    <span className="mr-2">MetaTrader 5 Tutorial (Beginners Tour)</span>
+                                                    <span className="mr-2">Trade-Cation Pine Lake Resort</span>
                                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                     </svg>
