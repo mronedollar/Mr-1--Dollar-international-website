@@ -430,12 +430,12 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
 
     // PrimeXBT Competition Card
     const CompetitionCard = () => (
-        <div className="relative group overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 p-6 transition-all duration-500 hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:border-amber-400/50 h-full">
-            <div className="absolute inset-0">
+        <div className="relative group overflow-visible rounded-xl bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 p-5 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:border-amber-400/40 h-full w-full max-w-md mx-auto">
+            <div className="absolute inset-0 overflow-visible">
                 <img 
                     src="https://i.ibb.co/B2sbNZRc/trophy.png" 
                     alt="Trophy" 
-                    className="absolute right-0 bottom-0 h-32 w-auto opacity-20 transform translate-x-4 translate-y-4"
+                    className="absolute right-0 bottom-0 h-32 w-auto opacity-20 transform translate-x-0 translate-y-0"
                 />
             </div>
             <div className="relative z-10">
@@ -504,53 +504,61 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                 <div className={`space-y-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     {/* Brokers Section */}
                     <div className="relative">
-                        <div className="flex flex-col md:flex-row gap-8 items-stretch">
-                            {/* Brokers List */}
-                            <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {partners
-                                    .filter(partner => partner.category === 'Brokers')
-                                    .map((partner, i) => (
-                                        <div 
-                                            key={partner.name}
-                                            className={`bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full`}
-                                            style={{
-                                                animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
-                                            }}
-                                        >
-                                            <div className="flex items-center justify-between mb-4">
-                                                <img 
-                                                    src={partner.logoUrl} 
-                                                    alt={`${partner.name} logo`} 
-                                                    className="h-8 w-auto"
-                                                />
-                                                <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-700/50 text-slate-300">
-                                                    Broker
-                                                </span>
-                                            </div>
-                                            <h3 className="text-xl font-bold mb-2 text-amber-400">
-                                                {partner.name}
-                                            </h3>
-                                            <p className="text-slate-300 text-sm mb-4">
-                                                {partner.description}
-                                            </p>
-                                            <a 
-                                                href={partner.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center text-sm font-medium text-amber-400 hover:underline"
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-2xl font-bold text-white">Broker</h3>
+                            <span className="text-slate-400 text-sm">Trade with the best broker with instant withdrawals</span>
+                        </div>
+                        <div className="flex flex-col md:flex-row gap-6 items-start">
+                            <div className="w-full">
+                                <div className="grid grid-cols-1 gap-6">
+                                    {partners
+                                        .filter(partner => partner.category === 'Brokers')
+                                        .map((partner, i) => (
+                                            <div 
+                                                key={partner.name}
+                                                className="bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full"
+                                                style={{
+                                                    animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
+                                                }}
                                             >
-                                                Start Trading
-                                                <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    ))}
+                                                <div className="flex items-center justify-between mb-4">
+                                                    <img 
+                                                        src={partner.logoUrl} 
+                                                        alt={`${partner.name} logo`} 
+                                                        className="h-8 w-auto"
+                                                    />
+                                                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-700/50 text-slate-300">
+                                                        Broker
+                                                    </span>
+                                                </div>
+                                                <h3 className="text-xl font-bold mb-2 text-amber-400">
+                                                    {partner.name}
+                                                </h3>
+                                                <p className="text-slate-300 text-sm mb-4">
+                                                    {partner.description}
+                                                </p>
+                                                <a 
+                                                    href={partner.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center text-sm font-medium text-amber-400 hover:underline"
+                                                >
+                                                    Start Trading
+                                                    <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        ))}
+                                </div>
                             </div>
                             
                             {/* PrimeXBT Competition Card */}
-                            <div className="md:w-1/3">
-                                <CompetitionCard />
+                            <div className="w-full md:w-auto relative mt-6 md:mt-0">
+                                <div className="hidden md:block absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent"></div>
+                                <div className="w-full">
+                                    <CompetitionCard />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -558,7 +566,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     {/* Prop Firms Section */}
                     <div className="pt-8">
                         <div className="flex justify-between items-center mb-8">
-                            <h3 className="text-2xl font-bold text-white">Prop Trading Firms</h3>
+                            <h3 className="text-2xl font-bold text-white">Prop-firms</h3>
                             <span className="text-slate-400 text-sm">Get funded by top proprietary trading firms</span>
                         </div>
                         
@@ -751,7 +759,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         <div className="flex items-start">
                                             <div className={`${activeStep >= 2 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>2</div>
                                             <div className="flex-1">
-                                                <h4 className="font-semibold">Register Your Trading Account</h4>
+                                                <h4 className="font-semibold mb-3">Register Your Trading Account</h4>
                                                 <div className="flex flex-col gap-3">
                                                     <div className="flex flex-col sm:flex-row gap-3">
                                                         <a 
@@ -821,7 +829,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         >
                                             <div className="bg-red-600 p-1 rounded">
                                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                                                 </svg>
                                             </div>
                                             <span className="text-sm">How to Register on PrimeXBT</span>
@@ -839,6 +847,19 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                             </div>
                                             <span className="text-sm">How to Transfer Funds</span>
                                         </a>
+                                        <a 
+                                            href="https://youtu.be/zXvOnW12mhY" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                                        >
+                                            <div className="bg-green-600 p-1 rounded">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                                </svg>
+                                            </div>
+                                            <span className="text-sm">MetaTrader Setup Guide</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -851,28 +872,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         <h4 className="font-semibold">Fund Your Account</h4>
                                         <div className="flex justify-between items-center w-full">
                                             <span className="text-gray-300 text-sm">Deposit minimum $10 (R200) into your wallet</span>
-                                            <a 
-                                                href="https://youtu.be/zXvOnW12mhY" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                onClick={(e) => {
-                                                    if (!canUseStep4) {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
-                                                        return;
-                                                    }
-                                                    markStepCompleted(4);
-                                                    unlockUpTo(5);
-                                                }}
-                                                className={`inline-flex items-center justify-center gap-2 ${canUseStep4 ? 'bg-red-600 hover:bg-red-700' : 'bg-gray-600 cursor-not-allowed'} text-white font-medium py-1.5 px-3 rounded transition-colors duration-200 text-sm`}
-                                            >
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                                    <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
-                                                </svg>
-                                                Watch MetaTrader Setup Guide
-                                            </a>
-                                        </div>
+                                                                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -1143,7 +1143,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         </li>
                         <li className="flex items-start text-slate-400">
                              <EnvelopeIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                             <a href="mailto:info@mr1dollar.co.za" className="hover:text-amber-400 transition-colors">info@mr1dollar.co.za</a>
+                             <a href="mailto:info@mr1dollar.com" className="hover:text-amber-400 transition-colors">info@mr1dollar.com</a>
                         </li>
                     </ul>
                 </div>
@@ -1266,11 +1266,6 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
-    const [activeTab, setActiveTab] = useState<string | null>(null);
-
-    const handleFeatureClick = (tab: string) => {
-        setActiveTab(activeTab === tab ? null : tab);
-    };
     
     return (
         <>
@@ -1280,252 +1275,204 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
             {/* Our Trusted Partners */}
             <PropFirms setCurrentPage={setCurrentPage} />
             
-            {/* Features Grid */}
+            {/* Features Section with Expanded Cards */}
             <section className="py-20 bg-black animate-fadeInUp">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <FeatureCard 
-                            icon={
-                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="space-y-12">
+                        {/* Proven Track Record */}
+                        <div className="glass-card p-8 rounded-lg">
+                            <div className="flex items-center mb-6">
+                                <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
-                            } 
-                            title="Proven Track Record"
-                            onClick={() => handleFeatureClick('track-record')}
-                        />
-                        <FeatureCard 
-                            icon={
-                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <h2 className="text-3xl font-bold text-white">Proven Track Record</h2>
+                            </div>
+                            <p className="text-slate-300 mb-6">
+                                Our premium trading community consistently delivers exceptional weekly performance, with win rates ranging between 70% to 100% across all trading sessions. Here's a glimpse of our recent trading statistics:
+                            </p>
+                            
+                            {/* YouTube Videos Grid */}
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+                                {[
+                                    { id: 'vfX0Y106iK0', title: 'Video 1' },
+                                    { id: 'CVLyno-oktw', title: 'Video 2' },
+                                    { id: 'Zg1VAV2xzSQ', title: 'Video 3' },
+                                    { id: 'L_9QwGiHKrw', title: 'Video 4' },
+                                    { id: '71Ez4STWkkE', title: 'Video 5' },
+                                    { id: 'xxc5MLIwSSE', title: 'Video 6' },
+                                    { id: 'EXhbQfl6uVw', title: 'Video 7' }
+                                ].map((video) => (
+                                    <a
+                                        key={video.id}
+                                        href={`https://www.youtube.com/watch?v=${video.id}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group relative rounded-lg overflow-hidden aspect-video bg-slate-800/50 border border-slate-700/50 hover:border-amber-400/50 transition-all duration-300"
+                                    >
+                                        <img
+                                            src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                                            alt={video.title}
+                                            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                                            <p className="text-xs text-white font-medium line-clamp-2">{video.title}</p>
+                                        </div>
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="w-10 h-10 bg-red-500/90 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
+                                                <svg className="w-5 h-5 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+
+                            <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
+                                <h3 className="text-xl font-semibold text-amber-400 mb-3">More Trading Content</h3>
+                                <p className="text-slate-300 mb-4">
+                                    Subscribe to our YouTube channel for the latest trade ideas, market analysis, and educational content.
+                                </p>
+                                <a 
+                                    href="https://www.youtube.com/@MrOneDollarInternational" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center text-amber-400 hover:text-amber-300 font-medium transition-colors group"
+                                >
+                                    <span className="border-b border-transparent group-hover:border-amber-300">Visit Our YouTube Channel</span>
+                                    <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Trading Community */}
+                        <div className="glass-card p-8 rounded-lg">
+                            <div className="flex items-center mb-6">
+                                <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                            } 
-                            title="Trading Community"
-                            onClick={() => handleFeatureClick('community')}
-                        />
-                        <FeatureCard 
-                            icon={
-                                <svg className="w-12 h-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <h2 className="text-3xl font-bold text-white">Trading Community</h2>
+                            </div>
+                            <p className="text-slate-300 mb-6">
+                                Our trading community is a vibrant space where traders of all levels come together to share insights, strategies, and support each other's growth.
+                            </p>
+                            <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
+                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
+                                <p className="text-slate-300 mb-6">
+                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
+                                </p>
+                                <a 
+                                    href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg"
+                                >
+                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.498 14.382v3.3a1 1 0 01-.9 1.1c-5.2.5-10.4-2.4-11.8-7.3a11.6 11.6 0 011.7-8.1 1 1 0 011.6.2l2.1 3.5a1 1 0 01-.1 1.2l-1 1.2a8.1 8.1 0 003.9 3.4l1.2-1a1 1 0 011.3 0l3.5 2.1a1 1 0 01.3 1.1z"/>
+                                    </svg>
+                                    Join Our WhatsApp Group
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Exclusive Trade-Cations */}
+                        <div className="glass-card p-8 rounded-lg">
+                            <div className="flex items-center mb-6">
+                                <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                            } 
-                            title="Exclusive Trade-Cations"
-                            onClick={() => handleFeatureClick('tradecations')}
-                        />
-                    </div>
-
-                    {/* Track Record Modal */}
-                    {activeTab === 'track-record' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 pb-8 animate-fadeIn">
-                            <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[70vh] md:max-h-[60vh] overflow-y-auto border border-white">
-                                <div className="p-5 sm:p-6">
-                                    <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-bold text-white">Trade Ideas Stats</h2>
-                                        <button 
-                                            onClick={() => setActiveTab(null)}
-                                            className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                                            aria-label="Close modal"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div className="prose prose-invert max-w-none">
-                                        <p className="text-slate-300 text-sm mb-5">
-                                            Our premium trading community consistently delivers exceptional weekly performance, with win rates ranging between 70% to 100% across all trading sessions. Here's a glimpse of our recent trading statistics:
-                                        </p>
-                                        
-                                        {/* YouTube Videos Grid */}
-                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-                                            {[
-                                                { id: 'vfX0Y106iK0', title: 'Trade Analysis' },
-                                                { id: 'CVLyno-oktw', title: 'Market Update' },
-                                                { id: 'Zg1VAV2xzSQ', title: 'Trading Session' },
-                                                { id: 'L_9QwGiHKrw', title: 'Strategy Breakdown' },
-                                                { id: '71Ez4STWkkE', title: 'Market Review' },
-                                                { id: 'xxc5MLIwSSE', title: 'Live Trading' },
-                                                { id: 'EXhbQfl6uVw', title: 'Tutorial' }
-                                            ].map((video, index) => (
-                                                <a
-                                                    key={video.id}
-                                                    href={`https://www.youtube.com/watch?v=${video.id}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="group relative rounded-lg overflow-hidden aspect-video bg-slate-800/50 border border-slate-700/50 hover:border-amber-400/50 transition-all duration-300"
-                                                >
-                                                    <img
-                                                        src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
-                                                        alt={video.title}
-                                                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                                                    />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                                                        <p className="text-xs text-white font-medium line-clamp-2">{video.title}</p>
-                                                    </div>
-                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                        <div className="w-10 h-10 bg-red-500/90 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
-                                                            <svg className="w-5 h-5 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                                                                <path d="M8 5v14l11-7z" />
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            ))}
-                                        </div>
-
-                                        <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                                            <h3 className="text-lg font-semibold text-amber-400 mb-2">More Trading Content</h3>
-                                            <p className="text-slate-300 text-sm mb-3">
-                                                Subscribe to our YouTube channel for the latest trade ideas, market analysis, and educational content.
-                                            </p>
-                                            <a 
-                                                href="https://www.youtube.com/@MrOneDollarInternational" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center text-amber-400 hover:text-amber-300 text-sm font-medium transition-colors group"
-                                            >
-                                                <span className="border-b border-transparent group-hover:border-amber-300">Visit Our YouTube Channel</span>
-                                                <svg className="w-4 h-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h2 className="text-3xl font-bold text-white">Exclusive Trade-Cations</h2>
                             </div>
-                        </div>
-                    )}
-
-                    {/* Community Modal */}
-                    {activeTab === 'community' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 pb-8 animate-fadeIn">
-                            <div className="bg-black rounded-2xl max-w-4xl w-full max-h-[70vh] md:max-h-[60vh] overflow-y-auto border border-white">
-                                <div className="p-6 sm:p-8">
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h2 className="text-2xl font-bold text-white">Join Our Trading Community</h2>
-                                        <button 
-                                            onClick={() => setActiveTab(null)}
-                                            className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                                            aria-label="Close modal"
+                            <p className="text-slate-300 mb-6">
+                                Combine your passion for trading with the joy of travel. Our exclusive Trade-Cations provide immersive trading experiences in beautiful locations.
+                            </p>
+                            <div className="space-y-6">
+                                <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-4">
+                                        <div className="flex-1">
+                                            <h4 className="font-semibold text-white text-lg">Cayley Resort Trading Retreat</h4>
+                                            <p className="text-sm text-slate-400">February 23-27, 2026 (5 days)</p>
+                                            <span className="inline-block mt-2 bg-amber-500/20 text-amber-400 text-sm font-semibold px-3 py-1 rounded-full">Drakensburg, South Africa</span>
+                                        </div>
+                                        <a 
+                                            href="https://www.youtube.com/watch?v=AdtFWr97JmQ" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="group relative flex-shrink-0 w-full sm:w-64 h-40 md:w-80 md:h-48 rounded-lg overflow-hidden shadow-lg"
                                         >
-                                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div className="prose prose-invert max-w-none">
-                                        <p className="text-slate-300 mb-4">
-                                            Our trading community is a vibrant space where traders of all levels come together to share insights, strategies, and support each other's growth.
-                                        </p>
-                                        <div className="grid grid-cols-1 gap-6 mt-6">
-                                            <div className="bg-slate-800/50 p-6 rounded-lg">
-                                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
-                                                <p className="text-slate-300 mb-4">
-                                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
-                                                </p>
-                                                <a 
-                                                    href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300"
-                                                >
-                                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
-                                                        <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
+                                            <img
+                                                src="https://img.youtube.com/vi/AdtFWr97JmQ/maxresdefault.jpg"
+                                                alt="Tradecation Preview"
+                                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <div className="w-14 h-14 bg-red-500/90 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
+                                                    <svg className="w-7 h-7 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M8 5v14l11-7z" />
                                                     </svg>
-                                                    Join Our WhatsApp Group
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Trade-Cations Modal */}
-                    {activeTab === 'tradecations' && (
-                        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 pb-8 animate-fadeIn">
-                            <div className="bg-black rounded-2xl max-w-3xl w-full max-h-[65vh] md:max-h-[55vh] overflow-y-auto border border-white">
-                                <div className="p-5 sm:p-6">
-                                    <div className="flex justify-between items-center mb-5">
-                                        <h2 className="text-xl font-bold text-white">Exclusive Trade-Cations</h2>
-                                        <button 
-                                            onClick={() => setActiveTab(null)}
-                                            className="p-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                                            aria-label="Close"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div className="prose prose-invert max-w-none">
-                                        <p className="text-slate-300 text-sm mb-5">
-                                            Combine your passion for trading with the joy of travel. Our exclusive Trade-Cations provide immersive trading experiences in beautiful locations.
-                                        </p>
-                                        <div className="space-y-5">
-                                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                                    <div>
-                                                        <h4 className="font-medium text-white text-base">Cayley Resort Trading Retreat</h4>
-                                                        <p className="text-xs text-slate-400">February 23-27, 2026 (5 days)</p>
-                                                    </div>
-                                                    <span className="bg-amber-500/20 text-amber-400 text-xs font-medium px-2.5 py-1 rounded-full self-start sm:self-center">Drakensburg, South Africa</span>
                                                 </div>
                                             </div>
-                                            
-                                            <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                                                <h3 className="text-lg font-semibold text-amber-400 mb-3">What's Included</h3>
-                                                <ul className="space-y-2 text-sm text-slate-300">
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>Daily trading sessions with experts</span>
-                                                    </li>
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>Luxury accommodation & meals</span>
-                                                    </li>
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>One-on-one mentorship</span>
-                                                    </li>
-                                                    <li className="flex items-start">
-                                                        <svg className="w-4 h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span>Networking events & excursions</span>
-                                                    </li>
-                                                </ul>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                                <p className="text-sm md:text-base text-white font-medium flex items-center">
+                                                    <span className="mr-2">Watch Preview</span>
+                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                </p>
                                             </div>
-                                            
-                                            <a 
-                                                href="#" 
-                                                onClick={(e) => { 
-                                                    e.preventDefault(); 
-                                                    setCurrentPage('events'); 
-                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                }} 
-                                                className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-300 hover:shadow-lg text-sm text-center"
-                                            >
-                                                Learn More About Trade-Cations
-                                            </a>
-                                        </div>
+                                        </a>
                                     </div>
+                                    
+                                    <h4 className="text-lg font-semibold text-amber-400 mb-3">What's Included</h4>
+                                    <ul className="space-y-2 text-slate-300">
+                                        <li className="flex items-start">
+                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Daily trading sessions with experts</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Luxury accommodation & meals</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>One-on-one mentorship</span>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Networking events & excursions</span>
+                                        </li>
+                                    </ul>
                                 </div>
+                                
+                                <a 
+                                    href="#" 
+                                    onClick={(e) => { 
+                                        e.preventDefault(); 
+                                        setCurrentPage('events'); 
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    }} 
+                                    className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg text-center"
+                                >
+                                    Learn More About Trade-Cations
+                                </a>
                             </div>
                         </div>
-                    )}
+                    </div>
                 </div>
             </section>
-            
+
             <Testimonials />
-            <AboutPage />
+            <FAQ />
         </>
     );
 };
@@ -2095,7 +2042,7 @@ const ContactPage: React.FC = () => {
                                 <EnvelopeIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Email us</h3>
-                                    <a href="mailto:info@mr1dollar.co.za" className="text-slate-400 hover:text-amber-400">info@mr1dollar.co.za</a>
+                                    <a href="mailto:info@mr1dollar.com" className="text-slate-400 hover:text-amber-400">info@mr1dollar.com</a>
                                 </div>
                             </li>
                         </ul>
@@ -2856,7 +2803,7 @@ const TermsPage: React.FC = () => (
                 
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
-                    <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                    <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@mr1dollar.com" className="text-amber-400 hover:underline">info@mr1dollar.com</a>.</p>
                 </div>
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">9. Data Protection &amp; Third-Party Platforms</h2>
@@ -2920,7 +2867,7 @@ const PrivacyPolicyPage: React.FC = () => (
                 </div>
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
-                    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@mr1dollar.co.za" className="text-amber-400 hover:underline">info@mr1dollar.co.za</a>.</p>
+                    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@mr1dollar.com" className="text-amber-400 hover:underline">info@mr1dollar.com</a>.</p>
                 </div>
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">9. Data Storage &amp; Third-Party Service Providers</h2>
