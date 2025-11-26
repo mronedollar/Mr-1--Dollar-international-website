@@ -51,7 +51,7 @@ const servicesData: Product[] = [
             { number: 3, text: "Deposit minimum $50 (R800) into your wallet" },
             { number: 4, text: "WhatsApp Nomii with proof to claim your free month" }
         ],
-        whatsappLink: "https://wa.me/27614267355?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
+        whatsappLink: "https://wa.me/27676923876?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
     },
     { id: 3, name: "Diamond Trade Ideas", price: 172.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
     { id: 4, name: "Private Wealth VIP_Black Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
@@ -319,7 +319,15 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
-    <section className="py-24 sm:py-32 text-center hero-background">
+    <section 
+        className="py-24 sm:py-32 text-center hero-background"
+        style={{
+            backgroundImage: "url('https://i.pinimg.com/1200x/6b/5a/79/6b5a79c00621b21813c3f9feffb67873.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+        } as React.CSSProperties}
+    >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
             <h2 className="text-amber-400 text-3xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}></h2>
             <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
@@ -522,7 +530,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         .map((partner, i) => (
                                             <div 
                                                 key={partner.name}
-                                                className="bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full"
+                                                className="bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col"
                                                 style={{
                                                     animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
                                                 }}
@@ -543,17 +551,59 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 <p className="text-slate-300 text-sm mb-4">
                                                     {partner.description}
                                                 </p>
-                                                <a 
-                                                    href={partner.link}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center text-sm font-medium text-amber-400 hover:underline"
-                                                >
-                                                    Start Trading
-                                                    <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                    </svg>
-                                                </a>
+                                                
+                                                {/* PrimeXBT Benefits */}
+                                                <div className="mt-auto pt-6 border-t border-amber-500/20">
+                                                    <h4 className="text-base font-bold text-amber-400 mb-3">
+                                                        Why Trade with PrimeXBT?
+                                                    </h4>
+                                                    <ul className="space-y-2 text-slate-300 text-sm mb-4">
+                                                        <li className="flex items-start">
+                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                                            </svg>
+                                                            <span>Ultra-competitive fees and tight spreads</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                                            </svg>
+                                                            <span>Trade crypto, forex, indices & commodities</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                                            </svg>
+                                                            <span>Up to 1000x leverage on select assets</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                                            </svg>
+                                                            <span>Deep liquidity & instant withdrawals</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                                            </svg>
+                                                            <span>Professional-grade trading tools & charts</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                                                            </svg>
+                                                            <span>24/7 customer support & secure platform</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a 
+                                                        href={partner.link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300 transform hover:scale-[1.02] text-sm"
+                                                    >
+                                                        Start Trading Now
+                                                    </a>
+                                                </div>
                                             </div>
                                         ))}
                                 </div>
@@ -739,7 +789,13 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                             <div className="text-right text-xs text-gray-400 mb-2">
                                 {completedSteps.length} of 5 steps completed
                             </div>
-                            
+                            <div className="text-center text-xs text-amber-300/80 mb-4 px-4 py-2 bg-amber-500/10 rounded-lg border border-amber-400/20">
+                                <svg className="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                Important: You must complete all 5 steps to receive your free Platinum Trade Ideas. Incomplete steps will result in no access.
+                            </div>
+
                             <div className="flex flex-col md:flex-row gap-8">
                                 <div className="space-y-6 flex-1">
                                     {/* Step 1 */}
@@ -750,14 +806,14 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                 <h4 className="font-semibold">Fill Out Contact Details</h4>
                                                 <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
                                                 <a 
-                                                    href={`https://forms.fillout.com/t/69dxiDrK4kus?MrOneDollar_International_Contact_form=xxxxx&id=${Date.now()}&returnTo=${encodeURIComponent('https://mr-1-international.vercel.app/?return_to=step2')}`}
-                                                    onClick={() => {
+                                                    href="#"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
                                                         markStepCompleted(1);
                                                         unlockUpTo(2);
+                                                        window.location.href = `https://forms.fillout.com/t/69dxiDrK4kus?MrOneDollar_International_Contact_form=xxxxx&id=${Date.now()}&returnTo=${encodeURIComponent('https://mr-1-international.vercel.app/?return_to=step2')}`;
                                                     }}
                                                     className="inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
                                                 >
                                                     Fill Out Contact Form
                                                 </a>
@@ -812,16 +868,21 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                     >
                                                         Yes, I've completed KYC
                                                     </button>
-                                                    <a 
-                                                        href="#" 
-                                                        className="px-4 py-2 rounded-md font-medium bg-red-600 hover:bg-red-700 text-white"
+                                                    <button 
                                                         onClick={(e) => {
                                                             e.preventDefault();
+                                                            if (!canUseStep3) return;
                                                             window.open('https://youtu.be/xaTeSbbXn9g', '_blank');
                                                         }}
+                                                        className={`px-4 py-2 rounded-md font-medium ${
+                                                            canUseStep3 
+                                                                ? 'bg-red-600 hover:bg-red-700' 
+                                                                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                                                        } text-white`}
+                                                        disabled={!canUseStep3}
                                                     >
                                                         No, show me how
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -895,7 +956,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                     <div className="flex-1">
                                         <h4 className="font-semibold">Claim Your Free Month</h4>
                                         <a 
-                                            href="https://wa.me/27686108003?text=Hi%20Nomii,%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20$10.%20Here's%20my%20proof%20of%20funding:" 
+                                            href="https://wa.me/27676923876?text=Hi%20Nomii,%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20$10.%20Here's%20my%20proof%20of%20funding:" 
                                             target="_blank" 
                                             rel="noopener noreferrer"
                                             onClick={(e) => {
@@ -1148,8 +1209,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         <li className="flex items-start text-slate-400">
                             <PhoneIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
                             <div>
-                                <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a> / 
-                                <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors"> +27 61 426 7355</a>
+                                <a href="https://wa.me/+27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
                             </div>
                         </li>
                         <li className="flex items-start text-slate-400">
@@ -1185,7 +1245,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 }}
                             />
                         </a>
-                        <a href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://chat.whatsapp.com/Ksqy2vkb7FvDo1lwovJIYS" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
                                 src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
                                 alt="WhatsApp Community" 
@@ -1223,11 +1283,11 @@ const WhatsAppWidget: React.FC = () => {
   return (
     <div className="fixed right-5 bottom-5 z-50 transition-all duration-300 transform hover:translate-y-[-2px]">
       <a 
-        href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T"
+        href="https://wa.me/27676923876?text=Hi%20Nomii,%20I%20have%20a%20question%20about%20your%20trading%20services."
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center w-11 h-11 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
-        aria-label="Join our WhatsApp Community"
+        aria-label="Chat with Nomii on WhatsApp"
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <img 
@@ -1238,7 +1298,7 @@ const WhatsAppWidget: React.FC = () => {
         </div>
         
         <span className="absolute right-14 bg-white text-gray-800 text-xs font-medium px-2.5 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-          Join our Community
+          Chat with Nomii
         </span>
       </a>
     </div>
@@ -1250,6 +1310,59 @@ const WhatsAppWidget: React.FC = () => {
 interface HomePageProps {
     setCurrentPage: (page: Page) => void;
 }
+
+// Image carousel component
+const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[], interval?: number }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        // Auto-advance the carousel
+        timerRef.current = setInterval(() => {
+            setCurrentIndex(prevIndex => 
+                prevIndex === images.length - 1 ? 0 : prevIndex + 1
+            );
+        }, interval);
+
+        // Clear interval on component unmount
+        return () => {
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
+        };
+    }, [images.length, interval]);
+
+    return (
+        <div className="relative w-full h-48 md:h-56 lg:h-64 overflow-hidden rounded-t-lg">
+            {images.map((image, index) => (
+                <div 
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                >
+                    <img 
+                        src={image.url} 
+                        alt={`Tradecation ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = 'https://via.placeholder.com/800x450?text=Tradecation+Image';
+                        }}
+                    />
+                </div>
+            ))}
+            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2">
+                {images.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setCurrentIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${index === currentIndex ? 'bg-amber-400 w-6' : 'bg-white/50 w-2'}`}
+                        aria-label={`Go to slide ${index + 1}`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
 
 const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
     
@@ -1350,7 +1463,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                     Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
                                 </p>
                                 <a 
-                                    href="https://chat.whatsapp.com/KQxJNRF7vUL2jH29YPNG1T" 
+                                    href="https://chat.whatsapp.com/Ksqy2vkb7FvDo1lwovJIYS" 
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg"
@@ -1375,82 +1488,115 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                 Combine your passion for trading with the joy of travel. Our exclusive Trade-Cations provide immersive trading experiences in beautiful locations.
                             </p>
                             <div className="space-y-6">
-                                <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
-                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-4">
-                                        <div className="flex-1">
-                                            <h4 className="font-semibold text-white text-lg">Cayley Resort Trading Retreat</h4>
-                                            <p className="text-sm text-slate-400">February 23-27, 2026 (5 days)</p>
-                                            <span className="inline-block mt-2 bg-amber-500/20 text-amber-400 text-sm font-semibold px-3 py-1 rounded-full">Drakensburg, South Africa</span>
+                                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-amber-500/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
+                                    {/* Image Carousel */}
+                                    <ImageCarousel 
+                                        images={[
+                                            { url: '/Track%20record%20html%20file/Tradecation/1.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/2.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/3.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/4.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/5.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/6.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/7.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/8.png' },
+                                            { url: '/Track%20record%20html%20file/Tradecation/9.png' }
+                                        ]} 
+                                        interval={3000}
+                                    />
+                                    
+                                    <div className="relative z-10 p-6 md:p-8 flex-1 flex flex-col">
+                                        {/* Header with Icon */}
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="p-3 bg-amber-500/20 rounded-xl">
+                                                <svg className="w-8 h-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-white">Cayley Resort Trading Retreat</h3>
+                                                <p className="text-amber-300 font-medium">February 23-27, 2026 • 5 Days</p>
+                                            </div>
                                         </div>
-                                        <a 
-                                            href="https://www.youtube.com/watch?v=AdtFWr97JmQ" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="group relative flex-shrink-0 w-full sm:w-64 h-40 md:w-80 md:h-48 rounded-lg overflow-hidden shadow-lg"
-                                        >
-                                            <img
-                                                src="https://img.youtube.com/vi/AdtFWr97JmQ/maxresdefault.jpg"
-                                                alt="Tradecation Preview"
-                                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="w-14 h-14 bg-red-500/60 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
-                                                    <svg className="w-7 h-7 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                                                        <path d="M8 5v14l11-7z" />
+
+                                        {/* Location Badge */}
+                                        <div className="inline-flex items-center bg-slate-700/50 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-500/30 mb-6">
+                                            <svg className="w-5 h-5 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            <span className="text-white font-medium">Drakensburg, South Africa</span>
+                                        </div>
+
+                                        {/* What's Included Section */}
+                                        <div className="mb-8">
+                                            <h4 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
+                                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                                </svg>
+                                                What's Included
+                                            </h4>
+                                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                {[
+                                                    "🎯 Private life-coaching sessions",
+                                                    "📈 Daily trading sessions with experts",
+                                                    "🏨 Luxury accommodation & meals (by our private chef)",
+                                                    "👨‍🏫 One-on-one mentorship (Beginner to Advanced)",
+                                                    "🌄 Networking & fun activities"
+                                                ].map((item, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-amber-400 mr-2">•</span>
+                                                        <span className="text-slate-300">{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* Resort Info */}
+                                        <div className="bg-slate-700/30 p-4 rounded-lg border border-slate-600/30 mb-6">
+                                            <div className="flex items-start">
+                                                <div className="bg-amber-500/20 p-2 rounded-lg mr-3">
+                                                    <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                                     </svg>
                                                 </div>
+                                                <div>
+                                                    <h4 className="font-semibold text-white mb-1">Trade-Cation Pine Lake Resort</h4>
+                                                    <p className="text-slate-300 text-sm">Experience luxury and learning in the heart of Drakensburg's breathtaking landscapes.</p>
+                                                </div>
                                             </div>
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                                                <p className="text-sm md:text-base text-white font-medium flex items-center">
-                                                    <span className="mr-2">Trade-Cation Pine Lake Resort</span>
-                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                    </svg>
-                                                </p>
-                                            </div>
-                                        </a>
+                                        </div>
+
+                                        {/* CTA Buttons */}
+                                        <div className="flex flex-col sm:flex-row gap-3">
+                                            <a 
+                                                href="#" 
+                                                onClick={(e) => { 
+                                                    e.preventDefault(); 
+                                                    setCurrentPage('events'); 
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                }}
+                                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
+                                            >
+                                                <span>Reserve Your Spot</span>
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </a>
+                                            <a 
+                                                href="https://www.youtube.com/watch?v=AdtFWr97JmQ" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border border-slate-600 hover:border-amber-500 text-white font-medium rounded-lg transition-all duration-300 hover:bg-slate-800/50"
+                                            >
+                                                <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                                </svg>
+                                                Watch Preview
+                                            </a>
+                                        </div>
                                     </div>
-                                    
-                                    <h4 className="text-lg font-semibold text-amber-400 mb-3">What's Included</h4>
-                                    <ul className="space-y-2 text-slate-300">
-                                        <li className="flex items-start">
-                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            <span>Daily trading sessions with experts</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            <span>Luxury accommodation & meals</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            <span>One-on-one mentorship</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <svg className="w-5 h-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            <span>Networking events & excursions</span>
-                                        </li>
-                                    </ul>
                                 </div>
-                                
-                                <a 
-                                    href="#" 
-                                    onClick={(e) => { 
-                                        e.preventDefault(); 
-                                        setCurrentPage('events'); 
-                                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                                    }} 
-                                    className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-lg text-center"
-                                >
-                                    Learn More About Trade-Cations
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -1512,7 +1658,7 @@ const EventsPage: React.FC = () => {
             location: "Luxury Retreat Location",
             image: "/mr$1 testimonials/trade cation poster.jpg",
             whatsappMessage: "Hi, I'm interested in the Tradecation experience. Please send me more details.",
-            whatsappLink: "https://wa.me/27614267355?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
+            whatsappLink: "https://wa.me/27676923876?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
         },
         {
             id: 2,
@@ -1524,7 +1670,7 @@ const EventsPage: React.FC = () => {
             location: "Physical or Online",
             image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
             whatsappMessage: "Hi, I'd like to register for the NFP Trading Masterclass.",
-            whatsappLink: "https://wa.me/27614267355?text=Hi%2C%20I'd%20like%20to%20register%20for%20the%20NFP%20Trading%20Masterclass."
+            whatsappLink: "https://wa.me/27676923876?text=Hi%2C%20I'd%20like%20to%20register%20for%20the%20NFP%20Trading%20Masterclass."
         }
     ];
 
@@ -1950,6 +2096,9 @@ const TeamPage: React.FC = () => {
         { name: "Jason. N", role: "Senior developer" },
         { name: "Lungelo. N", role: "IT Developer" },
         { name: "Yandisa. D", role: "Business Systems" },
+        { name: "Kennedy. M", role: "Technical Analyst" },
+        { name: "Tebogo. M", role: "Technical Support" },
+        { name: "Mojalefa. P", role: "Technical Support" },
     ];
 
     return (
@@ -2017,7 +2166,7 @@ const ContactPage: React.FC = () => {
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Call us</h3>
                                     <p className="text-slate-400">
-                                        <a href="https://wa.me/27626898567" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 62 689 8567</a>
+                                        <a href="https://wa.me/27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
                                     </p>
                                     <p className="text-slate-400">
                                         <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
@@ -2060,6 +2209,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const modalRef = useRef<HTMLDivElement>(null);
     
     // Handle click on image to open modal
     const handleImageClick = (e: React.MouseEvent) => {
@@ -2069,184 +2219,237 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     
     // Close modal when clicking outside the image
     useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                setIsImageModalOpen(false);
+            }
+        };
+
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isImageModalOpen) {
                 setIsImageModalOpen(false);
             }
         };
         
-        document.addEventListener('keydown', handleKeyDown);
+        if (isImageModalOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', handleKeyDown);
+        }
+        
         return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
             document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isImageModalOpen]);
+
+    // Handle add to cart with proper event handling
+    const handleAddToCartClick = (e: React.MouseEvent, product: Product) => {
+        e.stopPropagation();
+        onAddToCart(product);
+    };
     
     return (
-    <div 
-        id={`product-${product.id}`}
-        className={`glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative ${
-            isExpanded ? 'ring-2 ring-amber-400 shadow-lg shadow-amber-500/20' : ''
-        }`}
-    >
-        {isMentorship && (
-            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
-                For Course Graduates Only
-            </div>
-        )}
-        <div className="relative">
-             <div 
-                className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer"
-                onClick={handleImageClick}
-                aria-label="Click to view full size"
-             >
-                <img 
-                    src={product.imageUrl} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" 
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <svg className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                    </svg>
+    <>
+        <div 
+            id={`product-${product.id}`}
+            className={`glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative ${
+                isExpanded ? 'ring-2 ring-amber-400 shadow-lg shadow-amber-500/20' : ''
+            }`}
+        >
+            {isMentorship && (
+                <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
+                    For Course Graduates Only
                 </div>
-            </div>
-            <button 
-                onClick={onToggle}
-                className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-amber-400 rounded-full p-2 hover:bg-black/70 transition-colors"
-                aria-label={isExpanded ? "Collapse" : "Expand"}
-            >
-                {isExpanded ? <MinusIcon /> : <PlusIcon />}
-            </button>
-        </div>
-        <div className="p-4 flex flex-col flex-grow">
-            <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
-            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
-                <p className="text-slate-400 text-sm mb-3">{product.description}</p>
-                {product.isSpecialOffer && product.offerSteps && (
-                    <div className="space-y-3 mt-3">
-                        <h4 className="text-amber-400 font-semibold">Follow These Simple Steps:</h4>
-                        <div className="space-y-2">
-                            {product.offerSteps.map((step, index) => (
-                                <div key={index} className="flex items-start">
-                                    <div className="flex-shrink-0 bg-amber-400 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2 mt-0.5">
-                                        {step.number}
-                                    </div>
-                                    {step.number === 1 && product.id === 2 ? (
-                                        <a 
-                                            href="https://primexbt.com/sign-up?ref=MR1DOLLAR" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-amber-400 hover:underline text-sm"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            {step.text} <span className="text-xs text-slate-400">(Press here to register)</span>
-                                        </a>
-                                    ) : (
-                                        <span className="text-slate-300 text-sm">{step.text}</span>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
+            )}
+            <div className="relative">
+                 <div 
+                    className="w-full h-48 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer"
+                    onClick={handleImageClick}
+                    aria-label="Click to view full size"
+                 >
+                    <img 
+                        src={product.imageUrl} 
+                        alt={product.name} 
+                        className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" 
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <svg className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
                     </div>
-                )}
-            </div>
-            <div className="mt-2">
-                {product.isPlatinumBenefit ? (
-                    <div>
-                        <p className="text-amber-400 text-xl font-bold">Free for Platinum+</p>
-                        <p className="text-green-400 text-sm mt-1">Included with Platinum Plan</p>
-                        <div className="mt-4 space-y-2">
-                            <a 
-                                href="#plans" 
-                                className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
-                            >
-                                Get Platinum Plan
-                            </a>
-                            <button 
-                                onClick={() => {
-                                    alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
-                                }}
-                                className="w-full text-center text-amber-400 text-sm hover:underline"
-                            >
-                                Already a Platinum member? Click here
-                            </button>
-                        </div>
-                    </div>
-                ) : product.originalPrice ? (
-                    <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
-                        <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
-                        {product.category === 'Trade Ideas' && product.price > 0 && (
-                            <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                monthly
-                            </span>
-                        )}
-                    </p>
-                ) : (
-                    <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
-                        ${product.price.toFixed(2)}
-                        {product.category === 'Trade Ideas' && product.price > 0 && (
-                            <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                monthly
-                            </span>
-                        )}
-                    </p>
-                )}
-            </div>
-            {product.isSpecialOffer ? (
-                <a 
-                    href={product.whatsappLink || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-colors flex items-center justify-center space-x-2"
+                </div>
+                <button 
+                    onClick={onToggle}
+                    className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-amber-400 rounded-full p-2 hover:bg-black/70 transition-colors"
+                    aria-label={isExpanded ? "Collapse" : "Expand"}
                 >
-                    <svg className="w-5 h-5" viewBox="0 0 32 32" fill="currentColor">
-                        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1z"></path>
-                    </svg>
-                    <span>Claim Your Free Month on WhatsApp</span>
-                </a>
-            ) : product.isPlatinumBenefit ? (
-                <div className="mt-4 space-y-2">
-                    <a 
-                        href="#plans" 
-                        className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
-                    >
-                        Get Platinum Plan
-                    </a>
-                    <button 
-                        onClick={() => {
-                            alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
-                        }}
-                        className="w-full text-center text-amber-400 text-sm hover:underline"
-                    >
-                        Already a Platinum member? Click here
-                    </button>
-                </div>
-            ) : product.checkoutUrl ? (
-                <div className="space-y-2">
-                    {isMentorship && (
-                        <div className="bg-blue-600/20 border border-blue-500/50 text-blue-100 text-xs p-2 rounded-md text-center">
-                            Only available to students who have completed our course
+                    {isExpanded ? <MinusIcon /> : <PlusIcon />}
+                </button>
+            </div>
+            <div className="p-4 flex flex-col flex-grow">
+                <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
+                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
+                    <p className="text-slate-400 text-sm mb-3">{product.description}</p>
+                    {product.isSpecialOffer && product.offerSteps && (
+                        <div className="space-y-3 mt-3">
+                            <h4 className="text-amber-400 font-semibold">Follow These Simple Steps:</h4>
+                            <div className="space-y-2">
+                                {product.offerSteps.map((step, index) => (
+                                    <div key={index} className="flex items-start">
+                                        <div className="flex-shrink-0 bg-amber-400 text-black font-bold rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2 mt-0.5">
+                                            {step.number}
+                                        </div>
+                                        {step.number === 1 && product.id === 2 ? (
+                                            <a 
+                                                href="https://primexbt.com/sign-up?ref=MR1DOLLAR" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="text-amber-400 hover:underline text-sm"
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
+                                                {step.text} <span className="text-xs text-slate-400">(Press here to register)</span>
+                                            </a>
+                                        ) : (
+                                            <span className="text-slate-300 text-sm">{step.text}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
-                    <a 
-                        href={product.checkoutUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
-                    >
-                        {isMentorship ? 'Enroll Now' : 'Buy product'}
-                    </a>
                 </div>
-            ) : (
-                <button 
-                    onClick={() => onAddToCart(product)} 
-                    className="mt-4 w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
-                >
-                    Add to cart
-                </button>
-            )}
+                <div className="mt-2">
+                    {product.isPlatinumBenefit ? (
+                        <div>
+                            <p className="text-amber-400 text-xl font-bold">Free for Platinum+</p>
+                            <p className="text-green-400 text-sm mt-1">Included with Platinum Plan</p>
+                            <div className="mt-4 space-y-2">
+                                <a 
+                                    href="#plans" 
+                                    className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                                >
+                                    Get Platinum Plan
+                                </a>
+                                <button 
+                                    onClick={() => {
+                                        alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
+                                    }}
+                                    className="w-full text-center text-amber-400 text-sm hover:underline"
+                                >
+                                    Already a Platinum member? Click here
+                                </button>
+                            </div>
+                        </div>
+                    ) : product.originalPrice ? (
+                        <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
+                            <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
+                            {product.category === 'Trade Ideas' && product.price > 0 && (
+                                <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                    monthly
+                                </span>
+                            )}
+                        </p>
+                    ) : (
+                        <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
+                            ${product.price.toFixed(2)}
+                            {product.category === 'Trade Ideas' && product.price > 0 && (
+                                <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                    monthly
+                                </span>
+                            )}
+                        </p>
+                    )}
+                </div>
+                {product.isSpecialOffer ? (
+                    <a 
+                        href={product.whatsappLink || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-colors flex items-center justify-center space-x-2"
+                    >
+                        <svg className="w-5 h-5" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1.1z"></path>
+                        </svg>
+                        <span>Claim Your Free Month on WhatsApp</span>
+                    </a>
+                ) : product.isPlatinumBenefit ? (
+                    <div className="mt-4 space-y-2">
+                        <a 
+                            href="#plans" 
+                            className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                        >
+                            Get Platinum Plan
+                        </a>
+                        <button 
+                            onClick={() => {
+                                alert(product.platinumBenefitDescription || "Please contact support for access to this Platinum benefit.");
+                            }}
+                            className="w-full text-center text-amber-400 text-sm hover:underline"
+                        >
+                            Already a Platinum member? Click here
+                        </button>
+                    </div>
+                ) : product.checkoutUrl ? (
+                    <div className="space-y-2">
+                        {isMentorship && (
+                            <div className="bg-blue-600/20 border border-blue-500/50 text-blue-100 text-xs p-2 rounded-md text-center">
+                                Only available to students who have completed our course
+                            </div>
+                        )}
+                        <a 
+                            href={product.checkoutUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
+                        >
+                            {isMentorship ? 'Enroll Now' : 'Buy product'}
+                        </a>
+                    </div>
+                ) : (
+                    <button 
+                        onClick={(e) => handleAddToCartClick(e, product)}
+                        className="mt-4 w-full text-center bg-amber-400 hover:bg-amber-300 text-black font-bold py-2 px-4 rounded-md transition-colors duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                        Add to cart
+                    </button>
+                )}
+            </div>
         </div>
-    </div>
+        {isImageModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
+                <div 
+                    ref={modalRef}
+                    className="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 rounded-lg overflow-hidden shadow-2xl"
+                >
+                    <div className="absolute top-0 right-0 p-4 z-10">
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsImageModalOpen(false);
+                            }}
+                            className="text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all"
+                            aria-label="Close"
+                        >
+                            <CloseIcon className="w-6 h-6" />
+                        </button>
+                    </div>
+                    <div className="h-full flex items-center justify-center p-4">
+                        <img 
+                            src={product.imageUrl} 
+                            alt={product.name}
+                            className="max-w-full max-h-[80vh] object-contain"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <p className="text-white text-center text-sm md:text-base">
+                            {product.name} - Click outside or press ESC to close
+                        </p>
+                    </div>
+                </div>
+            </div>
+        )}
+    </>
 );
 }
 
@@ -2262,6 +2465,7 @@ const ServicesPage: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Check if we need to expand a specific product when component mounts
     useEffect(() => {
@@ -2287,18 +2491,9 @@ const ServicesPage: React.FC = () => {
     const platinumPackage = products.find(p => p.id === 2);
     
     // Categorize products
-    const tradeIdeas = products.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
-    const mentorship = products.filter(p => p.category === 'Mentorship');
-    const courses = products.filter(p => p.category === 'Courses');
-    const otherProducts = products.filter(p => 
-        p.category !== 'Trade Ideas' && 
-        p.category !== 'Courses' && 
-        p.category !== 'Mentorship' &&
-        p.id !== 2
-    );
     
     // Update Platinum package with new WhatsApp link and broker link
-    const updatedPlatinumPackage = platinumPackage ? {
+const updatedPlatinumPackage = platinumPackage ? {
         ...platinumPackage,
         offerSteps: [
             { 
@@ -2314,7 +2509,7 @@ const ServicesPage: React.FC = () => {
             { 
                 number: 5, 
                 text: <a 
-                    href="https://wa.me/27626898567?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]" 
+                    href="https://wa.me/27676923876?text=I've%20registered%20on%20PrimeXBT%20and%20deposited%20R800.%20Here's%20my%20proof%20for%20free%20Platinum%20Trade%20Ideas%3A%20[YOUR_PROOF_HERE]" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-green-400 hover:text-green-300 transition-colors"
@@ -2380,6 +2575,16 @@ const ServicesPage: React.FC = () => {
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
     const paginatedProducts = filteredAndSortedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     
+    const tradeIdeas = paginatedProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
+    const mentorship = paginatedProducts.filter(p => p.category === 'Mentorship');
+    const courses = paginatedProducts.filter(p => p.category === 'Courses');
+    const otherProducts = paginatedProducts.filter(p => 
+        p.category !== 'Trade Ideas' && 
+        p.category !== 'Courses' && 
+        p.category !== 'Mentorship' &&
+        p.id !== 2
+    );
+    
     const cartTotal = cart.reduce((total, product) => total + product.price, 0);
 
     const handleAddToCart = (product: Product) => {
@@ -2390,12 +2595,30 @@ const ServicesPage: React.FC = () => {
         setCart(prevCart => prevCart.filter((p, i) => !(p.id === productId && i === index)));
     };
 
-    const handlePriceFilter = () => {
+    const handlePriceFilter = async () => {
+        setIsLoading(true);
         setCurrentPage(1);
+        
+        // Add a small delay to show loading state
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
         const min = priceRange.min === '' ? null : Number(priceRange.min);
         const max = priceRange.max === '' ? null : Number(priceRange.max);
-        setAppliedPriceRange({ min, max });
+        
+        // Validate min and max values
+        if (min !== null && max !== null && min > max) {
+            // Swap values if min is greater than max
+            setPriceRange({ min: max, max: min });
+            setAppliedPriceRange({ min: max, max: min });
+        } else {
+            setAppliedPriceRange({ min, max });
+        }
+        
         setIsFilterApplied(true);
+        setIsLoading(false);
+        
+        // Close mobile sidebar if open
+        setIsSidebarOpen(false);
     };
     
     // Clear all filters and reset to default state
@@ -2412,42 +2635,77 @@ const ServicesPage: React.FC = () => {
     // Render filter section with search and category filters
     const renderFilterSection = () => (
         <div className="mb-8 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <SearchIcon className="h-5 w-5 text-slate-400" />
+            <div className="flex flex-col gap-4 mb-4">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                    <div className="relative flex-1">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <SearchIcon className="h-5 w-5 text-slate-400" />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            value={searchTerm}
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            className="pl-10 pr-8 w-full bg-slate-800 border border-slate-700 rounded-xl text-white p-3 focus:ring-2 focus:ring-amber-500/70 focus:border-transparent transition-all duration-300 hover:border-amber-500/30"
+                        />
+                        {searchTerm && (
+                            <button
+                                onClick={() => {
+                                    setSearchTerm('');
+                                    setCurrentPage(1);
+                                }}
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white transition-colors"
+                                aria-label="Clear search"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        )}
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Search products..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 w-full bg-slate-800 border border-slate-700 rounded-lg text-white p-2.5 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                    />
-                </div>
-                <div className="flex items-center gap-2">
-                    <select
-                        value={selectedCategory || ''}
-                        onChange={(e) => {
-                            setSelectedCategory(e.target.value || null);
-                            setCurrentPage(1);
-                        }}
-                        className="bg-slate-800 border border-slate-700 text-white text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block p-2.5"
-                    >
-                        <option value="">All Categories</option>
-                        {categories.map((cat) => (
-                            <option key={cat.name} value={cat.name}>
-                                {cat.name} ({cat.count})
-                            </option>
-                        ))}
-                    </select>
                     <button
                         onClick={() => setIsSidebarOpen(true)}
-                        className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-lg border border-slate-700 transition-colors"
+                        className="md:hidden flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-3 rounded-lg border border-slate-700 transition-colors"
                     >
                         <FilterIcon className="w-5 h-5" />
-                        <span className="hidden sm:inline">Filters</span>
+                        <span>Filters</span>
                     </button>
+                </div>
+                
+                {/* Category Filter Buttons */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                    <button
+                        onClick={() => {
+                            setSelectedCategory(null);
+                            setCurrentPage(1);
+                        }}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                            selectedCategory === null
+                                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                : 'bg-slate-800 text-slate-300 hover:bg-slate-700/80'
+                        }`}
+                    >
+                        All Categories
+                    </button>
+                    {categories.map((cat) => (
+                        <button
+                            key={cat.name}
+                            onClick={() => {
+                                setSelectedCategory(selectedCategory === cat.name ? null : cat.name);
+                                setCurrentPage(1);
+                            }}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                                selectedCategory === cat.name
+                                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700/80'
+                            }`}
+                        >
+                            {cat.name} ({cat.count})
+                        </button>
+                    ))}
                 </div>
             </div>
 
@@ -2476,9 +2734,22 @@ const ServicesPage: React.FC = () => {
                 <div className="flex gap-2">
                     <button
                         onClick={handlePriceFilter}
-                        className="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-2.5 px-4 rounded-lg transition-colors"
+                        disabled={isLoading}
+                        className={`w-full flex items-center justify-center gap-2 ${
+                            isLoading ? 'bg-amber-600' : 'bg-amber-500 hover:bg-amber-600'
+                        } text-black font-medium py-2.5 px-4 rounded-lg transition-all`}
                     >
-                        Apply Price Filter
+                        {isLoading ? (
+                            <>
+                                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Applying...
+                            </>
+                        ) : (
+                            'Apply Price Filter'
+                        )}
                     </button>
                     {isFilterApplied && (
                         <button
