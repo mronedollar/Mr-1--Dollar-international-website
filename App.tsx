@@ -1375,7 +1375,8 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         <li className="flex items-start text-slate-400">
                             <PhoneIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
                             <div>
-                                <a href="https://wa.me/+27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
+                                <a href="https://wa.me/+27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a> / 
+                                <a href="https://wa.me/+27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
                             </div>
                         </li>
                         <li className="flex items-start text-slate-400">
@@ -1612,7 +1613,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                     Subscribe to our YouTube channel for the latest trade ideas, market analysis, and educational content.
                                 </p>
                                 <a 
-                                    href="https://www.youtube.com/@MrOneDollarInternational" 
+                                    href="https://www.youtube.com/@mr1dollar572" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center text-amber-400 hover:text-amber-300 font-medium transition-colors group"
