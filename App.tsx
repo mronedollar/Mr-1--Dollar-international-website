@@ -58,12 +58,12 @@ const servicesData: Product[] = [
     { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
     { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
     { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
-    { id: 8, name: "Full Course", price: 879.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader.", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q?d2c=true" },
+    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer!", checkoutUrl: "https://whop.com/mr1dollar-international/full-course-85/" },
     { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
     { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
     { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
     { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
-    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution." },
+    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "https://whop.com/checkout/plan_EoyvAo4ReKJhi" },
     { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: 'https://i.ibb.co/BK7gWpRY/forex-trading.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
 ];
 
@@ -373,6 +373,84 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
 );
 
 
+const BlackFridayPromo = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="mb-8">
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between cursor-pointer"
+            >
+                <span className="text-lg font-bold">🎁 Open to see a special Black Friday offer!</span>
+                <svg 
+                    className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            
+            {isOpen && (
+                <div className="mt-4 bg-gradient-to-br from-purple-900/50 to-pink-900/50 border border-purple-500/30 rounded-xl p-6 shadow-xl animate-fadeIn">
+                    <h3 className="text-2xl font-bold text-center text-yellow-400 mb-4">Black Friday x Funded7</h3>
+                    <p className="text-center text-gray-200 mb-6">Exclusive Black Friday offer powered by Mr One Dollar & Funded7.</p>
+                    
+                    <div className="bg-black/50 border border-yellow-500/30 rounded-lg p-4 mb-6">
+                        <h4 className="text-lg font-bold text-yellow-400 mb-3 text-center">🔥 BLACK FRIDAY SPECIAL 🔥</h4>
+                        <p className="text-gray-200 mb-4">
+                            This Black Friday is for the traders who want to level up — FAST. Funded7 just dropped a deal that removes every excuse and puts you directly in position to win BIG.
+                        </p>
+                        <p className="text-yellow-300 font-medium mb-4">For the first time ever:</p>
+                        <ul className="space-y-2 mb-4">
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 mr-2">🎯</span>
+                                <span>Buy 1 Challenge → Get 1 FREE</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 mr-2">🎯</span>
+                                <span>PLUS Free Access to Trade Directly with The Alpha, Tinyiko Miyambo</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-yellow-400 mr-2">🎯</span>
+                                <span>CODE: <span className="font-bold text-yellow-300">DOLLAR</span></span>
+                            </li>
+                        </ul>
+                        <p className="text-gray-200 mb-4">
+                            This is how ordinary traders break into the funded world with confidence, support, and a real blueprint that comes from proven results — not guesswork.
+                        </p>
+                        <p className="font-semibold text-yellow-300 mb-3">Why this matters:</p>
+                        <ul className="space-y-2 mb-4">
+                            {['Double your chances of passing', 'Double your path to payouts', 'Learn directly from the Alpha you trust', 'Trade smarter, not harder', 'Only available during Black Friday'].map((item, index) => (
+                                <li key={index} className="flex items-center">
+                                    <span className="text-yellow-400 mr-2">⚡</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="text-gray-200 italic mb-4">
+                            If you've ever said you want to change your financial life — this is the moment the door opens. Take the leap. Get your accounts. Get your access. Let's build a powerful end to the year.
+                        </p>
+                        <div className="text-center mt-6">
+                            <a 
+                                href="https://my.funded7.com/en/sign-up?affiliateId=mr1dollar" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-black font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
+                            >
+                                Get Your Funded7 Challenge
+                                <span className="ml-2 px-2 py-1 bg-black/20 rounded text-sm font-mono">CODE:DOLLAR</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
 const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurrentPage }) => {
     const partners = [
         // Brokers
@@ -436,64 +514,90 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         };
     }, []);
 
-    // PrimeXBT Competition Card
-    const CompetitionCard = () => (
-        <div className="relative group overflow-visible rounded-xl bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 p-5 transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:border-amber-400/40 h-full w-full max-w-md mx-auto">
-            <div className="absolute inset-0 overflow-visible">
-                <img 
-                    src="https://i.ibb.co/B2sbNZRc/trophy.png" 
-                    alt="Trophy" 
-                    className="absolute right-0 bottom-0 h-32 w-auto opacity-20 transform translate-x-0 translate-y-0"
-                />
-            </div>
-            <div className="relative z-10">
-                <div className="flex items-center mb-4">
+    // Trading Competition Card - PrimeXBT Themed
+    const CompetitionCard = () => {
+        const [isExpanded, setIsExpanded] = useState(false);
+        
+        return (
+        <div className="bg-gradient-to-br from-blue-900/80 to-black border border-blue-700/50 hover:border-blue-500/70 rounded-xl p-5 transition-all duration-300 hover:shadow-lg h-full flex flex-col group">
+            <div className="flex items-center mb-2">
+                <div className="p-1.5 bg-blue-600/20 rounded-lg mr-3 group-hover:bg-blue-500/30 transition-colors">
                     <img 
                         src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" 
-                        alt="PrimeXBT Logo" 
-                        className="h-8 mr-3"
+                        alt="PrimeXBT" 
+                        className="h-5 w-auto"
                     />
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
-                        Trading Competition
-                    </h3>
                 </div>
-                <p className="text-slate-300 text-sm mb-6">
-                    The time has come!!! The one with the highest score in trading volume takes the cup home and joins us at the next Trade-Cation 
-                </p>
-                <div className="space-y-3">
-                    <a 
-                        href="https://primexbt.me/competitions/MrOneDollar" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300 transform hover:scale-[1.02]"
-                    >
-                        Join Competition
-                    </a>
-                    <a 
-                        href="#" 
+                <h3 className="text-lg font-bold text-blue-300 group-hover:text-blue-200 transition-colors">
+                    Trading Competition
+                </h3>
+            </div>
+            <p className="text-blue-100 text-xs mb-1 font-medium">
+                Trading Challenge
+            </p>
+            <p className="text-blue-100/80 text-xs mb-3">
+                Compete & win a full paid Trade-Cation!
+            </p>
+            <div className="space-y-2 mb-3">
+                <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
+                    <span className="mr-2">🏆</span>
+                    <span className="text-blue-100 text-xs">Win a Trade-Cation</span>
+                </div>
+                <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
+                    <span className="mr-2">🥇</span>
+                    <span className="text-blue-100 text-xs">Top 3 traders with highest volume win !!</span>
+                </div>
+            </div>
+            <div className="bg-blue-800/40 border border-blue-700/60 rounded-lg p-2 mb-3 text-center group-hover:border-blue-500/70 transition-colors">
+                <span className="text-blue-100 text-xs font-medium">Ends: 17 Feb 2026</span>
+            </div>
+            <div className="mt-1 space-y-2">
+                <a 
+                    href="https://primexbt.me/competitions/MrOneDollar" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-medium py-1.5 px-4 rounded-lg text-center text-xs transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-blue-500/20 flex items-center justify-center"
+                >
+                    <span>Join Now</span>
+                    <svg className="w-3 h-3 ml-1.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+                <div className="w-full">
+                    <button 
                         onClick={(e) => {
                             e.preventDefault();
-                            setCurrentPage('events');
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            setIsExpanded(!isExpanded);
                         }}
-                        className="block w-full bg-transparent border border-amber-500/30 hover:border-amber-400/50 text-amber-400 hover:text-amber-300 font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300"
+                        className="w-full bg-transparent border border-blue-500/40 hover:border-blue-400/60 text-blue-300 hover:text-blue-200 font-medium py-1.5 px-4 rounded-lg text-center text-xs transition-all duration-300 group-hover:bg-blue-900/20 flex items-center justify-center"
                     >
-                        Learn More about Trade-Cations
-                    </a>
-                </div>
-                <div className="mt-4 text-amber-400/80 text-sm font-medium">
-                    
+                        {isExpanded ? 'Show Less' : 'Learn More'}
+                        <svg 
+                            className={`w-3 h-3 ml-1 transition-transform duration-300 ${isExpanded ? 'transform rotate-180' : ''}`}
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    {isExpanded && (
+                        <div className="mt-2 p-3 bg-blue-900/30 border border-blue-700/50 rounded-lg text-blue-100 text-xs">
+                            The time has come!!! The one with the highest score in trading volume takes the cup home and joins us at the next Trade-Cation🔥🔥🔥
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     );
+    };
     
     return (
         <section ref={sectionRef} className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 animate-fadeIn relative overflow-hidden">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden opacity-30">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-5"></div>
-                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-amber-500/5 via-transparent to-blue-500/5 animate-spin-slow"></div>
+                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-transparent via-amber-500/30 to-transparent animate-spin-slow"></div>
             </div>
             
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -519,18 +623,20 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                 </svg>
                                 <span className="text-sm font-semibold tracking-wide text-white uppercase">Broker</span>
                             </div>
-                            <span className="text-slate-400 text-sm">Trade with the best broker with instant withdrawals</span>
                         </div>
                         
-                        <div className="flex flex-col md:flex-row gap-6 items-start">
-                            <div className="w-full">
-                                <div className="grid grid-cols-1 gap-6">
+                        <div className="flex flex-col md:flex-row gap-6 items-stretch">
+                            <div className="w-full flex-1 h-full">
+                                <div className="h-full">
                                     {partners
                                         .filter(partner => partner.category === 'Brokers')
                                         .map((partner, i) => (
-                                            <div 
+                                            <a 
                                                 key={partner.name}
-                                                className="bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col"
+                                                href={partner.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col group`}
                                                 style={{
                                                     animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
                                                 }}
@@ -545,74 +651,56 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                         Broker
                                                     </span>
                                                 </div>
-                                                <h3 className="text-xl font-bold mb-2 text-amber-400">
+                                                <h3 className="text-xl font-bold text-amber-400 mb-2">
                                                     {partner.name}
                                                 </h3>
-                                                <p className="text-slate-300 text-sm mb-4">
+                                                <p className="text-slate-300 text-sm mb-2 line-clamp-3">
                                                     {partner.description}
                                                 </p>
-                                                
-                                                {/* PrimeXBT Benefits */}
-                                                <div className="mt-auto pt-6 border-t border-amber-500/20">
-                                                    <h4 className="text-base font-bold text-amber-400 mb-3">
-                                                        Why Trade with PrimeXBT?
-                                                    </h4>
-                                                    <ul className="space-y-2 text-slate-300 text-sm mb-4">
-                                                        <li className="flex items-start">
-                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                                                            </svg>
-                                                            <span>Ultra-competitive fees and tight spreads</span>
-                                                        </li>
-                                                        <li className="flex items-start">
-                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                                                            </svg>
-                                                            <span>Trade crypto, forex, indices & commodities</span>
-                                                        </li>
-                                                        <li className="flex items-start">
-                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                                                            </svg>
-                                                            <span>Up to 1000x leverage on select assets</span>
-                                                        </li>
-                                                        <li className="flex items-start">
-                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                                                            </svg>
-                                                            <span>Deep liquidity & instant withdrawals</span>
-                                                        </li>
-                                                        <li className="flex items-start">
-                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                                                            </svg>
-                                                            <span>Professional-grade trading tools & charts</span>
-                                                        </li>
-                                                        <li className="flex items-start">
-                                                            <svg className="w-4 h-4 text-amber-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                                                            </svg>
-                                                            <span>24/7 customer support & secure platform</span>
-                                                        </li>
-                                                    </ul>
-                                                    <a 
-                                                        href={partner.link}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2.5 px-4 rounded-lg text-center transition-all duration-300 transform hover:scale-[1.02] text-sm"
-                                                    >
-                                                        Start Trading Now
-                                                    </a>
+                                                <div className="grid grid-cols-2 gap-2 mb-6 text-xs">
+                                                    <div className="flex items-center">
+                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span className="truncate">1000x Leverage</span>
+                                                    </div>
+                                                    <div className="flex items-center">
+                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span className="truncate">Low Fees</span>
+                                                    </div>
+                                                    <div className="flex items-center">
+                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span className="truncate">100+ Assets</span>
+                                                    </div>
+                                                    <div className="flex items-center">
+                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        <span className="truncate">24/7 Support</span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div className="mt-auto flex justify-between items-center">
+                                                    <span className="inline-flex items-center text-sm font-medium text-amber-400 group-hover:text-amber-300 transition-colors">
+                                                        
+                                                        Start Trading
+                                                        <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
                                         ))}
                                 </div>
                             </div>
                             
                             {/* PrimeXBT Competition Card */}
-                            <div className="w-full md:w-auto relative mt-6 md:mt-0">
+                            <div className="w-full md:w-[400px] flex-shrink-0 relative mt-6 md:mt-0 h-full">
                                 <div className="hidden md:block absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent"></div>
-                                <div className="w-full">
+                                <div className="w-full h-full flex flex-col">
                                     <CompetitionCard />
                                 </div>
                             </div>
@@ -628,7 +716,6 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                 </svg>
                                 <span className="text-sm font-semibold tracking-wide text-white uppercase">Prop-firms</span>
                             </div>
-                            <span className="text-slate-400 text-sm">Get funded by top proprietary trading firms</span>
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -649,10 +736,12 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         amber: 'text-amber-400'
                                     };
                                     
+                                    const [showPromo, setShowPromo] = useState(false);
+                                    
                                     return (
                                         <div 
                                             key={partner.name}
-                                            className={`bg-gradient-to-br ${colorMap[partner.color as keyof typeof colorMap]} border rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full`}
+                                            className={`group bg-gradient-to-br ${colorMap[partner.color as keyof typeof colorMap]} border rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col`}
                                             style={{
                                                 animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
                                             }}
@@ -670,20 +759,97 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                             <h3 className={`text-xl font-bold mb-2 ${textColorMap[partner.color as keyof typeof textColorMap]}`}>
                                                 {partner.name}
                                             </h3>
-                                            <p className="text-slate-300 text-sm mb-4">
+                                            <p className="text-slate-300 text-sm mb-2 line-clamp-3">
                                                 {partner.description}
                                             </p>
-                                            <a 
-                                                href={partner.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={`inline-flex items-center text-sm font-medium ${textColorMap[partner.color as keyof typeof textColorMap]} hover:underline`}
-                                            >
-                                                Get Funded
-                                                <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                            </a>
+                                            
+                                            {/* Black Friday Button - Only for Funded7 */}
+                                            {partner.name === 'Funded7' && (
+                                                <div className="mt-2 mb-3">
+                                                    <button 
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setShowPromo(!showPromo);
+                                                        }}
+                                                        className="w-full bg-gradient-to-r from-amber-500/10 to-amber-600/20 border border-amber-500/40 hover:border-amber-400/60 text-amber-300 hover:text-amber-200 font-medium py-1.5 px-3 rounded-lg text-center text-xs transition-all duration-300 flex items-center justify-center gap-1.5"
+                                                    >
+                                                        <span>Black Friday Special</span>
+                                                        <svg 
+                                                            className={`w-3 h-3 transition-transform duration-200 ${showPromo ? 'transform rotate-180' : ''}`}
+                                                            fill="none" 
+                                                            viewBox="0 0 24 24" 
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            )}
+                                            
+                                            <div className="mt-auto">
+                                                <a 
+                                                    href={partner.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center text-sm font-medium ${textColorMap[partner.color as keyof typeof textColorMap]} group-hover:underline"
+                                                >
+                                                    Get Funded
+                                                    <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            
+                                            {/* Black Friday Promo Content - Only for Funded7 */}
+                                            {partner.name === 'Funded7' && showPromo && (
+                                                <div className="mt-4 pt-4 border-t border-slate-700/50">
+                                                    <div className="space-y-3 text-xs">
+                                                        <div className="flex items-start gap-2">
+                                                            <span className="text-amber-400 mt-0.5">🔥</span>
+                                                            <p className="text-amber-100 font-medium">BLACK FRIDAY SPECIAL</p>
+                                                        </div>
+                                                        <p className="text-slate-200">Exclusive offer powered by Mr One Dollar & Funded7</p>
+                                                        <div className="space-y-2 mt-3">
+                                                            <div className="flex items-start gap-2">
+                                                                <span className="text-amber-400">🎯</span>
+                                                                <span>Buy 1 Challenge → Get 1 FREE</span>
+                                                            </div>
+                                                            <div className="flex items-start gap-2">
+                                                                <span className="text-amber-400">🎯</span>
+                                                                <span>PLUS Free Access to Trade Directly with The Alpha, Tinyiko Miyambo</span>
+                                                            </div>
+                                                            <div className="flex items-start gap-2">
+                                                                <span className="text-amber-400">🎯</span>
+                                                                <span>Use code: <span className="font-bold text-amber-300">DOLLAR</span></span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="mt-3 space-y-2">
+                                                            <p className="text-amber-100 font-medium text-xs">Why this matters:</p>
+                                                            {[
+                                                                'Double your chances of passing',
+                                                                'Double your path to payouts',
+                                                                'Learn directly from the Alpha you trust',
+                                                                'Trade smarter, not harder',
+                                                                'Only available during Black Friday'
+                                                            ].map((item, idx) => (
+                                                                <div key={idx} className="flex items-center gap-2 text-slate-200">
+                                                                    <span className="text-amber-400">⚡</span>
+                                                                    <span>{item}</span>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                        <a 
+                                                            href="https://my.funded7.com/en/sign-up?affiliateId=mr1dollar"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="mt-3 block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-medium py-2 px-4 rounded-lg text-center text-xs transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-amber-500/20 flex items-center justify-center"
+                                                        >
+                                                            Get Your Funded7 Challenge
+                                                            <span className="ml-2 px-1.5 py-0.5 bg-black/20 rounded text-xs font-mono">CODE:DOLLAR</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     );
                                 })}
@@ -1229,7 +1395,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.onerror = null;
-                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik01NDkuNjU1IDEyNC4wODNjLTYuMjgxLTIzLjY1LTI0Ljc4Ny00Mi4xLTQ4LjI4NC00OC41OTdDNDU4Ljc4MSA2NCAyODggNjQgMjg4IDY0UzExNy4yMiA2NCA3NC42MjkgNzUuNDg2Yy0yMy40OTcgNi40OTctNDEuOTk1IDI0Ljk0Ny00OC4yODQgNDguNTk3LTExLjQxMiA0Mi44NjctMTEuNDEyIDEzMi4zMjUtMTEuNDEyIDEzMi4zMjVzMCA4OS40NTggMTEuNDEyIDEzMi4zMjVjNi4yODkgMjMuNjUgMjQuNzg3IDQxLjk5NSA0OC4yODQgNDguNTk3QzExNy4yMiA0NDggMjg4IDQ0OCAyODggNDQ4czE3MC43OCAwIDIxMy4zNzItMTEuNDg2YzIzLjQ5Ny02LjU5NyA0Mi4wMDItMjQuOTQ3IDQ4LjI4NC00OC41OTcgMTEuNDEyLTQyLjg2Ny0xMS40MTItMTMyLjMyNSAxMS40MTItMTMyLjMyNXMwLTg5LjQ1OC0xMS40MTItMTMyLjMyNXpNMjMyLjYxNSAzNTQuNDZWMjU3Ljk5bDEzMi43MzggOTguNDYtMTMyLjczOCA5OC40NnoiLz48L3N2Zz4=';
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQuxIDMwLjgxYz0xMjEuNzIgMC0yMjQuMSA5OS4zLTIyNC4xIDIyMS43IDAgMTIyLjQgMTAyLjQgIDIyMS43IDIyNC4xIDIyMS43IDEyMS43IDAgMjI0LjEtOTkuMyAyMjQuMS0yMjEuN0M0NDguMSAxMzAuMSAzNDUuOCAzMC44MSAyMjQuMSAzMC44MXptMCAzNzMuNmMtODMuOSAwLTE1MS45LTY4LjgtMTUxLjktMTUxLjkgMC04My45IDY4LTE1MS45IDE1MS45LTE1MS45czE1MS45IDY4IDE1MS45IDE1MS45YzAgODMuMS02OCAxNTEuOS0xNTEuOSAxNTEuOXptMTI5LjctMzQ4LjJjLTE0LjkgMC0yNy4xLTEyLjItMjcuMS0yNy4xczEyLjItMjcuMSAyNy4xLTI3LjEgMjcuMSAxMi4yIDI3LjEgMjcuMWMwIDE0LjktMTIuMiAyNy4xLTI3LjEgMjcuMXptLTgxLjIgMTIuOGMtMjkuMyAwLTUzLjEgMjMuOS01My4xIDUzLjFzMjMuOSA1My4xIDUzLjEgNTMuMSA1My4xLTIzLjkgNTMuMS01My4xLTIzLjgtNTMuMS01My4xLTUzLjF6bTgxLjIgMTQzYy00OS45IDAtOTAuNS00MC41LTkwLjUtOTAuNXM0MC45LTkwLjUgOTAuNS05MC41IDkwLjUgNDAuNSA5MC41IDkwLjUtNDAuNSA5MC41LTkwLjUgOTAuNXptMC0xNjMuOWMtNDAuNSAwLTczLjQgMzIuOS03My40IDczLjRzMzIuOSA3My40IDczLjQgNzMuNCA3My40LTMyLjkgNzMuNC03My40LTMzLTczLjQtNzMuNC03My40eiIvPjwvc3ZnPg==';
                                 }}
                             />
                         </a>
@@ -1241,7 +1407,19 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.onerror = null;
-                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQuxIDMwLjgxYz0xMjEuNzIgMC0yMjQuMSA5OS4zLTIyNC4xIDIyMS43IDAgMTIyLjQgMTAyLjQgIDIyMS43IDIyNC4xIDIyMS43IDEyMS43IDAgMjI0LjEtOTkuMyAyMjQuMS0yMjEuN0M0NDguMSAxMzAuMSAzNDUuOCAzMC44MSAyMjQuMSAzMC44MXptMCAzNzMuNmMtODMuOSAwLTE1MS45LTY4LjgtMTUxLjktMTUxLjkgMC04My45IDY4LTE1MS45IDE1MS45LTE1MS45czE1MS45IDY4IDE1MS45IDE1MS45YzAgODMuMS02OCAxNTEuOS0xNTEuOSAxNTEuOXptMTI5LjctMzQ4LjJjLTE0LjkgMC0yNy4xLTEyLjItMjcuMS0yNy4xczEyLjItMjcuMSAyNy4xLTI3LjEgMjcuMSAxMi4yIDI3LjEgMjcuMWMwIDE0LjktMTIuMiAyNy4xLTI3LjEgMjcuMXptLTgxLjIgMTIuOGMtMjkuMyAwLTUzLjEgMjMuOS01My4xIDUzLjFzMjMuOSA1My4xIDUzLjEgNTMuMSA1My4xLTIzLjkgNTMuMS01My4xLTIzLjgtNTMuMS01My4xLTUzLjF6bTgxLjIgMTQzYy00OS45IDAtOTAuNS00MC41LTkwLjUtOTAuNXM0MC41LTkwLjUgOTAuNS05MC41IDkwLjUgNDAuNSA5MC41IDkwLjUtNDAuNSA5MC41LTkwLjUgOTAuNXptMC0xNjMuOWMtNDAuNSAwLTczLjQgMzIuOS03My40IDczLjRzMzIuOSA3My40IDczLjQgNzMuNCA3My40LTMyLjkgNzMuNC03My40LTMzLTczLjQtNzMuNC03My40eiIvPjwvc3ZnPg==';
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQsMTI4YzUyLjkzLDAsNTkuMjcsMC4yNyw3OS44MywxLjQ5YzE1Ljg2LDAuOTUsMjQuNDU0LDQuMiwzMy41NzQsOC41NmM5LjYzLDQuNjUsMTcuNTM0LDEwLjg5LDI1LjE0NCwxOC45N2M3LjYxLDguMDgsMTQuMzIxLDE3LjgxLDE4Ljk3LDI1LjE0YzQuMzYsOS4xMyw3LjYxLDE3LjcxLDguNTYsMzMuNTdjMS4yNiwyMC41NiwxLjQ5LDI2LjksMS40OSw3OS44M3MtMC4yNyw1OS4yNy0xLjQ5LDc5LjgzYy0wLjk1LDE1Ljg2LTQuMiwyNC40NTQtOC41NiwzMy41NzRjLTQuNjUsOS42My0xMC44OSwxNy41MzQtMTguOTcsMjUuMTRjLTguMDgsNy42MS0xNy44MSwxNC4zMjEtMjUuMTQsMTguOTdjLTkuMTMsNC4zNi0xNy43MSw3LjYxLTMzLjU3LDguNTZjLTIwLjU2LDEuMjYtMjYuOSwxLjQ5LTc5LjgzLDEuNDlzLTU5LjI3LTAuMjctNzkuODMtMS40OWMtMTUuODYtMC45NS0yNC40NTQtNC4yLTMzLjU3NC04LjU2Yy01LjktMTIuNy0xMC44OS0yNS4xLTEwLjktNDQuMWMwLTE2LjEzLDEzLjExLTI5LjI0LDI5LjI0LTI5LjI0aC00MGMtMTYuMTMsMC0yOS4yNCwxMy4xMS0yOS4yNCwyOS4yNGgtMTZjMC00My4yMiwzNC45OC03OC4yLDc4LjItNzguMnM3OC4yLDM0Ljk4LDc4LjIsNzguMnMtMzQuOTgsNzguMi03OC4yLDc4LjJjLTE2LjEzLDAtMjkuMjQsMTMuMTEtMjkuMjQsMjkuMjR2MTZjMCwxNi4xMywxMy4xMSwyOS4yNCwyOS4yNCwyOS4yNGM3Mi4wNywwLDEzMC42LTU4LjUzLDEzMC42LTEzMC42UzI5Ni4wNywyMDguMiwyMjQsMjA4LjJ6IE0zODQuMSwxMThjMCwxNi43Ny0xMy42LDMwLjM3LTMwLjM3LDMwLjM3Yy0xNi43NywwLTMwLjM3LTEzLjYtMzAuMzctMzAuMzdjMC0xNi43NywxMy42LTMwLjM3LDMwLjM3LTMwLjM3QzM3MC41LDg3LjYzLDM4NC4xLDEwMS4yMywzODQuMSwxMTh6Ii8+PC9zdmc+';
+                                }}
+                            />
+                        </a>
+                        <a href="https://t.me/mr1dollarinternational" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                            <img 
+                                src="https://i.ibb.co/6cxvssxN/telegram-icon.png" 
+                                alt="Telegram Channel" 
+                                className="w-7 h-7 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgNTEyIDUxMiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMTE5LjcgMzA4LjljLTMuMiA3LjItNy44IDkuMS0xNS44IDUuN2wtNDMuNS0zMy4yLTIwLjcgMjAuMiA3LjQgNjguMWMxLjIgNy4yLTIsMTAuMS05LjEgNi4zbC0xMjAtNzUuNi01MS43IDQ5LjVjLTEuNyAxLjctMy4yIDMuMi02LjQgMy4ybC0uOS0xMy40IDUxLjMtNDYuNC0xMDUuNi05MyA0LjctMTMuOSA4My4yIDc4LjMgMTE3LjQtMzQuNGMxMC4yLTIuOSAxMC4yLTEwLjIgMi4yLTExLjlsLxYwgezAgMHoiLz48L3N2Zz4=';
                                 }}
                             />
                         </a>
@@ -1253,12 +1431,12 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.onerror = null;
-                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMGg1di0yaC0xYy0xLjEgMC0yOS4yNC0zLjk1Ljk1LTMuMDFWjE0aC0yVjloDQuNTJMMTAgOC41SDRWNGg2bC0uMDEgMS45OWMxLjQ5LS4yIDIuNzUtLjc2IDMuOS0xLjY2bC0xLjQxLTEuNDFjLTEuOTUgMS42LTQuNCAyLjU4LTcuMDggMi41OHoiLz48L3N2Zz4=';
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0zODAuOSw5Ny4xQzMzOSw1NS40LDI4My42LDMyLDIyNCwzMkMxMDQuMywzMiw4LDcxLjYsOCwxNjBjMCwyNi4zLDYuNiw1Mi4zLDE5Ljc1LDc1TDE2LDQzOGwxMDcuNy0yOC41YzI0LjIsMTMuNCw1Mi4yLDEzLjUsNzYuMSwxLjVjMC4xLDAsMC4yLDAsMC4zLDBjMjQuMSwwLDQ2LjgtMTAuMSw2My45LTI4LjRjMTcuMS0xOC4zLDI2LjUtNDIuOSwyNi41LTY5LjNDMjMyLjgsMTQxLjEsMzExLjgsMTEwLjEsMzgwLjksOTcuMXpNMjI0LDQwMGMtMjYuNCwwLTUxLjUtMTEuMS02OS4yLTMwLjVjLTExLjUtMTIuNy0xNy44LTI5LjMtMTcuOC00Ny40YzAtMzguMSwzMS02OS4xLDY5LTY5LjFjMTguMSwwLDM0LjgsNi45LDQ3LjQsMTguM2MxMi42LDExLjQsMTkuNSwyNy4xLDE5LjUsNDQuMUMyODEuOCwzNjksMjUwLjgsNDAwLDIyNCw0MDB6IE0zNDguMiwzNDkuMWMtMTYuNCwxOC0zOS43LDI4LjEtNjQuMiwyOC4xYy0xMy44LDAtMjcuMS00LjEtMzguNC0xMS43bC0zLjktMi4zbC00MC4yLDEwLjVsMTAuNy0zOS4xbC0yLjQtMy45Yy03LjgtMTEuNy0xMi0yNS4xLTEyLTM4LjdjMC0xMy43LDQuMi0yNy4xLDEyLTM4LjdjNy44LTExLjcsMTkuMS0yMC43LDMyLjUtMjUuNmwzLjItMS4xbDEuNSwzLjVjNC42LDEwLjcsNy4xLDIyLDcuNSwzMy41YzAuMywxMS40LTEuOCwyMi44LTYuNCwzMy4yYy0wLjEsMC4yLTAuMSwwLjQtMC4yLDAuNmwtMS43LDMuNGwzLjIsMS45YzExLjgsNy4xLDI1LjIsMTAuOCwzOC44LDEwLjhjMTMuNywwLDI3LjEtMy44LDM4LjctMTEuNGwzLjItMS45bDMuNCwxLjdDMzMzLjMsMzMzLjIsMzQxLjIsMzQxLjIsMzQ4LjIsMzQ5LjF6Ii8+PC9zdmc+';
                                 }}
                             />
                         </a>
                     </div>
-                     <p className="mt-4 text-slate-400 text-sm">Join our WhatsApp Community!</p>
+                     <p className="mt-4 text-slate-400 text-sm">Join our communities on WhatsApp and Telegram!</p>
                 </div>
             </div>
             <div className="mt-8 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
@@ -1333,7 +1511,7 @@ const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[],
     }, [images.length, interval]);
 
     return (
-        <div className="relative w-full h-48 md:h-56 lg:h-64 overflow-hidden rounded-t-lg">
+        <div className="relative w-full h-48 md:h-56 lg:h-64 overflow-hidden rounded-t-lg bg-black">
             {images.map((image, index) => (
                 <div 
                     key={index}
@@ -1342,9 +1520,10 @@ const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[],
                     <img 
                         src={image.url} 
                         alt={`Tradecation ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover md:object-contain lg:object-contain"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
+                            target.onerror = null;
                             target.src = 'https://via.placeholder.com/800x450?text=Tradecation+Image';
                         }}
                     />
@@ -1442,36 +1621,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                     <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                     </svg>
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Trading Community */}
-                        <div className="glass-card p-8 rounded-lg">
-                            <div className="flex items-center mb-6">
-                                <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <h2 className="text-3xl font-bold text-white">Trading Community</h2>
-                            </div>
-                            <p className="text-slate-300 mb-6">
-                                Our trading community is a vibrant space where traders of all levels come together to share insights, strategies, and support each other's growth.
-                            </p>
-                            <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
-                                <h3 className="text-xl font-semibold text-amber-400 mb-3">Community Benefits</h3>
-                                <p className="text-slate-300 mb-6">
-                                    Network with like-minded traders, share your trades, and learn from experienced professionals in a supportive environment.
-                                </p>
-                                <a 
-                                    href="https://chat.whatsapp.com/Ksqy2vkb7FvDo1lwovJIYS" 
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg"
-                                >
-                                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M17.498 14.382v3.3a1 1 0 01-.9 1.1c-5.2.5-10.4-2.4-11.8-7.3a11.6 11.6 0 011.7-8.1 1 1 0 011.6.2l2.1 3.5a1 1 0 01-.1 1.2l-1 1.2a8.1 8.1 0 003.9 3.4l1.2-1a1 1 0 011.3 0l3.5 2.1a1 1 0 01.3 1.1z"/>
-                                    </svg>
-                                    Join Our WhatsApp Group
                                 </a>
                             </div>
                         </div>
@@ -1599,6 +1748,10 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                 </div>
                             </div>
                         </div>
+                        
+                        {/* Support & Community Section */}
+                        <SupportSection />
+                        
                     </div>
                 </div>
             </section>
@@ -1653,7 +1806,7 @@ const EventsPage: React.FC = () => {
                     ]
                 }
             ],
-            price: "R15,354.99 (≈ $900)",
+            price: "R15,089 (≈ $879.99)",
             date: "Next Intake Coming Soon",
             location: "Luxury Retreat Location",
             image: "/mr$1 testimonials/trade cation poster.jpg",
@@ -1664,7 +1817,7 @@ const EventsPage: React.FC = () => {
             id: 2,
             title: "🎯 NFP Trading Masterclass",
             description: "Master the most volatile trading day of the month with our expert-led NFP trading session. Learn to profit from the biggest market-moving economic report.",
-            price: "$16.00 (≈ R300)",
+            price: "R279 (≈ $15.99)",
             date: "Every first Friday of a month",
             time: "14:30 PM - 15:30 PM (SAST)",
             location: "Physical or Online",
@@ -1752,17 +1905,27 @@ const EventsPage: React.FC = () => {
                                             </div>
                                         </div>
                                         
-                                        <a 
-                                            href={event.whatsappLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                                        >
-                                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M17.498 14.382v3.3a1 1 0 01-.9 1.1c-5.2.5-10.4-2.4-11.8-7.3a11.6 11.6 0 011.7-8.1 1 1 0 011.6.2l2.1 3.5a1 1 0 01-.1 1.2l-1 1.2a8.1 8.1 0 003.9 3.4l1.2-1a1 1 0 011.3 0l3.5 2.1a1 1 0 01.3 1.1z"/>
-                                            </svg>
-                                            Enquire on WhatsApp
-                                        </a>
+                                        <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                                            <a 
+                                                href={event.id === 1 
+                                                    ? "https://whop.com/mr1dollar-international/full-course-85/" 
+                                                    : "https://whop.com/checkout/plan_EoyvAo4ReKJhi"
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 flex-1 text-center"
+                                            >
+                                                Buy Now
+                                            </a>
+                                            <a 
+                                                href={event.whatsappLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 flex-1 text-center"
+                                            >
+                                                Enquire
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1824,7 +1987,7 @@ const EventsPage: React.FC = () => {
                                         </div>
                                         <div>
                                             <p className="text-slate-400">Price</p>
-                                            <p className="text-amber-400 font-bold">$16.00 (≈ R300)</p>
+                                            <p className="text-amber-400 font-bold">$15.99 (≈ R279)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -2099,6 +2262,7 @@ const TeamPage: React.FC = () => {
         { name: "Kennedy. M", role: "Technical Analyst" },
         { name: "Tebogo. M", role: "Technical Support" },
         { name: "Mojalefa. P", role: "Technical Support" },
+        { name: "Bruce. M", role: "Technical Analyst" },
     ];
 
     return (
@@ -2195,6 +2359,127 @@ const ContactPage: React.FC = () => {
                         </ul>
                     </div>
                 </div>
+                <SupportSection />
+            </div>
+        </div>
+    );
+};
+
+// Support Section Component
+const SupportSection: React.FC = () => {
+    const zoomDetails = {
+        meetingLink: "https://us06web.zoom.us/j/81165255532?pwd=ofshvQl8ruaMygqfgxAKaQ8eKbK1i2.1",
+        meetingId: "811 6525 5532",
+        passcode: "304559"
+    };
+
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(`Copied to clipboard: ${text}`);
+        });
+    };
+
+    return (
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+            <div className="text-center mb-12">
+                <h2 className="text-4xl font-extrabold text-white">Support & Community</h2>
+                <div className="mt-4 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Telegram Community */}
+                <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-blue-400/50 transition-all duration-300">
+                    <div className="flex items-center mb-4">
+                        <div className="bg-blue-500/10 p-3 rounded-lg mr-4">
+                            <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.242-1.865-.442-.749-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-semibold text-white">Join Our Community</h3>
+                    </div>
+                    <p className="text-slate-300 text-sm mb-4">Connect with fellow traders, share insights, and stay updated with the latest market trends.</p>
+                    <a 
+                        href="https://t.me/mr1dollarinternational" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
+                    >
+                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.242-1.865-.442-.749-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        Join Telegram Group
+                    </a>
+                </div>
+
+                {/* Zoom Support */}
+                <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-blue-400/50 transition-all duration-300">
+                    <div className="flex items-center mb-4">
+                        <div className="bg-blue-500/10 p-3 rounded-lg mr-4">
+                            <img 
+                                src="https://i.ibb.co/Qvx1Vr53/zoom-icon.png" 
+                                alt="Zoom" 
+                                className="w-8 h-8 object-contain"
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.onerror = null;
+                                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjIgNS41YTQuNSA0LjUgMCAwIDAtNC41LTQuNUg0LjVBNC41IDQuNSAwIDAgMCAwIDUuNXYxM2E0LjUgNC41IDAgMCAwIDQuNSA0LjVoMTNhNC41IDQuNSAwIDAgMCA0LjUtNC41di0xM3pNMTcuNSAyYy44IDAgMS41LjcgMS41IDEuNVY2aC0zVjJoMS41ek0yMSA5aC01VjRoLTF2NWgtNXYxaDV2NWgxdi01aDVWOXptLTguNSA2LjV2M2gtMXYtM2gtM3YtMWgzdjNoMXYtM2gzdjFoLTN6Ii8+PC9zdmc+';
+                                }}
+                            />
+                        </div>
+                        <h3 className="text-xl font-semibold text-white">Instant Zoom Support</h3>
+                    </div>
+                    <p className="text-slate-300 text-sm mb-4">Need help? Join our live support session for immediate assistance.</p>
+                    <div className="space-y-3">
+                        <a 
+                            href={zoomDetails.meetingLink}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg text-center transition-colors"
+                        >
+                            Join Zoom Meeting
+                        </a>
+                        <div className="grid grid-cols-2 gap-2">
+                            <button 
+                                onClick={() => copyToClipboard(zoomDetails.meetingId)}
+                                className="bg-slate-700/50 hover:bg-slate-700/70 text-slate-200 text-sm py-2 px-3 rounded transition-colors text-left"
+                            >
+                                <span className="text-slate-400 text-xs block">Meeting ID</span>
+                                {zoomDetails.meetingId}
+                            </button>
+                            <button 
+                                onClick={() => copyToClipboard(zoomDetails.passcode)}
+                                className="bg-slate-700/50 hover:bg-slate-700/70 text-slate-200 text-sm py-2 px-3 rounded transition-colors text-left"
+                            >
+                                <span className="text-slate-400 text-xs block">Passcode</span>
+                                {zoomDetails.passcode}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Technical Analyst Community */}
+                <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-green-400/50 transition-all duration-300">
+                    <div className="flex items-center mb-4">
+                        <div className="bg-green-500/10 p-3 rounded-lg mr-4">
+                            <svg className="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.15-1.758-.867-2.03-.966-.273-.1-.473-.15-.673.15-.197.295-.771.962-.944 1.163-.174.195-.347.21-.644.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.137-.135.3-.345.45-.532.146-.195.194-.338.29-.563.1-.21.049-.394-.025-.54-.075-.15-.674-1.62-.922-2.207-.24-.585-.487-.506-.672-.51-.173-.008-.371-.01-.571-.01-.2 0-.525.06-.8.3-.27.24-1.04 1.005-1.04 2.455s1.07 2.85 1.22 3.045c.15.196 2.1 3.195 5.08 4.485.714.3 1.27.48 1.705.63.714.225 1.37.195 1.89.12.574-.09 1.767-.72 2.015-1.425.255-.705.255-1.29.18-1.41-.075-.135-.27-.21-.57-.36m-5.45 7.443h-.015c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375a9.45 9.45 0 0 1-1.44-5.04c0-5.25 4.29-9.51 9.554-9.51 2.55 0 4.95.99 6.75 2.79 1.8 1.8 2.79 4.2 2.79 6.75-.004 5.26-4.304 9.51-9.555 9.505"/>
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-semibold text-white">Join Our Community</h3>
+                    </div>
+                    <p className="text-slate-300 text-sm mb-4">Connect with fellow traders, share insights, and stay updated with the latest market trends.</p>
+                    <a 
+                        href="https://chat.whatsapp.com/Ksqy2vkb7FvDo1lwovJIYS" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
+                    >
+                        <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.15-1.758-.867-2.03-.966-.273-.1-.473-.15-.673.15-.197.295-.771.962-.944 1.163-.174.195-.347.21-.644.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.137-.135.3-.345.45-.532.146-.195.194-.338.29-.563.1-.21.049-.394-.025-.54-.075-.15-.674-1.62-.922-2.207-.24-.585-.487-.506-.672-.51-.173-.008-.371-.01-.571-.01-.2 0-.525.06-.8.3-.27.24-1.04 1.005-1.04 2.455s1.07 2.85 1.22 3.045c.15.196 2.1 3.195 5.08 4.485.714.3 1.27.48 1.705.63.714.225 1.37.195 1.89.12.574-.09 1.767-.72 2.015-1.425.255-.705.255-1.29.18-1.41-.075-.135-.27-.21-.57-.36m-5.45 7.443h-.015c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375a9.45 9.45 0 0 1-1.44-5.04c0-5.25 4.29-9.51 9.554-9.51 2.55 0 4.95.99 6.75 2.79 1.8 1.8 2.79 4.2 2.79 6.75-.004 5.26-4.304 9.51-9.555 9.505"/>
+                        </svg>
+                        Join WhatsApp Community
+                    </a>
+                </div>
             </div>
         </div>
     );
@@ -2248,17 +2533,31 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
         onAddToCart(product);
     };
     
+    const isFullCourse = product.name.includes("Full Course + Free Tradecation");
+    
     return (
     <>
         <div 
             id={`product-${product.id}`}
-            className={`glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-500/10 transform hover:-translate-y-1 hover:scale-[1.02] relative ${
+            className={`glass-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] relative ${
                 isExpanded ? 'ring-2 ring-amber-400 shadow-lg shadow-amber-500/20' : ''
+            } ${
+                isFullCourse 
+                    ? 'bg-gradient-to-br from-black via-gray-900 to-black border-2 border-amber-400/50 shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] hover:border-amber-300/80 relative overflow-hidden' 
+                    : 'bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-gray-700 hover:border-amber-400/50 hover:shadow-[0_0_20px_rgba(251,191,36,0.1)] transition-all duration-300'
             }`}
         >
+            {isFullCourse && (
+                <>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/20 via-amber-200/10 to-amber-400/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/10 via-amber-200/5 to-amber-400/10 rounded-lg animate-pulse pointer-events-none"></div>
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/5 via-amber-200/2 to-amber-400/5 rounded-lg animate-pulse pointer-events-none" style={{animationDelay: '0.5s'}}></div>
+                </>
+            )}
             {isMentorship && (
                 <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
                     For Course Graduates Only
+// ... (rest of the code remains the same)
                 </div>
             )}
             <div className="relative">
