@@ -2492,6 +2492,16 @@ interface PlatinumProduct extends BaseProduct {
 }
 
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
+    const [imageError, setImageError] = useState(false);
+    const [currentImageUrl, setCurrentImageUrl] = useState(product.imageUrl.startsWith('http') ? product.imageUrl : `/${product.imageUrl}`);
+    
+    const handleImageError = () => {
+        if (!imageError) {
+            setImageError(true);
+            // Fallback to an inline SVG if the image fails to load
+            setCurrentImageUrl('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWEyOTQyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+TXIgJDEgSW50ZXJuYXRpb25hbDwvdGV4dD48L3N2Zz4=');
+        }
+    };
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
@@ -2568,8 +2578,9 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     aria-label="Click to view full size"
                  >
                     <img 
-                        src={product.imageUrl} 
-                        alt={product.name} 
+                        src={currentImageUrl} 
+                        alt={product.name}
+                        onError={handleImageError}
                         className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500" 
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
