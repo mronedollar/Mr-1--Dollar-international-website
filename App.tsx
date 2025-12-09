@@ -29,8 +29,8 @@ interface Product extends BaseProduct {
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: '/images/forex-trading.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
-    { id: 13, name: "Synthetics trade ideas", price: 60.00, category: 'Trade Ideas', imageUrl: '/images/Synthetics%20trade%20ideas.png', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_xyz123?d2c=true" },
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
+    { id: 13, name: "Synthetics trade ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_rumeFlqobZyqj" },
     { 
         id: 2, 
         name: "Platinum Trade Ideas", 
@@ -53,18 +53,18 @@ const servicesData: Product[] = [
         ],
         whatsappLink: "https://wa.me/27676923876?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
     },
-    { id: 3, name: "Diamond Trade Ideas", price: 172.00, category: 'Trade Ideas', imageUrl: '/images/forex-trading.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade signals, advanced market commentary, and priority support from our top analysts.", checkoutUrl: "https://whop.com/checkout/plan_7xl4XRVNSiQ9t?d2c=true" },
-    { id: 4, name: "Private Wealth VIP_Black Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: '/images/forex-trading.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
-    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: '/images/forex-trading.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
-    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: '/images/forex-trading.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
-    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: '/images/forex-trading.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
-    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: '/images/forex-trading.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer!", checkoutUrl: "https://whop.com/mr1dollar-international/full-course-85/" },
-    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: '/images/forex-trading.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
-    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: '/images/forex-trading.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
-    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: '/images/forex-trading.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
-    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: '/images/forex-trading.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
-    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: '/images/forex-trading.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "https://whop.com/checkout/plan_EoyvAo4ReKJhi" },
-    { id: 15, name: "Branded Merchandise", price: 45.00, category: 'Uncategorized', imageUrl: '/images/forex-trading.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit." },
+    { id: 3, name: "Diamond Trade Ideas", price: 179.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts. Initial payment of $179, then just $89.50/month (50% discount) for continued access.", checkoutUrl: "https://whop.com/checkout/plan_qNrnwywYsgp5M" },
+    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
+    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
+    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
+    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
+    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer!", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q" },
+    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/kgYq4tjW/Beginner-Mentorship.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
+    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/XqsD89BR/Intermediate-Mentorship.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
+    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/QCgjx4Pd/Advanced-Mentorship.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
+    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.postimg.cc/Y0MJ8pnh/Currencies-Strategy.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
+    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.postimg.cc/tCmMntjX/NFP-Event-Access.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "https://whop.com/checkout/plan_EoyvAo4ReKJhi" },
+    { id: 15, name: "Branded Merchandise", price: 59.00, category: 'Uncategorized', imageUrl: 'https://i.postimg.cc/y8xCw8Vg/Branded-Merchandise.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit.", checkoutUrl: "https://whop.com/checkout/plan_4Ge1iEh1RHYGm" },
 ];
 
 const testimonialsData = [
@@ -249,7 +249,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
                         <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="block cursor-pointer transform hover:scale-105 transition-transform duration-300">
-                            <img src="https://mr1dollar.co.za/wp-content/uploads/2025/03/cropped-MR1Dollar_mERCHWhite-7.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
+                            <img src="https://i.postimg.cc/J4LgGJnS/Horizontal_Inverse.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
                         </a>
                     </div>
                     <div className="hidden md:block">
@@ -316,64 +316,165 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 
 interface HeroProps {
     setCurrentPage: (page: Page) => void;
+    currentPage: Page;
 }
 
-const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => (
-    <section 
-        className="py-24 sm:py-32 text-center hero-background"
-        style={{
-            backgroundImage: "url('https://i.pinimg.com/1200x/6b/5a/79/6b5a79c00621b21813c3f9feffb67873.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-        } as React.CSSProperties}
-    >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
-            <h2 className="text-amber-400 text-3xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}></h2>
-            <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
-                The Blueprint to the 1% – <br /> Consistently Profitable Traders!!!
-            </h1>
-            <p className="mt-12 max-w-2xl mx-auto text-lg text-slate-400" style={{'--delay': '0.3s'} as React.CSSProperties}>
-                "Designed for traders who refuse to be average. Learn the strategies that put us in the 1%, <span className="text-blue-400">Stay Blue</span> & <span className="text-green-400">Take Profit</span>."
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style={{'--delay': '0.4s'} as React.CSSProperties}>
-                <a 
-                    href="#platinum-promo"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        const element = document.getElementById('platinum-promo');
-                        if (element) {
-                            // Open the promo section
-                            const button = element.querySelector('button');
-                            if (button && !button.getAttribute('aria-expanded') === true) {
-                                button.click();
-                            }
-                            // Scroll to the section
-                            element.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }}
-                    className="w-full sm:w-auto inline-block bg-amber-400 text-black font-bold py-3 px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary"
-                >
-                    Free Trade Ideas | Unlimited
-                </a>
-                <a 
-                    href="/services" 
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentPage('services');
-                        sessionStorage.setItem('expandProductId', '3'); // ID of Diamond Trade Ideas
-                    }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border-2 border-amber-400 text-amber-400 font-bold py-3 px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary"
-                >
-                    💎 Diamond Trade Ideas at $179
-                </a>
-            </div>
-        </div>
-    </section>
-);
+const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
+    const [isZoomPanelOpen, setIsZoomPanelOpen] = useState(false);
 
+    const copyZoomDetail = (label: string, value: string) => {
+        const textToCopy = `${label}: ${value}`;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert(`Copied to clipboard: ${textToCopy}`);
+        });
+    };
+
+    return (
+        <section 
+            className="py-24 sm:py-32 text-center hero-background relative"
+            style={{
+                backgroundImage: "url('https://i.pinimg.com/1200x/6b/5a/79/6b5a79c00621b21813c3f9feffb67873.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            } as React.CSSProperties}
+        >
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
+                <h2 className="text-amber-400 text-3xl font-bold uppercase tracking-widest" style={{'--delay': '0.1s'} as React.CSSProperties}></h2>
+                <h1 className="mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white" style={{'--delay': '0.2s'} as React.CSSProperties}>
+                    The Blueprint to the 1% – <br /> Consistently Profitable Traders!!!
+                </h1>
+                <p className="mt-12 max-w-2xl mx-auto text-lg text-slate-400" style={{'--delay': '0.3s'} as React.CSSProperties}>
+                    "Designed for traders who refuse to be average. Learn the strategies that put us in the 1%, <span className="text-blue-400">Stay Blue</span> & <span className="text-green-400">Take Profit</span>."
+                </p>
+                <div className="mt-10 w-full px-4 sm:px-0">
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto" style={{'--delay': '0.4s'} as React.CSSProperties}>
+                            <a 
+                                href="#platinum-promo"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const element = document.getElementById('platinum-promo');
+                                    if (element) {
+                                        const button = element.querySelector('button');
+                                        if (button && button.getAttribute('aria-expanded') !== 'true') {
+                                            button.click();
+                                        }
+                                        element.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
+                                className="w-full sm:w-auto text-center bg-amber-400 text-black font-bold py-3 px-6 sm:px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary"
+                            >
+                                Free Trade Ideas | Lifetime
+                            </a>
+                            <a 
+                                href="/services" 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage('services');
+                                    sessionStorage.setItem('expandProductId', '3');
+                                }}
+                                className="w-full sm:w-auto text-center border-2 border-amber-400 text-amber-400 font-bold py-3 px-6 sm:px-8 rounded-md hover:bg-amber-400 hover:text-black transition-all duration-300 ease-in-out transform hover:scale-105 btn-secondary flex items-center justify-center gap-2"
+                            >
+                                <span>💎</span>
+                                <span>Diamond Trade Ideas at $179</span>
+                            </a>
+                        </div>
+                        {currentPage === 'home' && (
+                            <div className="w-full flex flex-col items-center">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsZoomPanelOpen((prev) => !prev)}
+                                    aria-haspopup="dialog"
+                                    aria-expanded={isZoomPanelOpen}
+                                    aria-controls="zoom-support-panel"
+                                    className="mt-6 sm:mt-4 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-blue-600/90 hover:bg-blue-500 text-white font-semibold px-6 py-3 shadow-xl backdrop-blur focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-300 animate-bounce"
+                                >
+                                    <span className="">
+                                        <img
+                                            src="https://i.postimg.cc/7YZjFzbK/icons8-zoom-logo-34-1.png"
+                                            alt="Zoom Support"
+                                            className="h-[34px] w-[34px] object-contain"
+                                        />
+                                    </span>
+                                    <span className="text-sm">Instant Zoom Support</span>
+                                </button>
+                                {isZoomPanelOpen && (
+                                    <div
+                                        id="zoom-support-panel"
+                                        role="dialog"
+                                        aria-label="Instant Zoom Support"
+                                        className="mt-4 w-full max-w-lg bg-slate-950/95 border border-blue-500/40 rounded-2xl p-5 text-left shadow-2xl backdrop-blur-sm animate-fadeInUp"
+                                    >
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div>
+                                                <h3 className="text-lg font-semibold text-white">Instant Zoom Support</h3>
+                                                <p className="mt-1 text-sm text-slate-300">Need help? Join our live support session for immediate assistance.</p>
+                                            </div>
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsZoomPanelOpen(false)}
+                                                className="text-slate-400 hover:text-white transition"
+                                                aria-label="Close Zoom support details"
+                                            >
+                                                <CloseIcon className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                        <a
+                                            href="https://us06web.zoom.us/j/81165255532?pwd=ofshvQl8ruaMygqfgxAKaQ8eKbK1i2.1"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="mt-4 inline-flex items-center justify-center gap-2 w-full rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold py-2 transition"
+                                        >
+                                            Join Zoom Meeting
+                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                            </svg>
+                                        </a>
+                                        <div className="mt-3 space-y-2 text-xs text-slate-200">
+                                            <div className="flex items-center justify-between bg-slate-900/60 rounded-lg px-3 py-2">
+                                                <div>
+                                                    <span className="block text-slate-400 uppercase tracking-wide">Meeting ID</span>
+                                                    <p className="text-sm font-semibold text-white">811 6525 5532</p>
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => copyZoomDetail('Meeting ID', '811 6525 5532')}
+                                                    className="ml-3 text-xs font-semibold text-amber-300 hover:text-amber-200 bg-amber-400/10 hover:bg-amber-400/20 rounded-full px-3 py-1 transition-colors"
+                                                >
+                                                    Copy
+                                                </button>
+                                            </div>
+                                            <div className="flex items-center justify-between bg-slate-900/60 rounded-lg px-3 py-2">
+                                                <div>
+                                                    <span className="block text-slate-400 uppercase tracking-wide">Passcode</span>
+                                                    <p className="text-sm font-semibold text-white">304559</p>
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => copyZoomDetail('Passcode', '304559')}
+                                                    className="ml-3 text-xs font-semibold text-amber-300 hover:text-amber-200 bg-amber-400/10 hover:bg-amber-400/20 rounded-full px-3 py-1 transition-colors"
+                                                >
+                                                    Copy
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                {/* Zoom Support Panel handled inline with the button above */}
+            </div>
+        </section>
+    );
+};
+
+// ... (rest of the code remains the same)
 
 const BlackFridayPromo = () => {
+    // ... (rest of the code remains the same)
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -457,11 +558,13 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         {
             name: 'PrimeXBT',
             description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
+
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
             link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1',
             category: 'Brokers',
             color: 'amber'
         },
+
         // Prop Firms
         {
             name: 'Funded7',
@@ -519,7 +622,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         const [isExpanded, setIsExpanded] = useState(false);
         
         return (
-        <div className="bg-gradient-to-br from-blue-900/80 to-black border border-blue-700/50 hover:border-blue-500/70 rounded-xl p-5 transition-all duration-300 hover:shadow-lg h-full flex flex-col group">
+        <div className="bg-gradient-to-br from-blue-900/80 to-black border border-blue-700/50 hover:border-blue-500/70 rounded-xl p-5 transition-all duration-300 hover:shadow-lg h-full min-h-[360px] flex flex-col group">
             <div className="flex items-center mb-2">
                 <div className="p-1.5 bg-blue-600/20 rounded-lg mr-3 group-hover:bg-blue-500/30 transition-colors">
                     <img 
@@ -532,26 +635,28 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     Trading Competition
                 </h3>
             </div>
-            <p className="text-blue-100 text-xs mb-1 font-medium">
-                Trading Challenge
-            </p>
-            <p className="text-blue-100/80 text-xs mb-3">
-                Compete & win a full paid Trade-Cation!
-            </p>
-            <div className="space-y-2 mb-3">
-                <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
-                    <span className="mr-2">🏆</span>
-                    <span className="text-blue-100 text-xs">Win a Trade-Cation</span>
+            <div className="flex flex-col flex-grow">
+                <p className="text-blue-100 text-xs mb-1 font-medium">
+                    Trading Challenge
+                </p>
+                <p className="text-blue-100/80 text-xs mb-3">
+                    Compete & win a full paid Trade-Cation!
+                </p>
+                <div className="space-y-2 mb-3">
+                    <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
+                        <span className="mr-2">🏆</span>
+                        <span className="text-blue-100 text-xs">Win a Trade-Cation</span>
+                    </div>
+                    <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
+                        <span className="mr-2">🥇</span>
+                        <span className="text-blue-100 text-xs">Top 3 traders with highest volume win !!</span>
+                    </div>
                 </div>
-                <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
-                    <span className="mr-2">🥇</span>
-                    <span className="text-blue-100 text-xs">Top 3 traders with highest volume win !!</span>
+                <div className="bg-blue-800/40 border border-blue-700/60 rounded-lg p-2 mb-3 text-center group-hover:border-blue-500/70 transition-colors">
+                    <span className="text-blue-100 text-xs font-medium">Ends: 17 Feb 2026</span>
                 </div>
             </div>
-            <div className="bg-blue-800/40 border border-blue-700/60 rounded-lg p-2 mb-3 text-center group-hover:border-blue-500/70 transition-colors">
-                <span className="text-blue-100 text-xs font-medium">Ends: 17 Feb 2026</span>
-            </div>
-            <div className="mt-1 space-y-2">
+            <div className="mt-3 space-y-2">
                 <a 
                     href="https://primexbt.me/competitions/MrOneDollar" 
                     target="_blank" 
@@ -573,7 +678,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     >
                         {isExpanded ? 'Show Less' : 'Learn More'}
                         <svg 
-                            className={`w-3 h-3 ml-1 transition-transform duration-300 ${isExpanded ? 'transform rotate-180' : ''}`}
+                            className={`w-3 h-3 ml-1 transition-transform duration-200 ${isExpanded ? 'transform rotate-180' : ''}`}
                             fill="none" 
                             viewBox="0 0 24 24" 
                             stroke="currentColor"
@@ -599,7 +704,8 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-5"></div>
                 <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-transparent via-amber-500/30 to-transparent animate-spin-slow"></div>
             </div>
-            
+            <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
+
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <span className="inline-block px-3 py-1 text-sm font-medium bg-amber-500/10 text-amber-400 rounded-full mb-4">
@@ -636,7 +742,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 href={partner.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className={`bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col group`}
+                                                className={`bg-gradient-to-br from-amber-500/10 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full min-h-[360px] flex flex-col group`}
                                                 style={{
                                                     animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1}s both` : 'none'
                                                 }}
@@ -654,34 +760,23 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 <h3 className="text-xl font-bold text-amber-400 mb-2">
                                                     {partner.name}
                                                 </h3>
-                                                <p className="text-slate-300 text-sm mb-2 line-clamp-3">
+                                                <p className="text-slate-300 text-sm mb-5 line-clamp-3">
                                                     {partner.description}
                                                 </p>
-                                                <div className="grid grid-cols-2 gap-2 mb-6 text-xs">
-                                                    <div className="flex items-center">
-                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span className="truncate">1000x Leverage</span>
-                                                    </div>
-                                                    <div className="flex items-center">
-                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span className="truncate">Low Fees</span>
-                                                    </div>
-                                                    <div className="flex items-center">
-                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span className="truncate">100+ Assets</span>
-                                                    </div>
-                                                    <div className="flex items-center">
-                                                        <svg className="w-3 h-3 text-amber-400 mr-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span className="truncate">24/7 Support</span>
-                                                    </div>
+                                                <div className="space-y-5 mb-6 text-xs">
+                                                    {[
+                                                        '1000x Leverage',
+                                                        'Instant Withdrawals',
+                                                        'Minimal Spreads',
+                                                        '24/7 Support'
+                                                    ].map((label) => (
+                                                        <div key={label} className="flex items-center gap-6">
+                                                            <svg className="w-3 h-3 text-amber-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                            <span className="truncate">{label}</span>
+                                                        </div>
+                                                    ))}
                                                 </div>
                                                 <div className="mt-auto flex justify-between items-center">
                                                     <span className="inline-flex items-center text-sm font-medium text-amber-400 group-hover:text-amber-300 transition-colors">
@@ -736,12 +831,19 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         amber: 'text-amber-400'
                                     };
                                     
-                                    const [showPromo, setShowPromo] = useState(false);
-                                    
                                     return (
                                         <div 
                                             key={partner.name}
-                                            className={`group bg-gradient-to-br ${colorMap[partner.color as keyof typeof colorMap]} border rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col`}
+                                            role="link"
+                                            tabIndex={0}
+                                            onClick={() => window.open(partner.link, '_blank', 'noopener,noreferrer')}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' || e.key === ' ') {
+                                                    e.preventDefault();
+                                                    window.open(partner.link, '_blank', 'noopener,noreferrer');
+                                                }
+                                            }}
+                                            className={`group bg-gradient-to-br ${colorMap[partner.color as keyof typeof colorMap]} border rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col cursor-pointer`}
                                             style={{
                                                 animation: isVisible ? `fadeInUp 0.6s ease-out ${i * 0.1 + 0.3}s both` : 'none'
                                             }}
@@ -763,34 +865,12 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 {partner.description}
                                             </p>
                                             
-                                            {/* Black Friday Button - Only for Funded7 */}
-                                            {partner.name === 'Funded7' && (
-                                                <div className="mt-2 mb-3">
-                                                    <button 
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            setShowPromo(!showPromo);
-                                                        }}
-                                                        className="w-full bg-gradient-to-r from-amber-500/10 to-amber-600/20 border border-amber-500/40 hover:border-amber-400/60 text-amber-300 hover:text-amber-200 font-medium py-1.5 px-3 rounded-lg text-center text-xs transition-all duration-300 flex items-center justify-center gap-1.5"
-                                                    >
-                                                        <span>Black Friday Special</span>
-                                                        <svg 
-                                                            className={`w-3 h-3 transition-transform duration-200 ${showPromo ? 'transform rotate-180' : ''}`}
-                                                            fill="none" 
-                                                            viewBox="0 0 24 24" 
-                                                            stroke="currentColor"
-                                                        >
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            )}
-                                            
                                             <div className="mt-auto">
                                                 <a 
                                                     href={partner.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
+                                                    onClick={(e) => e.stopPropagation()}
                                                     className="inline-flex items-center text-sm font-medium ${textColorMap[partner.color as keyof typeof textColorMap]} group-hover:underline"
                                                 >
                                                     Get Funded
@@ -799,57 +879,6 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                     </svg>
                                                 </a>
                                             </div>
-                                            
-                                            {/* Black Friday Promo Content - Only for Funded7 */}
-                                            {partner.name === 'Funded7' && showPromo && (
-                                                <div className="mt-4 pt-4 border-t border-slate-700/50">
-                                                    <div className="space-y-3 text-xs">
-                                                        <div className="flex items-start gap-2">
-                                                            <span className="text-amber-400 mt-0.5">🔥</span>
-                                                            <p className="text-amber-100 font-medium">BLACK FRIDAY SPECIAL</p>
-                                                        </div>
-                                                        <p className="text-slate-200">Exclusive offer powered by Mr One Dollar & Funded7</p>
-                                                        <div className="space-y-2 mt-3">
-                                                            <div className="flex items-start gap-2">
-                                                                <span className="text-amber-400">🎯</span>
-                                                                <span>Buy 1 Challenge → Get 1 FREE</span>
-                                                            </div>
-                                                            <div className="flex items-start gap-2">
-                                                                <span className="text-amber-400">🎯</span>
-                                                                <span>PLUS Free Access to Trade Directly with The Alpha, Tinyiko Miyambo</span>
-                                                            </div>
-                                                            <div className="flex items-start gap-2">
-                                                                <span className="text-amber-400">🎯</span>
-                                                                <span>Use code: <span className="font-bold text-amber-300">DOLLAR</span></span>
-                                                            </div>
-                                                        </div>
-                                                        <div className="mt-3 space-y-2">
-                                                            <p className="text-amber-100 font-medium text-xs">Why this matters:</p>
-                                                            {[
-                                                                'Double your chances of passing',
-                                                                'Double your path to payouts',
-                                                                'Learn directly from the Alpha you trust',
-                                                                'Trade smarter, not harder',
-                                                                'Only available during Black Friday'
-                                                            ].map((item, idx) => (
-                                                                <div key={idx} className="flex items-center gap-2 text-slate-200">
-                                                                    <span className="text-amber-400">⚡</span>
-                                                                    <span>{item}</span>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        <a 
-                                                            href="https://my.funded7.com/en/sign-up?affiliateId=mr1dollar"
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="mt-3 block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-medium py-2 px-4 rounded-lg text-center text-xs transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-amber-500/20 flex items-center justify-center"
-                                                        >
-                                                            Get Your Funded7 Challenge
-                                                            <span className="ml-2 px-1.5 py-0.5 bg-black/20 rounded text-xs font-mono">CODE:DOLLAR</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            )}
                                         </div>
                                     );
                                 })}
@@ -1163,24 +1192,24 @@ const Testimonials: React.FC = () => {
     // Minimum swipe distance to trigger navigation (in pixels)
     const minSwipeDistance = 50;
     
-    // Get all testimonial image files from the public directory
+    // Testimonial images from provided URLs
     const testimonialImages = [
-        'WhatsApp Image 2025-11-03 at 14.53.22_1344b584.jpg',
-        'WhatsApp Image 2025-11-03 at 17.16.03_119b503d.jpg',
-        'WhatsApp Image 2025-11-03 at 17.17.11_57705a92.jpg',
-        'WhatsApp Image 2025-11-03 at 17.18.03_07fdb6eb.jpg',
-        'WhatsApp Image 2025-11-03 at 17.21.00_2b64be7d.jpg',
-        'WhatsApp Image 2025-11-03 at 17.34.02_20e3bebb.jpg',
-        'WhatsApp Image 2025-11-04 at 08.57.18_eb106dae.jpg',
-        'WhatsApp Image 2025-11-04 at 17.24.42_6c99cf04.jpg',
-        'WhatsApp Image 2025-11-06 at 21.37.54_3fe0f787.jpg',
-        'WhatsApp Image 2025-11-07 at 21.18.22_6d830380.jpg',
-        'WhatsApp Image 2025-11-07 at 21.19.45_9c8b041e.jpg',
-        'WhatsApp Image 2025-11-11 at 14.26.31_b730de11.jpg',
-        'WhatsApp Image 2025-11-11 at 14.26.32_f23f739c.jpg',
-        'WhatsApp Image 2025-11-11 at 14.44.38_a5e0cc99.jpg',
-        'WhatsApp Image 2025-11-11 at 15.39.25_0be34331.jpg',
-        'WhatsApp Image 2025-11-11 at 15.48.45_14350078.jpg'
+        'https://i.postimg.cc/mg5Kpz8t/1.jpg',
+        'https://i.postimg.cc/1tCFDS9P/2.jpg',
+        'https://i.postimg.cc/zGZgC01r/3.jpg',
+        'https://i.postimg.cc/Sss2SPc2/4.jpg',
+        'https://i.postimg.cc/mhxtS2JV/5.jpg',
+        'https://i.postimg.cc/X7F86Zj4/6.jpg',
+        'https://i.postimg.cc/vm8Ln3Wc/7.jpg',
+        'https://i.postimg.cc/T1brxSXC/8.jpg',
+        'https://i.postimg.cc/YCM1cbDn/9.jpg',
+        'https://i.postimg.cc/G28DPN93/10.jpg',
+        'https://i.postimg.cc/nVm7C66d/11.jpg',
+        'https://i.postimg.cc/W15qBjJx/12.jpg',
+        'https://i.postimg.cc/nrKC0tJS/13.jpg',
+        'https://i.postimg.cc/QdYV6b2W/14.jpg',
+        'https://i.postimg.cc/T1xPyHbR/15.jpg',
+        'https://i.postimg.cc/JhB7pW3P/16.jpg'
     ];
     
     return (
@@ -1217,9 +1246,10 @@ const Testimonials: React.FC = () => {
                                         onClick={() => setSelectedImage(image)}
                                     >
                                         <img 
-                                            src={`/mr$1 testimonials/${image}`}
+                                            src={image}
                                             alt={`Testimonial ${index + 1}`}
                                             className="w-full h-48 object-cover"
+                                            loading="lazy"
                                         />
                                         <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                             <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1304,11 +1334,11 @@ const Testimonials: React.FC = () => {
                                 }}
                             >
                                 <img 
-                                    src={`/mr$1 testimonials/${selectedImage}`}
+                                    src={selectedImage}
                                     alt="Full size testimonial"
-                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl select-none touch-none"
+                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl"
                                     onClick={(e) => e.stopPropagation()}
-                                    draggable={false}
+                                    loading="lazy"
                                 />
                                 <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
                                     {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
@@ -1400,7 +1430,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 }}
                             />
                         </a>
-                        <a href="https://www.instagram.com/mr1dollarforextrading/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://www.instagram.com/mr1dollarinternational/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
                                 src="https://i.ibb.co/dwHV57BN/instagram-icon.png" 
                                 alt="Instagram Profile" 
@@ -1465,17 +1495,14 @@ const WhatsAppWidget: React.FC = () => {
         href="https://wa.me/27676923876?text=Hi%20Nomii,%20I%20have%20a%20question%20about%20your%20trading%20services."
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-11 h-11 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
+        className="flex items-center justify-center group relative"
         aria-label="Chat with Nomii on WhatsApp"
       >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <img 
-            src="https://i.ibb.co/S4KMyg8d/whatsapp.png" 
-            alt="WhatsApp" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
+        <img 
+          src="https://i.postimg.cc/85bCvgVM/icons8-whatsapp-40.png" 
+          alt="WhatsApp" 
+          className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+        />
         <span className="absolute right-14 bg-white text-gray-800 text-xs font-medium px-2.5 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
           Chat with Nomii
         </span>
@@ -1525,7 +1552,7 @@ const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[],
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.onerror = null;
-                            target.src = 'https://via.placeholder.com/800x450?text=Tradecation+Image';
+                            target.src = 'https://i.postimg.cc/2SnNJPxH/5.png';
                         }}
                     />
                 </div>
@@ -1545,10 +1572,11 @@ const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[],
 };
 
 const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
-    
+    const [perksOpen, setPerksOpen] = useState(true);
+
     return (
         <>
-            <Hero setCurrentPage={setCurrentPage} />
+            <Hero setCurrentPage={setCurrentPage} currentPage="home" />
             <PromoSection id="platinum-promo" />
             
             {/* Our Trusted Partners */}
@@ -1579,7 +1607,8 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                     { id: 'L_9QwGiHKrw', title: 'Video 4' },
                                     { id: '71Ez4STWkkE', title: 'Video 5' },
                                     { id: 'xxc5MLIwSSE', title: 'Video 6' },
-                                    { id: 'EXhbQfl6uVw', title: 'Video 7' }
+                                    { id: 'EXhbQfl6uVw', title: 'Video 7' },
+                                    { id: '5koztpAhFmg', title: 'Video 8' }
                                 ].map((video) => (
                                     <a
                                         key={video.id}
@@ -1627,7 +1656,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                         </div>
 
                         {/* Exclusive Trade-Cations */}
-                        <div className="glass-card p-8 rounded-lg">
+                        <div className="glass-card p-4 md:p-8 rounded-lg overflow-hidden">
                             <div className="flex items-center mb-6">
                                 <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1637,87 +1666,200 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                             <p className="text-slate-300 mb-6">
                                 Combine your passion for trading with the joy of travel. Our exclusive Trade-Cations provide immersive trading experiences in beautiful locations.
                             </p>
-                            <div className="space-y-6">
-                                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-amber-500/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
+                            <div className="space-y-6 overflow-visible">
+                                <div className="relative overflow-visible rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-amber-500/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
                                     {/* Image Carousel */}
                                     <ImageCarousel 
                                         images={[
-                                            { url: '/Track%20record%20html%20file/Tradecation/1.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/2.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/3.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/4.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/5.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/6.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/7.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/8.png' },
-                                            { url: '/Track%20record%20html%20file/Tradecation/9.png' }
+                                            { url: 'https://i.postimg.cc/zGGTPrNs/1.png' },
+                                            { url: 'https://i.postimg.cc/4NNKXQMk/2.png' },
+                                            { url: 'https://i.postimg.cc/d3SJsrkc/3.png' },
+                                            { url: 'https://i.postimg.cc/cHxWfXw5/4.png' },
+                                            { url: 'https://i.postimg.cc/2SnNJPxH/5.png' },
+                                            { url: 'https://i.postimg.cc/xTbwJWBJ/6.png' },
+                                            { url: 'https://i.postimg.cc/W1Vs2NzW/7.png' },
+                                            { url: 'https://i.postimg.cc/QNWD19T8/8.png' },
+                                            { url: 'https://i.postimg.cc/0NQRQbv2/9.png' }
                                         ]} 
                                         interval={3000}
                                     />
                                     
-                                    <div className="relative z-10 p-6 md:p-8 flex-1 flex flex-col">
+                                    <div className="relative z-10 p-4 md:p-8 flex-1 flex flex-col overflow-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                                         {/* Header with Icon */}
                                         <div className="flex items-center gap-3 mb-6">
-                                            <div className="p-3 bg-amber-500/20 rounded-xl">
-                                                <svg className="w-8 h-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            <div className="inline-flex items-center bg-slate-700/50 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-500/30 mb-6">
+                                                <svg className="w-5 h-5 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
+                                                <div className="flex flex-col">
+                                                    <span className="text-white font-medium">Drakensburg, South Africa</span>
+                                                    <span className="text-amber-300 text-sm font-medium">Upcoming Tradecation (Feb 23-27, 2026)</span>
+                                                </div>
                                             </div>
+                                        </div>
+
+                                        <div className="grid gap-6 grid-cols-1 md:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] mb-8 overflow-visible">
+                                            {/* Upcoming Tradecation Details */}
                                             <div>
-                                                <h3 className="text-2xl font-bold text-white">Cayley Resort Trading Retreat</h3>
-                                                <p className="text-amber-300 font-medium">February 23-27, 2026 • 5 Days</p>
-                                            </div>
-                                        </div>
-
-                                        {/* Location Badge */}
-                                        <div className="inline-flex items-center bg-slate-700/50 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-500/30 mb-6">
-                                            <svg className="w-5 h-5 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                            <span className="text-white font-medium">Drakensburg, South Africa</span>
-                                        </div>
-
-                                        {/* What's Included Section */}
-                                        <div className="mb-8">
-                                            <h4 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-                                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                                </svg>
-                                                What's Included
-                                            </h4>
-                                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                {[
-                                                    "🎯 Private life-coaching sessions",
-                                                    "📈 Daily trading sessions with experts",
-                                                    "🏨 Luxury accommodation & meals (by our private chef)",
-                                                    "👨‍🏫 One-on-one mentorship (Beginner to Advanced)",
-                                                    "🌄 Networking & fun activities"
-                                                ].map((item, index) => (
-                                                    <li key={index} className="flex items-start">
-                                                        <span className="text-amber-400 mr-2">•</span>
-                                                        <span className="text-slate-300">{item}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-
-                                        {/* Resort Info */}
-                                        <div className="bg-slate-700/30 p-4 rounded-lg border border-slate-600/30 mb-6">
-                                            <div className="flex items-start">
-                                                <div className="bg-amber-500/20 p-2 rounded-lg mr-3">
-                                                    <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                <h4 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
+                                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                                     </svg>
+                                                    What's Included
+                                                </h4>
+                                                <div className="bg-slate-900/70 border border-amber-500/20 rounded-2xl p-6 sm:p-8 space-y-6 shadow-lg shadow-amber-500/10">
+                                                    <div className="space-y-3 text-sm sm:text-base leading-relaxed text-slate-200">
+                                                        <p>
+                                                            At <span className="text-amber-400 font-semibold">Mr One Dollar International</span>, the Full Course is engineered to transform you into a calm, confident and profitable trader—whether you are starting from zero or ready to master the markets at an elite level.
+                                                        </p>
+                                                        <p>
+                                                            This isn’t another video bundle. It’s an immersive experience that blends education, mentorship and lifestyle optimisation so you can live like a professional trader while you learn to think like one.
+                                                        </p>
+                                                    </div>
+
+                                                    <div className="bg-black/30 border border-amber-500/20 rounded-xl overflow-hidden">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setPerksOpen(prev => !prev)}
+                                                            className="w-full flex items-center justify-between gap-3 px-5 sm:px-6 py-4 text-left text-white font-semibold"
+                                                            aria-expanded={perksOpen}
+                                                        >
+                                                            <span className="flex items-center gap-2">
+                                                                <span className="text-amber-400 text-xl">✨</span>
+                                                                When you enrol, you unlock:
+                                                            </span>
+                                                            <svg
+                                                                className={`w-5 h-5 text-amber-300 transition-transform ${perksOpen ? 'rotate-180' : ''}`}
+                                                                fill="none"
+                                                                viewBox="0 0 24 24"
+                                                                stroke="currentColor"
+                                                                strokeWidth={1.5}
+                                                            >
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                            </svg>
+                                                        </button>
+                                                        {perksOpen && (
+                                                            <div className="px-5 sm:px-6 pb-5 sm:pb-6 space-y-4">
+                                                                <div className="grid gap-4 sm:grid-cols-2">
+                                                                    {[{
+                                                                        icon: '🎓',
+                                                                        title: 'Complete Training Journey',
+                                                                        description: 'Beginner, Intermediate & Advanced modules that build true mastery.'
+                                                                    }, {
+                                                                        icon: '💡',
+                                                                        title: '3 Months of Diamond💎 Trade Ideas',
+                                                                        description: 'Learn and earn simultaneously with guided institutional-grade insights.'
+                                                                    }, {
+                                                                        icon: '💼',
+                                                                        title: 'Funding Pathway',
+                                                                        description: '$5,000 prop firm account setup or a $50 funded account with our recommended broker.'
+                                                                    }, {
+                                                                        icon: '🏨',
+                                                                        title: 'Luxury Tradecation Residency',
+                                                                        description: 'Private accommodation (Mon–Fri) designed for deep focus and execution.'
+                                                                    }, {
+                                                                        icon: '🍽️',
+                                                                        title: 'Lifestyle Support',
+                                                                        description: 'Daily breakfast, lunch, dinner & snacks prepared by our private chef.'
+                                                                    }, {
+                                                                        icon: '🧠',
+                                                                        title: 'Mind & Body Optimisation',
+                                                                        description: '5 AM fitness with a health coach plus 30-minute mindset coaching every day.'
+                                                                    }].map((item, index) => (
+                                                                        <div key={index} className="bg-slate-800/80 border border-slate-700/60 rounded-xl p-4 flex flex-col gap-2 hover:border-amber-400/60 transition-colors">
+                                                                            <div className="flex items-center gap-2 text-amber-300 font-semibold">
+                                                                                <span className="text-xl">{item.icon}</span>
+                                                                                <span>{item.title}</span>
+                                                                            </div>
+                                                                            <p className="text-slate-300 text-sm leading-relaxed">{item.description}</p>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="space-y-3 text-sm sm:text-base leading-relaxed text-slate-200">
+                                                        <p>
+                                                            It’s more than education—it’s the <span className="text-amber-400 font-semibold">Blueprint to the 1%</span>, engineered to reshape you mentally, emotionally and technically into a funded trader with institutional discipline.
+                                                        </p>
+                                                    </div>
+
+                                                    <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-5 space-y-3">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-amber-300 text-2xl">💡</span>
+                                                            <h5 className="text-lg font-semibold text-white">You’ll learn how to:</h5>
+                                                        </div>
+                                                        <ul className="grid gap-2 sm:grid-cols-2 text-slate-300 text-sm leading-relaxed">
+                                                            {[
+                                                                'Decode how the forex market truly moves',
+                                                                'Master charting, Deep chart secrets and Our powerful strategies',
+                                                                'Apply elite risk management and cultivate consistent psychology',
+                                                                'Develop and stress-test your own winning strategy',
+                                                                'Trade like a funded professional and pass prop firm challenges'
+                                                            ].map((item, index) => (
+                                                                <li key={index} className="flex items-start gap-2">
+                                                                    <span className="text-amber-400 mt-0.5">▹</span>
+                                                                    <span>{item}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                        <p className="text-slate-200 text-sm sm:text-base leading-relaxed pt-1">
+                                                            When you complete the Full Course, you won’t just understand forex—you’ll think, operate, and execute like a seasoned professional. 🔥
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h4 className="font-semibold text-white mb-1">Trade-Cation Pine Lake Resort</h4>
-                                                    <p className="text-slate-300 text-sm">Experience luxury and learning in the heart of Drakensburg's breathtaking landscapes.</p>
+                                            </div>
+
+                                            {/* Previous Tradecation Highlight */}
+                                            <div className="bg-gradient-to-br from-slate-800/70 to-slate-900/80 border border-amber-500/20 rounded-2xl p-6 sm:p-7 shadow-xl shadow-black/20 space-y-4">
+                                                <div className="inline-flex items-center gap-2 text-amber-300 text-xs font-semibold uppercase tracking-[0.2em]">
+                                                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                                                    Previous Tradecation
                                                 </div>
+                                                <div className="space-y-3">
+                                                    <h4 className="text-2xl font-bold text-white">Trade-Cation Pine Lake Resort</h4>
+                                                    <p className="text-slate-300 text-sm leading-relaxed">
+                                                        Experience luxury and learning in the heart of Drakensburg's breathtaking landscapes. Get a glimpse of how we blend lifestyle, discipline, and trader performance.
+                                                    </p>
+                                                </div>
+                                                <ul className="space-y-2 text-sm text-slate-300">
+                                                    {[
+                                                        {
+                                                            icon: '🏞️',
+                                                            text: 'Immersive live-in mentorship for traders at every level'
+                                                        },
+                                                        {
+                                                            icon: '🍳',
+                                                            text: 'Private chef-curated meals tailored for peak performance'
+                                                        },
+                                                        {
+                                                            icon: '🤝',
+                                                            text: 'Powerful networking with high-performing traders'
+                                                        }
+                                                    ].map((item, index) => (
+                                                        <li key={index} className="flex items-start gap-3">
+                                                            <span className="text-lg leading-none">{item.icon}</span>
+                                                            <span>{item.text}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                                <a 
+                                                    href="https://www.youtube.com/watch?v=AdtFWr97JmQ" 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center justify-center gap-2 px-5 py-3 w-full rounded-lg border border-amber-500/30 text-amber-300 font-semibold bg-amber-500/10 hover:bg-amber-500/20 hover:text-amber-200 transition-colors"
+                                                >
+                                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                                    </svg>
+                                                    Watch Previous Tradecation
+                                                </a>
                                             </div>
                                         </div>
 
-                                        {/* CTA Buttons */}
+                                        {/* CTA */}
                                         <div className="flex flex-col sm:flex-row gap-3">
                                             <a 
                                                 href="#" 
@@ -1732,17 +1874,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                                 </svg>
-                                            </a>
-                                            <a 
-                                                href="https://www.youtube.com/watch?v=AdtFWr97JmQ" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border border-slate-600 hover:border-amber-500 text-white font-medium rounded-lg transition-all duration-300 hover:bg-slate-800/50"
-                                            >
-                                                <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                                                </svg>
-                                                Watch Preview
                                             </a>
                                         </div>
                                     </div>
@@ -1765,19 +1896,61 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
 
 const EventsPage: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    
+    const [tradecationPerksOpen, setTradecationPerksOpen] = useState(false);
+
+    const tradecationPerks = [
+        {
+            icon: '🎓',
+            title: 'Complete Training Journey',
+            description: 'Beginner, Intermediate & Advanced modules that build true mastery.'
+        },
+        {
+            icon: '💡',
+            title: '3 Months of Diamond💎 Trade Ideas',
+            description: 'Learn and earn simultaneously with guided institutional-grade insights.'
+        },
+        {
+            icon: '💼',
+            title: 'Funding Pathway',
+            description: '$5,000 prop firm account setup or a $50 funded account with our recommended broker.'
+        },
+        {
+            icon: '🏨',
+            title: 'Luxury Tradecation Residency',
+            description: 'Private accommodation (Mon–Fri) designed for deep focus and execution.'
+        },
+        {
+            icon: '🍽️',
+            title: 'Lifestyle Support',
+            description: 'Daily breakfast, lunch, dinner & snacks prepared by our private chef.'
+        },
+        {
+            icon: '🧠',
+            title: 'Mind & Body Optimisation',
+            description: '5 AM fitness with a health coach plus 30-minute mindset coaching every day.'
+        }
+    ];
+
+    const tradecationLearningPoints = [
+     'Decode how the forex market truly moves',
+     'Master charting, Deep chart secrets and Our powerful strategies',
+     'Apply elite risk management and cultivate consistent psychology',
+     'Develop and stress-test your own winning strategy',
+     'Trade like a funded professional and pass prop firm challenges'
+    ];
+
     // Event data
     const events = [
         {
             id: 1,
             title: "🚀 Exclusive Tradecation Experience",
-            description: "You can transform from beginner to advanced trader in just 5 days with our immersive trading retreat. This all-inclusive experience combines expert trading education with luxury accommodation and lifestyle optimization.",
+            description: "A 5-day luxury residency engineered to transform you into a calm, confident and profitable trader with institutional discipline.",
             details: [
                 {
                     title: "🔥 What's Included",
                     items: [
                         "🏆 Complete Trading Education (Beginner to Advanced)",
-                        "💡 3 Months of Premium Trade Ideas ($1,000+ value)",
+                        "💡 3 Months of Diamond 💎 Trade Ideas",
                         "💼 $5,000 Prop Firm Account Setup (or $50 funded account)",
                         "🏨 Luxury Accommodation (Private Residency, Mon-Fri)",
                         "🍽️ All Meals Included (Breakfast, Lunch, Dinner + Snacks)",
@@ -1807,10 +1980,11 @@ const EventsPage: React.FC = () => {
                     ]
                 }
             ],
-            price: "R15,089 (≈ $879.99)",
-            date: "Next Intake Coming Soon",
-            location: "Luxury Retreat Location",
-            image: "/mr$1 testimonials/trade cation poster.jpg",
+            price: "R15,354.99 (≈ $879.99)",
+            date: "February 23-27, 2026",
+            time: "5-Day Immersive Residency",
+            location: "Cayley Resort • Drakensburg, South Africa",
+            image: "https://i.postimg.cc/1Xs6Qhxx/trade-cation-poster.jpg",
             whatsappMessage: "Hi, I'm interested in the Tradecation experience. Please send me more details.",
             whatsappLink: "https://wa.me/27676923876?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
         },
@@ -1819,7 +1993,7 @@ const EventsPage: React.FC = () => {
             title: "🎯 NFP Trading Masterclass",
             description: "Master the most volatile trading day of the month with our expert-led NFP trading session. Learn to profit from the biggest market-moving economic report.",
             price: "R279 (≈ $15.99)",
-            date: "Every first Friday of a month",
+            date: "First Friday of every month",
             time: "14:30 PM - 15:30 PM (SAST)",
             location: "Physical or Online",
             image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
@@ -1831,27 +2005,26 @@ const EventsPage: React.FC = () => {
     // Events gallery images with tags
     const eventImages = [
         // NFP Images
-        { url: '/Track%20record%20html%20file/nfp/nfp1.png', tag: '#NFP' },
-        { url: '/Track%20record%20html%20file/nfp/nfp2.png', tag: '#NFP' },
-        { url: '/Track%20record%20html%20file/nfp/nfp3.png', tag: '#NFP' },
-        { url: '/Track%20record%20html%20file/nfp/nfp4.png', tag: '#NFP' },
-        { url: '/Track%20record%20html%20file/nfp/nfp5.png', tag: '#NFP' },
-        { url: '/Track%20record%20html%20file/nfp/nfp6.png', tag: '#NFP' },
+        { url: 'https://i.postimg.cc/MH9h0wqq/nfp2.png', tag: '#NFP' },
+        { url: 'https://i.postimg.cc/rmQh39bf/nfp3.png', tag: '#NFP' },
+        { url: 'https://i.postimg.cc/KzvfPMzp/nfp4.png', tag: '#NFP' },
+        { url: 'https://i.postimg.cc/Hn8Qz4CN/nfp5.png', tag: '#NFP' },
+        { url: 'https://i.postimg.cc/wMNwMd3x/nfp6.png', tag: '#NFP' },
         // Tradecation Images
-        { url: '/Track%20record%20html%20file/Tradecation/1.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/2.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/3.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/4.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/5.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/6.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/7.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/8.png', tag: '#Tradecation' },
-        { url: '/Track%20record%20html%20file/Tradecation/9.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/zGGTPrNs/1.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/4NNKXQMk/2.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/d3SJsrkc/3.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/cHxWfXw5/4.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/2SnNJPxH/5.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/xTbwJWBJ/6.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/W1Vs2NzW/7.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/QNWD19T8/8.png', tag: '#Tradecation' },
+        { url: 'https://i.postimg.cc/0NQRQbv2/9.png', tag: '#Tradecation' },
         // Traders Fair Images
-        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024%20speakers.png', tag: '#Tradersfair' },
-        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024%20tk.png', tag: '#Tradersfair' },
-        { url: '/Track%20record%20html%20file/nfp/tradesfair%202024.png', tag: '#Tradersfair' },
-        { url: '/Track%20record%20html%20file/nfp/tradesfair%202025.png', tag: '#Tradersfair' },
+        { url: 'https://i.postimg.cc/66Dvfvbk/tradesfair-2024-speakers.png', tag: '#Tradersfair' },
+        { url: 'https://i.postimg.cc/kG8DpTYj/tradesfair-2024-tk.png', tag: '#Tradersfair' },
+        { url: 'https://i.postimg.cc/j2zdXLLV/tradesfair-2024.png', tag: '#Tradersfair' },
+        { url: 'https://i.postimg.cc/CKXhpjqH/tradesfair-2025.png', tag: '#Tradersfair' },
     ];
 
     return (
@@ -1864,20 +2037,20 @@ const EventsPage: React.FC = () => {
                             <div key={event.id} className="glass-card p-6 sm:p-8 rounded-lg">
                                 <div className="flex flex-col md:flex-row gap-6">
                                     <div className="md:w-1/3">
-                                        <div className="aspect-w-16 aspect-h-9 bg-slate-800 rounded-lg overflow-hidden cursor-pointer group" onClick={() => setSelectedImage(event.image)}>
-                                            <img 
-                                                src={event.image} 
-                                                alt={event.title}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                                onError={(e) => {
-                                                    const target = e.target as HTMLImageElement;
-                                                    target.src = 'https://via.placeholder.com/400x225?text=Event+Image';
-                                                }}
-                                            />
-                                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                                </svg>
+                                        <div className="aspect-w-16 aspect-h-9 bg-slate-800 rounded-lg overflow-hidden">
+                                            <div className="w-full h-full cursor-pointer group" onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedImage(event.image);
+                                            }}>
+                                                <img 
+                                                    src={event.image} 
+                                                    alt={event.title}
+                                                    className="w-full h-full object-cover"
+                                                    onError={(e) => {
+                                                        const target = e.target as HTMLImageElement;
+                                                        target.src = 'https://via.placeholder.com/400x225?text=Event+Image';
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -1898,7 +2071,12 @@ const EventsPage: React.FC = () => {
                                             )}
                                             <div>
                                                 <p className="text-sm text-slate-400">Location</p>
-                                                <p className="text-white font-medium">{event.location}</p>
+                                                <p className="text-white font-medium">
+                                                    {event.location}
+                                                    {event.id === 1 && (
+                                                        <span className="block text-xs text-amber-400 mt-1 ml-2">• Upcoming Tradecation</span>
+                                                    )}
+                                                </p>
                                             </div>
                                             <div>
                                                 <p className="text-sm text-slate-400">Price</p>
@@ -1906,10 +2084,139 @@ const EventsPage: React.FC = () => {
                                             </div>
                                         </div>
                                         
+                                        {event.id === 1 && (
+                                            <div className="space-y-5 mt-4">
+                                                <div className="space-y-3 text-sm leading-relaxed text-slate-200">
+                                                    <p>
+                                                        At <span className="text-amber-400 font-semibold">Mr One Dollar International</span>, the Full Course Tradecation blends education, mentorship, and lifestyle optimisation so you can live and execute like a professional trader while you learn to think like one.
+                                                    </p>
+                                                    <p>
+                                                        Immerse yourself in a results-driven environment designed for elite focus—complete with private accommodation, curated meals, and daily performance coaching to ensure every session compounds your mastery.
+                                                    </p>
+                                                </div>
+
+                                                <div className="bg-black/30 border border-amber-500/20 rounded-xl overflow-hidden">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setTradecationPerksOpen((prev) => !prev)}
+                                                        className="w-full flex items-center justify-between gap-3 px-5 sm:px-6 py-4 text-left text-white font-semibold"
+                                                        aria-expanded={tradecationPerksOpen}
+                                                        aria-controls="tradecation-perks"
+                                                    >
+                                                        <span className="flex items-center gap-2">
+                                                            <span className="text-amber-400 text-xl">✨</span>
+                                                            What You'll Get
+                                                        </span>
+                                                        <svg
+                                                            className={`w-5 h-5 text-amber-300 transition-transform ${tradecationPerksOpen ? 'rotate-180' : ''}`}
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                            strokeWidth={1.5}
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                        </svg>
+                                                    </button>
+                                                    {tradecationPerksOpen && (
+                                                        <div id="tradecation-perks" className="px-5 sm:px-6 pb-5 sm:pb-6 space-y-4">
+                                                            <div className="grid gap-4 sm:grid-cols-2">
+                                                                {tradecationPerks.map((item) => (
+                                                                    <div key={item.title} className="bg-slate-800/80 border border-slate-700/60 rounded-xl p-4 flex flex-col gap-2 hover:border-amber-400/60 transition-colors">
+                                                                        <div className="flex items-center gap-2 text-amber-300 font-semibold">
+                                                                            <span className="text-xl">{item.icon}</span>
+                                                                            <span>{item.title}</span>
+                                                                        </div>
+                                                                        <p className="text-slate-300 text-sm leading-relaxed">{item.description}</p>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                <div className="mt-6">
+                                                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
+                                                    <ul className="space-y-2 text-slate-300">
+                                                        {tradecationLearningPoints.map((point) => (
+                                                            <li key={point} className="flex items-start">
+                                                                <span className="text-amber-400 mr-2">•</span>
+                                                                <span>{point}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {event.id === 2 && (
+                                            <div className="space-y-5 mt-4">
+                                                <div className="space-y-3 text-sm leading-relaxed text-slate-200">
+                                                    <p>
+                                                        Join our expert traders as we navigate the most volatile trading day of the month. Learn to profit from the Non-Farm Payroll report with our proven strategies.
+                                                    </p>
+                                                </div>
+
+                                                <div className="bg-slate-800/50 p-4 rounded-lg border-l-4 border-amber-400">
+                                                    <h3 className="text-lg font-semibold text-amber-400 mb-2">NEXT NFP TRADING SESSION</h3>
+                                                    <p className="text-slate-300 mb-3">Master the most volatile trading day of the month with our expert-led NFP trading session.</p>
+                                                    <div className="grid grid-cols-2 gap-4 text-sm">
+                                                        <div>
+                                                            <p className="text-slate-400">When</p>
+                                                            <p className="text-white font-medium">Next NFP Release</p>
+                                                            <p className="text-slate-400 text-xs">(First Friday of each month)</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-slate-400">Time</p>
+                                                            <p className="text-white font-medium">1:30 PM - 3:30 PM (SAST)</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-slate-400">Where</p>
+                                                            <p className="text-white font-medium">Physical or Online</p>
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-slate-400">Price</p>
+                                                            <p className="text-amber-400 font-bold">$15.99 (≈ R279)</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div>
+                                                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
+                                                    <ul className="space-y-2 text-slate-300">
+                                                        <li className="flex items-start">
+                                                            <span className="text-amber-400 mr-2">•</span>
+                                                            <span>Pre-news analysis and market preparation</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <span className="text-amber-400 mr-2">•</span>
+                                                            <span>Optimal entry and exit strategies</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <span className="text-amber-400 mr-2">•</span>
+                                                            <span>Risk management techniques for high volatility</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <span className="text-amber-400 mr-2">•</span>
+                                                            <span>Live trading demonstration</span>
+                                                        </li>
+                                                        <li className="flex items-start">
+                                                            <span className="text-amber-400 mr-2">•</span>
+                                                            <span>Q&A with professional traders</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                
+                                                <div className="bg-gradient-to-r from-amber-500/10 to-transparent p-4 rounded-lg border border-amber-500/20">
+                                                    <h4 className="text-lg font-semibold text-amber-400 mb-2">Special Bonus</h4>
+                                                    <p className="text-slate-300 text-sm">All participants will receive a NFP Trading Guide. Nicely prepared food and drinks will be provided for those attending physically.</p>
+                                                </div>
+                                            </div>
+                                        )}
+
                                         <div className="flex flex-col sm:flex-row gap-3 mt-2">
                                             <a 
                                                 href={event.id === 1 
-                                                    ? "https://whop.com/mr1dollar-international/full-course-85/" 
+                                                    ? "https://whop.com/checkout/plan_91pPZHbkPYU9q" 
                                                     : "https://whop.com/checkout/plan_EoyvAo4ReKJhi"
                                                 }
                                                 target="_blank"
@@ -1922,7 +2229,7 @@ const EventsPage: React.FC = () => {
                                                 href={event.whatsappLink}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 flex-1 text-center"
+                                                className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
                                             >
                                                 Enquire
                                             </a>
@@ -1940,22 +2247,25 @@ const EventsPage: React.FC = () => {
                                 {eventImages.map((image, index) => (
                                     <div 
                                         key={index} 
-                                        className="relative group cursor-pointer overflow-hidden rounded-lg aspect-square"
+                                        className="relative overflow-hidden rounded-lg aspect-square"
                                         onClick={() => setSelectedImage(image.url)}
                                     >
-                                        <img 
-                                            src={image.url} 
-                                            alt={`Event ${index + 1}`} 
-                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-                                            onError={(e) => {
-                                                const target = e.target as HTMLImageElement;
-                                                target.src = 'https://via.placeholder.com/400x400?text=Event+Image';
+                                        <div 
+                                            className="w-full h-full cursor-pointer group"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedImage(image.url);
                                             }}
-                                        />
-                                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                            </svg>
+                                        >
+                                            <img 
+                                                src={image.url} 
+                                                alt={`Event ${index + 1}`} 
+                                                className="w-full h-full object-cover"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.src = 'https://i.postimg.cc/8CqkWhwH/1.png';
+                                                }}
+                                            />
                                         </div>
                                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
                                             <span className="text-amber-400 text-sm font-semibold">{image.tag}</span>
@@ -1969,59 +2279,13 @@ const EventsPage: React.FC = () => {
                         <div className="glass-card p-6 sm:p-8 rounded-lg">
                             <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">📅 Event Details</h2>
                             <div className="space-y-6">
-                                <div className="bg-slate-800/50 p-4 rounded-lg border-l-4 border-amber-400">
-                                    <h3 className="text-lg font-semibold text-amber-400 mb-2">NEXT NFP TRADING SESSION</h3>
-                                    <p className="text-slate-300 mb-3">Join our expert traders as we navigate the most volatile trading day of the month. Learn to profit from the Non-Farm Payroll report with our proven strategies.</p>
-                                    <div className="grid grid-cols-2 gap-4 text-sm">
-                                        <div>
-                                            <p className="text-slate-400">When</p>
-                                            <p className="text-white font-medium">Next NFP Release</p>
-                                            <p className="text-slate-400 text-xs">(First Friday of each month)</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-slate-400">Time</p>
-                                            <p className="text-white font-medium">1:30 PM - 3:30 PM (SAST)</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-slate-400">Where</p>
-                                            <p className="text-white font-medium">Physical or Online </p>
-                                        </div>
-                                        <div>
-                                            <p className="text-slate-400">Price</p>
-                                            <p className="text-amber-400 font-bold">$15.99 (≈ R279)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div className="mt-6">
-                                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
-                                    <ul className="space-y-2 text-slate-300">
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Pre-news analysis and market preparation</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Optimal entry and exit strategies</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Risk management techniques for high volatility</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Live trading demonstration</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-amber-400 mr-2">•</span>
-                                            <span>Q&A with professional traders</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                                <div className="bg-gradient-to-r from-amber-500/10 to-transparent p-4 rounded-lg border border-amber-500/20 mt-6">
-                                    <h4 className="text-lg font-semibold text-amber-400 mb-2">Special Bonus</h4>
-                                    <p className="text-slate-300 text-sm">All participants will receive a NFP Trading Guide | Nicely prepared food and drinks will be provided for those attending physically.</p>
+                                <div className="space-y-3 text-slate-300">
+                                    <p>
+                                        Our events are designed to provide you with the knowledge and skills to succeed in the financial markets. Whether you're a beginner or an experienced trader, our expert-led sessions will help you take your trading to the next level.
+                                    </p>
+                                    <p>
+                                        Check out our upcoming events above for more details on what each session offers and how you can participate.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -2058,7 +2322,7 @@ const EventsPage: React.FC = () => {
                         <img 
                             src={selectedImage} 
                             alt="Full size event" 
-                            className="max-h-[80vh] w-auto mx-auto rounded-lg"
+                            className="max-h-[80vh] w-auto mx-auto rounded-lg object-contain"
                             onClick={(e) => e.stopPropagation()}
                         />
                     </div>
@@ -2178,7 +2442,7 @@ const AboutPage: React.FC = () => {
                                 >
                                     <div className="relative">
                                         <img 
-                                            src="https://i.ibb.co/gZ0jkq0V/mr-one-dollar-profile.jpg" 
+                                            src="https://i.postimg.cc/QNYm7P8L/Emblem_Inverse.png" 
                                             alt="Mr One Dollar YouTube Channel" 
                                             className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-amber-400/30 hover:border-amber-400/70 transition-all duration-300 transform group-hover:scale-105 object-cover"
                                             onError={(e) => {
@@ -2260,7 +2524,7 @@ const TeamPage: React.FC = () => {
         { name: "Jason. N", role: "Senior developer" },
         { name: "Lungelo. N", role: "IT Developer" },
         { name: "Yandisa. D", role: "Business Systems" },
-        { name: "Kennedy. M", role: "Technical Analyst" },
+        { name: "Kenny. M", role: "Technical Analyst" },
         { name: "Tebogo. M", role: "Technical Support" },
         { name: "Mojalefa. P", role: "Technical Support" },
         { name: "Bruce. M", role: "Technical Analyst" },
@@ -2313,7 +2577,11 @@ const ContactPage: React.FC = () => {
                         </p>
                         <ul className="mt-8 space-y-6">
                             <li className="flex items-start">
-                                <MapPinIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
+                                <img 
+                                    src="https://img.icons8.com/ios-filled/20/ffb74d/marker.png" 
+                                    alt="Location" 
+                                    className="w-6 h-6 mr-4 mt-1 flex-shrink-0"
+                                />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Head office</h3>
                                     <a 
@@ -2327,7 +2595,11 @@ const ContactPage: React.FC = () => {
                                 </div>
                             </li>
                             <li className="flex items-start">
-                                <PhoneIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
+                                <img 
+                                    src="https://img.icons8.com/ios-filled/20/ffb74d/phone.png" 
+                                    alt="Phone" 
+                                    className="w-6 h-6 mr-4 mt-1 flex-shrink-0"
+                                />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Call us</h3>
                                     <p className="text-slate-400">
@@ -2339,7 +2611,11 @@ const ContactPage: React.FC = () => {
                                 </div>
                             </li>
                              <li className="flex items-start">
-                                <EnvelopeIcon className="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0" />
+                                <img 
+                                    src="https://img.icons8.com/ios-filled/20/ffb74d/mail.png" 
+                                    alt="Email" 
+                                    className="w-6 h-6 mr-4 mt-1 flex-shrink-0"
+                                />
                                 <div>
                                     <h3 className="text-lg font-semibold text-white">Email us</h3>
                                     <a href="mailto:info@mr1dollar.com" className="text-slate-400 hover:text-amber-400">info@mr1dollar.com</a>
@@ -2439,20 +2715,28 @@ const SupportSection: React.FC = () => {
                         >
                             Join Zoom Meeting
                         </a>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="flex items-center justify-between bg-slate-700/50 hover:bg-slate-700/70 rounded-lg px-3 py-2 transition-colors">
+                            <div>
+                                <span className="text-slate-400 text-xs block uppercase tracking-wide">Meeting ID</span>
+                                <p className="text-white text-sm font-semibold">{zoomDetails.meetingId}</p>
+                            </div>
                             <button 
-                                onClick={() => copyToClipboard(zoomDetails.meetingId)}
-                                className="bg-slate-700/50 hover:bg-slate-700/70 text-slate-200 text-sm py-2 px-3 rounded transition-colors text-left"
+                                onClick={() => copyToClipboard(`Meeting ID: ${zoomDetails.meetingId}`)}
+                                className="ml-3 text-xs font-semibold text-amber-300 hover:text-amber-200 bg-amber-400/10 hover:bg-amber-400/20 rounded-full px-3 py-1 transition-colors"
                             >
-                                <span className="text-slate-400 text-xs block">Meeting ID</span>
-                                {zoomDetails.meetingId}
+                                Copy
                             </button>
+                        </div>
+                        <div className="flex items-center justify-between bg-slate-700/50 hover:bg-slate-700/70 rounded-lg px-3 py-2 transition-colors">
+                            <div>
+                                <span className="text-slate-400 text-xs block uppercase tracking-wide">Passcode</span>
+                                <p className="text-white text-sm font-semibold">{zoomDetails.passcode}</p>
+                            </div>
                             <button 
-                                onClick={() => copyToClipboard(zoomDetails.passcode)}
-                                className="bg-slate-700/50 hover:bg-slate-700/70 text-slate-200 text-sm py-2 px-3 rounded transition-colors text-left"
+                                onClick={() => copyToClipboard(`Passcode: ${zoomDetails.passcode}`)}
+                                className="ml-3 text-xs font-semibold text-amber-300 hover:text-amber-200 bg-amber-400/10 hover:bg-amber-400/20 rounded-full px-3 py-1 transition-colors"
                             >
-                                <span className="text-slate-400 text-xs block">Passcode</span>
-                                {zoomDetails.passcode}
+                                Copy
                             </button>
                         </div>
                     </div>
@@ -2598,7 +2882,28 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                 </button>
             </div>
             <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold text-white flex-grow cursor-pointer" onClick={onToggle}>{product.name}</h3>
+                <div className="flex items-start justify-between gap-3">
+                    <h3 
+                        className="text-lg font-semibold text-white cursor-pointer"
+                        onClick={onToggle}
+                    >
+                        {product.name}
+                    </h3>
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onToggle();
+                        }}
+                        className={`text-amber-300 hover:text-amber-200 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                        aria-label={isExpanded ? 'Collapse product details' : 'Expand product details'}
+                        aria-expanded={isExpanded}
+                    >
+                        <svg className="w-6 h-6 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
                 <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-screen mt-2' : 'max-h-0'}`}>
                     <p className="text-slate-400 text-sm mb-3">{product.description}</p>
                     {product.isSpecialOffer && product.offerSteps && (
@@ -2637,7 +2942,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                             <div className="mt-4 space-y-2">
                                 <a 
                                     href="#plans" 
-                                    className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                                    className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors"
                                 >
                                     Get Platinum Plan
                                 </a>
@@ -2650,6 +2955,18 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     Already a Platinum member? Click here
                                 </button>
                             </div>
+                        </div>
+                    ) : product.id === 3 ? (
+                        <div>
+                            <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
+                                ${product.price.toFixed(2)}
+                                <span className="bg-amber-500/20 text-amber-300 text-xs font-medium px-2 py-1 rounded-full border border-amber-500/30">
+                                    50% OFF
+                                </span>
+                            </p>
+                            <p className="text-blue-400 text-sm mt-1">
+                                Initial fee, then ${(product.price * 0.5).toFixed(2)}/month
+                            </p>
                         </div>
                     ) : product.originalPrice ? (
                         <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
@@ -2665,7 +2982,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                             ${product.price.toFixed(2)}
                             {product.category === 'Trade Ideas' && product.price > 0 && (
                                 <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                    monthly
+                                    {product.id === 3 ? 'Initial fee' : 'monthly'}
                                 </span>
                             )}
                         </p>
@@ -2676,7 +2993,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                         href={product.whatsappLink || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-md transition-colors flex items-center justify-center space-x-2"
+                        className="mt-4 w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-md transition-colors flex items-center justify-center space-x-2"
                     >
                         <svg className="w-5 h-5" viewBox="0 0 32 32" fill="currentColor">
                             <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm7.994 24.362c-.2.57-1.156 1.1-1.894 1.125-.5.019-.994-.006-1.5-.131-1.256-.3-2.569-.863-3.8-1.5-3.4-1.75-6.2-5.4-6.9-9.1-.2-1.1-.2-2.1 0-3.1.2-1 .8-1.9 1.6-2.4.4-.3.9-.4 1.3-.2.3.1.6.4.8.8.2.4.5 1.1.6 1.5.1.4.1.8 0 1.2-.1.4-.3.7-.5 1.1-.2.3-.4.6-.4 1 0 .4.1.8.4 1.1.3.3.6.7.9 1 .3.3.7.7 1 1.1.4.4.8.7 1.2 1.1.4.3.8.5 1.3.7.4.2.8.2 1.2 0 .4-.1.7-.3 1.1-.5.3-.2.8-.1 1.1.2.4.3.8.7 1.2 1.1.4.4.8.8 1.2 1.1.2.2.3.5.3.8 0 .3-.1.7-.2 1.1z"></path>
@@ -2687,7 +3004,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                     <div className="mt-4 space-y-2">
                         <a 
                             href="#plans" 
-                            className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors btn-primary"
+                            className="block w-full text-center bg-amber-400 text-black font-bold py-2 px-4 rounded-md hover:bg-amber-300 transition-colors"
                         >
                             Get Platinum Plan
                         </a>
@@ -2846,7 +3163,7 @@ const updatedPlatinumPackage = platinumPackage ? {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
         return uniqueCategories.map(cat => ({
             name: cat,
-            count: products.filter(p => p.category === cat).length
+            count: products.filter(p => p.category === cat && p.id !== 2).length
         }));
     }, [products]);
 
@@ -2886,15 +3203,38 @@ const updatedPlatinumPackage = platinumPackage ? {
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
     const paginatedProducts = filteredAndSortedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     
-    const tradeIdeas = paginatedProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2);
-    const mentorship = paginatedProducts.filter(p => p.category === 'Mentorship');
-    const courses = paginatedProducts.filter(p => p.category === 'Courses');
-    const otherProducts = paginatedProducts.filter(p => 
-        p.category !== 'Trade Ideas' && 
-        p.category !== 'Courses' && 
-        p.category !== 'Mentorship' &&
-        p.id !== 2
-    );
+    // Filter products based on selected category
+    const filteredProducts = selectedCategory 
+        ? paginatedProducts.filter(p => p.category === selectedCategory)
+        : paginatedProducts;
+
+    // Categorize products
+    const tradeIdeas = selectedCategory === 'Trade Ideas' || !selectedCategory 
+        ? filteredProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2) 
+        : [];
+        
+    const mentorship = selectedCategory === 'Mentorship' || !selectedCategory 
+        ? filteredProducts.filter(p => p.category === 'Mentorship') 
+        : [];
+        
+    const courses = selectedCategory === 'Courses' || !selectedCategory 
+        ? filteredProducts.filter(p => p.category === 'Courses') 
+        : [];
+
+    const strategies = selectedCategory === 'Strategy' || !selectedCategory
+        ? filteredProducts.filter(p => p.category === 'Strategy')
+        : [];
+
+    const events = selectedCategory === 'Events' || !selectedCategory
+        ? filteredProducts.filter(p => p.category === 'Events')
+        : [];
+        
+    const otherProducts = !['Trade Ideas', 'Mentorship', 'Courses', 'Strategy', 'Events'].includes(selectedCategory || '') 
+        ? filteredProducts.filter(p => 
+            !['Trade Ideas', 'Courses', 'Mentorship', 'Strategy', 'Events'].includes(p.category) &&
+            p.id !== 2
+        ) 
+        : [];
     
     const cartTotal = cart.reduce((total, product) => total + product.price, 0);
 
@@ -2943,7 +3283,6 @@ const updatedPlatinumPackage = platinumPackage ? {
         setIsFilterApplied(false);
     };
 
-    // Render filter section with search and category filters
     const renderFilterSection = () => (
         <div className="mb-8 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
             <div className="flex flex-col gap-4 mb-4">
@@ -3269,15 +3608,17 @@ const updatedPlatinumPackage = platinumPackage ? {
                         ) : (
                             <>
                                 {/* Trade Ideas Section */}
-                                <div className="mb-12">
-                                    <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                                        <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                        </svg>
-                                        Trade Ideas
-                                    </h2>
-                                    {renderProductGrid(tradeIdeas)}
-                                </div>
+                                {(selectedCategory === 'Trade Ideas' || !selectedCategory) && tradeIdeas.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                            </svg>
+                                            Trade Ideas
+                                        </h2>
+                                        {renderProductGrid(tradeIdeas)}
+                                    </div>
+                                )}
 
                                 {/* Courses Section */}
                                 {courses.length > 0 && (
@@ -3302,6 +3643,32 @@ const updatedPlatinumPackage = platinumPackage ? {
                                             Mentorship Programs
                                         </h2>
                                         {renderProductGrid(mentorship)}
+                                    </div>
+                                )}
+
+                                {/* Strategies Section */}
+                                {strategies.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-indigo-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                            </svg>
+                                            Trading Strategies
+                                        </h2>
+                                        {renderProductGrid(strategies)}
+                                    </div>
+                                )}
+
+                                {/* Events Section */}
+                                {events.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-red-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            Trading Events
+                                        </h2>
+                                        {renderProductGrid(events)}
                                     </div>
                                 )}
 
@@ -3379,7 +3746,10 @@ const TermsPage: React.FC = () => (
                         We use reputable third-party platforms (such as payment providers, form tools and communication platforms) to securely store and process certain contact and account details. These service providers act as data processors on our behalf and are required to protect your information, use it only for the purposes we specify, and handle it in line with applicable data-protection principles.
                     </p>
                     <p>
-                        We do not sell your personal information. We only share it with third parties where it is necessary to provide our services, to comply with legal or regulatory obligations, or where you have given us clear consent. By using our services, you consent to this use of third-party platforms as described here and in our Privacy Policy.
+                        Information you voluntarily submit through our forms—including your name, email address, and contact preferences—is used to maintain the Mr $1 International communications database, such as our newsletter mailing list. We only send marketing or service updates to individuals who have provided their details for that purpose, and every message includes a clear option to update preferences or opt out.
+                    </p>
+                    <p>
+                        We do not sell, harvest, or otherwise misappropriate your personal information. We only share it with third parties where it is necessary to provide our services, to comply with legal or regulatory obligations, or where you have given us clear consent. By using our services, you consent to this use of third-party platforms as described here and in our Privacy Policy.
                     </p>
                     <p>
                         To the maximum extent permitted by applicable law, we are not liable for any loss arising from unauthorised access, use or disclosure of your information by such third parties, provided we have taken reasonable steps to select and monitor those providers and to safeguard your information.
@@ -3389,6 +3759,15 @@ const TermsPage: React.FC = () => (
                     <h2 className="text-2xl font-bold text-white">10. Legal Compliance</h2>
                     <p>
                         Nothing in these Terms is intended to exclude or limit any rights you may have under applicable law. Where any part of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in full force and effect. You are responsible for ensuring that your use of our services complies with the laws of your country or jurisdiction, including any tax, reporting or regulatory requirements.
+                    </p>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">11. Newsletter &amp; Communications</h2>
+                    <p>
+                        By providing your details through our website forms you authorise us to store that information securely and to use it for service updates, community announcements, promotional offers, and educational content relating to Mr $1 International. You may unsubscribe at any time by following the instructions in our communications or by contacting us directly at <a href="mailto:info@mr1dollar.com" className="text-amber-400 hover:underline">info@mr1dollar.com</a>.
+                    </p>
+                    <p>
+                        We do not collect personal information through covert means. All data is supplied by users or their authorised representatives, and it is processed only for legitimate business purposes aligned with the expectations set out in these Terms and our Privacy Policy.
                     </p>
                 </div>
             </div>
@@ -3460,6 +3839,43 @@ const PrivacyPolicyPage: React.FC = () => (
     </div>
 );
 
+
+const ScrollToTopButton: React.FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsVisible(window.scrollY > 400);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    if (!isVisible) {
+        return null;
+    }
+
+    return (
+        <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-6 left-6 z-50 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400/55 via-amber-500/55 to-amber-400/55 text-black/55 font-semibold px-4 py-2 shadow-[0_12px_32px_rgba(251,191,36,0.15)] hover:shadow-[0_16px_40px_rgba(251,191,36,0.25)] transition-all duration-300 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-300/55 backdrop-blur-sm"
+            aria-label="Scroll back to top"
+        >
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black/20 text-black">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                </svg>
+            </span>
+            <span className="hidden sm:inline text-sm tracking-wide uppercase">Back to top</span>
+        </button>
+    );
+};
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -3601,6 +4017,7 @@ const App: React.FC = () => {
       </main>
       <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
+      <ScrollToTopButton />
     </div>
   );
 };
