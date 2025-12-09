@@ -408,7 +408,14 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
                                     >
                                         <div className="flex items-start justify-between gap-3">
                                             <div>
-                                                <h3 className="text-lg font-semibold text-white">Instant Zoom Support</h3>
+                                                <div className="flex items-center space-x-2">
+  <h3 className="text-lg font-semibold text-white">Instant Zoom Support</h3>
+  <img 
+    src="https://i.postimg.cc/Gh5YKvKT/Badge_White.png" 
+    alt="MR1Dollar Badge" 
+    className="w-6 h-6 object-contain"
+  />
+</div>
                                                 <p className="mt-1 text-sm text-slate-300">Need help? Join our live support session for immediate assistance.</p>
                                             </div>
                                             <button
@@ -1388,7 +1395,14 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-2">
-                    <h3 className="text-xl font-bold text-white">MR <span className="text-amber-400">ONE</span> DOLLAR</h3>
+                    <div className="flex items-center space-x-2">
+  <img 
+    src="https://i.postimg.cc/T3mHV2x0/Favicon_Color.png" 
+    alt="MR ONE DOLLAR Logo" 
+    className="w-8 h-8 object-contain"
+  />
+  <h3 className="text-xl font-bold text-white">MR <span className="text-amber-400">ONE</span> DOLLAR</h3>
+</div>
                     <p className="mt-4 text-slate-400 text-sm leading-relaxed">
                         At Mr. One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn, and grow together.
                     </p>
@@ -1396,22 +1410,50 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                 <div>
                     <h3 className="text-xl font-bold text-white">Contact Us</h3>
                     <ul className="mt-4 space-y-3 text-sm">
-                        <li className="flex items-start text-slate-400">
-                           <MapPinIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                           <a href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
-                                4 Karen Street, Bryanston, Sandton, 2060
-                           </a>
-                        </li>
-                        <li className="flex items-start text-slate-400">
-                            <PhoneIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
+                        <li className="flex items-start">
+                            <img 
+                                src="https://img.icons8.com/ios-filled/20/ffb74d/marker.png" 
+                                alt="Location" 
+                                className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
+                            />
                             <div>
-                                <a href="https://wa.me/+27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a> / 
-                                <a href="https://wa.me/+27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
+                                <h3 className="text-slate-300 font-medium">Head office</h3>
+                                <a 
+                                    href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-slate-400 hover:text-amber-400 transition-colors"
+                                >
+                                    4 Karen Street, Bryanston, Sandton, 2060
+                                </a>
                             </div>
                         </li>
-                        <li className="flex items-start text-slate-400">
-                             <EnvelopeIcon className="w-5 h-5 mr-3 mt-1 text-amber-400 flex-shrink-0"/>
-                             <a href="mailto:info@mr1dollar.com" className="hover:text-amber-400 transition-colors">info@mr1dollar.com</a>
+                        <li className="flex items-start">
+                            <img 
+                                src="https://img.icons8.com/ios-filled/20/ffb74d/phone.png" 
+                                alt="Phone" 
+                                className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
+                            />
+                            <div>
+                                <h3 className="text-slate-300 font-medium">Whatsapp/Call us</h3>
+                                <p className="text-slate-400">
+                                    <a href="https://wa.me/27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
+                                </p>
+                                <p className="text-slate-400">
+                                    <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <img 
+                                src="https://img.icons8.com/ios-filled/20/ffb74d/mail.png" 
+                                alt="Email" 
+                                className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
+                            />
+                            <div>
+                                <h3 className="text-slate-300 font-medium">Email us</h3>
+                                <a href="mailto:info@mr1dollar.com" className="text-slate-400 hover:text-amber-400 transition-colors">info@mr1dollar.com</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -2417,7 +2459,7 @@ const AboutPage: React.FC = () => {
             </section>
 
             {/* Mission Section */}
-            <section className="py-20 bg-slate-900 animate-fadeInUp">
+            <section className="pt-8 pb-20 bg-slate-900 animate-fadeInUp">
                 <div className="container mx-auto px-4 max-w-4xl text-center">
                     <p className="text-xl text-slate-300 leading-relaxed">
                         At Mr One Dollar International, our purpose goes beyond just trading. We believe in empowering individuals with the skills and knowledge to achieve financial independence. Our mission is to create a community where traders can thrive, learn and grow together.
@@ -2601,7 +2643,7 @@ const ContactPage: React.FC = () => {
                                     className="w-6 h-6 mr-4 mt-1 flex-shrink-0"
                                 />
                                 <div>
-                                    <h3 className="text-lg font-semibold text-white">Call us</h3>
+                                    <h3 className="text-lg font-semibold text-white">Whatsapp/Call us</h3>
                                     <p className="text-slate-400">
                                         <a href="https://wa.me/27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
                                     </p>
