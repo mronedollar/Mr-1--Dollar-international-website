@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
@@ -4060,6 +4061,7 @@ const App: React.FC = () => {
       <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
       <ScrollToTopButton />
+      <SpeedInsights />
     </div>
   );
 };
