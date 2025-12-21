@@ -1,6 +1,4 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from './src/contexts/AuthContext';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
@@ -30,7 +28,7 @@ interface Product extends BaseProduct {
 }
 
 // --- Centralized Data Source ---
-export const servicesData: Product[] = [
+const servicesData: Product[] = [
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
     { id: 13, name: "Synthetics trade ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_rumeFlqobZyqj" },
     { 
@@ -219,6 +217,10 @@ const FilterIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" })
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
     </svg>
 );
+
+
+// --- Page Section Components ---
+
 interface HeaderProps {
     currentPage: Page;
     setCurrentPage: (page: Page) => void;
@@ -226,10 +228,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { user, logout } = useAuth();
-    const navigate = useNavigate();
-    const isAuthenticated = !!user;
-
     const navLinks: { name: string, page: Page }[] = [
         { name: "Home", page: 'home' },
         { name: "Events", page: 'events' },
@@ -245,19 +243,6 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
         setIsMenuOpen(false);
     };
 
-    const goToPortal = () => {
-        if (!user) {
-            navigate('/login');
-            return;
-        }
-        navigate(user.role === 'admin' ? '/admin' : '/dashboard');
-    };
-
-    const handleLogout = () => {
-        logout();
-        navigate('/');
-    };
-
     return (
         <header className="bg-black/70 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-800/50">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -268,7 +253,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                         </a>
                     </div>
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-center space-x-4">
+                        <div className="ml-10 flex items-baseline space-x-4">
                             {navLinks.map(link => (
                                 <a 
                                     key={link.name} 
@@ -282,35 +267,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                                     )}
                                 </a>
                             ))}
-                            {!isAuthenticated ? (
-                                <button
-                                    type="button"
-                                    onClick={() => navigate('/login')}
-                                    className="ml-4 inline-flex items-center rounded-full bg-amber-400 text-black text-sm font-semibold px-4 py-2 hover:bg-amber-300 transition-all duration-200 transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
-                                >
-                                    Login
-                                </button>
-                            ) : (
-                                <div className="flex items-center space-x-2 ml-4">
-                                    <button
-                                        type="button"
-                                        onClick={goToPortal}
-                                        className="inline-flex items-center rounded-full bg-amber-400 text-black text-sm font-semibold px-4 py-2 hover:bg-amber-300 transition-all duration-200 transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
-                                    >
-                                        Dashboard
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={handleLogout}
-                                        className="inline-flex items-center rounded-full border border-slate-600 text-slate-200 text-xs font-medium px-3 py-1.5 hover:bg-slate-800 transition-colors"
-                                    >
-                                        Logout
-                                    </button>
-                                </div>
-                            )}
                         </div>
                     </div>
-
                     <div className="-mr-2 flex md:hidden">
                         <button 
                             onClick={() => setIsMenuOpen(!isMenuOpen)} 
@@ -349,43 +307,6 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                                 )}
                             </a>
                         ))}
-                        <div className="mt-3 pt-3 border-t border-slate-700/60 space-y-2">
-                            {!isAuthenticated ? (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setIsMenuOpen(false);
-                                        navigate('/login');
-                                    }}
-                                    className="w-full px-4 py-3 rounded-full bg-amber-400 text-black text-sm font-semibold text-center hover:bg-amber-300 transition-all duration-200 transform hover:scale-[1.02]"
-                                >
-                                    Login
-                                </button>
-                            ) : (
-                                <>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setIsMenuOpen(false);
-                                            goToPortal();
-                                        }}
-                                        className="w-full px-4 py-3 rounded-full bg-amber-400 text-black text-sm font-semibold text-center hover:bg-amber-300 transition-all duration-200 transform hover:scale-[1.02]"
-                                    >
-                                        Go to Dashboard
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setIsMenuOpen(false);
-                                            handleLogout();
-                                        }}
-                                        className="w-full px-4 py-3 rounded-full bg-slate-800 text-slate-100 text-sm font-medium text-center hover:bg-slate-700 transition-colors"
-                                    >
-                                        Logout
-                                    </button>
-                                </>
-                            )}
-                        </div>
                     </div>
                 </div>
             </div>
