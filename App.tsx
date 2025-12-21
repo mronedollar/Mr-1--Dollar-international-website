@@ -10,7 +10,7 @@ interface OfferStep {
 interface BaseProduct {
     id: number;
     name: string;
-    price: number;
+    price: number;https://chat.whatsapp.com/LYKIJlJWNEyGnhQ8vfAaBW
     originalPrice?: number;
     category: string;
     imageUrl: string;
@@ -1496,7 +1496,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                 }}
                             />
                         </a>
-                        <a href="https://chat.whatsapp.com/Ksqy2vkb7FvDo1lwovJIYS" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://chat.whatsapp.com/LYKIJlJWNEyGnhQ8vfAaBW" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
                                 src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
                                 alt="WhatsApp Community" 
@@ -2796,7 +2796,7 @@ const SupportSection: React.FC = () => {
                     </div>
                     <p className="text-slate-300 text-sm mb-4">Connect with fellow traders, share insights, and stay updated with the latest market trends.</p>
                     <a 
-                        href="https://chat.whatsapp.com/Ksqy2vkb7FvDo1lwovJIYS" 
+                        href="https://chat.whatsapp.com/LYKIJlJWNEyGnhQ8vfAaBW" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
