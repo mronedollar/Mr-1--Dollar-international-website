@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
+import { FundedNextToast } from './src/components/FundedNextToast';
 
 // --- Types ---
 type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
@@ -3523,7 +3524,8 @@ const updatedPlatinumPackage = platinumPackage ? {
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+        <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white font-sans">
+            <FundedNextToast />
             {/* Mobile Filter Sidebar */}
             {isSidebarOpen && (
                 <div className="fixed inset-0 z-50 overflow-hidden">
@@ -4057,6 +4059,7 @@ const App: React.FC = () => {
       <main>
         {renderPage()}
       </main>
+      <FundedNextToast />
       <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
       <ScrollToTopButton />
