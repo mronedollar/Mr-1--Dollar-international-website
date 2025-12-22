@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { FundedNextToast } from './src/components/FundedNextToast';
 
 // --- Types ---
@@ -4060,6 +4061,7 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
       <FundedNextToast />
+      <SpeedInsights />
       <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
       <ScrollToTopButton />
