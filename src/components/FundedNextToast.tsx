@@ -1,19 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { XMarkIcon, ArrowTopRightOnSquareIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
 export const FundedNextToast: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  const images = [
+    'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
+    'https://i.postimg.cc/HxssXF88/FN-Christmmas.jpg'
+  ];
+  
+  const imageAlts = [
+    'FundedNext Logo',
+    'Christmas BOGO Special'
+  ];
 
+  // Image slideshow effect
   useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // Change image every 3 seconds
+    
     // Show toast after 3 seconds of page load
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
+  }, [images.length]);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText('XMASBOGO');
@@ -45,9 +64,9 @@ export const FundedNextToast: React.FC = () => {
         <div className="flex gap-3">
           <div className="flex-shrink-0 w-20 h-20 overflow-hidden rounded-lg border border-white/10">
             <img 
-              src="https://i.postimg.cc/HxssXF88/FN-Christmmas.jpg" 
-              alt="Christmas BOGO Special"
-              className="w-full h-full object-cover"
+              src={images[currentImageIndex]} 
+              alt={imageAlts[currentImageIndex]}
+              className={`w-full h-full object-cover transition-opacity duration-1000 ${isHovered ? 'opacity-90' : 'opacity-100'}`}
             />
           </div>
 

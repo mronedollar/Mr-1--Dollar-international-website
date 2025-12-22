@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { FundedNextToast } from './src/components/FundedNextToast';
 
 // --- Types ---
@@ -72,7 +71,7 @@ const servicesData: Product[] = [
 const testimonialsData = [
     {
         quote: "High Voltage is something else... We woke up in deep profits!",
-        author: "Lungelo C.",
+        author: "Njabulo C.",
         role: "Gold Member",
     },
     {
@@ -2568,10 +2567,11 @@ const TeamPage: React.FC = () => {
         { name: "Jason. N", role: "Senior developer" },
         { name: "Lungelo. N", role: "IT Developer" },
         { name: "Yandisa. D", role: "Business Systems" },
-        { name: "Kenny. M", role: "Technical Analyst" },
         { name: "Tebogo. M", role: "Technical Support" },
+        { name: "Thalente. S", role: "Technical Support" },
         { name: "Mojalefa. P", role: "Technical Support" },
         { name: "Bruce. M", role: "Technical Analyst" },
+        { name: "Kenny. M", role: "Technical Analyst" },
     ];
 
     return (
@@ -4061,7 +4061,6 @@ const App: React.FC = () => {
         {renderPage()}
       </main>
       <FundedNextToast />
-      <SpeedInsights />
       <Footer setCurrentPage={setCurrentPage} />
       <WhatsAppWidget />
       <ScrollToTopButton />
