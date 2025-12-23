@@ -2398,7 +2398,7 @@ const FAQ: React.FC = () => {
             answer: "Our courses cater to everyone, from absolute beginners with no prior knowledge to experienced traders looking to refine their strategies. We offer a structured learning path, including beginner, intermediate, and advanced courses, as well as specialized mentorship programs."
         },
         {
-            question: "What makes your trade ideas different?",
+            question: "What makes our trade ideas different?",
             answer: "Our trade ideas are the result of rigorous analysis by our team of expert traders. We offer insights into the market's direction, helping you make informed decisions. Our focus is on high-probability setups that align with our core 'Stay Blue & Take Profit' philosophy."
         },
         {
