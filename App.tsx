@@ -585,7 +585,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         {
             name: 'FundedNext',
             description: 'A proprietary trading firm providing funding for forex and crypto traders worldwide',
-            logoUrl: 'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
+            logoUrl: 'https://i.postimg.cc/NGHNgjZr/short-logo-removebg-preview.png',
             link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
             category: 'Prop Firms',
             color: 'blue'

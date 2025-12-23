@@ -8,7 +8,7 @@ export const FundedNextToast: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const images = [
-    'https://i.ibb.co/BKdbGB2V/Fundednext-Logo.png',
+    'https://i.postimg.cc/NGHNgjZr/short-logo-removebg-preview.png',
     'https://i.postimg.cc/HxssXF88/FN-Christmmas.jpg'
   ];
   
@@ -44,10 +44,11 @@ export const FundedNextToast: React.FC = () => {
     window.open('https://fundednext.com/?fpr=tinyiko-paul-miyambo55', '_blank');
   };
 
-  if (!isVisible) return null;
+  // Temporarily force visibility for testing
+  // if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-20 right-4 z-40 w-80">
+    <div className="fixed bottom-20 right-4 z-50 w-80" style={{ backgroundColor: '#1a1a1a' }}>
       <div 
         className="relative bg-gradient-to-br from-red-900/40 to-green-900/40 backdrop-blur-lg rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
