@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { XMarkIcon, ArrowTopRightOnSquareIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
 export const FundedNextToast: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -44,8 +44,7 @@ export const FundedNextToast: React.FC = () => {
     window.open('https://fundednext.com/?fpr=tinyiko-paul-miyambo55', '_blank');
   };
 
-  // Temporarily force visibility for testing
-  // if (!isVisible) return null;
+  if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-20 right-4 z-50 w-80" style={{ backgroundColor: '#1a1a1a' }}>
