@@ -5,24 +5,45 @@ export const FundedNextToast: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
   
-  const images = [
-    'https://i.postimg.cc/NGHNgjZr/short-logo-removebg-preview.png',
-    'https://i.postimg.cc/HxssXF88/FN-Christmmas.jpg'
-  ];
-  
-  const imageAlts = [
-    'FundedNext Logo',
-    'Christmas BOGO Special'
+  const promos = [
+    {
+      id: 'fundednext',
+      logo: 'https://i.postimg.cc/NGHNgjZr/short-logo-removebg-preview.png',
+      title: '🎄 BOGO Special!',
+      description: 'Buy 1 Stellar plan Get 1 FREE',
+      code: 'XMASBOGO',
+      link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
+      bgGradient: 'from-red-900/40 to-green-900/40'
+    },
+    {
+      id: 'funded7',
+      logo: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
+      title: '🎁 Limited Time Offer',
+      description: '27% Off on all Challenges',
+      code: 'DEC27',
+      link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
+      bgGradient: 'from-purple-900/40 to-blue-900/40'
+    },
+    {
+      id: 'ftmo',
+      logo: 'https://i.postimg.cc/sfSsnbs0/FTMO-modified.png',
+      title: '🎉 Anniversary Special',
+      description: '19% Off for a $100k account',
+      code: 'LOGIN REQUIRED',
+      link: 'https://ftmo.com/en/login/',
+      bgGradient: 'from-blue-900/40 to-gray-900/40',
+      noCopy: true
+    }
   ];
 
-  // Image slideshow effect
+  // Auto-rotate promos every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // Change image every 3 seconds
-    
+      setCurrentPromoIndex((prevIndex) => (prevIndex + 1) % promos.length);
+    }, 5000);
+
     // Show toast after 3 seconds of page load
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -32,16 +53,22 @@ export const FundedNextToast: React.FC = () => {
       clearInterval(interval);
       clearTimeout(timer);
     };
-  }, [images.length]);
+  }, [promos.length]);
+
+  const currentPromo = promos[currentPromoIndex];
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText('XMASBOGO');
+    if (currentPromo.noCopy) {
+      window.open(currentPromo.link, '_blank');
+      return;
+    }
+    navigator.clipboard.writeText(currentPromo.code);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
 
   const handleRedirect = () => {
-    window.open('https://fundednext.com/?fpr=tinyiko-paul-miyambo55', '_blank');
+    window.open(currentPromo.link, '_blank');
   };
 
   if (!isVisible) return null;
@@ -49,7 +76,7 @@ export const FundedNextToast: React.FC = () => {
   return (
     <div className="fixed bottom-20 right-4 z-50 w-80" style={{ backgroundColor: '#1a1a1a' }}>
       <div 
-        className="relative bg-gradient-to-br from-red-900/40 to-green-900/40 backdrop-blur-lg rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden"
+        className={`relative bg-gradient-to-br ${currentPromo.bgGradient} backdrop-blur-lg rounded-xl p-3 border border-white/10 shadow-xl overflow-hidden transition-all duration-500`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -62,28 +89,58 @@ export const FundedNextToast: React.FC = () => {
         </button>
 
         <div className="flex gap-3">
-          <div className="flex-shrink-0 w-20 h-20 overflow-hidden rounded-lg border border-white/10">
-            <img 
-              src={images[currentImageIndex]} 
-              alt={imageAlts[currentImageIndex]}
-              className={`w-full h-full object-cover transition-opacity duration-1000 ${isHovered ? 'opacity-90' : 'opacity-100'}`}
-            />
+          {/* Logo and Navigation Dots Container */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-20 h-20 overflow-hidden rounded-lg border border-white/10 bg-white p-1">
+              <img 
+                src={currentPromo.logo} 
+                alt={currentPromo.id}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            {/* Navigation Dots - Below the logo */}
+            <div className="flex justify-center space-x-1.5 mt-1">
+              {promos.map((_, index) => (
+                <button 
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentPromoIndex(index);
+                  }}
+                  className={`h-1.5 rounded-full transition-all ${index === currentPromoIndex ? 'bg-white w-4' : 'bg-white/40 w-1.5'}`}
+                  aria-label={`Go to promo ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
 
+          {/* Content Container */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-start justify-between gap-2">
-              <h3 className="text-white font-bold text-sm">🎄 BOGO Special!</h3>
-            </div>
-            <p className="text-white/80 text-xs mt-0.5 mb-2">Buy 1 Stellar plan Get 1 FREE</p>
+            
+            {/* Title */}
+            <h3 className="text-white font-bold text-sm">{currentPromo.title}</h3>
+            <p className="text-white/80 text-xs mt-0.5 mb-2">{currentPromo.description}</p>
             
             <div className="mb-2">
               <div className="flex items-center bg-black/30 rounded-md overflow-hidden border border-white/5">
-                <code className="flex-1 px-2 py-1.5 text-xs font-mono text-amber-400 font-medium truncate">XMASBOGO</code>
+                <code className="flex-1 px-2 py-1.5 text-xs font-mono text-amber-400 font-medium truncate">
+                  {currentPromo.noCopy ? (
+                    <span className="text-yellow-300">Login to claim offer</span>
+                  ) : (
+                    currentPromo.code
+                  )}
+                </code>
                 <button 
                   onClick={handleCopyCode}
-                  className="px-2 py-1.5 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 transition-colors text-xs flex items-center gap-1"
+                  className={`px-2 py-1.5 ${currentPromo.noCopy ? 'bg-blue-500/20 text-blue-300 hover:bg-blue-500/30' : 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30'} transition-colors text-xs flex items-center gap-1`}
                 >
-                  {isCopied ? '✓' : <DocumentDuplicateIcon className="h-3 w-3" />}
+                  {currentPromo.noCopy ? (
+                    <ArrowTopRightOnSquareIcon className="h-3 w-3" />
+                  ) : isCopied ? (
+                    '✓'
+                  ) : (
+                    <DocumentDuplicateIcon className="h-3 w-3" />
+                  )}
                 </button>
               </div>
             </div>
