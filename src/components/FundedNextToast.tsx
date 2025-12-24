@@ -32,7 +32,7 @@ export const FundedNextToast: React.FC = () => {
       title: '🎉 Anniversary Special',
       description: '19% Off for a $100k account',
       code: 'LOGIN REQUIRED',
-      link: 'https://ftmo.com/en/login/',
+      link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
       bgGradient: 'from-blue-900/40 to-gray-900/40',
       noCopy: true
     }
