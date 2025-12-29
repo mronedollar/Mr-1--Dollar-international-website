@@ -25,6 +25,8 @@ interface BaseProduct {
 interface Product extends BaseProduct {
     isPlatinumBenefit?: boolean;
     platinumBenefitDescription?: string;
+    promoCode?: string;
+    discountedPrice?: number;
     // Additional properties specific to Product can be added here
 }
 
@@ -59,7 +61,7 @@ const servicesData: Product[] = [
     { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
     { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
     { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
-    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer!", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q" },
+    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer!", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q", promoCode: "DOLLAR50", discountedPrice: 439.50 },
     { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/kgYq4tjW/Beginner-Mentorship.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
     { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/XqsD89BR/Intermediate-Mentorship.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
     { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/QCgjx4Pd/Advanced-Mentorship.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
@@ -3008,7 +3010,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     50% OFF
                                 </span>
                             </p>
-                            <p className="text-blue-400 text-sm mt-1">
+                            <p className="text-slate-400 text-sm mt-1">
                                 Initial fee, then ${(product.price * 0.5).toFixed(2)}/month
                             </p>
                         </div>
@@ -3022,14 +3024,30 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                             )}
                         </p>
                     ) : (
-                        <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
-                            ${product.price.toFixed(2)}
-                            {product.category === 'Trade Ideas' && product.price > 0 && (
-                                <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                    {product.id === 3 ? 'Initial fee' : 'monthly'}
-                                </span>
+                        <div>
+                            <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
+                                ${product.price.toFixed(2)}
+                                {product.category === 'Trade Ideas' && product.price > 0 && (
+                                    <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                        {product.id === 3 ? 'Initial fee' : 'monthly'}
+                                    </span>
+                                )}
+                            </p>
+                            {isFullCourse && (
+                                <p className="text-slate-400 text-xs mt-1">
+                                    Use promo code 
+                                    <button 
+                                        onClick={() => {
+                                            navigator.clipboard.writeText('DOLLAR50');
+                                            alert('Promo code DOLLAR50 copied to clipboard!');
+                                        }}
+                                        className="text-amber-400 hover:text-amber-300 underline ml-1"
+                                    >
+                                        DOLLAR50
+                                    </button>  for 50% OFF ($439.50)
+                                </p>
                             )}
-                        </p>
+                        </div>
                     )}
                 </div>
                 {product.isSpecialOffer ? (
