@@ -4036,24 +4036,20 @@ const DiamondPrepaidCheckout: React.FC = () => {
                             data-whop-checkout-on-complete="onCheckoutComplete"
                             style={{ minHeight: '600px' }}
                         >
-                            <div className="flex flex-col items-center justify-center min-h-[600px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                                <div className="relative">
-                                    <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
-                                        <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
-                                    </div>
-                                </div>
-                                <p className="text-slate-300 text-sm font-medium mt-6 animate-pulse">Initializing secure checkout...</p>
-                                <div className="mt-4 flex items-center space-x-2">
-                                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-ping"></div>
-                                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.2s' }}></div>
-                                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.4s' }}></div>
+                            <div className="flex flex-col items-center justify-center min-h-[600px] bg-slate-900">
+                                <div className="w-8 h-8 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin"></div>
+                                <p className="text-slate-300 text-sm font-medium mt-4">Initializing secure checkout...</p>
+                                <div className="mt-3 flex items-center space-x-1">
+                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping"></div>
+                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.2s' }}></div>
+                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.4s' }}></div>
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-6 flex justify-center">
+                        <div className="mt-4 flex justify-between items-center px-4">
                             <button 
                                 onClick={() => window.history.back()}
-                                className="group flex items-center space-x-2 px-4 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105"
+                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7 7" />
