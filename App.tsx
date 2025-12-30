@@ -4001,8 +4001,12 @@ const DiamondPrepaidCheckout: React.FC = () => {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400 mx-auto"></div>
-                    <p className="mt-4 text-white">Redirecting to secure connection...</p>
+                    <div className="relative mb-6">
+                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
+                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
                 </div>
             </div>
         );
@@ -4012,82 +4016,50 @@ const DiamondPrepaidCheckout: React.FC = () => {
         <div className="min-h-screen bg-black">
             <div className="container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
-                    <button
-                        onClick={() => window.history.back()}
-                        className="inline-flex items-center text-slate-400 hover:text-white mb-6 transition-colors group"
-                    >
-                        <svg className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7 7" />
-                        </svg>
-                        Back to Services
-                    </button>
-                    
-                    <h1 className="text-4xl font-bold text-white mb-3 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-                        Diamond 7-Days Prepaid
-                    </h1>
-                    <p className="text-slate-300 text-lg mb-6">Complete your purchase to get instant access to premium trade ideas</p>
-                    
-                    <div className="mt-6 inline-flex items-center bg-green-900/20 border border-green-500/50 rounded-full px-6 py-3">
-                        <svg className="w-6 h-6 text-green-400 mr-3 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h1 className="text-3xl font-bold text-white mb-2">Diamond 7-Days Prepaid Checkout</h1>
+                    <p className="text-slate-400">Complete your purchase to get instant access to premium trade ideas</p>
+                    <div className="mt-4 inline-flex items-center bg-green-900/20 border border-green-500 rounded-lg px-4 py-2">
+                        <svg className="w-5 h-5 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="text-green-400 font-medium">Secure Connection Active</span>
+                        <span className="text-green-400 text-sm font-medium">Secure Connection Active</span>
                     </div>
                 </div>
                 
                 {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
-                    <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 border border-slate-700 shadow-2xl shadow-black/20">
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
                             data-whop-checkout-plan-id="plan_U4XwSHPH3MtfQ"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
-                            style={{ minHeight: '650px' }}
+                            style={{ minHeight: '600px' }}
                         >
-                            <div className="bg-gradient-to-br from-slate-800 to-slate-700 rounded-xl p-12 text-center border border-slate-600">
+                            <div className="flex flex-col items-center justify-center min-h-[600px] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
                                 <div className="relative">
-                                    <div className="flex justify-center mb-6">
-                                        <div className="relative">
-                                            <div className="w-16 h-16 border-4 border-amber-400/30 border-t-amber-400 rounded-full animate-spin"></div>
-                                            <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-amber-400 rounded-full animate-pulse"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="space-y-4">
-                                        <div className="h-2 bg-slate-600 rounded-full overflow-hidden">
-                                            <div className="h-full bg-gradient-to-r from-amber-400 to-orange-400 rounded-full animate-pulse" style={{width: '60%'}}></div>
-                                        </div>
-                                        
-                                        <h3 className="text-xl font-semibold text-white mb-2">Initializing Secure Checkout</h3>
-                                        <p className="text-slate-300 mb-4">Setting up your encrypted payment environment...</p>
-                                        
-                                        <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
-                                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                            <span>Connecting to Whop secure servers</span>
-                                        </div>
-                                        
-                                        <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
-                                            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                                            <span>Preparing payment form</span>
-                                        </div>
-                                        
-                                        <div className="flex items-center justify-center space-x-2 text-sm text-slate-400">
-                                            <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-                                            <span>Loading product details</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="mt-6 pt-4 border-t border-slate-600">
-                                        <p className="text-xs text-slate-500 text-center">
-                                            <svg className="inline w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a5 5 0 01-10 0v2a5 5 0 0010 0z" clipRule="evenodd" />
-                                            </svg>
-                                            All transactions are encrypted and secure
-                                        </p>
+                                    <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
+                                        <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
                                     </div>
                                 </div>
+                                <p className="text-slate-300 text-sm font-medium mt-6 animate-pulse">Initializing secure checkout...</p>
+                                <div className="mt-4 flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-ping"></div>
+                                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.2s' }}></div>
+                                    <div className="w-2 h-2 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.4s' }}></div>
+                                </div>
                             </div>
+                        </div>
+                        <div className="mt-6 flex justify-center">
+                            <button 
+                                onClick={() => window.history.back()}
+                                className="group flex items-center space-x-2 px-4 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105"
+                            >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7 7" />
+                                </svg>
+                                <span className="text-sm font-medium">Back to Services</span>
+                            </button>
                         </div>
                     </div>
                 </div>
