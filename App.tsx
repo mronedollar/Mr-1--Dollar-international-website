@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 import { FundedNextToast } from './src/components/FundedNextToast';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout';
 interface OfferStep {
     number: number;
     text: string | React.ReactNode;
@@ -32,6 +32,7 @@ interface Product extends BaseProduct {
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
+    { id: 14, name: "Diamond 7-Days Prepaid", price: 45.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/dtCTfkRV/DIAMOND-prepaid.png', description: "Get Diamond-level trade ideas for a full week at an affordable prepaid rate. Perfect for traders who want premium trading signals without monthly commitment. Receive daily trade setups, market analysis, and expert insights for 7 days. Weekly subscription.", checkoutUrl: "diamond-prepaid-checkout" },
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "https://whop.com/checkout/plan_ctZTpakqloK39?d2c=true" },
     { id: 13, name: "Synthetics trade ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "https://whop.com/checkout/plan_rumeFlqobZyqj" },
     { 
@@ -50,24 +51,14 @@ const servicesData: Product[] = [
                     Register on PrimeXBT
                 </span> 
             },
-            { number: 2, text: "Complete KYC verification" },
-            { number: 3, text: "Deposit minimum $50 (R800) into your wallet" },
-            { number: 4, text: "WhatsApp Nomii with proof to claim your free month" }
         ],
-        whatsappLink: "https://wa.me/27676923876?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
+        whatsappLink: "https://wa.me/27676824746"
     },
-    { id: 3, name: "Diamond Trade Ideas", price: 179.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts. Initial payment of $179, then just $89.50/month (50% discount) for continued access.", checkoutUrl: "https://whop.com/checkout/plan_qNrnwywYsgp5M" },
-    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true" },
-    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true" },
-    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true" },
-    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true" },
-    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer! Note: Using the DOLLAR50 promo code gives you 50% off the course only, without the free tradecation.", checkoutUrl: "https://whop.com/checkout/plan_91pPZHbkPYU9q", promoCode: "DOLLAR50", discountedPrice: 439.50 },
-    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/kgYq4tjW/Beginner-Mentorship.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "https://whop.com/checkout/plan_0l3JSa0u7ie7J?d2c=true" },
     { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/XqsD89BR/Intermediate-Mentorship.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "https://whop.com/checkout/plan_3yLCP9PECWJNW?d2c=true" },
     { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/QCgjx4Pd/Advanced-Mentorship.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "https://whop.com/checkout/plan_6WOfsWPi4NT2I?d2c=true" },
     { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.postimg.cc/Y0MJ8pnh/Currencies-Strategy.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "https://whop.com/checkout/plan_9SrCavVpvpVfh?d2c=true" },
-    { id: 14, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.postimg.cc/tCmMntjX/NFP-Event-Access.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "https://whop.com/checkout/plan_EoyvAo4ReKJhi" },
-    { id: 15, name: "Branded Merchandise", price: 59.00, category: 'Uncategorized', imageUrl: 'https://i.postimg.cc/y8xCw8Vg/Branded-Merchandise.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit.", checkoutUrl: "https://whop.com/checkout/plan_4Ge1iEh1RHYGm" },
+    { id: 13, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.postimg.cc/tCmMntjX/NFP-Event-Access.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "https://whop.com/checkout/plan_EoyvAo4ReKJhi" },
+    { id: 14, name: "Branded Merchandise", price: 59.00, category: 'Uncategorized', imageUrl: 'https://i.postimg.cc/y8xCw8Vg/Branded-Merchandise.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit.", checkoutUrl: "https://whop.com/checkout/plan_4Ge1iEh1RHYGm" },
 ];
 
 const testimonialsData = [
@@ -2821,7 +2812,7 @@ interface PlatinumProduct extends BaseProduct {
     platinumBenefitDescription: string;
 }
 
-const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; }> = ({ product, onAddToCart, isExpanded, onToggle }) => {
+const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; setCurrentPage: (page: Page) => void }> = ({ product, onAddToCart, isExpanded, onToggle, setCurrentPage }) => {
     const [imageError, setImageError] = useState(false);
     const [currentImageUrl, setCurrentImageUrl] = useState(product.imageUrl.startsWith('http') ? product.imageUrl : `/${product.imageUrl}`);
     
@@ -3019,7 +3010,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                             <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
                             {product.category === 'Trade Ideas' && product.price > 0 && (
                                 <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                    monthly
+                                    {product.id === 14 ? 'weekly' : 'monthly'}
                                 </span>
                             )}
                         </p>
@@ -3029,7 +3020,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                 ${product.price.toFixed(2)}
                                 {product.category === 'Trade Ideas' && product.price > 0 && (
                                     <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                        {product.id === 3 ? 'Initial fee' : 'monthly'}
+                                        {product.id === 14 ? 'weekly' : (product.id === 3 ? 'Initial fee' : 'monthly')}
                                     </span>
                                 )}
                             </p>
@@ -3088,8 +3079,14 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                         )}
                         <a 
                             href={product.checkoutUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                            target={product.checkoutUrl.startsWith('http') ? "_blank" : "_self"} 
+                            rel={product.checkoutUrl.startsWith('http') ? "noopener noreferrer" : undefined}
+                            onClick={(e) => {
+                                if (product.checkoutUrl === 'diamond-prepaid-checkout') {
+                                    e.preventDefault();
+                                    setCurrentPage('diamond-prepaid-checkout');
+                                }
+                            }}
                             className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
                         >
                             {isMentorship ? 'Enroll Now' : 'Buy product'}
@@ -3143,7 +3140,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
 );
 }
 
-const ServicesPage: React.FC = () => {
+const ServicesPage: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurrentPage }) => {
     const [products] = useState<Product[]>(servicesData);
     const [cart, setCart] = useState<Product[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -3152,7 +3149,7 @@ const ServicesPage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [sortOption, setSortOption] = useState('default');
     const [isFilterApplied, setIsFilterApplied] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [productsCurrentPage, setProductsCurrentPage] = useState(1);
     const [expandedProductId, setExpandedProductId] = useState<number | null>(2);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -3263,7 +3260,7 @@ const updatedPlatinumPackage = platinumPackage ? {
     }, [products, searchTerm, selectedCategory, appliedPriceRange, sortOption]);
 
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
-    const paginatedProducts = filteredAndSortedProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const paginatedProducts = filteredAndSortedProducts.slice((productsCurrentPage - 1) * itemsPerPage, productsCurrentPage * itemsPerPage);
     
     // Filter products based on selected category
     const filteredProducts = selectedCategory 
@@ -3310,7 +3307,7 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     const handlePriceFilter = async () => {
         setIsLoading(true);
-        setCurrentPage(1);
+        setProductsCurrentPage(1);
         
         // Add a small delay to show loading state
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -3341,7 +3338,7 @@ const updatedPlatinumPackage = platinumPackage ? {
         setAppliedPriceRange({ min: null, max: null });
         setSelectedCategory(null);
         setSortOption('default');
-        setCurrentPage(1);
+        setProductsCurrentPage(1);
         setIsFilterApplied(false);
     };
 
@@ -3359,7 +3356,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                             value={searchTerm}
                             onChange={(e) => {
                                 setSearchTerm(e.target.value);
-                                setCurrentPage(1);
+                                setProductsCurrentPage(1);
                             }}
                             className="pl-10 pr-8 w-full bg-slate-800 border border-slate-700 rounded-xl text-white p-3 focus:ring-2 focus:ring-amber-500/70 focus:border-transparent transition-all duration-300 hover:border-amber-500/30"
                         />
@@ -3367,7 +3364,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                             <button
                                 onClick={() => {
                                     setSearchTerm('');
-                                    setCurrentPage(1);
+                                    setProductsCurrentPage(1);
                                 }}
                                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white transition-colors"
                                 aria-label="Clear search"
@@ -3392,7 +3389,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                     <button
                         onClick={() => {
                             setSelectedCategory(null);
-                            setCurrentPage(1);
+                            setProductsCurrentPage(1);
                         }}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                             selectedCategory === null
@@ -3407,7 +3404,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                             key={cat.name}
                             onClick={() => {
                                 setSelectedCategory(selectedCategory === cat.name ? null : cat.name);
-                                setCurrentPage(1);
+                                setProductsCurrentPage(1);
                             }}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                                 selectedCategory === cat.name
@@ -3496,6 +3493,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                         }
                     }}
                     onAddToCart={handleAddToCart}
+                    setCurrentPage={setCurrentPage}
                 />
             ))}
         </div>
@@ -3505,24 +3503,24 @@ const updatedPlatinumPackage = platinumPackage ? {
         totalPages > 1 && (
             <div className="flex justify-center mt-8 space-x-2">
                 <button
-                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
+                    onClick={() => setProductsCurrentPage(p => Math.max(1, p - 1))}
+                    disabled={productsCurrentPage === 1}
                     className="px-4 py-2 border border-slate-700 rounded-lg text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800"
                 >
                     Previous
                 </button>
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     const pageNum = Math.max(1, Math.min(
-                        currentPage - 2,
+                        productsCurrentPage - 2,
                         totalPages - 4
                     )) + i;
                     if (pageNum > totalPages) return null;
                     return (
                         <button
                             key={pageNum}
-                            onClick={() => setCurrentPage(pageNum)}
+                            onClick={() => setProductsCurrentPage(pageNum)}
                             className={`w-10 h-10 rounded-lg ${
-                                currentPage === pageNum
+                                productsCurrentPage === pageNum
                                     ? 'bg-amber-500 text-black font-bold'
                                     : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                             }`}
@@ -3532,8 +3530,8 @@ const updatedPlatinumPackage = platinumPackage ? {
                     );
                 })}
                 <button
-                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                    disabled={currentPage === totalPages}
+                    onClick={() => setProductsCurrentPage(p => Math.min(totalPages, p + 1))}
+                    disabled={productsCurrentPage === totalPages}
                     className="px-4 py-2 border border-slate-700 rounded-lg text-slate-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800"
                 >
                     Next
@@ -3577,7 +3575,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                                                         setSelectedCategory(
                                                             selectedCategory === cat.name ? null : cat.name
                                                         );
-                                                        setCurrentPage(1);
+                                                        setProductsCurrentPage(1);
                                                     }}
                                                     className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-slate-700"
                                                 />
@@ -3802,18 +3800,6 @@ const TermsPage: React.FC = () => (
                 <div className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">8. Contact Us</h2>
                     <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@mr1dollar.com" className="text-amber-400 hover:underline">info@mr1dollar.com</a>.</p>
-                </div>
-                <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-white">9. Data Protection &amp; Third-Party Platforms</h2>
-                    <p>
-                        We use reputable third-party platforms (such as payment providers, form tools and communication platforms) to securely store and process certain contact and account details. These service providers act as data processors on our behalf and are required to protect your information, use it only for the purposes we specify, and handle it in line with applicable data-protection principles.
-                    </p>
-                    <p>
-                        Information you voluntarily submit through our forms—including your name, email address, and contact preferences—is used to maintain the Mr $1 International communications database, such as our newsletter mailing list. We only send marketing or service updates to individuals who have provided their details for that purpose, and every message includes a clear option to update preferences or opt out.
-                    </p>
-                    <p>
-                        We do not sell, harvest, or otherwise misappropriate your personal information. We only share it with third parties where it is necessary to provide our services, to comply with legal or regulatory obligations, or where you have given us clear consent. By using our services, you consent to this use of third-party platforms as described here and in our Privacy Policy.
-                    </p>
                     <p>
                         To the maximum extent permitted by applicable law, we are not liable for any loss arising from unauthorised access, use or disclosure of your information by such third parties, provided we have taken reasonable steps to select and monitor those providers and to safeguard your information.
                     </p>
@@ -3940,6 +3926,124 @@ const ScrollToTopButton: React.FC = () => {
     );
 };
 
+const DiamondPrepaidCheckout: React.FC = () => {
+    const [isSecure, setIsSecure] = useState(true);
+    const [showSecureWarning, setShowSecureWarning] = useState(false);
+
+    useEffect(() => {
+        // Check if running on HTTPS
+        const isHttps = window.location.protocol === 'https:';
+        setIsSecure(isHttps);
+        
+        if (!isHttps) {
+            setShowSecureWarning(true);
+            return;
+        }
+
+        // Load Whop checkout script
+        const script = document.createElement('script');
+        script.src = 'https://js.whop.com/static/checkout/loader.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        // Set up completion callback
+        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
+            console.log('Payment complete:', planId, receiptId);
+            alert('Payment successful! You now have access to Diamond 7-Days Prepaid trade ideas.');
+            window.location.href = '/services';
+        };
+
+        return () => {
+            // Cleanup
+            if (document.head.contains(script)) {
+                document.head.removeChild(script);
+            }
+            delete (window as any).onCheckoutComplete;
+        };
+    }, []);
+
+    if (showSecureWarning) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center max-w-md">
+                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
+                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
+                        </svg>
+                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
+                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
+                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
+                        <div className="space-y-3">
+                            <button
+                                onClick={() => window.location.href = 'https://mr1dollar.international/services'}
+                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
+                            >
+                                Go to Secure Site
+                            </button>
+                            <button 
+                                onClick={() => window.open('https://whop.com/checkout/plan_U4XwSHPH3MtfQ?d2c=true', '_blank')}
+                                className="w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                            >
+                                Continue on Whop
+                            </button>
+                        </div>
+                    </div>
+                    <p className="text-slate-500 text-sm">
+                        Your security is our priority. All payment processing requires encryption.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isSecure) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400 mx-auto"></div>
+                    <p className="mt-4 text-white">Redirecting to secure connection...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-black">
+            <div className="container mx-auto px-4 py-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-white mb-2">Diamond 7-Days Prepaid Checkout</h1>
+                    <p className="text-slate-400">Complete your purchase to get instant access to premium trade ideas</p>
+                    <div className="mt-4 inline-flex items-center bg-green-900/20 border border-green-500 rounded-lg px-4 py-2">
+                        <svg className="w-5 h-5 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="text-green-400 text-sm font-medium">Secure Connection Active</span>
+                    </div>
+                </div>
+                
+                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                        <div
+                            data-whop-checkout-plan-id="plan_U4XwSHPH3MtfQ"
+                            data-whop-checkout-return-url="https://mr1dollar.international/"
+                            data-whop-checkout-theme="dark"
+                            data-whop-checkout-on-complete="onCheckoutComplete"
+                            style={{ minHeight: '600px' }}
+                        >
+                            <div className="bg-slate-800 rounded-lg p-8 text-center">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400 mx-auto mb-4"></div>
+                                <p className="text-white">Loading secure checkout...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   
@@ -4062,11 +4166,13 @@ const App: React.FC = () => {
       case 'contact':
         return <ContactPage />;
       case 'services':
-        return <ServicesPage />;
+        return <ServicesPage setCurrentPage={setCurrentPage} />;
       case 'terms':
         return <TermsPage />;
       case 'privacy':
         return <PrivacyPolicyPage />;
+      case 'diamond-prepaid-checkout':
+        return <DiamondPrepaidCheckout />;
       default:
         return <HomePage setCurrentPage={setCurrentPage} />;
     }
