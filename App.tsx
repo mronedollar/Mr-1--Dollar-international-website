@@ -4047,12 +4047,95 @@ const DiamondPrepaidCheckout: React.FC = () => {
                             style={{ minHeight: '600px' }}
                         >
                             <div className="flex flex-col items-center justify-center min-h-[600px] bg-slate-900">
-                                <div className="w-8 h-8 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin"></div>
-                                <p className="text-slate-300 text-sm font-medium mt-4">Initializing secure checkout...</p>
-                                <div className="mt-3 flex items-center space-x-1">
-                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping"></div>
-                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.2s' }}></div>
-                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.4s' }}></div>
+                                <div className="w-full max-w-2xl mx-auto p-6">
+                                    {/* Header */}
+                                    <div className="text-center mb-8">
+                                        <img 
+                                            src="https://i.postimg.cc/sgWBJqvz/Vertical_Wordmark_White.png" 
+                                            alt="Mr. $1 International" 
+                                            className="h-12 mx-auto mb-6"
+                                        />
+                                    </div>
+
+                                    {/* Back Button */}
+                                    <div className="mb-6">
+                                        <button 
+                                            onClick={() => window.history.back()}
+                                            className="flex items-center text-slate-400 hover:text-white transition-colors duration-200"
+                                        >
+                                            <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7 7" />
+                                            </svg>
+                                            Back to Services
+                                        </button>
+                                    </div>
+
+                                    {/* Payment Form */}
+                                    <div className="bg-slate-800 rounded-lg border border-slate-700 p-6">
+                                        <div className="text-center mb-6">
+                                            <div className="inline-block px-4 py-2 bg-green-900/20 border border-green-500 rounded text-green-400 text-sm font-medium">
+                                                SECURE CHECKOUT
+                                            </div>
+                                        </div>
+
+                                        {/* Product Info */}
+                                        <div className="mb-6 pb-6 border-b border-slate-700">
+                                            <div className="text-slate-300 text-sm font-medium mb-2">Product / Service</div>
+                                            <div className="text-white text-lg font-semibold mb-4">Premium Trading Service</div>
+                                            
+                                            <div className="text-slate-300 text-sm font-medium mb-2">Price</div>
+                                            <div className="text-white text-xl font-bold">Amount: $49.00 / month</div>
+                                        </div>
+
+                                        {/* Payment Method */}
+                                        <div className="mb-6 pb-6 border-b border-slate-700">
+                                            <div className="text-slate-300 text-sm font-medium mb-4">Payment Method</div>
+                                            
+                                            <div className="space-y-3">
+                                                <label className="flex items-center text-slate-300 hover:text-white transition-colors cursor-pointer">
+                                                    <input type="radio" name="payment" className="mr-3" defaultChecked />
+                                                    <span>Card • Visa / MasterCard</span>
+                                                </label>
+                                                
+                                                <label className="flex items-center text-slate-300 hover:text-white transition-colors cursor-pointer">
+                                                    <input type="radio" name="payment" className="mr-3" />
+                                                    <span>Crypto • USDT / BTC / ETH</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        {/* Email */}
+                                        <div className="mb-6">
+                                            <div className="text-slate-300 text-sm font-medium mb-2">Email Address</div>
+                                            <input 
+                                                type="email" 
+                                                placeholder="your@email.com"
+                                                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/20"
+                                            />
+                                        </div>
+
+                                        {/* Complete Payment Button */}
+                                        <div className="mb-6">
+                                            <button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                                COMPLETE PAYMENT WITH WHOP
+                                            </button>
+                                        </div>
+
+                                        {/* Security Badge */}
+                                        <div className="text-center">
+                                            <div className="inline-flex items-center text-slate-400 text-sm">
+                                                <span className="mr-2">🔒</span>
+                                                <span>Encrypted • Secure • Instant Access</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Footer */}
+                                    <div className="text-center mt-8">
+                                        <div className="text-slate-500 text-sm">
+                                            Need help? <a href="mailto:support@mr1dollar.com" className="text-amber-400 hover:text-amber-300 transition-colors">support@mr1dollar.com</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
