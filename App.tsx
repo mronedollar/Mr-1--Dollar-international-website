@@ -4040,9 +4040,9 @@ const DiamondPrepaidCheckout: React.FC = () => {
                             data-whop-checkout-on-complete="onCheckoutComplete"
                             style={{ minHeight: '600px' }}
                         >
-                            <div className="flex flex-col items-center justify-center min-h-[600px] bg-slate-900">
+                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://postimg.cc/rD8FVh1Z" 
+                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
