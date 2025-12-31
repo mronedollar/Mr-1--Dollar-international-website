@@ -4020,14 +4020,13 @@ const DiamondPrepaidCheckout: React.FC = () => {
         <div className="min-h-screen bg-black">
             <div className="container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
+                    <img 
+                        src="https://postimg.cc/rD8FVh1Z" 
+                        alt="Mr. One Dollar" 
+                        className="h-16 w-auto mx-auto mb-6"
+                    />
                     <h1 className="text-3xl font-bold text-white mb-2">Diamond 7-Days Prepaid Checkout</h1>
                     <p className="text-slate-400">Complete your purchase to get instant access to premium trade ideas</p>
-                    <div className="mt-4 inline-flex items-center bg-green-900/20 border border-green-500 rounded-lg px-4 py-2">
-                        <svg className="w-5 h-5 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span className="text-green-400 text-sm font-medium">Secure Connection Active</span>
-                    </div>
                 </div>
                 
                 {/* Embedded Checkout */}
@@ -4050,8 +4049,8 @@ const DiamondPrepaidCheckout: React.FC = () => {
                             </div>
                         </div>
                         <div className="mt-4 flex justify-between items-center px-4">
-                            <button 
-                                onClick={() => window.location.href = '/services'}
+                            <a 
+                                href="/services"
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
@@ -4060,7 +4059,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                                     className="w-4 h-4"
                                 />
                                 <span className="text-sm font-medium">Back to Services</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
