@@ -335,7 +335,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
 
     return (
         <section 
-            className="py-24 sm:py-32 text-center hero-background relative"
+            className="py-18 sm:py-24 text-center hero-background relative"
             style={{
                 backgroundImage: "url('https://i.pinimg.com/1200x/6b/5a/79/6b5a79c00621b21813c3f9feffb67873.jpg')",
                 backgroundSize: 'cover',
@@ -3182,6 +3182,17 @@ const ServicesPage: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setC
             }, 100);
         }
     }, []);
+
+    // Check for hash to trigger All Categories selection
+    useEffect(() => {
+        if (window.location.hash === '#all-categories') {
+            setSelectedCategory(null);
+            setProductsCurrentPage(1);
+            // Clear the hash after processing
+            window.history.replaceState(null, '', window.location.pathname);
+        }
+    }, []);
+
     const itemsPerPage = 12;
     
     // Get Platinum package (ID: 2)
@@ -4020,11 +4031,6 @@ const DiamondPrepaidCheckout: React.FC = () => {
         <div className="min-h-screen bg-black">
             <div className="container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
-                    <img 
-                        src="https://postimg.cc/rD8FVh1Z" 
-                        alt="Mr. One Dollar" 
-                        className=""
-                    />
                     <h1 className="text-3xl font-bold text-white mb-2">Diamond 7-Days Prepaid Checkout</h1>
                     <p className="text-slate-400">Complete your purchase to get instant access to premium trade ideas</p>
                 </div>
@@ -4050,7 +4056,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                         </div>
                         <div className="mt-4 flex justify-between items-center px-4">
                             <a 
-                                href="/"
+                                href="/services#all-categories"
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
@@ -4058,7 +4064,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
-                                <span className="text-sm font-medium">Back to Home</span>
+                                <span className="text-sm font-medium">Back to Services</span>
                             </a>
                         </div>
                     </div>
