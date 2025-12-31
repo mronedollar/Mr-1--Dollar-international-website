@@ -3985,15 +3985,9 @@ const DiamondPrepaidCheckout: React.FC = () => {
                         <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
-                            <button
-                                onClick={() => window.location.href = 'https://mr1dollar.international/services'}
-                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
-                            >
-                                Go to Secure Site
-                            </button>
                             <button 
                                 onClick={() => window.open('https://whop.com/checkout/plan_U4XwSHPH3MtfQ?d2c=true', '_blank')}
-                                className="w-full bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
                             </button>
@@ -4047,18 +4041,17 @@ const DiamondPrepaidCheckout: React.FC = () => {
                             style={{ minHeight: '600px' }}
                         >
                             <div className="flex flex-col items-center justify-center min-h-[600px] bg-slate-900">
-                                <div className="w-8 h-8 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin"></div>
-                                <p className="text-slate-300 text-sm font-medium mt-4">Initializing secure checkout...</p>
-                                <div className="mt-3 flex items-center space-x-1">
-                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping"></div>
-                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.2s' }}></div>
-                                    <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" style={{ animationDelay: '0.4s' }}></div>
-                                </div>
+                                <img 
+                                    src="https://postimg.cc/rD8FVh1Z" 
+                                    alt="Mr. One Dollar" 
+                                    className="h-16 w-auto mb-4"
+                                />
+                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
                             </div>
                         </div>
                         <div className="mt-4 flex justify-between items-center px-4">
                             <button 
-                                onClick={() => window.history.back()}
+                                onClick={() => window.location.href = '/services'}
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
