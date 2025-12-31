@@ -261,7 +261,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                             {navLinks.map(link => (
                                 <a 
                                     key={link.name} 
-                                    href="#" 
+                                    href={`/${link.page === 'home' ? '' : link.page === 'diamond-prepaid-checkout' ? 'diamond-prepaid-checkout' : link.page}`}
                                     onClick={(e) => handleNavClick(e, link.page)} 
                                     className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${currentPage === link.page ? 'text-amber-400' : 'text-slate-300 hover:text-amber-400'}`}
                                 >
@@ -4056,7 +4056,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                         </div>
                         <div className="mt-4 flex justify-between items-center px-4">
                             <a 
-                                href="/services#all-categories"
+                                href="/services"
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
@@ -4076,6 +4076,38 @@ const DiamondPrepaidCheckout: React.FC = () => {
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  
+  // Handle direct URL navigation for SPA
+  useEffect(() => {
+    const path = window.location.pathname;
+    const hash = window.location.hash;
+    
+    // Map paths to pages
+    const pathToPageMap: Record<string, Page> = {
+      '/': 'home',
+      '/services': 'services',
+      '/about': 'about',
+      '/contact': 'contact',
+      '/events': 'events',
+      '/team': 'team',
+      '/terms': 'terms',
+      '/privacy': 'privacy',
+      '/diamond-prepaid-checkout': 'diamond-prepaid-checkout'
+    };
+    
+    // Set current page based on URL
+    if (pathToPageMap[path]) {
+      setCurrentPage(pathToPageMap[path]);
+    }
+    
+    // Handle hash for services page
+    if (path === '/services' && hash === '#all-categories') {
+      // The ServicesPage component will handle this hash
+      setTimeout(() => {
+        window.history.replaceState(null, '', '/services');
+      }, 100);
+    }
+  }, []);
   
   // Add animation styles to document head
   useEffect(() => {
@@ -4104,6 +4136,22 @@ const App: React.FC = () => {
 
   // Smooth scroll to top on page change and add performance optimizations
   useEffect(() => {
+    // Update URL in address bar
+    const pageToPathMap: Record<Page, string> = {
+      'home': '/',
+      'services': '/services',
+      'about': '/about',
+      'contact': '/contact',
+      'events': '/events',
+      'team': '/team',
+      'terms': '/terms',
+      'privacy': '/privacy',
+      'diamond-prepaid-checkout': '/diamond-prepaid-checkout'
+    };
+    
+    // Update browser URL without page reload
+    window.history.pushState(null, '', pageToPathMap[currentPage]);
+    
     // Smooth scroll to top when page changes
     window.scrollTo({
       top: 0,
