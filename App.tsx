@@ -4023,7 +4023,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                     <img 
                         src="https://postimg.cc/rD8FVh1Z" 
                         alt="Mr. One Dollar" 
-                        className="h-16 w-auto mx-auto mb-6"
+                        className=""
                     />
                     <h1 className="text-3xl font-bold text-white mb-2">Diamond 7-Days Prepaid Checkout</h1>
                     <p className="text-slate-400">Complete your purchase to get instant access to premium trade ideas</p>
@@ -4050,7 +4050,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                         </div>
                         <div className="mt-4 flex justify-between items-center px-4">
                             <a 
-                                href="/services"
+                                href="/"
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
@@ -4058,7 +4058,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
-                                <span className="text-sm font-medium">Back to Services</span>
+                                <span className="text-sm font-medium">Back to Home</span>
                             </a>
                         </div>
                     </div>
