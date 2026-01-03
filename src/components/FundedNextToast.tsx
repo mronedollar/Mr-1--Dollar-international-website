@@ -8,21 +8,13 @@ export const FundedNextToast: React.FC = () => {
   const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
   
   const promos = [
-    {
-      id: 'fundednext',
-      logo: 'https://i.postimg.cc/NGHNgjZr/short-logo-removebg-preview.png',
-      title: '🎄 BOGO Special!',
-      description: 'Buy 1 Stellar plan Get 1 FREE',
-      code: 'XMASBOGO',
-      link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
-      bgGradient: 'from-red-900/40 to-green-900/40'
-    },
+    
     {
       id: 'funded7',
       logo: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
-      title: '🎁 Limited Time Offer',
+      title: 'Enjoy 27% OFF!!🏆 ',
       description: '27% Off on all Challenges',
-      code: 'DEC27',
+      code: 'FIRST',
       link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
       bgGradient: 'from-purple-900/40 to-blue-900/40'
     },
