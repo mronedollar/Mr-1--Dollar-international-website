@@ -930,7 +930,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
             }, 100);
             
             // Clean up the URL
-            window.history.replaceState({}, document.title, window.location.pathname);
+            window.history.replaceState({}, '', window.location.pathname);
         }
     }, []);
 
