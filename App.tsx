@@ -335,7 +335,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
 
     return (
         <section 
-            className="py-18 sm:py-24 text-center hero-background relative"
+            className="py-22 sm:py-24 text-center hero-background relative"
             style={{
                 backgroundImage: "url('https://i.postimg.cc/sD0B2R99/Mr-1-bg.jpg')",
                 backgroundSize: 'cover',
