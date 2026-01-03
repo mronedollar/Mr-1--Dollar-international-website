@@ -2885,21 +2885,21 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                 isExpanded ? 'ring-2 ring-amber-400 shadow-lg shadow-amber-500/20' : ''
             } ${
                 isFullCourse 
-                    ? 'bg-gradient-to-br from-black via-gray-900 to-black border-2 border-amber-400/50 shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] hover:border-amber-300/80 relative overflow-hidden' 
+                    ? 'bg-gradient-to-br from-black via-gray-900 to-black border-2 border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:border-white/80 relative overflow-hidden' 
                     : 'bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-gray-700 hover:border-amber-400/50 hover:shadow-[0_0_20px_rgba(251,191,36,0.1)] transition-all duration-300'
             }`}
         >
             {isFullCourse && (
-                <>
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/20 via-amber-200/10 to-amber-400/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/10 via-amber-200/5 to-amber-400/10 rounded-lg animate-pulse pointer-events-none"></div>
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/5 via-amber-200/2 to-amber-400/5 rounded-lg animate-pulse pointer-events-none" style={{animationDelay: '0.5s'}}></div>
-                </>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400/20 via-amber-200/10 to-amber-400/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
             )}
             {isMentorship && (
                 <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold py-1 px-3 text-center">
                     For Course Graduates Only
-// ... (rest of the code remains the same)
+                </div>
+            )}
+            {product.id === 14 && (
+                <div className="absolute top-2 left-2 bg-white text-red-500 text-sm font-bold px-3 py-1.5 rounded-md shadow-lg z-10">
+                    New
                 </div>
             )}
             <div className="relative">
