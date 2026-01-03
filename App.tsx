@@ -4108,6 +4108,39 @@ const App: React.FC = () => {
       }, 100);
     }
   }, []);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      
+      // Map paths to pages
+      const pathToPageMap: Record<string, Page> = {
+        '/': 'home',
+        '/services': 'services',
+        '/about': 'about',
+        '/contact': 'contact',
+        '/events': 'events',
+        '/team': 'team',
+        '/terms': 'terms',
+        '/privacy': 'privacy',
+        '/diamond-prepaid-checkout': 'diamond-prepaid-checkout'
+      };
+      
+      // Update current page based on new URL
+      if (pathToPageMap[path]) {
+        setCurrentPage(pathToPageMap[path]);
+      }
+    };
+
+    // Add popstate event listener
+    window.addEventListener('popstate', handlePopState);
+    
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
   
   // Add animation styles to document head
   useEffect(() => {
