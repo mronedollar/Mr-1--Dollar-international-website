@@ -4094,7 +4094,8 @@ const App: React.FC = () => {
       '/team': 'team',
       '/terms': 'terms',
       '/privacy': 'privacy',
-      '/diamond-prepaid-checkout': 'diamond-prepaid-checkout'
+      '/diamond-prepaid-checkout': 'diamond-prepaid-checkout',
+      '/affiliate': 'affiliate'
     };
     
     // Set current page based on URL
@@ -4126,7 +4127,8 @@ const App: React.FC = () => {
         '/team': 'team',
         '/terms': 'terms',
         '/privacy': 'privacy',
-        '/diamond-prepaid-checkout': 'diamond-prepaid-checkout'
+        '/diamond-prepaid-checkout': 'diamond-prepaid-checkout',
+        '/affiliate': 'affiliate'
       };
       
       // Update current page based on new URL
