@@ -223,7 +223,6 @@ const FilterIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" })
     </svg>
 );
 
-
 // --- Page Section Components ---
 
 interface HeaderProps {
@@ -240,7 +239,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
         { name: "About Us", page: 'about' },
         { name: "Our Team", page: 'team' },
         { name: "Contact Us", page: 'contact' },
-        { name: "Affiliate", page: 'affiliate' },
+        { name: "Affiliate", page: 'affiliate' }
     ];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, page: Page) => {
@@ -4078,6 +4077,34 @@ const DiamondPrepaidCheckout: React.FC = () => {
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | 'up'>('up');
+  
+  // Handle page changes with smooth transitions
+  const handlePageChange = (page: Page) => {
+    if (page === currentPage) return;
+    
+    // Determine transition direction based on page order
+    const pageOrder: Page[] = ['home', 'about', 'team', 'events', 'services', 'contact', 'terms', 'privacy', 'diamond-prepaid-checkout', 'affiliate'];
+    const currentIndex = pageOrder.indexOf(currentPage);
+    const newIndex = pageOrder.indexOf(page);
+    
+    if (newIndex > currentIndex) {
+      setTransitionDirection('right');
+    } else if (newIndex < currentIndex) {
+      setTransitionDirection('left');
+    } else {
+      setTransitionDirection('up');
+    }
+    
+    setIsTransitioning(true);
+    
+    // Change page after brief delay for transition effect
+    setTimeout(() => {
+      setCurrentPage(page);
+      setIsTransitioning(false);
+    }, 150);
+  };
   
   // Handle direct URL navigation for SPA
   useEffect(() => {
@@ -4160,8 +4187,72 @@ const App: React.FC = () => {
           transform: translateX(0);
         }
       }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
       .animate-fadeInRight {
         animation: fadeInRight 0.5s ease-out forwards;
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 0.7s ease-out forwards;
+      }
+      .animate-slideInLeft {
+        animation: slideInLeft 0.5s ease-out forwards;
+      }
+      .animate-slideInRight {
+        animation: slideInRight 0.5s ease-out forwards;
+      }
+      .page-transition {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .page-transition-enter {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .page-transition-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
       }
     `;
     document.head.appendChild(style);
@@ -4298,12 +4389,17 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-black">
-      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <main>
-        {renderPage()}
+      <Header currentPage={currentPage} setCurrentPage={handlePageChange} />
+      <main className="relative min-h-screen">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-transparent pointer-events-none" />
+        <div className="relative z-10">
+          <div className={`page-transition ${isTransitioning ? 'page-transition-enter' : 'page-transition-enter-active'}`}>
+            {renderPage()}
+          </div>
+        </div>
       </main>
       <FundedNextToast />
-      <Footer setCurrentPage={setCurrentPage} />
+      <Footer setCurrentPage={handlePageChange} />
       <WhatsAppWidget />
       <ScrollToTopButton />
     </div>
