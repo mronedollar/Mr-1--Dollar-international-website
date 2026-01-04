@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 import { FundedNextToast } from './src/components/FundedNextToast';
+import AffiliatePage from './src/pages/AffiliatePage';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'affiliate';
 interface OfferStep {
     number: number;
     text: string | React.ReactNode;
@@ -239,6 +240,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
         { name: "About Us", page: 'about' },
         { name: "Our Team", page: 'team' },
         { name: "Contact Us", page: 'contact' },
+        { name: "Affiliate", page: 'affiliate' },
     ];
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, page: Page) => {
@@ -4179,7 +4181,8 @@ const App: React.FC = () => {
       'team': '/team',
       'terms': '/terms',
       'privacy': '/privacy',
-      'diamond-prepaid-checkout': '/diamond-prepaid-checkout'
+      'diamond-prepaid-checkout': '/diamond-prepaid-checkout',
+      'affiliate': '/affiliate'
     };
     
     // Update browser URL without page reload
@@ -4284,6 +4287,8 @@ const App: React.FC = () => {
         return <PrivacyPolicyPage />;
       case 'diamond-prepaid-checkout':
         return <DiamondPrepaidCheckout />;
+      case 'affiliate':
+        return <AffiliatePage />;
       default:
         return <HomePage setCurrentPage={setCurrentPage} />;
     }
