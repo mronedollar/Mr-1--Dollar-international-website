@@ -3096,9 +3096,17 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                 if (product.checkoutUrl === 'diamond-prepaid-checkout') {
                                     e.preventDefault();
                                     setCurrentPage('diamond-prepaid-checkout');
+                                    // Refresh to ensure Whop checkout renders correctly
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 100);
                                 } else if (product.checkoutUrl === 'gold-high-voltage-checkout') {
                                     e.preventDefault();
                                     setCurrentPage('gold-high-voltage-checkout');
+                                    // Refresh to ensure Whop checkout renders correctly
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 100);
                                 }
                             }}
                             className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
