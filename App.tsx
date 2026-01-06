@@ -4170,7 +4170,7 @@ const GoldHighVoltageCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_KG9aAEAY57x93"
+                            data-whop-checkout-plan-id="plan_ctZTpakqloK39"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
