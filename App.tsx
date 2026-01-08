@@ -60,10 +60,10 @@ const servicesData: Product[] = [
     },
     { id: 3, name: "Diamond Trade Ideas", price: 179.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts. Initial payment of $179, then just $89.50/month (50% discount) for continued access.", checkoutUrl: "diamond-trade-ideas-checkout" },
     { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "private-wealth-vip-black-checkout" },
-    { id: 5, name: "Beginners Course", price: 206.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "beginners-course-checkout" },
-    { id: 6, name: "Intermediate Course", price: 307.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "intermediate-course-checkout" },
-    { id: 7, name: "Advanced Course", price: 439.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "advanced-course-checkout" },
-    { id: 8, name: "Full Course + Free Tradecation", price: 879.00, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer! Note: Using the DOLLAR50 promo code gives you 50% off the course only, without the free tradecation.", checkoutUrl: "full-course-tradecation-checkout", promoCode: "DOLLAR50", discountedPrice: 439.50 },
+    { id: 5, name: "Beginners Course", price: 247.20, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "beginners-course-checkout" },
+    { id: 6, name: "Intermediate Course", price: 368.40, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "intermediate-course-checkout" },
+    { id: 7, name: "Advanced Course", price: 526.80, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "advanced-course-checkout" },
+    { id: 8, name: "Full Course + Free Tradecation", price: 1189.89, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer! Note: Using the DOLLAR50 promo code gives you 50% off the course only, without the free tradecation.", checkoutUrl: "full-course-tradecation-checkout", promoCode: "DOLLAR50", discountedPrice: 439.50 },
     { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/kgYq4tjW/Beginner-Mentorship.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "beginner-mentorship-checkout" },
     { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/XqsD89BR/Intermediate-Mentorship.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "intermediate-mentorship-checkout" },
     { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/QCgjx4Pd/Advanced-Mentorship.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "advanced-mentorship-checkout" },
@@ -1290,8 +1290,8 @@ const Testimonials: React.FC = () => {
                 
                 {/* Image Modal */}
                 {selectedImage && (
-                    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
-                        <div className="relative max-w-4xl w-full mx-auto">
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
+                        <div className="relative max-w-4xl w-full mx-auto max-h-[90vh] flex items-center justify-center">
                             {/* Close button */}
                             <button 
                                 className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors z-10"
@@ -1348,7 +1348,7 @@ const Testimonials: React.FC = () => {
                                 <img 
                                     src={selectedImage}
                                     alt="Full size testimonial"
-                                    className="max-h-[80vh] max-w-full mx-auto rounded-lg shadow-2xl"
+                                    className="max-h-[80vh] max-w-full rounded-lg shadow-2xl"
                                     onClick={(e) => e.stopPropagation()}
                                     loading="lazy"
                                 />
@@ -1357,12 +1357,12 @@ const Testimonials: React.FC = () => {
                                 </div>
                                 <div className="absolute top-1/2 left-4 right-4 flex justify-between pointer-events-none">
                                     <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                         </svg>
                                     </div>
                                     <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                         </svg>
                                     </div>
@@ -2027,11 +2027,11 @@ const EventsPage: React.FC = () => {
                     ]
                 }
             ],
-            price: "R15,354.99 (≈ $879.99)",
+            price: "R19,531.56 (≈ $1,189.89)",
             date: "February 23-27, 2026",
             time: "5-Day Immersive Residency",
             location: "Cayley Resort • Drakensburg, South Africa",
-            image: "https://i.postimg.cc/1Xs6Qhxx/trade-cation-poster.jpg",
+            image: "https://i.postimg.cc/NFSssMF3/image-(17).jpg",
             whatsappMessage: "Hi, I'm interested in the Tradecation experience. Please send me more details.",
             whatsappLink: "https://wa.me/27676923876?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
         },
@@ -2351,10 +2351,10 @@ const EventsPage: React.FC = () => {
             {/* Image Modal */}
             {selectedImage && (
                 <div 
-                    className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
                     onClick={() => setSelectedImage(null)}
                 >
-                    <div className="relative max-w-5xl w-full">
+                    <div className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center">
                         <button 
                             className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
                             onClick={(e) => {
