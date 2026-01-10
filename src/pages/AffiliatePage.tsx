@@ -10,10 +10,24 @@ interface Product {
 
 const AffiliatePage: React.FC = () => {
   const [affiliateUsername, setAffiliateUsername] = useState('');
+  const [usernameError, setUsernameError] = useState('');
 
-  // Handle input validation - only allow lowercase letters, numbers, and special symbols
+  // Handle input validation - only allow lowercase letters, numbers, and special symbols (excluding @)
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    
+    // Check for @ symbol and show error
+    if (value.includes('@')) {
+      setUsernameError('@ symbol is not allowed. Please use your Whop username only.');
+      // Clear the @ symbol from input
+      const filteredValue = value.replace(/@/g, '');
+      setAffiliateUsername(filteredValue);
+      return;
+    }
+    
+    // Clear error if no @ symbol
+    setUsernameError('');
+    
     // Only allow lowercase letters, numbers, and special symbols -!@#$%^&*
     const filteredValue = value.replace(/[^a-z0-9\-!@#$%^&*]/g, '');
     setAffiliateUsername(filteredValue);
@@ -115,7 +129,7 @@ const AffiliatePage: React.FC = () => {
             <div className="relative z-10">
               
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-orange-500">
+                <span className="text-amber-400">
                   Partner with Mr. $1
                 </span>
                 <br />
@@ -186,7 +200,7 @@ const AffiliatePage: React.FC = () => {
               
               <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-300 mb-2 text-left">
                     Your Whop Affiliate Username
                   </label>
                   <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-3 space-y-3 sm:space-y-0">
@@ -195,7 +209,9 @@ const AffiliatePage: React.FC = () => {
                       value={affiliateUsername}
                       onChange={handleUsernameChange}
                       placeholder="Enter your Whop username"
-                      className="flex-1 w-full sm:w-auto px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+                      className={`flex-1 w-full sm:w-auto px-4 py-3 bg-slate-800 border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all ${
+                        usernameError ? 'border-red-500 focus:ring-red-500' : 'border-slate-700'
+                      }`}
                       autoComplete="off"
                       spellCheck="false"
                     />
@@ -221,6 +237,11 @@ const AffiliatePage: React.FC = () => {
                       )}
                     </button>
                   </div>
+                  {usernameError && (
+                    <div className="mt-2 text-red-400 text-sm animate-pulse">
+                      ⚠️ {usernameError}
+                    </div>
+                  )}
                 </div>
 
                 <div className="text-sm text-slate-400">
@@ -377,7 +398,7 @@ const AffiliatePage: React.FC = () => {
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-3">Ready to Start Earning?</h3>
                         <p className="text-slate-300 text-lg max-w-md mx-auto">
-                          Enter your Whop username and click "Generate Links" to create your custom affiliate links for all 15 products
+                          Enter your Whop username and click "Generate Links" to create your custom affiliate links for all 11+ products
                         </p>
                       </div>
                       
