@@ -114,14 +114,14 @@ const AffiliatePage: React.FC = () => {
             
             <div className="relative z-10">
               
-              <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 <span className="text-orange-500">
                   Partner with Mr. $1
                 </span>
                 <br />
                 <span className="text-white">Affiliate Program</span>
               </h2>
-              <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Create affiliate links for Mr. $1 products and earn commissions on every sale. Start earning with our trusted affiliate network today.
               </p>
               
@@ -176,33 +176,33 @@ const AffiliatePage: React.FC = () => {
           </div>
 
           {/* Affiliate Link Generator */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 mb-16">
             {/* Input Section */}
-            <div className="bg-slate-900 rounded-xl p-8 border border-slate-800">
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <ArrowTopRightOnSquareIcon className="w-6 h-6 mr-3 text-amber-400" />
+            <div className="bg-slate-900 rounded-xl p-6 sm:p-8 border border-slate-800">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
+                <ArrowTopRightOnSquareIcon className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-amber-400" />
                 Generate Your Links
               </h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Your Whop Affiliate Username
                   </label>
-                  <div className="flex space-x-3">
+                  <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-3 space-y-3 sm:space-y-0">
                     <input
                       type="text"
                       value={affiliateUsername}
                       onChange={handleUsernameChange}
                       placeholder="Enter your Whop username"
-                      className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+                      className="flex-1 w-full sm:w-auto px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
                       autoComplete="off"
                       spellCheck="false"
                     />
                     <button
                       onClick={generateAllLinks}
                       disabled={isGenerating}
-                      className={`px-6 py-3 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 ${
+                      className={`w-full sm:w-auto px-4 sm:px-6 py-3 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 ${
                         isGenerating 
                           ? 'bg-slate-600 text-slate-300 cursor-not-allowed' 
                           : 'bg-amber-500 hover:bg-amber-600 text-black'
@@ -210,14 +210,14 @@ const AffiliatePage: React.FC = () => {
                     >
                       {isGenerating ? (
                         <>
-                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin -ml-1 mr-2 sm:mr-3 h-4 sm:h-5 w-4 sm:w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Generating Links...
+                          <span className="text-sm sm:text-base">Generating Links...</span>
                         </>
                       ) : (
-                        'Generate Links'
+                        <span className="text-sm sm:text-base">Generate Links</span>
                       )}
                     </button>
                   </div>
@@ -250,10 +250,10 @@ const AffiliatePage: React.FC = () => {
             </div>
 
             {/* Generated Links Display */}
-            <div className="bg-slate-900 rounded-xl p-8 border border-slate-800">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-white flex items-center">
-                  <CheckCircleIcon className="w-6 h-6 mr-3 text-green-400" />
+            <div className="bg-slate-900 rounded-xl p-6 sm:p-8 border border-slate-800">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                  <CheckCircleIcon className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-green-400" />
                   Your Affiliate Link
                 </h3>
               </div>
@@ -287,18 +287,18 @@ const AffiliatePage: React.FC = () => {
               ) : generatedLinks.length > 0 ? (
                 <div className="space-y-4 max-h-96 overflow-y-auto">
                   {generatedLinks.map((item, index) => (
-                    <div key={index} className="bg-slate-800 rounded-lg p-4 border border-slate-700">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
+                    <div key={index} className="bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700">
+                      <div className="flex flex-col sm:flex-row items-start justify-between mb-3 sm:mb-4">
+                        <div className="flex-1 min-w-0">
                           <div className="flex items-center mb-2">
                             
-                            <h4 className="font-semibold text-white text-lg">Your Mr <span className="text-amber-400">One</span> Dollar Affiliate Link:</h4>
+                            <h4 className="font-semibold text-white text-base sm:text-lg">Your Mr <span className="text-amber-400">One</span> Dollar Affiliate Link:</h4>
                           </div>
                           
                         </div>
                         <button
                           onClick={() => copyToClipboard(item.link, item.product.name)}
-                          className={`px-3 py-2 text-sm rounded-lg transition-all duration-300 flex items-center ${
+                          className={`px-3 py-2 text-sm rounded-lg transition-all duration-300 flex items-center flex-shrink-0 ${
                             copiedLinks.has(item.link)
                               ? 'bg-green-600 text-white'
                               : 'bg-amber-500 hover:bg-amber-600 text-black'
@@ -350,10 +350,10 @@ const AffiliatePage: React.FC = () => {
                             href="https://whop.com/dashboard/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center px-6 py-3 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
+                            className="inline-flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 py-3 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
                           >
-                            <ChartBarIcon className="w-5 h-5 mr-2" />
-                            Access Dashboard
+                            <ChartBarIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                            <span className="text-sm sm:text-base">Access Dashboard</span>
                           </a>
                         </div>
                       </div>
