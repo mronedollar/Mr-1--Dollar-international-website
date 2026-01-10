@@ -39,9 +39,9 @@ const AffiliatePage: React.FC = () => {
   // Product data matching the main App.tsx
   const products: Product[] = [
     // Courses
-    { id: 5, name: "Beginners Course", productId: "prod_27Sg99aDR0rye", commission: 5 },
-    { id: 6, name: "Intermediate Course", productId: "prod_Qx2L3p9W8nK0", commission: 5 },
-    { id: 7, name: "Advanced Course", productId: "prod_8J4mR2L7fX6t", commission: 5 },
+    { id: 5, name: "Beginners Course", productId: "prod_27Sg99aDR0rye", commission: 15 },
+    { id: 6, name: "Intermediate Course", productId: "prod_Qx2L3p9W8nK0", commission: 15 },
+    { id: 7, name: "Advanced Course", productId: "prod_8J4mR2L7fX6t", commission: 15 },
     { id: 8, name: "Full Course + Free Tradecation", productId: "prod_9K2vN4X7qH1", commission: 5 },
     { id: 12, name: "Currencies Strategy", productId: "prod_9SrCavVpvpVfh", commission: 5 }
   ];
@@ -446,7 +446,7 @@ const AffiliatePage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* High Commission Products */}
               <div>
-                <h4 className="text-lg font-semibold text-amber-400 mb-4">🔥 High Commission (5-20%)</h4>
+                <h4 className="text-lg font-semibold text-amber-400 mb-4">🔥 High Commission (20%)</h4>
                 <div className="space-y-2">
                   <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
                     <div className="flex justify-between items-center">
@@ -484,14 +484,6 @@ const AffiliatePage: React.FC = () => {
                       </div>
                       <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
                         <div className="flex justify-between items-center">
-                          <span className="text-white font-medium text-sm">Private Wealth VIP Black</span>
-                          <div className="text-right">
-                            <span className="text-amber-400 font-bold">20%</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
-                        <div className="flex justify-between items-center">
                           <span className="text-white font-medium text-sm">NFP Event Access</span>
                           <div className="text-right">
                             <span className="text-amber-400 font-bold">20%</span>
@@ -505,13 +497,13 @@ const AffiliatePage: React.FC = () => {
 
               {/* Standard Commission Products */}
               <div>
-                <h4 className="text-lg font-semibold text-blue-400 mb-4">💎 Standard Commission (5%)</h4>
+                <h4 className="text-lg font-semibold text-blue-400 mb-4">💎 Medium Commission (15%)</h4>
                 <div className="space-y-2">
                   <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
                     <div className="flex justify-between items-center">
                       <span className="text-white font-medium text-sm">Beginners Course</span>
                       <div className="text-right">
-                        <span className="text-blue-400 font-bold">5%</span>
+                        <span className="text-blue-400 font-bold">15%</span>
                       </div>
                     </div>
                   </div>
@@ -519,7 +511,7 @@ const AffiliatePage: React.FC = () => {
                     <div className="flex justify-between items-center">
                       <span className="text-white font-medium text-sm">Intermediate Course</span>
                       <div className="text-right">
-                        <span className="text-blue-400 font-bold">5%</span>
+                        <span className="text-blue-400 font-bold">15%</span>
                       </div>
                     </div>
                   </div>
@@ -529,23 +521,7 @@ const AffiliatePage: React.FC = () => {
                         <div className="flex justify-between items-center">
                           <span className="text-white font-medium text-sm">Advanced Course</span>
                           <div className="text-right">
-                            <span className="text-blue-400 font-bold">5%</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
-                        <div className="flex justify-between items-center">
-                          <span className="text-white font-medium text-sm">Full Course + Tradecation</span>
-                          <div className="text-right">
-                            <span className="text-blue-400 font-bold">5%</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
-                        <div className="flex justify-between items-center">
-                          <span className="text-white font-medium text-sm">Currencies Strategy</span>
-                          <div className="text-right">
-                            <span className="text-blue-400 font-bold">5%</span>
+                            <span className="text-blue-400 font-bold">15%</span>
                           </div>
                         </div>
                       </div>
@@ -554,18 +530,36 @@ const AffiliatePage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Other Products */}
+              {/* Low Commission Products */}
               <div>
-                <h4 className="text-lg font-semibold text-purple-400 mb-4">🎯 Other Products</h4>
+                <h4 className="text-lg font-semibold text-purple-400 mb-4">🎯 Standard  Commission (5%)</h4>
                 <div className="space-y-2">
                   <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
                     <div className="flex justify-between items-center">
-                      <span className="text-white font-medium text-sm">Branded Merchandise</span>
+                      <span className="text-white font-medium text-sm">Full Course + Tradecation</span>
                       <div className="text-right">
-                        <span className="text-purple-400 font-bold">20%</span>
+                        <span className="text-purple-400 font-bold">5%</span>
                       </div>
                     </div>
                   </div>
+                  <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white font-medium text-sm">Currencies Strategy</span>
+                      <div className="text-right">
+                        <span className="text-purple-400 font-bold">5%</span>
+                      </div>
+                    </div>
+                  </div>
+                  {showAllCommissions && (
+                    <div className="bg-slate-800 rounded-lg p-3 border border-slate-700">
+                      <div className="flex justify-between items-center">
+                        <span className="text-white font-medium text-sm">Private Wealth VIP Black</span>
+                        <div className="text-right">
+                          <span className="text-purple-400 font-bold">5%</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {!showAllCommissions && (
                     <div className="text-center py-8">
                       <p className="text-slate-400 text-sm">Click below to see more products</p>
@@ -589,7 +583,7 @@ const AffiliatePage: React.FC = () => {
                 ) : (
                   <>
                     <ChevronDownIcon className="w-5 h-5 mr-2" />
-                    Show All Products ({showAllCommissions ? 0 : 10} more)
+                    Show All Products
                   </>
                 )}
               </button>
