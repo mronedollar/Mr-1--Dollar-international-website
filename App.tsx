@@ -289,7 +289,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 
                 {/* Mobile menu */}
                 <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`} id="mobile-menu">
-                    <div className="px-2 pt-2 pb-4 space-y-2 sm:px-4 bg-slate-900/95 backdrop-blur-sm">
+                    <div className="px-2 pt-1 pb-4 space-y-1 sm:px-4 bg-slate-900/95 backdrop-blur-sm">
                         {navLinks.map(link => (
                             <a 
                                 key={link.name} 
