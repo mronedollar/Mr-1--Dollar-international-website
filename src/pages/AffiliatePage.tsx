@@ -16,16 +16,15 @@ const AffiliatePage: React.FC = () => {
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     
-    // Check for @ symbol and show error
+    // Check for @ symbol and remove it silently
     if (value.includes('@')) {
-      setUsernameError('@ symbol is not allowed. Please use your Whop username only.');
-      // Clear the @ symbol from input
+      // Clear the @ symbol from input without showing error
       const filteredValue = value.replace(/@/g, '');
       setAffiliateUsername(filteredValue);
       return;
     }
     
-    // Clear error if no @ symbol
+    // Clear any existing error
     setUsernameError('');
     
     // Only allow lowercase letters, numbers, and special symbols -!@#$%^&*
@@ -242,7 +241,7 @@ const AffiliatePage: React.FC = () => {
                       ⚠️ {usernameError}
                     </div>
                   )}
-                </div>
+                </div> 
 
                 <div className="text-sm text-slate-400">
                   <p className="mb-2">💡 <strong>Pro Tip:</strong> Use a memorable username that represents your brand!</p>
