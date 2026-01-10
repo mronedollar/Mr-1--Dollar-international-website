@@ -97,7 +97,7 @@ const AffiliatePage: React.FC = () => {
   const copyAllLinks = () => {
     const allLinksText = generatedLinks.map(item => `${item.product.name}: ${item.link}`).join('\n');
     navigator.clipboard.writeText(allLinksText);
-    alert('All affiliate links copied to clipboard!');
+    alert('Affiliate link copied to clipboard!');
   };
 
   return (
@@ -135,7 +135,7 @@ const AffiliatePage: React.FC = () => {
                 <span className="text-white">Affiliate Program</span>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Create affiliate links for Mr. $1 products and earn commissions on every sale. Start earning with our trusted affiliate network today.
+                Create affiliate link for Mr. $1 products and earn commissions on every sale. Start earning with our trusted affiliate network today.
               </p>
               
               {/* Stats Cards */}
@@ -194,7 +194,7 @@ const AffiliatePage: React.FC = () => {
             <div className="bg-slate-900 rounded-xl p-6 sm:p-8 border border-slate-800">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
                 <ArrowTopRightOnSquareIcon className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-amber-400" />
-                Generate Your Links
+                Generate Your Link
               </h3>
               
               <div className="space-y-4 sm:space-y-6">
@@ -229,10 +229,10 @@ const AffiliatePage: React.FC = () => {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          <span className="text-sm sm:text-base">Generating Links...</span>
+                          <span className="text-sm sm:text-base">Generating a Link...</span>
                         </>
                       ) : (
-                        <span className="text-sm sm:text-base">Generate Links</span>
+                        <span className="text-sm sm:text-base">Generate Link</span>
                       )}
                     </button>
                   </div>
@@ -254,7 +254,7 @@ const AffiliatePage: React.FC = () => {
                       </li>
                       <li className="flex items-start">
                         <span className="text-amber-400 font-bold mr-2">2.</span>
-                        <span>On your Whop profile get your username as highlighted in the image below and paste it on this field "Enter your Whop username" so you can generate affiliate links that are linked to you.</span>
+                        <span>On your Whop profile get your username as highlighted in the image below and paste it on this field "Enter your Whop username" so you can generate affiliate link that are linked to you.</span>
                       </li>
                     </ol>
                   </div>
@@ -286,8 +286,8 @@ const AffiliatePage: React.FC = () => {
                       <div className="absolute inset-0 w-16 h-16 border-4 border-blue-400/30 border-b-blue-400 rounded-full animate-spin" style={{ animationDelay: '150ms' }}></div>
                       <div className="absolute inset-0 w-16 h-16 border-4 border-purple-400/30 border-l-purple-400 rounded-full animate-spin" style={{ animationDelay: '300ms' }}></div>
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Generating Your Links</h3>
-                    <p className="text-slate-400 mb-6">Creating custom affiliate links for all products...</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Generating Your Link</h3>
+                    <p className="text-slate-400 mb-6">Creating custom affiliate link for all products...</p>
                     
                     {/* Loading skeleton cards */}
                     <div className="space-y-3 w-full max-w-md">
@@ -397,7 +397,7 @@ const AffiliatePage: React.FC = () => {
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-3">Ready to Start Earning?</h3>
                         <p className="text-slate-300 text-lg max-w-md mx-auto">
-                          Enter your Whop username and click "Generate Links" to create your custom affiliate links for all 11+ products
+                          Enter your Whop username and click "Generate Link" to create your custom affiliate link for all 11+ products
                         </p>
                       </div>
                       
@@ -616,7 +616,7 @@ const AffiliatePage: React.FC = () => {
           <div className="bg-slate-900 rounded-xl p-8 border border-slate-800">
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
               <LinkIcon className="w-6 h-6 mr-3 text-blue-400" />
-              How to Use Your Links
+              How to Use Your Link
             </h3>
             <div className="space-y-6 text-slate-300">
               <div className="flex items-start space-x-5">
@@ -625,7 +625,7 @@ const AffiliatePage: React.FC = () => {
                 </div>
                 <div className="pt-2">
                   <h4 className="font-semibold text-white mb-2 text-lg">Share Your Link</h4>
-                  <p className="text-sm leading-relaxed">Share your generated affiliate links on social media, YouTube, Instagram, X, or with friends and followers.</p>
+                  <p className="text-sm leading-relaxed">Share your generated affiliate link on social media, YouTube, Instagram, X, or with friends and followers.</p>
                 </div>
               </div>
               
@@ -651,7 +651,7 @@ const AffiliatePage: React.FC = () => {
 
               <div className="mt-8 p-6 bg-slate-800/50 rounded-lg border border-slate-700">
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  <strong className="text-amber-400">Commission Structure:</strong> Earn competitive commissions on all qualifying sales referred through your custom affiliate links.
+                  <strong className="text-amber-400">Commission Structure:</strong> Earn competitive commissions on all qualifying sales referred through your custom affiliate link.
                 </p>
               </div>
             </div>
