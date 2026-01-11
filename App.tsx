@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
-import { FundedNextToast } from './src/components/FundedNextToast';
 import AffiliatePage from './src/pages/AffiliatePage';
 
 // --- Types ---
@@ -21,6 +20,12 @@ interface BaseProduct {
     isSpecialOffer?: boolean;
     offerSteps?: OfferStep[];
     whatsappLink?: string;
+    promo?: {
+        title: string;
+        description: string;
+        code: string;
+        noCopy?: boolean;
+    };
 }
 
 interface Product extends BaseProduct {
@@ -584,7 +589,12 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             logoUrl: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
             link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
             category: 'Prop Firms',
-            color: 'purple'
+            color: 'purple',
+            promo: {
+                title: 'Enjoy 27% OFF!!🏆',
+                description: '27% Off on all Challenges',
+                code: 'FIRST'
+            }
         },
         {
             name: 'FundedNext',
@@ -600,7 +610,13 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
             link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
             category: 'Prop Firms',
-            color: 'green'
+            color: 'green',
+            promo: {
+                title: '🎉 Anniversary Special',
+                description: '19% Off for a $100k account',
+                code: 'Login to claim offer',
+                noCopy: true
+            }
         }
     ];
     
@@ -842,6 +858,9 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         green: 'text-green-400',
                                         amber: 'text-amber-400'
                                     };
+
+                                    const [isPromoOpen, setIsPromoOpen] = useState(false);
+                                    const [isCopied, setIsCopied] = useState(false);
                                     
                                     return (
                                         <div 
@@ -877,6 +896,56 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 {partner.description}
                                             </p>
                                             
+                                            {/* Promo Dropdown */}
+                                            {partner.promo && (
+                                                <div className="mb-3">
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setIsPromoOpen(!isPromoOpen);
+                                                        }}
+                                                        className={`w-full px-3 py-2 text-xs font-medium rounded-lg border ${textColorMap[partner.color as keyof typeof textColorMap]} border-current/20 hover:border-current/30 transition-all flex items-center justify-between`}
+                                                    >
+                                                        <span>🎁 Special Offer</span>
+                                                        <svg 
+                                                            className={`w-3 h-3 transition-transform ${isPromoOpen ? 'rotate-180' : ''}`}
+                                                            fill="none" 
+                                                            viewBox="0 0 24 24" 
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                        </svg>
+                                                    </button>
+                                                    
+                                                    {isPromoOpen && (
+                                                        <div className="mt-2 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+                                                            <h4 className="text-white font-semibold text-sm mb-1">{partner.promo.title}</h4>
+                                                            <p className="text-slate-300 text-xs mb-2">{partner.promo.description}</p>
+                                                            <div className="flex items-center justify-between">
+                                                                <code className="text-xs font-mono bg-slate-900 px-2 py-1 rounded text-amber-400">
+                                                                    {partner.promo.code}
+                                                                </code>
+                                                                <button
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        if (partner.promo?.noCopy) {
+                                                                            window.open(partner.link, '_blank');
+                                                                        } else {
+                                                                            navigator.clipboard.writeText(partner.promo.code);
+                                                                            setIsCopied(true);
+                                                                            setTimeout(() => setIsCopied(false), 2000);
+                                                                        }
+                                                                    }}
+                                                                    className={`text-xs px-2 py-1 rounded ${partner.promo.noCopy ? 'bg-blue-500/20 text-blue-300' : 'bg-amber-500/20 text-amber-300'} hover:opacity-80 transition-opacity`}
+                                                                >
+                                                                    {partner.promo.noCopy ? 'Claim' : isCopied ? 'Copied!' : 'Copy'}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                            
                                             <div className="mt-auto">
                                                 <a 
                                                     href={partner.link}
@@ -894,6 +963,117 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         </div>
                                     );
                                 })}
+                        </div>
+                    </div>
+                </div>
+
+                {/* FundedAward Certificate Framing Section */}
+                <div className="pt-8">
+                    <div className="flex justify-between items-center mb-8">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-400/40 shadow-[0_0_12px_rgba(148,163,184,0.25)]">
+                            <svg className="w-4 h-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 19h16M5 11h14M7 5h10" />
+                            </svg>
+                            <span className="text-sm font-semibold tracking-wide text-white uppercase">Certificate Framing</span>
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* FundedAward Card */}
+                        <div 
+                            className="group bg-gradient-to-br from-slate-500/10 to-slate-600/20 border border-slate-500/30 hover:border-slate-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col cursor-pointer"
+                            role="link"
+                            tabIndex={0}
+                            onClick={() => window.open("https://fundedaward.com/?ta_aff=MR1USD&discount=MR1USD&fbclid=PAVERFWAPPf69leHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadVw9ghFejD1oluQ4ntRwrt7mgqZz4s7BJh6KXUcJe068wzQKpUoWDeZzrQ_g_aem___KSwMw2JvRbOo3tnqe16g", '_blank', 'noopener,noreferrer')}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    window.open("https://fundedaward.com/?ta_aff=MR1USD&discount=MR1USD&fbclid=PAVERFWAPPf69leHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadVw9ghFejD1oluQ4ntRwrt7mgqZz4s7BJh6KXUcJe068wzQKpUoWDeZzrQ_g_aem___KSwMw2JvRbOo3tnqe16g", '_blank', 'noopener,noreferrer');
+                                }
+                            }}
+                        >
+                            <div className="flex items-center justify-between mb-4">
+                                <img 
+                                    src="https://fundedaward.com/cdn/shop/files/FA_vector_logo.png?height=54&v=1767254179" 
+                                    alt="FundedAward" 
+                                    className="h-8 w-auto"
+                                />
+                                <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-700/50 text-slate-300">
+                                    Certificate Framing
+                                </span>
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-400 mb-2">Funded Award</h3>
+                            <p className="text-slate-300 text-sm mb-2 line-clamp-3">
+                                Premium acrylic plaques for prop firm traders to showcase funded certificates and milestones.
+                            </p>
+                            
+                            {/* Dropdown for more info */}
+                            <div className="mb-3">
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const dropdown = e.currentTarget.nextElementSibling as HTMLElement;
+                                        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                                    }}
+                                    className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-600/30 text-slate-400 hover:border-slate-500/50 transition-all flex items-center justify-between"
+                                >
+                                    <span>🎁 Special Offer</span>
+                                    <svg 
+                                        className="w-3 h-3 transition-transform"
+                                        fill="none" 
+                                        viewBox="0 0 24 24" 
+                                        stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <div className="hidden mt-2 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+                                    <h4 className="text-white font-semibold text-sm mb-1">Frame Your Certificate & Get Credit</h4>
+                                    <p className="text-slate-300 text-xs mb-2">$80 Spent = $80 Off Your Next Challenge</p>
+                                    <div className="mb-2">
+                                        <img 
+                                            src="https://fundedaward.com/cdn/shop/files/Bundle.png?v=1763145691" 
+                                            alt="Certificate Framing Bundle" 
+                                            className="w-full h-32 object-cover rounded border border-slate-700"
+                                        />
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <code className="text-xs font-mono bg-slate-900 px-2 py-1 rounded text-amber-400">
+                                            MR1USD
+                                        </code>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                navigator.clipboard.writeText('MR1USD');
+                                                const btn = e.currentTarget;
+                                                btn.textContent = 'Copied!';
+                                                setTimeout(() => {
+                                                    btn.textContent = 'Copy';
+                                                }, 2000);
+                                            }}
+                                            className="text-xs px-2 py-1 rounded bg-amber-500/20 text-amber-300 hover:opacity-80 transition-opacity"
+                                        >
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-auto">
+                                <a 
+                                    href="https://fundedaward.com/?ta_aff=MR1USD&discount=MR1USD&fbclid=PAVERFWAPPf69leHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadVw9ghFejD1oluQ4ntRwrt7mgqZz4s7BJh6KXUcJe068wzQKpUoWDeZzrQ_g_aem___KSwMw2JvRbOo3tnqe16g"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="inline-flex items-center text-sm font-medium text-slate-400 group-hover:underline"
+                                >
+                                    Frame Certificate
+                                    <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -6288,7 +6468,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </main>
-      <FundedNextToast />
       <Footer setCurrentPage={handlePageChange} />
       <WhatsAppWidget />
       <ScrollToTopButton />
