@@ -904,7 +904,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                             e.stopPropagation();
                                                             setIsPromoOpen(!isPromoOpen);
                                                         }}
-                                                        className={`w-full px-3 py-2 text-xs font-medium rounded-lg border ${textColorMap[partner.color as keyof typeof textColorMap]} border-current/20 hover:border-current/30 transition-all flex items-center justify-between`}
+                                                        className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-600/30 text-slate-400 hover:border-slate-500/50 transition-all flex items-center justify-between"
                                                     >
                                                         <span>🎁 Special Offer</span>
                                                         <svg 
