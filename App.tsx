@@ -47,7 +47,7 @@ const servicesData: Product[] = [
         price: 0, 
         category: 'Trade Ideas', 
         imageUrl: '/images/forex-trading.jpg', 
-        description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A LIFETIME 🔥",
+        description: "🔥 GET FREE TRADE IDEAS FOR A LIFETIME 🔥",
         isSpecialOffer: true,
         offerSteps: [
             { 
@@ -1151,7 +1151,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                         onClick={() => setIsOpen(!isOpen)}
                         className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between cursor-pointer"
                     >
-                        <span className="text-lg sm:text-xl">GET FREE PLATINUM TRADE IDEAS FOR A LIFETIME 🥈</span>
+                        <span className="text-lg sm:text-xl">GET FREE TRADE IDEAS FOR A LIFETIME 🥈</span>
                         <svg 
                             className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
                             fill="none" 
@@ -1980,7 +1980,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                                                     }, {
                                                                         icon: '💼',
                                                                         title: 'Funding Pathway',
-                                                                        description: '$5,000 prop firm account setup or a $50 funded account with our recommended broker.'
+                                                                        description: '$15,000 prop firm account setup.'
                                                                     }, {
                                                                         icon: '🏨',
                                                                         title: 'Luxury Tradecation Residency',
@@ -2139,7 +2139,7 @@ const EventsPage: React.FC = () => {
         {
             icon: '💼',
             title: 'Funding Pathway',
-            description: '$5,000 prop firm account setup or a $50 funded account with our recommended broker.'
+            description: '$15,000 prop firm account setup.'
         },
         {
             icon: '🏨',
@@ -2178,7 +2178,7 @@ const EventsPage: React.FC = () => {
                     items: [
                         "🏆 Complete Trading Education (Beginner to Advanced)",
                         "💡 3 Months of Diamond 💎 Trade Ideas",
-                        "💼 $5,000 Prop Firm Account Setup (or $50 funded account)",
+                        "💼 $15,000 Prop Firm Account Setup",
                         "🏨 Luxury Accommodation (Private Residency, Mon-Fri)",
                         "🍽️ All Meals Included (Breakfast, Lunch, Dinner + Snacks)",
                         "💪 Morning Fitness Sessions with Certified Coach (5 AM)",
