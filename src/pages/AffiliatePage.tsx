@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { ClipboardDocumentIcon, CheckCircleIcon, ArrowTopRightOnSquareIcon, LinkIcon, SparklesIcon, ChartBarIcon, UserGroupIcon, CogIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
 interface Product {
@@ -16,10 +16,13 @@ const AffiliatePage: React.FC = () => {
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     
+    // Convert to lowercase first
+    const lowercaseValue = value.toLowerCase();
+    
     // Check for @ symbol and remove it silently
-    if (value.includes('@')) {
+    if (lowercaseValue.includes('@')) {
       // Clear the @ symbol from input without showing error
-      const filteredValue = value.replace(/@/g, '');
+      const filteredValue = lowercaseValue.replace(/@/g, '');
       setAffiliateUsername(filteredValue);
       return;
     }
@@ -28,13 +31,14 @@ const AffiliatePage: React.FC = () => {
     setUsernameError('');
     
     // Only allow lowercase letters, numbers, and special symbols -!@#$%^&*
-    const filteredValue = value.replace(/[^a-z0-9\-!@#$%^&*]/g, '');
+    const filteredValue = lowercaseValue.replace(/[^a-z0-9\-!@#$%^&*]/g, '');
     setAffiliateUsername(filteredValue);
   };
   const [generatedLinks, setGeneratedLinks] = useState<{ product: Product; link: string }[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedLinks, setCopiedLinks] = useState<Set<string>>(new Set());
   const [showAllCommissions, setShowAllCommissions] = useState(false);
+  const generatedLinksRef = useRef<HTMLDivElement>(null);
 
   // Product data matching the main App.tsx
   const products: Product[] = [
@@ -74,6 +78,17 @@ const AffiliatePage: React.FC = () => {
 
     setGeneratedLinks([link]);
     setIsGenerating(false);
+    
+    // Auto-scroll to generated links section on mobile
+    setTimeout(() => {
+      if (generatedLinksRef.current && window.innerWidth < 768) {
+        generatedLinksRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
+      }
+    }, 100);
   };
 
   const copyToClipboard = async (link: string, productName: string) => {
@@ -200,7 +215,7 @@ const AffiliatePage: React.FC = () => {
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2 text-left">
-                    Your Whop Affiliate Username
+                    Your Whop Affiliate Username: (small cases and numbers only e.g; mr1dollar)
                   </label>
                   <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-3 space-y-3 sm:space-y-0">
                     <input
@@ -305,7 +320,7 @@ const AffiliatePage: React.FC = () => {
                   </div>
                 </div>
               ) : generatedLinks.length > 0 ? (
-                <div className="space-y-4 max-h-96 overflow-y-auto">
+                <div ref={generatedLinksRef} className="space-y-4 max-h-96 overflow-y-auto">
                   {generatedLinks.map((item, index) => (
                     <div key={index} className="bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700">
                       <div className="flex flex-col sm:flex-row items-start justify-between mb-3 sm:mb-4">
@@ -367,7 +382,7 @@ const AffiliatePage: React.FC = () => {
                         {/* Dashboard Access Button */}
                         <div className="mt-4 text-center">
                           <a
-                            href="https://whop.com/dashboard/"
+                            href="https://whop.com/affiliates/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 py-3 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
@@ -427,6 +442,19 @@ const AffiliatePage: React.FC = () => {
                         <p className="text-slate-400 text-sm">
                           <strong className="text-amber-400">Pro Tip:</strong> Use a memorable username that represents your brand for better conversions!
                         </p>
+                      </div>
+                      
+                      {/* Dashboard Access Button */}
+                      <div className="mt-6">
+                        <a
+                          href="https://whop.com/affiliates/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center w-full px-6 py-3 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
+                        >
+                          <ChartBarIcon className="w-5 h-5 mr-2" />
+                          <span>Access Dashboard</span>
+                        </a>
                       </div>
                     </div>
                   </div>
