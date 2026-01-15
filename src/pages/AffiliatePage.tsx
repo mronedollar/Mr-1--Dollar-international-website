@@ -382,7 +382,7 @@ const AffiliatePage: React.FC = () => {
                         {/* Dashboard Access Button */}
                         <div className="mt-4 text-center">
                           <a
-                            href="https://whop.com/affiliates/"
+                            href="https://whop.com/mr1dollar-international/affiliates"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 py-3 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
@@ -447,7 +447,7 @@ const AffiliatePage: React.FC = () => {
                       {/* Dashboard Access Button */}
                       <div className="mt-6">
                         <a
-                          href="https://whop.com/affiliates/"
+                          href="https://whop.com/mr1dollar-international/affiliates"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center w-full px-6 py-3 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
