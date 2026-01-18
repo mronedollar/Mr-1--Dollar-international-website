@@ -43,7 +43,7 @@ const servicesData: Product[] = [
     { id: 13, name: "Synthetics trade ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "synthetics-checkout" },
     { 
         id: 2, 
-        name: "Platinum Trade Ideas", 
+        name: "Free Trade Ideas", 
         price: 0, 
         category: 'Trade Ideas', 
         imageUrl: '/images/forex-trading.jpg', 
@@ -1165,7 +1165,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                     {isOpen && (
                         <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-amber-500/20 shadow-xl animate-fadeIn">
                             <h3 className="text-xl font-bold text-amber-400 mb-6 text-center">
-                                Follow These Simple Steps to Get Your Free Platinum Trade Ideas:
+                                Follow These Simple Steps to Get Your Free Trade Ideas:
                             </h3>
                             <div className="w-full bg-gray-800 rounded-full h-2.5 mb-6">
                                 <div 
@@ -1180,7 +1180,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                 <svg className="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
-                                Important: You must complete all 5 steps to receive your free Platinum Trade Ideas. Incomplete steps will result in no access.
+                                Important: You must complete all 5 steps to receive your free Trade Ideas. Incomplete steps will result in no access.
                             </div>
 
                             <div className="flex flex-col md:flex-row gap-8">
@@ -1191,7 +1191,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                             <div className={`${activeStep >= 1 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>1</div>
                                             <div className="flex-1">
                                                 <h4 className="font-semibold">Fill Out Contact Details</h4>
-                                                <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
+                                                <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Trade Ideas</p>
                                                 <a 
                                                     href="#"
                                                     onClick={(e) => {

@@ -320,7 +320,7 @@ const AffiliatePage: React.FC = () => {
                   </div>
                 </div>
               ) : generatedLinks.length > 0 ? (
-                <div ref={generatedLinksRef} className="space-y-4 max-h-96 overflow-y-auto">
+                <div ref={generatedLinksRef} className="space-y-4 max-h-96 overflow-y-auto scroll-mt-20">
                   {generatedLinks.map((item, index) => (
                     <div key={index} className="bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700">
                       <div className="flex flex-col sm:flex-row items-start justify-between mb-3 sm:mb-4">
