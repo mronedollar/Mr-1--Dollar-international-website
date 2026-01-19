@@ -597,9 +597,9 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                 hasDropdown: true,
                 dropdownContent: `
                     <div class="space-y-3">
-                        <p class="text-white text-sm mb-2"><strong class="text-amber-400">MetaTrader 5 is returning to Funded7!</strong> We now operate under our own MT5 license for a seamless experience.</p>
+                        <p class="text-white text-sm mb-2"><strong class="text-amber-400">MetaTrader 5 is returning to Funded7!</strong> "We now operate under our own MT5 license for a seamless experience.</p>
                         <p class="text-white text-sm mb-2">Thank you for your loyalty during our cTrader transition. The platform you've been waiting for is ready!</p>
-                        <p class="text-white text-sm mb-2"><strong class="text-green-400">50% Discount:</strong> All clients get 50% off Two Phase Challenges!</p>
+                        <p class="text-white text-sm mb-2"><strong class="text-green-400">50% Discount:</strong> All clients get 50% off Two Phase Challenges!" </p>
                         <p class="text-white text-sm mb-3">Use coupon code <strong class="text-amber-400">FIRST</strong> at checkout</p>
                         <div class="border-t border-slate-600 pt-3">
                             <p class="text-xs text-slate-400 mb-2"><strong>Important Timeline:</strong></p>
