@@ -591,9 +591,30 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             category: 'Prop Firms',
             color: 'purple',
             promo: {
-                title: 'Enjoy 27% OFF!!🏆',
-                description: '27% Off on all Challenges',
-                code: 'FIRST'
+                title: 'MetaTrader 5 is Returning! 🎉',
+                description: '50% off Two Phase Challenges for all clients',
+                code: 'FIRST',
+                hasDropdown: true,
+                dropdownContent: `
+                    <div class="space-y-3">
+                        <p class="text-white text-sm mb-2"><strong class="text-amber-400">MetaTrader 5 is returning to Funded7!</strong> We now operate under our own MT5 license for a seamless experience.</p>
+                        <p class="text-white text-sm mb-2">Thank you for your loyalty during our cTrader transition. The platform you've been waiting for is ready!</p>
+                        <p class="text-white text-sm mb-2"><strong class="text-green-400">50% Discount:</strong> All clients get 50% off Two Phase Challenges!</p>
+                        <p class="text-white text-sm mb-3">Use coupon code <strong class="text-amber-400">FIRST</strong> at checkout</p>
+                        <div class="border-t border-slate-600 pt-3">
+                            <p class="text-xs text-slate-400 mb-2"><strong>Important Timeline:</strong></p>
+                            <p class="text-xs text-white mb-1">• Migration form deadline: January 23rd, 2026</p>
+                            <p class="text-xs text-white mb-1">• Close positions 2 days before migration</p>
+                            <p class="text-xs text-amber-400">• Exact migration date announced soon via email</p>
+                        </div>
+                        <div class="mt-3">
+                            <a href="https://f9wxx.r.a.d.sendibm1.com/mk/cl/f/sh/SMK1E8tHeG7uh65Nq889Q4qo1t3A/-KS14PR6IA9C" 
+                               class="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-2 px-4 rounded-lg text-center transition-colors">
+                                Fill Out Migration Form
+                            </a>
+                        </div>
+                    </div>
+                `
             }
         },
         {
@@ -919,28 +940,34 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                     
                                                     {isPromoOpen && (
                                                         <div className="mt-2 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
-                                                            <h4 className="text-white font-semibold text-sm mb-1">{partner.promo.title}</h4>
-                                                            <p className="text-slate-300 text-xs mb-2">{partner.promo.description}</p>
-                                                            <div className="flex items-center justify-between">
-                                                                <code className="text-xs font-mono bg-slate-900 px-2 py-1 rounded text-amber-400">
-                                                                    {partner.promo.code}
-                                                                </code>
-                                                                <button
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        if (partner.promo?.noCopy) {
-                                                                            window.open(partner.link, '_blank');
-                                                                        } else {
-                                                                            navigator.clipboard.writeText(partner.promo.code);
-                                                                            setIsCopied(true);
-                                                                            setTimeout(() => setIsCopied(false), 2000);
-                                                                        }
-                                                                    }}
-                                                                    className={`text-xs px-2 py-1 rounded ${partner.promo.noCopy ? 'bg-blue-500/20 text-blue-300' : 'bg-amber-500/20 text-amber-300'} hover:opacity-80 transition-opacity`}
-                                                                >
-                                                                    {partner.promo.noCopy ? 'Claim' : isCopied ? 'Copied!' : 'Copy'}
-                                                                </button>
-                                                            </div>
+                                                            {partner.promo.hasDropdown ? (
+                                                                <div dangerouslySetInnerHTML={{ __html: partner.promo.dropdownContent }} className="space-y-3" />
+                                                            ) : (
+                                                                <>
+                                                                    <h4 className="text-white font-semibold text-sm mb-1">{partner.promo.title}</h4>
+                                                                    <p className="text-slate-300 text-xs mb-2">{partner.promo.description}</p>
+                                                                    <div className="flex items-center justify-between">
+                                                                        <code className="text-xs font-mono bg-slate-900 px-2 py-1 rounded text-amber-400">
+                                                                            {partner.promo.code}
+                                                                        </code>
+                                                                        <button
+                                                                            onClick={(e) => {
+                                                                                e.stopPropagation();
+                                                                                if (partner.promo?.noCopy) {
+                                                                                    window.open(partner.link, '_blank');
+                                                                                } else {
+                                                                                    navigator.clipboard.writeText(partner.promo.code);
+                                                                                    setIsCopied(true);
+                                                                                    setTimeout(() => setIsCopied(false), 2000);
+                                                                                }
+                                                                            }}
+                                                                            className={`text-xs px-2 py-1 rounded ${partner.promo.noCopy ? 'bg-blue-500/20 text-blue-300' : 'bg-amber-500/20 text-amber-300'} hover:opacity-80 transition-opacity`}
+                                                                        >
+                                                                            {partner.promo.noCopy ? 'Claim' : isCopied ? 'Copied!' : 'Copy'}
+                                                                        </button>
+                                                                    </div>
+                                                                </>
+                                                            )}
                                                         </div>
                                                     )}
                                                 </div>
