@@ -33,11 +33,24 @@ interface Product extends BaseProduct {
     platinumBenefitDescription?: string;
     promoCode?: string;
     discountedPrice?: number;
+    productId?: string;
+    checkoutLink?: string;
     // Additional properties specific to Product can be added here
 }
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
+    { 
+        id: 15, 
+        name: "Mr One Dollar Gold Digger (EA)", 
+        price: 29.99, 
+        category: 'Softwares', 
+        imageUrl: 'https://i.postimg.cc/DZf72pvF/Gold-Digger-EA-photo.jpg', 
+        description: "Key Features:\n\nFully-automated gold trading 24/7—never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!\n\n$29.99 once off for a year, valid for only 20 people", 
+        checkoutUrl: "gold-digger-ea-checkout",
+        productId: "prod_z8f88CHTyd7tx",
+        checkoutLink: "https://whop.com/checkout/plan_BVSkuDVMnpu99"
+    },
     { id: 14, name: "Diamond 7-Days Prepaid", price: 45.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/dtCTfkRV/DIAMOND-prepaid.png', description: "Get Diamond-level trade ideas for a full week at an affordable prepaid rate. Perfect for traders who want premium trading signals without monthly commitment. Receive daily trade setups, market analysis, and expert insights for 7 days. Weekly subscription.", checkoutUrl: "diamond-prepaid-checkout" },
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "gold-high-voltage-checkout" },
     { id: 13, name: "Synthetics trade ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "synthetics-checkout" },
