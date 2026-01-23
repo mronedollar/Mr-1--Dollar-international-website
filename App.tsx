@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 import AffiliatePage from './src/pages/AffiliatePage';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'branded-merchandise-checkout' | 'affiliate';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'branded-merchandise-checkout' | 'gold-digger-ea-checkout' | 'affiliate';
 interface OfferStep {
     number: number;
     text: string | React.ReactNode;
@@ -3359,6 +3359,10 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     e.preventDefault();
                                     // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/branded-merchandise-checkout';
+                                } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
+                                    e.preventDefault();
+                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
+                                    window.location.href = '/gold-digger-ea-checkout';
                                 }
                             }}
                             className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
@@ -6115,6 +6119,133 @@ const BrandedMerchandiseCheckout: React.FC = () => {
     );
 };
 
+const GoldDiggerEACheckout: React.FC = () => {
+    const [isSecure, setIsSecure] = useState(true);
+    const [showSecureWarning, setShowSecureWarning] = useState(false);
+
+    useEffect(() => {
+        // Check if running on HTTPS
+        const isHttps = window.location.protocol === 'https:';
+        setIsSecure(isHttps);
+        
+        if (!isHttps) {
+            setShowSecureWarning(true);
+            return;
+        }
+
+        // Load Whop checkout script
+        const script = document.createElement('script');
+        script.src = 'https://js.whop.com/static/checkout/loader.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        // Set up completion callback
+        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
+            console.log('Payment complete:', planId, receiptId);
+            alert('Payment successful! You now have access to Mr One Dollar Gold Digger (EA).');
+            window.location.href = '/services';
+        };
+
+        return () => {
+            // Cleanup
+            if (document.head.contains(script)) {
+                document.head.removeChild(script);
+            }
+            delete (window as any).onCheckoutComplete;
+        };
+    }, []);
+
+    if (showSecureWarning) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center max-w-md">
+                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
+                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
+                        </svg>
+                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
+                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
+                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
+                        <div className="space-y-3">
+                            <button 
+                                onClick={() => window.open('https://whop.com/checkout/plan_BVSkuDVMnpu99?d2c=true', '_blank')}
+                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
+                            >
+                                Continue on Whop
+                            </button>
+                        </div>
+                    </div>
+                    <p className="text-slate-500 text-sm">
+                        Your security is our priority. All payment processing requires encryption.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isSecure) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <div className="relative mb-6">
+                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
+                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-black">
+            <div className="container mx-auto px-4 py-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Gold Digger (EA) Checkout</h1>
+                    <p className="text-slate-400">Complete your purchase to get instant access to the automated gold trading EA</p>
+                </div>
+                
+                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                        <div
+                            data-whop-checkout-plan-id="plan_BVSkuDVMnpu99"
+                            data-whop-checkout-return-url="https://mr1dollar.international/"
+                            data-whop-checkout-theme="dark"
+                            data-whop-checkout-on-complete="onCheckoutComplete"
+                            style={{ minHeight: '600px' }}
+                        >
+                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
+                                <img 
+                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    alt="Mr. One Dollar" 
+                                    className="h-16 w-auto mb-4"
+                                />
+                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 flex justify-between items-center px-4">
+                            <a 
+                                href="/services"
+                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
+                            >
+                                <img 
+                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    alt="Back" 
+                                    className="w-4 h-4"
+                                />
+                                <span className="text-sm font-medium">Back to Services</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -6176,6 +6307,7 @@ const App: React.FC = () => {
       '/currencies-strategy-checkout': 'currencies-strategy-checkout',
       '/nfp-event-access-checkout': 'nfp-event-access-checkout',
       '/branded-merchandise-checkout': 'branded-merchandise-checkout',
+      '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
       '/affiliate': 'affiliate'
     };
     
@@ -6223,6 +6355,7 @@ const App: React.FC = () => {
         '/currencies-strategy-checkout': 'currencies-strategy-checkout',
         '/nfp-event-access-checkout': 'nfp-event-access-checkout',
         '/branded-merchandise-checkout': 'branded-merchandise-checkout',
+        '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
         '/affiliate': 'affiliate'
       };
       
@@ -6357,6 +6490,7 @@ const App: React.FC = () => {
       'currencies-strategy-checkout': '/currencies-strategy-checkout',
       'nfp-event-access-checkout': '/nfp-event-access-checkout',
       'branded-merchandise-checkout': '/branded-merchandise-checkout',
+      'gold-digger-ea-checkout': '/gold-digger-ea-checkout',
       'affiliate': '/affiliate'
     };
     
@@ -6490,6 +6624,8 @@ const App: React.FC = () => {
         return <NFPEventAccessCheckout />;
       case 'branded-merchandise-checkout':
         return <BrandedMerchandiseCheckout />;
+      case 'gold-digger-ea-checkout':
+        return <GoldDiggerEACheckout />;
       case 'affiliate':
         return <AffiliatePage />;
       default:
