@@ -3433,7 +3433,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                 } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
                                     e.preventDefault();
                                     // Navigate to Google Forms for Gold Digger EA
-                                    window.open('https://docs.google.com/forms/d/e/1FAIpQLSe3sgcVGtDWSjjDb9GwJHGimdd58P9Bh8zwT3xjThEO2X7JEw/viewform?usp=dialog', '_blank');
+                                    window.open('https://forms.gle/zt8wkU75WebQ4GcB6', '_blank');
                                 } else if (product.checkoutUrl === 'lord-loot-ea-checkout') {
                                     e.preventDefault();
                                     // Navigate to Google Forms for Lord Loot EA
