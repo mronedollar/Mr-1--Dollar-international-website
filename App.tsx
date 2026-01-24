@@ -42,7 +42,7 @@ interface Product extends BaseProduct {
 const servicesData: Product[] = [
     { 
         id: 15, 
-        name: "Mr One Dollar Gold Digger (EA)", 
+        name: "Mr One Dollar Gold Digger (EA) Robot", 
         price: 29.99, 
         category: 'Softwares', 
         imageUrl: 'https://i.postimg.cc/DZf72pvF/Gold-Digger-EA-photo.jpg', 
@@ -53,7 +53,7 @@ const servicesData: Product[] = [
     },
     { 
         id: 16, 
-        name: "Mr One Dollar Lord Loot (EA)", 
+        name: "Mr One Dollar Lord Loot (EA) Robot", 
         price: 29.99, 
         category: 'Softwares', 
         imageUrl: 'https://i.postimg.cc/3NYDZPvv/Lord-Loot-EA-photo.jpg', 
@@ -3432,8 +3432,12 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     window.location.href = '/branded-merchandise-checkout';
                                 } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
-                                    window.location.href = '/gold-digger-ea-checkout';
+                                    // Navigate to Google Forms for Gold Digger EA
+                                    window.open('https://docs.google.com/forms/d/e/1FAIpQLSe3sgcVGtDWSjjDb9GwJHGimdd58P9Bh8zwT3xjThEO2X7JEw/viewform?usp=dialog', '_blank');
+                                } else if (product.checkoutUrl === 'lord-loot-ea-checkout') {
+                                    e.preventDefault();
+                                    // Navigate to Google Forms for Lord Loot EA
+                                    window.open('https://forms.gle/5aFMSqk8f5TUxGwi8', '_blank');
                                 }
                             }}
                             className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
@@ -6252,7 +6256,7 @@ const GoldDiggerEACheckout: React.FC = () => {
         // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
-            alert('Payment successful! You now have access to Mr One Dollar Gold Digger (EA).');
+            alert('Payment successful! You now have access to Mr One Dollar Gold Digger (EA) Robot.');
             window.location.href = '/services';
         };
 
@@ -6312,7 +6316,7 @@ const GoldDiggerEACheckout: React.FC = () => {
         <div className="min-h-screen bg-black">
             <div className="container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Gold Digger (EA) Checkout</h1>
+                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Gold Digger (EA) Robot Checkout</h1>
                     <p className="text-slate-400">Complete your purchase to get instant access to the automated gold trading EA</p>
                 </div>
                 
@@ -6379,7 +6383,7 @@ const LordLootEACheckout: React.FC = () => {
         // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
-            alert('Payment successful! You now have access to Mr One Dollar Lord Loot (EA).');
+            alert('Payment successful! You now have access to Mr One Dollar Lord Loot (EA) Robot.');
             window.location.href = '/services';
         };
 
@@ -6439,7 +6443,7 @@ const LordLootEACheckout: React.FC = () => {
         <div className="min-h-screen bg-black">
             <div className="container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Lord Loot (EA) Checkout</h1>
+                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Lord Loot (EA) Robot Checkout</h1>
                     <p className="text-slate-400">Complete your purchase to get instant access to the automated currency pairs trading EA</p>
                 </div>
                 
