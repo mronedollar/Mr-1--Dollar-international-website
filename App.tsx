@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 import AffiliatePage from './src/pages/AffiliatePage';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'branded-merchandise-checkout' | 'gold-digger-ea-checkout' | 'affiliate';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'branded-merchandise-checkout' | 'gold-digger-ea-checkout' | 'lord-loot-ea-checkout' | 'affiliate';
 interface OfferStep {
     number: number;
     text: string | React.ReactNode;
@@ -46,10 +46,21 @@ const servicesData: Product[] = [
         price: 29.99, 
         category: 'Softwares', 
         imageUrl: 'https://i.postimg.cc/DZf72pvF/Gold-Digger-EA-photo.jpg', 
-        description: "Key Features:\n\nFully-automated gold trading 24/7—never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!\n\n$29.99 once off for a year, valid for only 20 people", 
+        description: "Key Features:\n\nFully-automated gold trading 24/7, never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!\n\n$29.99 once off/whole year, valid for only 20 people", 
         checkoutUrl: "gold-digger-ea-checkout",
         productId: "prod_z8f88CHTyd7tx",
         checkoutLink: "https://whop.com/checkout/plan_BVSkuDVMnpu99"
+    },
+    { 
+        id: 16, 
+        name: "Mr One Dollar Lord Loot (EA)", 
+        price: 29.99, 
+        category: 'Softwares', 
+        imageUrl: 'https://i.postimg.cc/3NYDZPvv/Lord-Loot-EA-photo.jpg', 
+        description: "Fully Automated Currency Pairs Trading EA.\n\nUnlock the potential of round-the-clock forex trading with a powerful EA that does the hard work for you. This fully automated system analyzes the markets, executes trades, and manages take-profit targets, all without the need for constant monitoring. Perfect for busy traders and those seeking consistent results, this solution helps maximize profits while minimizing manual effort.\n\nKey Features:\n\n100% automated trading for major currency pairs\n\nIntelligent trade execution and management\n\nBuilt-in auto Take-Profit (TP) system for optimized gains\n\nSimple setup, get started in minutes\n\nSuitable for beginners and seasoned traders alike\n\nLet your capital work smarter with a reliable, hands-free trading assistant designed for real results.\n\n$29.99 once off/whole year, valid for only 20 people", 
+        checkoutUrl: "lord-loot-ea-checkout",
+        productId: "plan_i3B9lRxO7oE5M",
+        checkoutLink: "https://whop.com/checkout/plan_i3B9lRxO7oE5M"
     },
     { id: 14, name: "Diamond 7-Days Prepaid", price: 45.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/dtCTfkRV/DIAMOND-prepaid.png', description: "Get Diamond-level trade ideas for a full week at an affordable prepaid rate. Perfect for traders who want premium trading signals without monthly commitment. Receive daily trade setups, market analysis, and expert insights for 7 days. Weekly subscription.", checkoutUrl: "diamond-prepaid-checkout" },
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "gold-high-voltage-checkout" },
@@ -1420,6 +1431,14 @@ const Testimonials: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to modal when it opens
+    useEffect(() => {
+        if (selectedImage && modalRef.current) {
+            modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [selectedImage]);
     
     // Minimum swipe distance to trigger navigation (in pixels)
     const minSwipeDistance = 50;
@@ -1510,99 +1529,107 @@ const Testimonials: React.FC = () => {
                 
                 {/* Image Modal */}
                 {selectedImage && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
-                        <div className="relative max-w-4xl w-full mx-auto max-h-[90vh] flex items-center justify-center">
-                            {/* Close button */}
-                            <button 
-                                className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors z-10"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setSelectedImage(null);
-                                }}
-                            >
-                                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                            
-                            {/* Left navigation arrow */}
-                            <button 
-                                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    const currentIndex = testimonialImages.indexOf(selectedImage);
-                                    const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
-                                    setSelectedImage(testimonialImages[prevIndex]);
-                                }}
-                            >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            
-                            {/* Main image */}
-                            <div 
-                                className="relative"
-                                onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
-                                onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
-                                onTouchEnd={() => {
-                                    if (!touchStart || !touchEnd) return;
-                                    const distance = touchStart - touchEnd;
-                                    const isLeftSwipe = distance > minSwipeDistance;
-                                    const isRightSwipe = distance < -minSwipeDistance;
-                                    
-                                    if (isLeftSwipe) {
-                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
-                                        const nextIndex = (currentIndex + 1) % testimonialImages.length;
-                                        setSelectedImage(testimonialImages[nextIndex]);
-                                    } else if (isRightSwipe) {
-                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
-                                        const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
-                                        setSelectedImage(testimonialImages[prevIndex]);
-                                    }
-                                    
-                                    setTouchStart(null);
-                                    setTouchEnd(null);
-                                }}
-                            >
-                                <img 
-                                    src={selectedImage}
-                                    alt="Full size testimonial"
-                                    className="max-h-[80vh] max-w-full rounded-lg shadow-2xl"
-                                    onClick={(e) => e.stopPropagation()}
-                                    loading="lazy"
-                                />
-                                <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
-                                    {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
-                                </div>
-                                <div className="absolute top-1/2 left-4 right-4 flex justify-between pointer-events-none">
-                                    <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                        </svg>
-                                    </div>
-                                    <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </div>
+                    <div 
+                        className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm" 
+                        style={{ paddingTop: '92px' }} 
+                        onClick={() => setSelectedImage(null)}
+                        ref={modalRef}
+                    >
+                        <div className="relative w-full h-full max-w-6xl mx-auto flex flex-col" style={{ maxHeight: 'calc(100vh - 92px)' }}>
+                            <div className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all z-20" aria-label="Close">
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(null);
+                                    }}
+                                    className="w-6 h-6"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="relative p-4 border-b border-slate-700">
+                                <div className="text-center">
+                                    <h3 className="text-white text-lg font-medium">Testimonials</h3>
                                 </div>
                             </div>
                             
-                            {/* Right navigation arrow */}
-                            <button 
-                                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    const currentIndex = testimonialImages.indexOf(selectedImage);
-                                    const nextIndex = (currentIndex + 1) % testimonialImages.length;
-                                    setSelectedImage(testimonialImages[nextIndex]);
-                                }}
-                            >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
+                            {/* Image container with navigation */}
+                            <div className="flex-1 flex items-center justify-center p-4 min-h-0 relative">
+                                {/* Left navigation arrow */}
+                                <button 
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const currentIndex = testimonialImages.indexOf(selectedImage);
+                                        const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                        setSelectedImage(testimonialImages[prevIndex]);
+                                    }}
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                
+                                {/* Main image */}
+                                <div 
+                                    className="relative max-w-full max-h-full"
+                                    onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
+                                    onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+                                    onTouchEnd={() => {
+                                        if (!touchStart || !touchEnd) return;
+                                        const distance = touchStart - touchEnd;
+                                        const isLeftSwipe = distance > minSwipeDistance;
+                                        const isRightSwipe = distance < -minSwipeDistance;
+                                        
+                                        if (isLeftSwipe) {
+                                            const currentIndex = testimonialImages.indexOf(selectedImage!);
+                                            const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                            setSelectedImage(testimonialImages[nextIndex]);
+                                        } else if (isRightSwipe) {
+                                            const currentIndex = testimonialImages.indexOf(selectedImage!);
+                                            const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                            setSelectedImage(testimonialImages[prevIndex]);
+                                        }
+                                        
+                                        setTouchStart(null);
+                                        setTouchEnd(null);
+                                    }}
+                                >
+                                    <img 
+                                        src={selectedImage}
+                                        alt="Full size testimonial"
+                                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                                        onClick={(e) => e.stopPropagation()}
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
+                                        {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
+                                    </div>
+                                </div>
+                                
+                                {/* Right navigation arrow */}
+                                <button 
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const currentIndex = testimonialImages.indexOf(selectedImage);
+                                        const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                        setSelectedImage(testimonialImages[nextIndex]);
+                                    }}
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                                <p className="text-white text-center text-sm md:text-base">
+                                    Click outside or press ESC to close
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -2164,6 +2191,14 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
 const EventsPage: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [tradecationPerksOpen, setTradecationPerksOpen] = useState(false);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to modal when it opens
+    useEffect(() => {
+        if (selectedImage && modalRef.current) {
+            modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [selectedImage]);
 
     const tradecationPerks = [
         {
@@ -2571,27 +2606,46 @@ const EventsPage: React.FC = () => {
             {/* Image Modal */}
             {selectedImage && (
                 <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
+                    style={{ paddingTop: '92px' }}
                     onClick={() => setSelectedImage(null)}
+                    ref={modalRef}
                 >
-                    <div className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center">
-                        <button 
-                            className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedImage(null);
-                            }}
-                        >
-                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                        <img 
-                            src={selectedImage} 
-                            alt="Full size event" 
-                            className="max-h-[80vh] w-auto mx-auto rounded-lg object-contain"
-                            onClick={(e) => e.stopPropagation()}
-                        />
+                    <div className="relative w-full h-full max-w-6xl mx-auto flex flex-col" style={{ maxHeight: 'calc(100vh - 92px)' }}>
+                        <div className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all z-20" aria-label="Close">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedImage(null);
+                                }}
+                                className="w-6 h-6"
+                            >
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="relative p-4 border-b border-slate-700">
+                            <div className="text-center">
+                                <h3 className="text-white text-lg font-medium">Event Photo</h3>
+                            </div>
+                        </div>
+                        
+                        {/* Image container */}
+                        <div className="flex-1 flex items-center justify-center p-4 min-h-0">
+                            <img 
+                                src={selectedImage} 
+                                alt="Full size event" 
+                                className="max-w-full max-h-full object-contain rounded-lg"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        </div>
+                        
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <p className="text-white text-center text-sm md:text-base">
+                                Click outside or press ESC to close
+                            </p>
+                        </div>
                     </div>
                 </div>
             )}
@@ -3046,6 +3100,15 @@ interface PlatinumProduct extends BaseProduct {
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; setCurrentPage: (page: Page) => void }> = ({ product, onAddToCart, isExpanded, onToggle, setCurrentPage }) => {
     const [imageError, setImageError] = useState(false);
     const [currentImageUrl, setCurrentImageUrl] = useState(product.imageUrl.startsWith('http') ? product.imageUrl : `/${product.imageUrl}`);
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to modal when it opens
+    useEffect(() => {
+        if (isImageModalOpen && modalRef.current) {
+            modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [isImageModalOpen]);
     
     const handleImageError = () => {
         if (!imageError) {
@@ -3056,8 +3119,6 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     };
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
-    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-    const modalRef = useRef<HTMLDivElement>(null);
     
     // Handle click on image to open modal
     const handleImageClick = (e: React.MouseEvent) => {
@@ -3254,6 +3315,16 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                         {product.id === 14 ? 'weekly' : (product.id === 3 ? 'Initial fee' : 'monthly')}
                                     </span>
                                 )}
+                                {product.id === 15 && (
+                                    <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                        once off/year access
+                                    </span>
+                                )}
+                                {product.id === 16 && (
+                                    <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                        once off/year access
+                                    </span>
+                                )}
                             </p>
                         </div>
                     )}
@@ -3381,34 +3452,40 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             </div>
         </div>
         {isImageModalOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
-                <div 
-                    ref={modalRef}
-                    className="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 rounded-lg overflow-hidden shadow-2xl"
-                >
-                    <div className="absolute top-0 right-0 p-4 z-10">
-                        <button 
+            <div 
+                className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm" 
+                style={{ paddingTop: '92px' }}
+                onClick={() => setIsImageModalOpen(false)}
+                ref={modalRef}
+            >
+                <div className="relative w-full h-full max-w-6xl mx-auto bg-slate-900 rounded-lg overflow-hidden shadow-2xl flex flex-col" style={{ maxHeight: 'calc(100vh - 92px)' }}>
+                    <div className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all z-20" aria-label="Close">
+                        <button
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setIsImageModalOpen(false);
                             }}
-                            className="text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all"
-                            aria-label="Close"
+                            className="w-6 h-6"
                         >
-                            <CloseIcon className="w-6 h-6" />
+                            <CloseIcon />
                         </button>
                     </div>
-                    <div className="h-full flex items-center justify-center p-4">
+                    <div className="relative p-4 border-b border-slate-700">
+                        <div className="text-center">
+                            <h3 className="text-white text-lg font-medium">{product.name}</h3>
+                        </div>
+                    </div>
+                    <div className="flex-1 flex items-center justify-center p-4 min-h-0">
                         <img 
                             src={product.imageUrl} 
                             alt={product.name}
-                            className="max-w-full max-h-[80vh] object-contain"
+                            className="max-w-full max-h-full object-contain"
                             onClick={(e) => e.stopPropagation()}
                         />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                         <p className="text-white text-center text-sm md:text-base">
-                            {product.name} - Click outside or press ESC to close
+                            Click outside or press ESC to close
                         </p>
                     </div>
                 </div>
@@ -3509,7 +3586,15 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     const categories = useMemo(() => {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
-        return uniqueCategories.map(cat => ({
+        
+        // Sort categories to put Softwares first, then maintain original order
+        const sortedCategories = uniqueCategories.sort((a, b) => {
+            if (a === 'Softwares') return -1;
+            if (b === 'Softwares') return 1;
+            return 0;
+        });
+        
+        return sortedCategories.map(cat => ({
             name: cat,
             count: products.filter(p => p.category === cat && p.id !== 2).length
         }));
@@ -3549,14 +3634,25 @@ const updatedPlatinumPackage = platinumPackage ? {
     }, [products, searchTerm, selectedCategory, appliedPriceRange, sortOption]);
 
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
-    const paginatedProducts = filteredAndSortedProducts.slice((productsCurrentPage - 1) * itemsPerPage, productsCurrentPage * itemsPerPage);
     
-    // Filter products based on selected category
-    const filteredProducts = selectedCategory 
-        ? paginatedProducts.filter(p => p.category === selectedCategory)
-        : paginatedProducts;
+    // Filter products based on selected category first, then apply pagination
+    const categoryFilteredProducts = selectedCategory 
+        ? filteredAndSortedProducts.filter(p => p.category === selectedCategory)
+        : filteredAndSortedProducts;
+    
+    // When a category is selected, show all items in that category on one page
+    const paginatedProducts = selectedCategory 
+        ? categoryFilteredProducts
+        : filteredAndSortedProducts.slice((productsCurrentPage - 1) * itemsPerPage, productsCurrentPage * itemsPerPage);
+    
+    // Filter products for display
+    const filteredProducts = paginatedProducts;
 
     // Categorize products
+    const softwares = selectedCategory === 'Softwares' || !selectedCategory 
+        ? filteredProducts.filter(p => p.category === 'Softwares') 
+        : [];
+        
     const tradeIdeas = selectedCategory === 'Trade Ideas' || !selectedCategory 
         ? filteredProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2) 
         : [];
@@ -3577,9 +3673,9 @@ const updatedPlatinumPackage = platinumPackage ? {
         ? filteredProducts.filter(p => p.category === 'Events')
         : [];
         
-    const otherProducts = !['Trade Ideas', 'Mentorship', 'Courses', 'Strategy', 'Events'].includes(selectedCategory || '') 
+    const otherProducts = !['Softwares', 'Trade Ideas', 'Mentorship', 'Courses', 'Strategy', 'Events'].includes(selectedCategory || '') 
         ? filteredProducts.filter(p => 
-            !['Trade Ideas', 'Courses', 'Mentorship', 'Strategy', 'Events'].includes(p.category) &&
+            !['Softwares', 'Trade Ideas', 'Courses', 'Mentorship', 'Strategy', 'Events'].includes(p.category) &&
             p.id !== 2
         ) 
         : [];
@@ -3956,6 +4052,19 @@ const updatedPlatinumPackage = platinumPackage ? {
                             </div>
                         ) : (
                             <>
+                                {/* Softwares Section */}
+                                {(selectedCategory === 'Softwares' || !selectedCategory) && softwares.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                            Softwares
+                                        </h2>
+                                        {renderProductGrid(softwares)}
+                                    </div>
+                                )}
+
                                 {/* Trade Ideas Section */}
                                 {(selectedCategory === 'Trade Ideas' || !selectedCategory) && tradeIdeas.length > 0 && (
                                     <div className="mb-12">
@@ -4024,7 +4133,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                                 {/* Other Products */}
                                 {otherProducts.length > 0 && (
                                     <div className="mb-12">
-                                        <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
+                                        <h2 className="text-2xl font-bold text-white mb-6">Softwares</h2>
                                         {renderProductGrid(otherProducts)}
                                     </div>
                                 )}
@@ -6246,6 +6355,133 @@ const GoldDiggerEACheckout: React.FC = () => {
     );
 };
 
+const LordLootEACheckout: React.FC = () => {
+    const [isSecure, setIsSecure] = useState(true);
+    const [showSecureWarning, setShowSecureWarning] = useState(false);
+
+    useEffect(() => {
+        // Check if running on HTTPS
+        const isHttps = window.location.protocol === 'https:';
+        setIsSecure(isHttps);
+        
+        if (!isHttps) {
+            setShowSecureWarning(true);
+            return;
+        }
+
+        // Load Whop checkout script
+        const script = document.createElement('script');
+        script.src = 'https://js.whop.com/static/checkout/loader.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        // Set up completion callback
+        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
+            console.log('Payment complete:', planId, receiptId);
+            alert('Payment successful! You now have access to Mr One Dollar Lord Loot (EA).');
+            window.location.href = '/services';
+        };
+
+        return () => {
+            // Cleanup
+            if (document.head.contains(script)) {
+                document.head.removeChild(script);
+            }
+            delete (window as any).onCheckoutComplete;
+        };
+    }, []);
+
+    if (showSecureWarning) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center max-w-md">
+                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
+                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
+                        </svg>
+                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
+                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
+                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
+                        <div className="space-y-3">
+                            <button 
+                                onClick={() => window.open('https://whop.com/checkout/plan_i3B9lRxO7oE5M?d2c=true', '_blank')}
+                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
+                            >
+                                Continue on Whop
+                            </button>
+                        </div>
+                    </div>
+                    <p className="text-slate-500 text-sm">
+                        Your security is our priority. All payment processing requires encryption.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isSecure) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <div className="relative mb-6">
+                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
+                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-black">
+            <div className="container mx-auto px-4 py-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Lord Loot (EA) Checkout</h1>
+                    <p className="text-slate-400">Complete your purchase to get instant access to the automated currency pairs trading EA</p>
+                </div>
+                
+                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                        <div
+                            data-whop-checkout-plan-id="plan_i3B9lRxO7oE5M"
+                            data-whop-checkout-return-url="https://mr1dollar.international/"
+                            data-whop-checkout-theme="dark"
+                            data-whop-checkout-on-complete="onCheckoutComplete"
+                            style={{ minHeight: '600px' }}
+                        >
+                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
+                                <img 
+                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    alt="Mr. One Dollar" 
+                                    className="h-16 w-auto mb-4"
+                                />
+                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 flex justify-between items-center px-4">
+                            <a 
+                                href="/services"
+                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
+                            >
+                                <img 
+                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    alt="Back" 
+                                    className="w-4 h-4"
+                                />
+                                <span className="text-sm font-medium">Back to Services</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -6308,6 +6544,7 @@ const App: React.FC = () => {
       '/nfp-event-access-checkout': 'nfp-event-access-checkout',
       '/branded-merchandise-checkout': 'branded-merchandise-checkout',
       '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
+      '/lord-loot-ea-checkout': 'lord-loot-ea-checkout',
       '/affiliate': 'affiliate'
     };
     
@@ -6356,6 +6593,7 @@ const App: React.FC = () => {
         '/nfp-event-access-checkout': 'nfp-event-access-checkout',
         '/branded-merchandise-checkout': 'branded-merchandise-checkout',
         '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
+        '/lord-loot-ea-checkout': 'lord-loot-ea-checkout',
         '/affiliate': 'affiliate'
       };
       
@@ -6491,6 +6729,7 @@ const App: React.FC = () => {
       'nfp-event-access-checkout': '/nfp-event-access-checkout',
       'branded-merchandise-checkout': '/branded-merchandise-checkout',
       'gold-digger-ea-checkout': '/gold-digger-ea-checkout',
+      'lord-loot-ea-checkout': '/lord-loot-ea-checkout',
       'affiliate': '/affiliate'
     };
     
@@ -6626,6 +6865,8 @@ const App: React.FC = () => {
         return <BrandedMerchandiseCheckout />;
       case 'gold-digger-ea-checkout':
         return <GoldDiggerEACheckout />;
+      case 'lord-loot-ea-checkout':
+        return <LordLootEACheckout />;
       case 'affiliate':
         return <AffiliatePage />;
       default:
