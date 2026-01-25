@@ -3654,7 +3654,7 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     // Categorize products
     const softwares = selectedCategory === 'Softwares' || !selectedCategory 
-        ? filteredProducts.filter(p => p.category === 'Softwares') 
+        ? filteredProducts.filter(p => p.category === 'Softwares' && p.id !== 15 && p.id !== 16) 
         : [];
         
     const tradeIdeas = selectedCategory === 'Trade Ideas' || !selectedCategory 
