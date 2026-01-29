@@ -2843,7 +2843,7 @@ const TeamPage: React.FC = () => {
         { name: "Nkosi. K", role: "Senior developer" },
         { name: "Tshego. R", role: "Sales & Marketing Director" },
         { name: "Jason. N", role: "Senior developer" },
-        { name: "Lungelo. N", role: "IT Developer" },
+        { name: "Lungelo. N", role: "Systems Developer" },
         { name: "Yandisa. D", role: "Business Systems" },
         { name: "Tebogo. M", role: "Technical Support" },
         { name: "Thalente. S", role: "Technical Support" },
