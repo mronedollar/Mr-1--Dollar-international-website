@@ -601,7 +601,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
 
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
-            link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1',
+            link: 'https://go.primexbt.direct/visit/?bta=41494&brand=primexbt',
             category: 'Brokers',
             color: 'amber'
         },
@@ -1268,7 +1268,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                 <div className="flex flex-col gap-3">
                                                     <div className="flex flex-col sm:flex-row gap-3">
                                                         <a 
-                                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                                            href="https://go.primexbt.direct/visit/?bta=41494&brand=primexbt" 
                                                             target="_blank" 
                                                             rel="noopener noreferrer"
                                                             onClick={(e) => {
@@ -3654,7 +3654,7 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     // Categorize products
     const softwares = selectedCategory === 'Softwares' || !selectedCategory 
-        ? filteredProducts.filter(p => p.category === 'Softwares' && p.id !== 15 && p.id !== 16) 
+        ? filteredProducts.filter(p => p.category === 'Softwares') 
         : [];
         
     const tradeIdeas = selectedCategory === 'Trade Ideas' || !selectedCategory 
