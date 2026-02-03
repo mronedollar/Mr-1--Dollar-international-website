@@ -43,7 +43,7 @@ const servicesData: Product[] = [
     { 
         id: 15, 
         name: "Mr One Dollar Gold Digger (EA) Robot", 
-        price: 29.99, 
+        price: 33.99, 
         category: 'Softwares', 
         imageUrl: 'https://i.postimg.cc/DZf72pvF/Gold-Digger-EA-photo.jpg', 
         description: "Key Features:\n\nFully-automated gold trading 24/7, never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!\n\n$29.99 once off/whole year, valid for only 20 people", 
@@ -54,7 +54,7 @@ const servicesData: Product[] = [
     { 
         id: 16, 
         name: "Mr One Dollar Lord Loot (EA) Robot", 
-        price: 29.99, 
+        price: 33.99, 
         category: 'Softwares', 
         imageUrl: 'https://i.postimg.cc/3NYDZPvv/Lord-Loot-EA-photo.jpg', 
         description: "Fully Automated Currency Pairs Trading EA.\n\nUnlock the potential of round-the-clock forex trading with a powerful EA that does the hard work for you. This fully automated system analyzes the markets, executes trades, and manages take-profit targets, all without the need for constant monitoring. Perfect for busy traders and those seeking consistent results, this solution helps maximize profits while minimizing manual effort.\n\nKey Features:\n\n100% automated trading for major currency pairs\n\nIntelligent trade execution and management\n\nBuilt-in auto Take-Profit (TP) system for optimized gains\n\nSimple setup, get started in minutes\n\nSuitable for beginners and seasoned traders alike\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\nLet technology trade on your behalf with a reliable, hands-free trading assistant designed for real results.\n\n$29.99 once off/whole year, valid for only 20 people", 
