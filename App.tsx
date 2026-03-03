@@ -49,7 +49,7 @@ const servicesData: Product[] = [
         imageUrl: 'https://i.postimg.cc/DZf72pvF/Gold-Digger-EA-photo.jpg', 
         description: "Key Features:\n\nFully-automated gold trading 24/7, never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\n**Pricing Structure:**\n\n💰 **$36.23 Activation Fee** - One-time setup cost\n\n🔄 **$16.47/month** - After free subscription period\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!", 
         checkoutUrl: "gold-digger-ea-checkout",
-        productId: "prod_z8f88CHTyd7tx",
+        productId: "plan_kEDbM2ZUwVicH",
         checkoutLink: "https://whop.com/checkout/plan_kEDbM2ZUwVicH"
     },
     { 
