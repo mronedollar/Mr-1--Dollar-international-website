@@ -50,7 +50,7 @@ const servicesData: Product[] = [
         description: "Key Features:\n\nFully-automated gold trading 24/7, never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\n**Pricing Structure:**\n\n💰 **$36.23 Activation Fee** - One-time setup cost\n\n🔄 **$16.47/month** - After free subscription period\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!", 
         checkoutUrl: "gold-digger-ea-checkout",
         productId: "prod_z8f88CHTyd7tx",
-        checkoutLink: "https://forms.gle/aAuDffzRaHhTrEP58"
+        checkoutLink: "https://whop.com/checkout/plan_kEDbM2ZUwVicH"
     },
     { 
         id: 16, 
@@ -62,7 +62,7 @@ const servicesData: Product[] = [
         description: "Fully Automated Currency Pairs Trading EA.\n\nUnlock the potential of round-the-clock forex trading with a powerful EA that does the hard work for you. This fully automated system analyzes markets, executes trades, and manages take-profit targets, all without the need for constant monitoring. Perfect for busy traders and those seeking consistent results, this solution helps maximize profits while minimizing manual effort.\n\nKey Features:\n\n100% automated trading for major currency pairs\n\nIntelligent trade execution and management\n\nBuilt-in auto Take-Profit (TP) system for optimized gains\n\nSimple setup, get started in minutes\n\nSuitable for beginners and seasoned traders alike\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\n**Pricing Structure:**\n\n💰 **$36.23 Activation Fee** - One-time setup cost\n\n🔄 **$16.47/month** - After free subscription period\n\nLet technology trade on your behalf with a reliable, hands-free trading assistant designed for real results.", 
         checkoutUrl: "lord-loot-ea-checkout",
         productId: "plan_i3B9lRxO7oE5M",
-        checkoutLink: "https://forms.gle/aAuDffzRaHhTrEP58"
+        checkoutLink: "https://whop.com/checkout/plan_i3B9lRxO7oE5M"
     },
     { id: 14, name: "Diamond 7-Days Prepaid", price: 45.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/dtCTfkRV/DIAMOND-prepaid.png', description: "Get Diamond-level trade ideas for a full week at an affordable prepaid rate. Perfect for traders who want premium trading signals without monthly commitment. Receive daily trade setups, market analysis, and expert insights for 7 days. Weekly subscription.", checkoutUrl: "diamond-prepaid-checkout" },
     { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "gold-high-voltage-checkout" },
@@ -3299,15 +3299,6 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                 Initial fee, then ${(product.price * 0.5).toFixed(2)}/month
                             </p>
                         </div>
-                    ) : product.originalPrice ? (
-                        <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
-                            <del className="text-slate-500 text-sm font-normal">${product.originalPrice.toFixed(2)}</del> ${product.price.toFixed(2)}
-                            {product.category === 'Trade Ideas' && product.price > 0 && (
-                                <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
-                                    {product.id === 14 ? 'weekly' : 'monthly'}
-                                </span>
-                            )}
-                        </p>
                     ) : (
                         <div>
                             <p className="text-amber-400 text-xl font-bold flex items-center gap-2">
@@ -3434,12 +3425,12 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     window.location.href = '/branded-merchandise-checkout';
                                 } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
                                     e.preventDefault();
-                                    // Navigate to Google Forms for Gold Digger EA
-                                    window.open('https://forms.gle/aAuDffzRaHhTrEP58', '_blank');
+                                    // Navigate to Whop checkout for Gold Digger EA
+                                    window.location.href = '/gold-digger-ea-checkout';
                                 } else if (product.checkoutUrl === 'lord-loot-ea-checkout') {
                                     e.preventDefault();
-                                    // Navigate to Google Forms for Lord Loot EA
-                                    window.open('https://forms.gle/YVn6dX8HRm66kMom9', '_blank');
+                                    // Navigate to Whop checkout for Lord Loot EA
+                                    window.location.href = '/lord-loot-ea-checkout';
                                 }
                             }}
                             className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
