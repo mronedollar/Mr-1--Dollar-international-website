@@ -1,9 +1,8 @@
 import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
-import { FundedNextToast } from './src/components/FundedNextToast';
 import AffiliatePage from './src/pages/AffiliatePage';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'branded-merchandise-checkout' | 'affiliate';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'branded-merchandise-checkout' | 'gold-digger-ea-checkout' | 'lord-loot-ea-checkout' | 'affiliate';
 interface OfferStep {
     number: number;
     text: string | React.ReactNode;
@@ -21,6 +20,12 @@ interface BaseProduct {
     isSpecialOffer?: boolean;
     offerSteps?: OfferStep[];
     whatsappLink?: string;
+    promo?: {
+        title: string;
+        description: string;
+        code: string;
+        noCopy?: boolean;
+    };
 }
 
 interface Product extends BaseProduct {
@@ -28,21 +33,47 @@ interface Product extends BaseProduct {
     platinumBenefitDescription?: string;
     promoCode?: string;
     discountedPrice?: number;
+    productId?: string;
+    checkoutLink?: string;
     // Additional properties specific to Product can be added here
 }
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 14, name: "Diamond 7-Days Prepaid", price: 45.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/dtCTfkRV/DIAMOND-prepaid.png', description: "Get Diamond-level trade ideas for a full week at an affordable prepaid rate. Perfect for traders who want premium trading signals without monthly commitment. Receive daily trade setups, market analysis, and expert insights for 7 days. Weekly subscription.", checkoutUrl: "diamond-prepaid-checkout" },
-    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "gold-high-voltage-checkout" },
-    { id: 13, name: "Synthetics trade ideas", price: 59.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "synthetics-checkout" },
+    { 
+        id: 15, 
+        name: "Mr One Dollar Gold Digger (EA) Robot", 
+        price: 36.23, 
+        originalPrice: 36.23,
+        category: 'Softwares', 
+        imageUrl: 'https://i.postimg.cc/DZf72pvF/Gold-Digger-EA-photo.jpg', 
+        description: "Key Features:\n\nFully-automated gold trading 24/7, never miss an opportunity\n\nIntegrated auto Stop Loss (SL) and Take Profit (TP) management\n\nCustomizable risk settings to suit your style and capital\n\nEasy-to-use and suitable for beginners and experts alike\n\nBacktested, reliable strategy to adapt to evolving market conditions\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\n**Pricing Structure:**\n\n💰 **$36.23 Activation Fee** - One-time setup cost\n\n🔄 **$16.47/month** - After free subscription period\n\nLet technology trade on your behalf, streamline your workflow, and unlock new earning potential in the gold market. Take the step towards smarter, hands-free trading today!", 
+        checkoutUrl: "gold-digger-ea-checkout",
+        productId: "prod_z8f88CHTyd7tx",
+        checkoutLink: "https://forms.gle/aAuDffzRaHhTrEP58"
+    },
+    { 
+        id: 16, 
+        name: "Mr One Dollar Lord Loot (EA) Robot", 
+        price: 36.23, 
+        originalPrice: 36.23,
+        category: 'Softwares', 
+        imageUrl: 'https://i.postimg.cc/3NYDZPvv/Lord-Loot-EA-photo.jpg', 
+        description: "Fully Automated Currency Pairs Trading EA.\n\nUnlock the potential of round-the-clock forex trading with a powerful EA that does the hard work for you. This fully automated system analyzes markets, executes trades, and manages take-profit targets, all without the need for constant monitoring. Perfect for busy traders and those seeking consistent results, this solution helps maximize profits while minimizing manual effort.\n\nKey Features:\n\n100% automated trading for major currency pairs\n\nIntelligent trade execution and management\n\nBuilt-in auto Take-Profit (TP) system for optimized gains\n\nSimple setup, get started in minutes\n\nSuitable for beginners and seasoned traders alike\n\n**VPS Connection Required** - Price includes VPS setup for optimal trading performance\n\n**Broker Requirement**: Minimum $100 deposit on our recommended broker required to ensure the EA trades on exact pricing points rather than using different brokers\n\n**Pricing Structure:**\n\n💰 **$36.23 Activation Fee** - One-time setup cost\n\n🔄 **$16.47/month** - After free subscription period\n\nLet technology trade on your behalf with a reliable, hands-free trading assistant designed for real results.", 
+        checkoutUrl: "lord-loot-ea-checkout",
+        productId: "plan_i3B9lRxO7oE5M",
+        checkoutLink: "https://forms.gle/aAuDffzRaHhTrEP58"
+    },
+    { id: 14, name: "Diamond 7-Days Prepaid", price: 45.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/dtCTfkRV/DIAMOND-prepaid.png', description: "Get Diamond-level trade ideas for a full week at an affordable prepaid rate. Perfect for traders who want premium trading signals without monthly commitment. Receive daily trade setups, market analysis, and expert insights for 7 days. Weekly subscription.", checkoutUrl: "diamond-prepaid-checkout" },
+    { id: 1, name: "Gold High Voltage Trade Ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/0y0KHZ2B/GOLD-HIGH-VOLTAGE.jpg', description: "Harness the power of the precious metals market. Receive high-probability trade setups for Gold (XAU/USD), meticulously analyzed by our experts. Perfect for traders looking to capitalize on Gold's volatility and make informed decisions.", checkoutUrl: "gold-high-voltage-checkout" },
+    { id: 13, name: "Synthetics trade ideas", price: 59.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Px46X1yq/SYNTHETICS.jpg', description: "Master synthetic indices trading with our expert analysis. Receive precise trade setups for synthetic instruments, designed for traders seeking consistent profits in this specialized market segment.", checkoutUrl: "synthetics-checkout" },
     { 
         id: 2, 
-        name: "Platinum Trade Ideas", 
+        name: "Free Trade Ideas", 
         price: 0, 
         category: 'Trade Ideas', 
         imageUrl: '/images/forex-trading.jpg', 
-        description: "🔥 GET FREE PLATINUM TRADE IDEAS FOR A LIFETIME 🔥",
+        description: "🔥 GET FREE TRADE IDEAS FOR A LIFETIME 🔥",
         isSpecialOffer: true,
         offerSteps: [
             { 
@@ -58,18 +89,18 @@ const servicesData: Product[] = [
         ],
         whatsappLink: "https://wa.me/27676923876?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
     },
-    { id: 3, name: "Diamond Trade Ideas", price: 179.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts. Initial payment of $179, then just $89.50/month (50% discount) for continued access.", checkoutUrl: "diamond-trade-ideas-checkout" },
-    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1060.00, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "private-wealth-vip-black-checkout" },
-    { id: 5, name: "Beginners Course", price: 247.20, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "beginners-course-checkout" },
-    { id: 6, name: "Intermediate Course", price: 368.40, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "intermediate-course-checkout" },
-    { id: 7, name: "Advanced Course", price: 526.80, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "advanced-course-checkout" },
-    { id: 8, name: "Full Course + Free Tradecation", price: 1189.89, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer! Note: Using the DOLLAR50 promo code gives you 50% off the course only, without the free tradecation.", checkoutUrl: "full-course-tradecation-checkout", promoCode: "DOLLAR50", discountedPrice: 439.50 },
-    { id: 9, name: "Beginner Mentorship", price: 27.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/kgYq4tjW/Beginner-Mentorship.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "beginner-mentorship-checkout" },
-    { id: 10, name: "Intermediate Mentorship", price: 53.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/XqsD89BR/Intermediate-Mentorship.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "intermediate-mentorship-checkout" },
-    { id: 11, name: "Advanced Mentorship", price: 106.00, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/QCgjx4Pd/Advanced-Mentorship.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "advanced-mentorship-checkout" },
-    { id: 12, name: "Currencies Strategy", price: 429.00, category: 'Strategy', imageUrl: 'https://i.postimg.cc/Y0MJ8pnh/Currencies-Strategy.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "currencies-strategy-checkout" },
-    { id: 13, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.postimg.cc/tCmMntjX/NFP-Event-Access.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" },
-    { id: 15, name: "Branded Merchandise", price: 59.00, category: 'Uncategorized', imageUrl: 'https://i.postimg.cc/0NRkQHZG/Merch.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit.", checkoutUrl: "branded-merchandise-checkout" }
+    { id: 3, name: "Diamond Trade Ideas", price: 179.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts. Initial payment of $179, then just $89.50/month (50% discount) for continued access.", checkoutUrl: "diamond-trade-ideas-checkout" },
+    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1272.99, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "The ultimate trading experience. VIP Black is a bespoke service for high-net-worth individuals, offering personalized trade strategies, direct access to our head traders, and portfolio management insights. By application only.", checkoutUrl: "private-wealth-vip-black-checkout" },
+    { id: 5, name: "Beginners Course", price: 339.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "New to Forex? This is your starting point. Our comprehensive Beginners Course covers everything from the absolute basics of currency pairs to setting up your trading platform and executing your first trades with confidence.", checkoutUrl: "beginners-course-checkout" },
+    { id: 6, name: "Intermediate Course", price: 499.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "Ready to move beyond the basics? This course dives into technical analysis, chart patterns, risk management, and trading psychology. Develop the skills needed to build a consistently profitable trading strategy.", checkoutUrl: "intermediate-course-checkout" },
+    { id: 7, name: "Advanced Course", price: 719.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "For the experienced trader looking for an edge. Explore advanced institutional strategies, market structure, smart money concepts, and complex indicators to refine your approach and elevate your trading to an expert level.", checkoutUrl: "advanced-course-checkout" },
+    { id: 8, name: "Full Course + Free Tradecation", price: 1189.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer!", checkoutUrl: "full-course-tradecation-checkout" },
+    { id: 9, name: "Beginner Mentorship", price: 27.99, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/kgYq4tjW/Beginner-Mentorship.jpg', description: "Accelerate your learning curve with personalized guidance. Our Beginner Mentorship pairs you with an experienced trader to review your trades, answer your questions, and help you build a solid trading foundation and mindset.", checkoutUrl: "beginner-mentorship-checkout" },
+    { id: 10, name: "Intermediate Mentorship", price: 53.99, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/XqsD89BR/Intermediate-Mentorship.jpg', description: "Refine your strategy with expert feedback. This mentorship program is designed for traders who have a strategy but need help with consistency, discipline, and navigating live market conditions with a professional.", checkoutUrl: "intermediate-mentorship-checkout" },
+    { id: 11, name: "Advanced Mentorship", price: 106.99, category: 'Mentorship', imageUrl: 'https://i.postimg.cc/QCgjx4Pd/Advanced-Mentorship.jpg', description: "Collaborate with the best. Our Advanced Mentorship provides high-level strategic discussion, performance analysis, and psychological coaching to help you break through performance plateaus and reach your peak potential.", checkoutUrl: "advanced-mentorship-checkout" },
+    { id: 12, name: "Currencies Strategy", price: 429.99, category: 'Strategy', imageUrl: 'https://i.postimg.cc/Y0MJ8pnh/Currencies-Strategy.jpg', description: "Purchase our proprietary, back-tested currency trading strategy. This is a complete, rule-based system that provides clear entry, exit, and stop-loss parameters, taking the guesswork out of your trading.", checkoutUrl: "currencies-strategy-checkout" },
+    { id: 13, name: "NFP Event Access", price: 16.99, category: 'Events', imageUrl: 'https://i.postimg.cc/tCmMntjX/NFP-Event-Access.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" },
+    { id: 15, name: "Branded Merchandise", price: 59.99, category: 'Uncategorized', imageUrl: 'https://i.postimg.cc/0NRkQHZG/Merch.jpg', description: "Represent the Mr.$1 community with our exclusive branded merchandise. High-quality apparel and accessories for the trader who refuses to be average. Show off your commitment to staying blue and taking profit.", checkoutUrl: "branded-merchandise-checkout" }
 ];
 
 const testimonialsData = [
@@ -289,7 +320,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
 
                 {/* Mobile menu */}
                 <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`} id="mobile-menu">
-                    <div className="px-2 pt-2 pb-4 space-y-2 sm:px-4 bg-slate-900/95 backdrop-blur-sm">
+                    <div className="px-2 pt-1 pb-4 space-y-1 sm:px-4 bg-slate-900/95 backdrop-blur-sm">
                         {navLinks.map(link => (
                             <a 
                                 key={link.name} 
@@ -572,7 +603,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
 
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
-            link: 'https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1',
+            link: 'https://go.primexbt.direct/visit/?bta=41494&brand=primexbt',
             category: 'Brokers',
             color: 'amber'
         },
@@ -584,7 +615,33 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             logoUrl: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
             link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
             category: 'Prop Firms',
-            color: 'purple'
+            color: 'purple',
+            promo: {
+                title: 'MetaTrader 5 is Returning! 🎉',
+                description: '50% off Two Phase Challenges for all clients',
+                code: 'FIRST',
+                hasDropdown: true,
+                dropdownContent: `
+                    <div class="space-y-3">
+                        <p class="text-white text-sm mb-2"><strong class="text-amber-400">MetaTrader 5 is returning to Funded7!</strong> "We now operate under our own MT5 license for a seamless experience.</p>
+                        <p class="text-white text-sm mb-2">Thank you for your loyalty during our cTrader transition. The platform you've been waiting for is ready!</p>
+                        <p class="text-white text-sm mb-2"><strong class="text-green-400">50% Discount:</strong> All clients get 50% off Two Phase Challenges!" </p>
+                        <p class="text-white text-sm mb-3">Use coupon code <strong class="text-amber-400">FIRST</strong> at checkout</p>
+                        <div class="border-t border-slate-600 pt-3">
+                            <p class="text-xs text-slate-400 mb-2"><strong>Important Timeline:</strong></p>
+                            <p class="text-xs text-white mb-1">• Migration form deadline: January 23rd, 2026</p>
+                            <p class="text-xs text-white mb-1">• Close positions 2 days before migration</p>
+                            <p class="text-xs text-amber-400">• Exact migration date announced soon via email</p>
+                        </div>
+                        <div class="mt-3">
+                            <a href="https://f9wxx.r.a.d.sendibm1.com/mk/cl/f/sh/SMK1E8tHeG7uh65Nq889Q4qo1t3A/-KS14PR6IA9C" 
+                               class="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-2 px-4 rounded-lg text-center transition-colors">
+                                Fill Out Migration Form
+                            </a>
+                        </div>
+                    </div>
+                `
+            }
         },
         {
             name: 'FundedNext',
@@ -600,7 +657,13 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
             link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
             category: 'Prop Firms',
-            color: 'green'
+            color: 'green',
+            promo: {
+                title: '🎉 Anniversary Special',
+                description: '19% Off for a $100k account',
+                code: 'Login to claim offer',
+                noCopy: true
+            }
         }
     ];
     
@@ -842,6 +905,9 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         green: 'text-green-400',
                                         amber: 'text-amber-400'
                                     };
+
+                                    const [isPromoOpen, setIsPromoOpen] = useState(false);
+                                    const [isCopied, setIsCopied] = useState(false);
                                     
                                     return (
                                         <div 
@@ -877,6 +943,62 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 {partner.description}
                                             </p>
                                             
+                                            {/* Promo Dropdown */}
+                                            {partner.promo && (
+                                                <div className="mb-3">
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setIsPromoOpen(!isPromoOpen);
+                                                        }}
+                                                        className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-600/30 text-slate-400 hover:border-slate-500/50 transition-all flex items-center justify-between"
+                                                    >
+                                                        <span>🎁 Special Offer</span>
+                                                        <svg 
+                                                            className={`w-3 h-3 transition-transform ${isPromoOpen ? 'rotate-180' : ''}`}
+                                                            fill="none" 
+                                                            viewBox="0 0 24 24" 
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                        </svg>
+                                                    </button>
+                                                    
+                                                    {isPromoOpen && (
+                                                        <div className="mt-2 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+                                                            {partner.promo.hasDropdown ? (
+                                                                <div dangerouslySetInnerHTML={{ __html: partner.promo.dropdownContent }} className="space-y-3" />
+                                                            ) : (
+                                                                <>
+                                                                    <h4 className="text-white font-semibold text-sm mb-1">{partner.promo.title}</h4>
+                                                                    <p className="text-slate-300 text-xs mb-2">{partner.promo.description}</p>
+                                                                    <div className="flex items-center justify-between">
+                                                                        <code className="text-xs font-mono bg-slate-900 px-2 py-1 rounded text-amber-400">
+                                                                            {partner.promo.code}
+                                                                        </code>
+                                                                        <button
+                                                                            onClick={(e) => {
+                                                                                e.stopPropagation();
+                                                                                if (partner.promo?.noCopy) {
+                                                                                    window.open(partner.link, '_blank');
+                                                                                } else {
+                                                                                    navigator.clipboard.writeText(partner.promo.code);
+                                                                                    setIsCopied(true);
+                                                                                    setTimeout(() => setIsCopied(false), 2000);
+                                                                                }
+                                                                            }}
+                                                                            className={`text-xs px-2 py-1 rounded ${partner.promo.noCopy ? 'bg-blue-500/20 text-blue-300' : 'bg-amber-500/20 text-amber-300'} hover:opacity-80 transition-opacity`}
+                                                                        >
+                                                                            {partner.promo.noCopy ? 'Claim' : isCopied ? 'Copied!' : 'Copy'}
+                                                                        </button>
+                                                                    </div>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                            
                                             <div className="mt-auto">
                                                 <a 
                                                     href={partner.link}
@@ -894,6 +1016,117 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                         </div>
                                     );
                                 })}
+                        </div>
+                    </div>
+                </div>
+
+                {/* FundedAward Certificate Framing Section */}
+                <div className="pt-8">
+                    <div className="flex justify-between items-center mb-8">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-400/40 shadow-[0_0_12px_rgba(148,163,184,0.25)]">
+                            <svg className="w-4 h-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 19h16M5 11h14M7 5h10" />
+                            </svg>
+                            <span className="text-sm font-semibold tracking-wide text-white uppercase">Certificate Framing</span>
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* FundedAward Card */}
+                        <div 
+                            className="group bg-gradient-to-br from-slate-500/10 to-slate-600/20 border border-slate-500/30 hover:border-slate-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col cursor-pointer"
+                            role="link"
+                            tabIndex={0}
+                            onClick={() => window.open("https://fundedaward.com/?ta_aff=MR1USD&discount=MR1USD&fbclid=PAVERFWAPPf69leHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadVw9ghFejD1oluQ4ntRwrt7mgqZz4s7BJh6KXUcJe068wzQKpUoWDeZzrQ_g_aem___KSwMw2JvRbOo3tnqe16g", '_blank', 'noopener,noreferrer')}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    window.open("https://fundedaward.com/?ta_aff=MR1USD&discount=MR1USD&fbclid=PAVERFWAPPf69leHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadVw9ghFejD1oluQ4ntRwrt7mgqZz4s7BJh6KXUcJe068wzQKpUoWDeZzrQ_g_aem___KSwMw2JvRbOo3tnqe16g", '_blank', 'noopener,noreferrer');
+                                }
+                            }}
+                        >
+                            <div className="flex items-center justify-between mb-4">
+                                <img 
+                                    src="https://fundedaward.com/cdn/shop/files/FA_vector_logo.png?height=54&v=1767254179" 
+                                    alt="FundedAward" 
+                                    className="h-8 w-auto"
+                                />
+                                <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-700/50 text-slate-300">
+                                    Certificate Framing
+                                </span>
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-400 mb-2">Funded Award</h3>
+                            <p className="text-slate-300 text-sm mb-2 line-clamp-3">
+                                Premium acrylic plaques for prop firm traders to showcase funded certificates and milestones.
+                            </p>
+                            
+                            {/* Dropdown for more info */}
+                            <div className="mb-3">
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const dropdown = e.currentTarget.nextElementSibling as HTMLElement;
+                                        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                                    }}
+                                    className="w-full px-3 py-2 text-xs font-medium rounded-lg border border-slate-600/30 text-slate-400 hover:border-slate-500/50 transition-all flex items-center justify-between"
+                                >
+                                    <span>🎁 Special Offer</span>
+                                    <svg 
+                                        className="w-3 h-3 transition-transform"
+                                        fill="none" 
+                                        viewBox="0 0 24 24" 
+                                        stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <div className="hidden mt-2 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+                                    <h4 className="text-white font-semibold text-sm mb-1">Frame Your Certificate & Get Credit</h4>
+                                    <p className="text-slate-300 text-xs mb-2">$80 Spent = $80 Off Your Next Challenge</p>
+                                    <div className="mb-2">
+                                        <img 
+                                            src="https://fundedaward.com/cdn/shop/files/Bundle.png?v=1763145691" 
+                                            alt="Certificate Framing Bundle" 
+                                            className="w-full h-32 object-cover rounded border border-slate-700"
+                                        />
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <code className="text-xs font-mono bg-slate-900 px-2 py-1 rounded text-amber-400">
+                                            MR1USD
+                                        </code>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                navigator.clipboard.writeText('MR1USD');
+                                                const btn = e.currentTarget;
+                                                btn.textContent = 'Copied!';
+                                                setTimeout(() => {
+                                                    btn.textContent = 'Copy';
+                                                }, 2000);
+                                            }}
+                                            className="text-xs px-2 py-1 rounded bg-amber-500/20 text-amber-300 hover:opacity-80 transition-opacity"
+                                        >
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-auto">
+                                <a 
+                                    href="https://fundedaward.com/?ta_aff=MR1USD&discount=MR1USD&fbclid=PAVERFWAPPf69leHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadVw9ghFejD1oluQ4ntRwrt7mgqZz4s7BJh6KXUcJe068wzQKpUoWDeZzrQ_g_aem___KSwMw2JvRbOo3tnqe16g"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="inline-flex items-center text-sm font-medium text-slate-400 group-hover:underline"
+                                >
+                                    Frame Certificate
+                                    <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -971,7 +1204,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                         onClick={() => setIsOpen(!isOpen)}
                         className="w-full bg-black border-2 border-amber-500 hover:border-amber-400 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] flex items-center justify-between cursor-pointer"
                     >
-                        <span className="text-lg sm:text-xl">GET FREE PLATINUM TRADE IDEAS FOR A LIFETIME 🥈</span>
+                        <span className="text-lg sm:text-xl">GET FREE TRADE IDEAS FOR A LIFETIME 🥈</span>
                         <svg 
                             className={`w-6 h-6 ml-4 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
                             fill="none" 
@@ -985,7 +1218,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                     {isOpen && (
                         <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-amber-500/20 shadow-xl animate-fadeIn">
                             <h3 className="text-xl font-bold text-amber-400 mb-6 text-center">
-                                Follow These Simple Steps to Get Your Free Platinum Trade Ideas:
+                                Follow These Simple Steps to Get Your Free Trade Ideas:
                             </h3>
                             <div className="w-full bg-gray-800 rounded-full h-2.5 mb-6">
                                 <div 
@@ -1000,7 +1233,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                 <svg className="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
-                                Important: You must complete all 5 steps to receive your free Platinum Trade Ideas. Incomplete steps will result in no access.
+                                Important: You must complete all 5 steps to receive your free Trade Ideas. Incomplete steps will result in no access.
                             </div>
 
                             <div className="flex flex-col md:flex-row gap-8">
@@ -1011,7 +1244,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                             <div className={`${activeStep >= 1 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>1</div>
                                             <div className="flex-1">
                                                 <h4 className="font-semibold">Fill Out Contact Details</h4>
-                                                <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Platinum Trade Ideas</p>
+                                                <p className="text-gray-300 text-sm mb-2">Complete the form to get started with your free Trade Ideas</p>
                                                 <a 
                                                     href="#"
                                                     onClick={(e) => {
@@ -1037,7 +1270,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                 <div className="flex flex-col gap-3">
                                                     <div className="flex flex-col sm:flex-row gap-3">
                                                         <a 
-                                                            href="https://primexbt.com/id/sign-up?cxd=41494_583667&pid=41494&promo=[afp7]&type=IB&skip_app=1" 
+                                                            href="https://go.primexbt.direct/visit/?bta=41494&brand=primexbt" 
                                                             target="_blank" 
                                                             rel="noopener noreferrer"
                                                             onClick={(e) => {
@@ -1200,6 +1433,14 @@ const Testimonials: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to modal when it opens
+    useEffect(() => {
+        if (selectedImage && modalRef.current) {
+            modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [selectedImage]);
     
     // Minimum swipe distance to trigger navigation (in pixels)
     const minSwipeDistance = 50;
@@ -1290,99 +1531,107 @@ const Testimonials: React.FC = () => {
                 
                 {/* Image Modal */}
                 {selectedImage && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
-                        <div className="relative max-w-4xl w-full mx-auto max-h-[90vh] flex items-center justify-center">
-                            {/* Close button */}
-                            <button 
-                                className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors z-10"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setSelectedImage(null);
-                                }}
-                            >
-                                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                            
-                            {/* Left navigation arrow */}
-                            <button 
-                                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    const currentIndex = testimonialImages.indexOf(selectedImage);
-                                    const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
-                                    setSelectedImage(testimonialImages[prevIndex]);
-                                }}
-                            >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            
-                            {/* Main image */}
-                            <div 
-                                className="relative"
-                                onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
-                                onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
-                                onTouchEnd={() => {
-                                    if (!touchStart || !touchEnd) return;
-                                    const distance = touchStart - touchEnd;
-                                    const isLeftSwipe = distance > minSwipeDistance;
-                                    const isRightSwipe = distance < -minSwipeDistance;
-                                    
-                                    if (isLeftSwipe) {
-                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
-                                        const nextIndex = (currentIndex + 1) % testimonialImages.length;
-                                        setSelectedImage(testimonialImages[nextIndex]);
-                                    } else if (isRightSwipe) {
-                                        const currentIndex = testimonialImages.indexOf(selectedImage!);
-                                        const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
-                                        setSelectedImage(testimonialImages[prevIndex]);
-                                    }
-                                    
-                                    setTouchStart(null);
-                                    setTouchEnd(null);
-                                }}
-                            >
-                                <img 
-                                    src={selectedImage}
-                                    alt="Full size testimonial"
-                                    className="max-h-[80vh] max-w-full rounded-lg shadow-2xl"
-                                    onClick={(e) => e.stopPropagation()}
-                                    loading="lazy"
-                                />
-                                <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
-                                    {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
-                                </div>
-                                <div className="absolute top-1/2 left-4 right-4 flex justify-between pointer-events-none">
-                                    <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                        </svg>
-                                    </div>
-                                    <div className="bg-black/50 text-white p-2 rounded-full">
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </div>
+                    <div 
+                        className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm" 
+                        style={{ paddingTop: '92px' }} 
+                        onClick={() => setSelectedImage(null)}
+                        ref={modalRef}
+                    >
+                        <div className="relative w-full h-full max-w-6xl mx-auto flex flex-col" style={{ maxHeight: 'calc(100vh - 92px)' }}>
+                            <div className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all z-20" aria-label="Close">
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(null);
+                                    }}
+                                    className="w-6 h-6"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div className="relative p-4 border-b border-slate-700">
+                                <div className="text-center">
+                                    <h3 className="text-white text-lg font-medium">Testimonials</h3>
                                 </div>
                             </div>
                             
-                            {/* Right navigation arrow */}
-                            <button 
-                                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    const currentIndex = testimonialImages.indexOf(selectedImage);
-                                    const nextIndex = (currentIndex + 1) % testimonialImages.length;
-                                    setSelectedImage(testimonialImages[nextIndex]);
-                                }}
-                            >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
+                            {/* Image container with navigation */}
+                            <div className="flex-1 flex items-center justify-center p-4 min-h-0 relative">
+                                {/* Left navigation arrow */}
+                                <button 
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const currentIndex = testimonialImages.indexOf(selectedImage);
+                                        const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                        setSelectedImage(testimonialImages[prevIndex]);
+                                    }}
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                
+                                {/* Main image */}
+                                <div 
+                                    className="relative max-w-full max-h-full"
+                                    onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
+                                    onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+                                    onTouchEnd={() => {
+                                        if (!touchStart || !touchEnd) return;
+                                        const distance = touchStart - touchEnd;
+                                        const isLeftSwipe = distance > minSwipeDistance;
+                                        const isRightSwipe = distance < -minSwipeDistance;
+                                        
+                                        if (isLeftSwipe) {
+                                            const currentIndex = testimonialImages.indexOf(selectedImage!);
+                                            const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                            setSelectedImage(testimonialImages[nextIndex]);
+                                        } else if (isRightSwipe) {
+                                            const currentIndex = testimonialImages.indexOf(selectedImage!);
+                                            const prevIndex = (currentIndex - 1 + testimonialImages.length) % testimonialImages.length;
+                                            setSelectedImage(testimonialImages[prevIndex]);
+                                        }
+                                        
+                                        setTouchStart(null);
+                                        setTouchEnd(null);
+                                    }}
+                                >
+                                    <img 
+                                        src={selectedImage}
+                                        alt="Full size testimonial"
+                                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                                        onClick={(e) => e.stopPropagation()}
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute bottom-4 left-0 right-0 text-center text-white bg-black/50 py-1 rounded-full text-sm mx-auto w-24">
+                                        {testimonialImages.indexOf(selectedImage) + 1} / {testimonialImages.length}
+                                    </div>
+                                </div>
+                                
+                                {/* Right navigation arrow */}
+                                <button 
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        const currentIndex = testimonialImages.indexOf(selectedImage);
+                                        const nextIndex = (currentIndex + 1) % testimonialImages.length;
+                                        setSelectedImage(testimonialImages[nextIndex]);
+                                    }}
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                                <p className="text-white text-center text-sm md:text-base">
+                                    Click outside or press ESC to close
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -1800,7 +2049,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                                                     }, {
                                                                         icon: '💼',
                                                                         title: 'Funding Pathway',
-                                                                        description: '$5,000 prop firm account setup or a $50 funded account with our recommended broker.'
+                                                                        description: '$15,000 prop firm account setup.'
                                                                     }, {
                                                                         icon: '🏨',
                                                                         title: 'Luxury Tradecation Residency',
@@ -1944,6 +2193,14 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
 const EventsPage: React.FC = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [tradecationPerksOpen, setTradecationPerksOpen] = useState(false);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to modal when it opens
+    useEffect(() => {
+        if (selectedImage && modalRef.current) {
+            modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [selectedImage]);
 
     const tradecationPerks = [
         {
@@ -1959,7 +2216,7 @@ const EventsPage: React.FC = () => {
         {
             icon: '💼',
             title: 'Funding Pathway',
-            description: '$5,000 prop firm account setup or a $50 funded account with our recommended broker.'
+            description: '$15,000 prop firm account setup.'
         },
         {
             icon: '🏨',
@@ -1998,7 +2255,7 @@ const EventsPage: React.FC = () => {
                     items: [
                         "🏆 Complete Trading Education (Beginner to Advanced)",
                         "💡 3 Months of Diamond 💎 Trade Ideas",
-                        "💼 $5,000 Prop Firm Account Setup (or $50 funded account)",
+                        "💼 $15,000 Prop Firm Account Setup",
                         "🏨 Luxury Accommodation (Private Residency, Mon-Fri)",
                         "🍽️ All Meals Included (Breakfast, Lunch, Dinner + Snacks)",
                         "💪 Morning Fitness Sessions with Certified Coach (5 AM)",
@@ -2027,7 +2284,7 @@ const EventsPage: React.FC = () => {
                     ]
                 }
             ],
-            price: "R19,531.56 (≈ $1,189.89)",
+            price: "R19,531.56 (≈ $1,189.99)",
             date: "February 23-27, 2026",
             time: "5-Day Immersive Residency",
             location: "Cayley Resort • Drakensburg, South Africa",
@@ -2351,27 +2608,46 @@ const EventsPage: React.FC = () => {
             {/* Image Modal */}
             {selectedImage && (
                 <div 
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
+                    style={{ paddingTop: '92px' }}
                     onClick={() => setSelectedImage(null)}
+                    ref={modalRef}
                 >
-                    <div className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center">
-                        <button 
-                            className="absolute -top-12 right-0 text-white hover:text-amber-400 transition-colors"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedImage(null);
-                            }}
-                        >
-                            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                        <img 
-                            src={selectedImage} 
-                            alt="Full size event" 
-                            className="max-h-[80vh] w-auto mx-auto rounded-lg object-contain"
-                            onClick={(e) => e.stopPropagation()}
-                        />
+                    <div className="relative w-full h-full max-w-6xl mx-auto flex flex-col" style={{ maxHeight: 'calc(100vh - 92px)' }}>
+                        <div className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all z-20" aria-label="Close">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedImage(null);
+                                }}
+                                className="w-6 h-6"
+                            >
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="relative p-4 border-b border-slate-700">
+                            <div className="text-center">
+                                <h3 className="text-white text-lg font-medium">Event Photo</h3>
+                            </div>
+                        </div>
+                        
+                        {/* Image container */}
+                        <div className="flex-1 flex items-center justify-center p-4 min-h-0">
+                            <img 
+                                src={selectedImage} 
+                                alt="Full size event" 
+                                className="max-w-full max-h-full object-contain rounded-lg"
+                                onClick={(e) => e.stopPropagation()}
+                            />
+                        </div>
+                        
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                            <p className="text-white text-center text-sm md:text-base">
+                                Click outside or press ESC to close
+                            </p>
+                        </div>
                     </div>
                 </div>
             )}
@@ -2569,7 +2845,7 @@ const TeamPage: React.FC = () => {
         { name: "Nkosi. K", role: "Senior developer" },
         { name: "Tshego. R", role: "Sales & Marketing Director" },
         { name: "Jason. N", role: "Senior developer" },
-        { name: "Lungelo. N", role: "IT Developer" },
+        { name: "Lungelo. N", role: "Systems Developer" },
         { name: "Yandisa. D", role: "Business Systems" },
         { name: "Tebogo. M", role: "Technical Support" },
         { name: "Thalente. S", role: "Technical Support" },
@@ -2826,6 +3102,15 @@ interface PlatinumProduct extends BaseProduct {
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; setCurrentPage: (page: Page) => void }> = ({ product, onAddToCart, isExpanded, onToggle, setCurrentPage }) => {
     const [imageError, setImageError] = useState(false);
     const [currentImageUrl, setCurrentImageUrl] = useState(product.imageUrl.startsWith('http') ? product.imageUrl : `/${product.imageUrl}`);
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    // Auto-scroll to modal when it opens
+    useEffect(() => {
+        if (isImageModalOpen && modalRef.current) {
+            modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [isImageModalOpen]);
     
     const handleImageError = () => {
         if (!imageError) {
@@ -2836,8 +3121,6 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     };
     // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
-    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-    const modalRef = useRef<HTMLDivElement>(null);
     
     // Handle click on image to open modal
     const handleImageClick = (e: React.MouseEvent) => {
@@ -3034,21 +3317,17 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                         {product.id === 14 ? 'weekly' : (product.id === 3 ? 'Initial fee' : 'monthly')}
                                     </span>
                                 )}
+                                {product.id === 15 && (
+                                    <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                        once off/year access
+                                    </span>
+                                )}
+                                {product.id === 16 && (
+                                    <span className="bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30">
+                                        once off/year access
+                                    </span>
+                                )}
                             </p>
-                            {isFullCourse && (
-                                <p className="text-slate-400 text-xs mt-1">
-                                    Use promo code 
-                                    <button 
-                                        onClick={() => {
-                                            navigator.clipboard.writeText('DOLLAR50');
-                                            alert('Promo code DOLLAR50 copied to clipboard!');
-                                        }}
-                                        className="text-amber-400 hover:text-amber-300 underline ml-1"
-                                    >
-                                        DOLLAR50
-                                    </button>  for 50% OFF ($439.50)
-                                </p>
-                            )}
                         </div>
                     )}
                 </div>
@@ -3153,6 +3432,14 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     e.preventDefault();
                                     // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/branded-merchandise-checkout';
+                                } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
+                                    e.preventDefault();
+                                    // Navigate to Google Forms for Gold Digger EA
+                                    window.open('https://forms.gle/aAuDffzRaHhTrEP58', '_blank');
+                                } else if (product.checkoutUrl === 'lord-loot-ea-checkout') {
+                                    e.preventDefault();
+                                    // Navigate to Google Forms for Lord Loot EA
+                                    window.open('https://forms.gle/YVn6dX8HRm66kMom9', '_blank');
                                 }
                             }}
                             className={`mt-2 w-full text-center ${isMentorship ? 'bg-blue-600 hover:bg-blue-700' : 'bg-amber-400 hover:bg-amber-300 text-black'} font-bold py-2 px-4 rounded-md transition-colors block`}
@@ -3171,34 +3458,40 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
             </div>
         </div>
         {isImageModalOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
-                <div 
-                    ref={modalRef}
-                    className="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 rounded-lg overflow-hidden shadow-2xl"
-                >
-                    <div className="absolute top-0 right-0 p-4 z-10">
-                        <button 
+            <div 
+                className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm" 
+                style={{ paddingTop: '92px' }}
+                onClick={() => setIsImageModalOpen(false)}
+                ref={modalRef}
+            >
+                <div className="relative w-full h-full max-w-6xl mx-auto bg-slate-900 rounded-lg overflow-hidden shadow-2xl flex flex-col" style={{ maxHeight: 'calc(100vh - 92px)' }}>
+                    <div className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all z-20" aria-label="Close">
+                        <button
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setIsImageModalOpen(false);
                             }}
-                            className="text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-full p-2 transition-all"
-                            aria-label="Close"
+                            className="w-6 h-6"
                         >
-                            <CloseIcon className="w-6 h-6" />
+                            <CloseIcon />
                         </button>
                     </div>
-                    <div className="h-full flex items-center justify-center p-4">
+                    <div className="relative p-4 border-b border-slate-700">
+                        <div className="text-center">
+                            <h3 className="text-white text-lg font-medium">{product.name}</h3>
+                        </div>
+                    </div>
+                    <div className="flex-1 flex items-center justify-center p-4 min-h-0">
                         <img 
                             src={product.imageUrl} 
                             alt={product.name}
-                            className="max-w-full max-h-[80vh] object-contain"
+                            className="max-w-full max-h-full object-contain"
                             onClick={(e) => e.stopPropagation()}
                         />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                         <p className="text-white text-center text-sm md:text-base">
-                            {product.name} - Click outside or press ESC to close
+                            Click outside or press ESC to close
                         </p>
                     </div>
                 </div>
@@ -3299,7 +3592,15 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     const categories = useMemo(() => {
         const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
-        return uniqueCategories.map(cat => ({
+        
+        // Sort categories to put Softwares first, then maintain original order
+        const sortedCategories = uniqueCategories.sort((a, b) => {
+            if (a === 'Softwares') return -1;
+            if (b === 'Softwares') return 1;
+            return 0;
+        });
+        
+        return sortedCategories.map(cat => ({
             name: cat,
             count: products.filter(p => p.category === cat && p.id !== 2).length
         }));
@@ -3339,14 +3640,25 @@ const updatedPlatinumPackage = platinumPackage ? {
     }, [products, searchTerm, selectedCategory, appliedPriceRange, sortOption]);
 
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
-    const paginatedProducts = filteredAndSortedProducts.slice((productsCurrentPage - 1) * itemsPerPage, productsCurrentPage * itemsPerPage);
     
-    // Filter products based on selected category
-    const filteredProducts = selectedCategory 
-        ? paginatedProducts.filter(p => p.category === selectedCategory)
-        : paginatedProducts;
+    // Filter products based on selected category first, then apply pagination
+    const categoryFilteredProducts = selectedCategory 
+        ? filteredAndSortedProducts.filter(p => p.category === selectedCategory)
+        : filteredAndSortedProducts;
+    
+    // When a category is selected, show all items in that category on one page
+    const paginatedProducts = selectedCategory 
+        ? categoryFilteredProducts
+        : filteredAndSortedProducts.slice((productsCurrentPage - 1) * itemsPerPage, productsCurrentPage * itemsPerPage);
+    
+    // Filter products for display
+    const filteredProducts = paginatedProducts;
 
     // Categorize products
+    const softwares = selectedCategory === 'Softwares' || !selectedCategory 
+        ? filteredProducts.filter(p => p.category === 'Softwares') 
+        : [];
+        
     const tradeIdeas = selectedCategory === 'Trade Ideas' || !selectedCategory 
         ? filteredProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2) 
         : [];
@@ -3367,9 +3679,9 @@ const updatedPlatinumPackage = platinumPackage ? {
         ? filteredProducts.filter(p => p.category === 'Events')
         : [];
         
-    const otherProducts = !['Trade Ideas', 'Mentorship', 'Courses', 'Strategy', 'Events'].includes(selectedCategory || '') 
+    const otherProducts = !['Softwares', 'Trade Ideas', 'Mentorship', 'Courses', 'Strategy', 'Events'].includes(selectedCategory || '') 
         ? filteredProducts.filter(p => 
-            !['Trade Ideas', 'Courses', 'Mentorship', 'Strategy', 'Events'].includes(p.category) &&
+            !['Softwares', 'Trade Ideas', 'Courses', 'Mentorship', 'Strategy', 'Events'].includes(p.category) &&
             p.id !== 2
         ) 
         : [];
@@ -3746,6 +4058,19 @@ const updatedPlatinumPackage = platinumPackage ? {
                             </div>
                         ) : (
                             <>
+                                {/* Softwares Section */}
+                                {(selectedCategory === 'Softwares' || !selectedCategory) && softwares.length > 0 && (
+                                    <div className="mb-12">
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                                            <svg className="w-6 h-6 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                            Softwares
+                                        </h2>
+                                        {renderProductGrid(softwares)}
+                                    </div>
+                                )}
+
                                 {/* Trade Ideas Section */}
                                 {(selectedCategory === 'Trade Ideas' || !selectedCategory) && tradeIdeas.length > 0 && (
                                     <div className="mb-12">
@@ -3814,7 +4139,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                                 {/* Other Products */}
                                 {otherProducts.length > 0 && (
                                     <div className="mb-12">
-                                        <h2 className="text-2xl font-bold text-white mb-6">Other Services</h2>
+                                        <h2 className="text-2xl font-bold text-white mb-6">Softwares</h2>
                                         {renderProductGrid(otherProducts)}
                                     </div>
                                 )}
@@ -5909,6 +6234,260 @@ const BrandedMerchandiseCheckout: React.FC = () => {
     );
 };
 
+const GoldDiggerEACheckout: React.FC = () => {
+    const [isSecure, setIsSecure] = useState(true);
+    const [showSecureWarning, setShowSecureWarning] = useState(false);
+
+    useEffect(() => {
+        // Check if running on HTTPS
+        const isHttps = window.location.protocol === 'https:';
+        setIsSecure(isHttps);
+        
+        if (!isHttps) {
+            setShowSecureWarning(true);
+            return;
+        }
+
+        // Load Whop checkout script
+        const script = document.createElement('script');
+        script.src = 'https://js.whop.com/static/checkout/loader.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        // Set up completion callback
+        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
+            console.log('Payment complete:', planId, receiptId);
+            alert('Payment successful! You now have access to Mr One Dollar Gold Digger (EA) Robot.');
+            window.location.href = '/services';
+        };
+
+        return () => {
+            // Cleanup
+            if (document.head.contains(script)) {
+                document.head.removeChild(script);
+            }
+            delete (window as any).onCheckoutComplete;
+        };
+    }, []);
+
+    if (showSecureWarning) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center max-w-md">
+                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
+                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
+                        </svg>
+                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
+                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
+                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
+                        <div className="space-y-3">
+                            <button 
+                                onClick={() => window.open('https://whop.com/checkout/plan_BVSkuDVMnpu99?d2c=true', '_blank')}
+                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
+                            >
+                                Continue on Whop
+                            </button>
+                        </div>
+                    </div>
+                    <p className="text-slate-500 text-sm">
+                        Your security is our priority. All payment processing requires encryption.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isSecure) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <div className="relative mb-6">
+                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
+                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-black">
+            <div className="container mx-auto px-4 py-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Gold Digger (EA) Robot Checkout</h1>
+                    <p className="text-slate-400">Complete your purchase to get instant access to the automated gold trading EA</p>
+                </div>
+                
+                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                        <div
+                            data-whop-checkout-plan-id="plan_BVSkuDVMnpu99"
+                            data-whop-checkout-return-url="https://mr1dollar.international/"
+                            data-whop-checkout-theme="dark"
+                            data-whop-checkout-on-complete="onCheckoutComplete"
+                            style={{ minHeight: '600px' }}
+                        >
+                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
+                                <img 
+                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    alt="Mr. One Dollar" 
+                                    className="h-16 w-auto mb-4"
+                                />
+                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 flex justify-between items-center px-4">
+                            <a 
+                                href="/services"
+                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
+                            >
+                                <img 
+                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    alt="Back" 
+                                    className="w-4 h-4"
+                                />
+                                <span className="text-sm font-medium">Back to Services</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const LordLootEACheckout: React.FC = () => {
+    const [isSecure, setIsSecure] = useState(true);
+    const [showSecureWarning, setShowSecureWarning] = useState(false);
+
+    useEffect(() => {
+        // Check if running on HTTPS
+        const isHttps = window.location.protocol === 'https:';
+        setIsSecure(isHttps);
+        
+        if (!isHttps) {
+            setShowSecureWarning(true);
+            return;
+        }
+
+        // Load Whop checkout script
+        const script = document.createElement('script');
+        script.src = 'https://js.whop.com/static/checkout/loader.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        // Set up completion callback
+        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
+            console.log('Payment complete:', planId, receiptId);
+            alert('Payment successful! You now have access to Mr One Dollar Lord Loot (EA) Robot.');
+            window.location.href = '/services';
+        };
+
+        return () => {
+            // Cleanup
+            if (document.head.contains(script)) {
+                document.head.removeChild(script);
+            }
+            delete (window as any).onCheckoutComplete;
+        };
+    }, []);
+
+    if (showSecureWarning) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center max-w-md">
+                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
+                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
+                        </svg>
+                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
+                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
+                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
+                        <div className="space-y-3">
+                            <button 
+                                onClick={() => window.open('https://whop.com/checkout/plan_i3B9lRxO7oE5M?d2c=true', '_blank')}
+                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
+                            >
+                                Continue on Whop
+                            </button>
+                        </div>
+                    </div>
+                    <p className="text-slate-500 text-sm">
+                        Your security is our priority. All payment processing requires encryption.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!isSecure) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="text-center">
+                    <div className="relative mb-6">
+                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
+                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen bg-black">
+            <div className="container mx-auto px-4 py-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-white mb-2">Mr One Dollar Lord Loot (EA) Robot Checkout</h1>
+                    <p className="text-slate-400">Complete your purchase to get instant access to the automated currency pairs trading EA</p>
+                </div>
+                
+                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                        <div
+                            data-whop-checkout-plan-id="plan_i3B9lRxO7oE5M"
+                            data-whop-checkout-return-url="https://mr1dollar.international/"
+                            data-whop-checkout-theme="dark"
+                            data-whop-checkout-on-complete="onCheckoutComplete"
+                            style={{ minHeight: '600px' }}
+                        >
+                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
+                                <img 
+                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    alt="Mr. One Dollar" 
+                                    className="h-16 w-auto mb-4"
+                                />
+                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 flex justify-between items-center px-4">
+                            <a 
+                                href="/services"
+                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
+                            >
+                                <img 
+                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    alt="Back" 
+                                    className="w-4 h-4"
+                                />
+                                <span className="text-sm font-medium">Back to Services</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -5970,6 +6549,8 @@ const App: React.FC = () => {
       '/currencies-strategy-checkout': 'currencies-strategy-checkout',
       '/nfp-event-access-checkout': 'nfp-event-access-checkout',
       '/branded-merchandise-checkout': 'branded-merchandise-checkout',
+      '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
+      '/lord-loot-ea-checkout': 'lord-loot-ea-checkout',
       '/affiliate': 'affiliate'
     };
     
@@ -6017,6 +6598,8 @@ const App: React.FC = () => {
         '/currencies-strategy-checkout': 'currencies-strategy-checkout',
         '/nfp-event-access-checkout': 'nfp-event-access-checkout',
         '/branded-merchandise-checkout': 'branded-merchandise-checkout',
+        '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
+        '/lord-loot-ea-checkout': 'lord-loot-ea-checkout',
         '/affiliate': 'affiliate'
       };
       
@@ -6151,6 +6734,8 @@ const App: React.FC = () => {
       'currencies-strategy-checkout': '/currencies-strategy-checkout',
       'nfp-event-access-checkout': '/nfp-event-access-checkout',
       'branded-merchandise-checkout': '/branded-merchandise-checkout',
+      'gold-digger-ea-checkout': '/gold-digger-ea-checkout',
+      'lord-loot-ea-checkout': '/lord-loot-ea-checkout',
       'affiliate': '/affiliate'
     };
     
@@ -6284,6 +6869,10 @@ const App: React.FC = () => {
         return <NFPEventAccessCheckout />;
       case 'branded-merchandise-checkout':
         return <BrandedMerchandiseCheckout />;
+      case 'gold-digger-ea-checkout':
+        return <GoldDiggerEACheckout />;
+      case 'lord-loot-ea-checkout':
+        return <LordLootEACheckout />;
       case 'affiliate':
         return <AffiliatePage />;
       default:
@@ -6302,7 +6891,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </main>
-      <FundedNextToast />
       <Footer setCurrentPage={handlePageChange} />
       <WhatsAppWidget />
       <ScrollToTopButton />
