@@ -617,27 +617,16 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             category: 'Prop Firms',
             color: 'purple',
             promo: {
-                title: 'MetaTrader 5 is Returning! 🎉',
-                description: '50% off Two Phase Challenges for all clients',
-                code: 'FIRST',
+                title: 'Special Offer! 🎉',
+                description: '20% Off on all Challenges + 10% Profit Split Add-on',
+                code: 'SPRING',
                 hasDropdown: true,
                 dropdownContent: `
                     <div class="space-y-3">
-                        <p class="text-white text-sm mb-2"><strong class="text-amber-400">MetaTrader 5 is returning to Funded7!</strong> "We now operate under our own MT5 license for a seamless experience.</p>
-                        <p class="text-white text-sm mb-2">Thank you for your loyalty during our cTrader transition. The platform you've been waiting for is ready!</p>
-                        <p class="text-white text-sm mb-2"><strong class="text-green-400">50% Discount:</strong> All clients get 50% off Two Phase Challenges!" </p>
-                        <p class="text-white text-sm mb-3">Use coupon code <strong class="text-amber-400">FIRST</strong> at checkout</p>
-                        <div class="border-t border-slate-600 pt-3">
-                            <p class="text-xs text-slate-400 mb-2"><strong>Important Timeline:</strong></p>
-                            <p class="text-xs text-white mb-1">• Migration form deadline: January 23rd, 2026</p>
-                            <p class="text-xs text-white mb-1">• Close positions 2 days before migration</p>
-                            <p class="text-xs text-amber-400">• Exact migration date announced soon via email</p>
-                        </div>
-                        <div class="mt-3">
-                            <a href="https://f9wxx.r.a.d.sendibm1.com/mk/cl/f/sh/SMK1E8tHeG7uh65Nq889Q4qo1t3A/-KS14PR6IA9C" 
-                               class="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium py-2 px-4 rounded-lg text-center transition-colors">
-                                Fill Out Migration Form
-                            </a>
+                        <p class="text-white text-sm mb-2"><strong class="text-amber-400">Enjoy 20% Off on all Challenges + 10% Profit Split Add-on.</strong></p>
+                        <div class="flex items-center justify-between bg-slate-800/50 border border-slate-600 rounded-lg p-2">
+                            <code class="text-xs font-mono text-amber-400">SPRING</code>
+                            <button onclick="navigator.clipboard.writeText('SPRING'); this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000)" class="text-xs bg-amber-500 hover:bg-amber-600 text-black px-2 py-1 rounded transition-colors">Copy</button>
                         </div>
                     </div>
                 `
@@ -691,86 +680,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             }
         };
     }, []);
-
-    // Trading Competition Card - PrimeXBT Themed
-    const CompetitionCard = () => {
-        const [isExpanded, setIsExpanded] = useState(false);
-        
-        return (
-        <div className="bg-gradient-to-br from-blue-900/80 to-black border border-blue-700/50 hover:border-blue-500/70 rounded-xl p-5 transition-all duration-300 hover:shadow-lg h-full min-h-[360px] flex flex-col group">
-            <div className="flex items-center mb-2">
-                <div className="p-1.5 bg-blue-600/20 rounded-lg mr-3 group-hover:bg-blue-500/30 transition-colors">
-                    <img 
-                        src="https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png" 
-                        alt="PrimeXBT" 
-                        className="h-5 w-auto"
-                    />
-                </div>
-                <h3 className="text-lg font-bold text-blue-300 group-hover:text-blue-200 transition-colors">
-                    Trading Competition
-                </h3>
-            </div>
-            <div className="flex flex-col flex-grow">
-                <p className="text-blue-100 text-xs mb-1 font-medium">
-                    Trading Challenge
-                </p>
-                <p className="text-blue-100/80 text-xs mb-3">
-                    Compete & win a full paid Trade-Cation!
-                </p>
-                <div className="space-y-2 mb-3">
-                    <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
-                        <span className="mr-2">🏆</span>
-                        <span className="text-blue-100 text-xs">Win a Trade-Cation</span>
-                    </div>
-                    <div className="flex items-center bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-800/50">
-                        <span className="mr-2">🥇</span>
-                        <span className="text-blue-100 text-xs">Top 3 traders with highest volume win !!</span>
-                    </div>
-                </div>
-                <div className="bg-blue-800/40 border border-blue-700/60 rounded-lg p-2 mb-3 text-center group-hover:border-blue-500/70 transition-colors">
-                    <span className="text-blue-100 text-xs font-medium">Ends: 17 Feb 2026</span>
-                </div>
-            </div>
-            <div className="mt-3 space-y-2">
-                <a 
-                    href="https://primexbt.me/competitions/MrOneDollar" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-medium py-1.5 px-4 rounded-lg text-center text-xs transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-blue-500/20 flex items-center justify-center"
-                >
-                    <span>Join Now</span>
-                    <svg className="w-3 h-3 ml-1.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                </a>
-                <div className="w-full">
-                    <button 
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setIsExpanded(!isExpanded);
-                        }}
-                        className="w-full bg-transparent border border-blue-500/40 hover:border-blue-400/60 text-blue-300 hover:text-blue-200 font-medium py-1.5 px-4 rounded-lg text-center text-xs transition-all duration-300 group-hover:bg-blue-900/20 flex items-center justify-center"
-                    >
-                        {isExpanded ? 'Show Less' : 'Learn More'}
-                        <svg 
-                            className={`w-3 h-3 ml-1 transition-transform duration-200 ${isExpanded ? 'transform rotate-180' : ''}`}
-                            fill="none" 
-                            viewBox="0 0 24 24" 
-                            stroke="currentColor"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    {isExpanded && (
-                        <div className="mt-2 p-3 bg-blue-900/30 border border-blue-700/50 rounded-lg text-blue-100 text-xs">
-                            The time has come!!! The one with the highest score in trading volume takes the cup home and joins us at the next Trade-Cation🔥🔥🔥
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
-    );
-    };
+   
     
     return (
         <section ref={sectionRef} className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 animate-fadeIn relative overflow-hidden">
@@ -871,7 +781,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                             <div className="w-full md:w-[400px] flex-shrink-0 relative mt-6 md:mt-0 h-full">
                                 <div className="hidden md:block absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent"></div>
                                 <div className="w-full h-full flex flex-col">
-                                    <CompetitionCard />
+                                    {/* Competition card removed */}
                                 </div>
                             </div>
                         </div>
@@ -1714,7 +1624,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                 <div>
                     <h3 className="text-xl font-bold text-white">Follow Us</h3>
                     <div className="flex space-x-4 mt-4">
-                        <a href="https://www.youtube.com/@mr1dollar572" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
+                        <a href="https://www.youtube.com/@mr1dollar.international" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
                                 src="https://i.ibb.co/Rkr61Kyn/youtube-icon.png" 
                                 alt="YouTube Channel" 
@@ -1938,7 +1848,7 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                     Subscribe to our YouTube channel for the latest trade ideas, market analysis, and educational content.
                                 </p>
                                 <a 
-                                    href="https://www.youtube.com/@mr1dollar572" 
+                                    href="https://www.youtube.com/@mr1dollar.international" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center text-amber-400 hover:text-amber-300 font-medium transition-colors group"
@@ -2758,7 +2668,7 @@ const AboutPage: React.FC = () => {
                             {/* YouTube Profile Picture */}
                             <div className="flex-shrink-0">
                                 <a 
-                                    href="https://www.youtube.com/@mr1dollar572" 
+                                    href="https://www.youtube.com/@mr1dollar.international" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="block group"
@@ -2791,7 +2701,7 @@ const AboutPage: React.FC = () => {
                                 </p>
                                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                                     <a 
-                                        href="https://www.youtube.com/@mr1dollar572" 
+                                        href="https://www.youtube.com/@mr1dollar.international" 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
                                         className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
@@ -2802,7 +2712,7 @@ const AboutPage: React.FC = () => {
                                         Subscribe on YouTube
                                     </a>
                                     <a 
-                                        href="https://www.youtube.com/@mr1dollar572/videos" 
+                                        href="https://www.youtube.com/@mr1dollar.international/videos" 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
                                         className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
