@@ -1604,7 +1604,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                                     <a href="https://wa.me/27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
                                 </p>
                                 <p className="text-slate-400">
-                                    <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
+                                    <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 526 2009</a>
                                 </p>
                             </div>
                         </li>
@@ -2835,7 +2835,7 @@ const ContactPage: React.FC = () => {
                                         <a href="https://wa.me/27676923876" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 67 692 3876</a>
                                     </p>
                                     <p className="text-slate-400">
-                                        <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 426 7355</a>
+                                        <a href="https://wa.me/27614267355" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">+27 61 526 2009</a>
                                     </p>
                                 </div>
                             </li>
