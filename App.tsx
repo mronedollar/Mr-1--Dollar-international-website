@@ -1161,7 +1161,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                                         e.preventDefault();
                                                         markStepCompleted(1);
                                                         unlockUpTo(2);
-                                                        window.location.href = `https://forms.fillout.com/t/69dxiDrK4kus?MrOneDollar_International_Contact_form=xxxxx&id=${Date.now()}&returnTo=${encodeURIComponent('https://mr-1-international.vercel.app/?return_to=step2')}`;
+                                                        window.location.href = `https://forms.gle/7hgB2Gmr9doQEmy99`;
                                                     }}
                                                     className="inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
                                                 >
