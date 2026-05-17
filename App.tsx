@@ -625,8 +625,8 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     <div class="space-y-3">
                         <p class="text-white text-sm mb-2"><strong class="text-amber-400">Enjoy 20% Off on all Challenges + 10% Profit Split Add-on.</strong></p>
                         <div class="flex items-center justify-between bg-slate-800/50 border border-slate-600 rounded-lg p-2">
-                            <code class="text-xs font-mono text-amber-400">SPRING</code>
-                            <button onclick="navigator.clipboard.writeText('SPRING'); this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000)" class="text-xs bg-amber-500 hover:bg-amber-600 text-black px-2 py-1 rounded transition-colors">Copy</button>
+                            <code class="text-xs font-mono text-amber-400">EVAL4</code>
+                            <button onclick="navigator.clipboard.writeText('EVAL4'); this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000)" class="text-xs bg-amber-500 hover:bg-amber-600 text-black px-2 py-1 rounded transition-colors">Copy</button>
                         </div>
                     </div>
                 `
