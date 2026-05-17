@@ -618,8 +618,8 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
             color: 'purple',
             promo: {
                 title: 'Special Offer! 🎉',
-                description: '20% Off on all Challenges + 10% Profit Split Add-on',
-                code: 'SPRING',
+                description: '30% Off on all Challenges + 200% Refund on your second payout (May 15 - 18)',
+                code: 'EVAL4',
                 hasDropdown: true,
                 dropdownContent: `
                     <div class="space-y-3">
