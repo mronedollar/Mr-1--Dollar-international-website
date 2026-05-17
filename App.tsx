@@ -2756,7 +2756,6 @@ const TeamPage: React.FC = () => {
         { name: "Tebogo. M", role: "Technical Support" },
         { name: "Thalente. S", role: "Technical Support" },
         { name: "Mojalefa. P", role: "Technical Support" },
-        { name: "Bruce. M", role: "Technical Analyst" },
         { name: "Kenny. M", role: "Technical Analyst" },
     ];
 
