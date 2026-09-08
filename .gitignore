@@ -1,0 +1,8 @@
+node_modules
+.env
+.vite
+.vscode
+*.zip
+Mr-1-international-website/
+mr1-clone/
+NFP photos/
