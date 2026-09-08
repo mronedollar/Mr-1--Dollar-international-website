@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef, ReactNode } from 'react';
 import AffiliatePage from './src/pages/AffiliatePage';
 
 // --- Types ---
-type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'key-levels-calculator-checkout' | 'advanced-key-levels-calculator-checkout' | 'online-full-course-checkout' | 'gold-digger-ea-checkout' | 'lord-loot-ea-checkout' | 'affiliate';
+type Page = 'home' | 'events' | 'about' | 'team' | 'contact' | 'services' | 'terms' | 'privacy' | 'diamond-prepaid-checkout' | 'gold-high-voltage-checkout' | 'synthetics-checkout' | 'diamond-trade-ideas-checkout' | 'private-wealth-vip-black-checkout' | 'beginners-course-checkout' | 'intermediate-course-checkout' | 'advanced-course-checkout' | 'full-course-tradecation-checkout' | 'beginner-mentorship-checkout' | 'intermediate-mentorship-checkout' | 'advanced-mentorship-checkout' | 'currencies-strategy-checkout' | 'nfp-event-access-checkout' | 'gold-digger-ea-checkout' | 'lord-loot-ea-checkout' | 'affiliate';
 interface OfferStep {
     number: number;
     text: string | React.ReactNode;
@@ -41,8 +41,8 @@ interface Product extends BaseProduct {
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 16, name: "Key Levels Calculator", price: 59.99, category: 'Softwares', imageUrl: 'https://i.postimg.cc/j5R11GrM/remove-Key-Lvel-Zones-text-202608260258.jpg', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", checkoutUrl: "key-levels-calculator-checkout" },
-    { id: 18, name: "Advanced Key Levels Calculator", price: 119.98, category: 'Softwares', imageUrl: 'https://i.postimg.cc/j2wCznmT/Remove-big-logo-top-202608260249.jpg', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "advanced-key-levels-calculator-checkout" },
+    { id: 16, name: "Key Levels Calculator", price: 59.99, category: 'Softwares', imageUrl: 'https://i.postimg.cc/j5R11GrM/remove-Key-Lvel-Zones-text-202608260258.jpg', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", checkoutUrl: "https://whop.com/mr1dollar-international/mr-1-key-levels/" },
+    { id: 18, name: "Advanced Key Levels Calculator", price: 119.98, category: 'Softwares', imageUrl: 'https://i.postimg.cc/j2wCznmT/Remove-big-logo-top-202608260249.jpg', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "https://whop.com/mr1dollar-international/advanced-key-levels-calculator" },
     {
         id: 2,
         name: "Free Trade Ideas",
@@ -58,12 +58,12 @@ const servicesData: Product[] = [
         ],
         whatsappLink: "https://wa.me/27676923876?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
     },
-    { id: 3, name: "Diamond Trade Ideas", price: 43.18, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "diamond-trade-ideas-checkout" },
-    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1881.57, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "For traders who refuse to stay average. Join an exclusive circle of disciplined traders and investors focused on growing wealth, protecting capital, and building long-term financial freedom. Receive direct mentorship, advanced strategies, and priority access to MrOneDollar opportunities unavailable to the public. Membership is limited and available by application only. What You'll Receive: Direct mentorship & live trading sessions, Advanced institutional trading strategies, Elite trading psychology coaching, Private network of high-performing traders & entrepreneurs, Priority support & exclusive opportunities, Unlimited access to all premium resources. REQUIREMENTS: Reserved for traders with $100,000+ Funded Account or $10,000+ Personal Trading Account.", checkoutUrl: "private-wealth-vip-black-checkout" },
-    { id: 5, name: "Beginners Course", price: 194.70, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "BEGINNERS - FOREX FOUNDATIONS. Learn to Trade with Confidence. Understand how the forex market really works, Read charts like a professional, Identify high-probability trading opportunities, Build a solid foundation for consistent growth.", checkoutUrl: "beginners-course-checkout" },
-    { id: 6, name: "Intermediate Course", price: 259.60, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "INTERMEDIATE - BUILDING CONSISTENCY & DISCIPLINE. Turn Knowledge into Profits. Join live trading sessions with experienced mentors, Master precise trade entries and exits, Develop disciplined risk management, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "intermediate-course-checkout" },
-    { id: 17, name: "Advanced Course", price: 324.50, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "ADVANCED - ELITE TRADER. Trade with Institutional Precision. Advanced MrOneDollar trading Concepts & market confluence, Live mentorship and market breakdown, Professional trade management techniques, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "advanced-course-checkout" },
-    { id: 7, name: "Online Full Course", price: 649, category: 'Courses', imageUrl: 'https://i.postimg.cc/6Q91wcwD/Intermediate-Mentorship.png', description: "Master Trading from Beginner to Professional. Everything you need to develop your trading knowledge and build a structured approach to the financial markets — all in one complete educational programme. Learn market analysis, trading concepts, risk management and practical techniques through structured lessons and live educational sessions with experienced mentors. What You Get: Beginner, Intermediate & Advanced Modules, Live Educational Sessions with Mentors, Practical Market Analysis & Trading Education, Access to Educational Trading Tools, Educational Trade Ideas, FREE $15,000 Prop Firm Challenge Account. Only $649. One payment. Lifetime access to the educational programme. Start Your Trading Education Today. *Terms and conditions apply. The programme is for educational purposes and does not constitute financial advice or a recommendation to buy or sell any financial product.", checkoutUrl: "online-full-course-checkout" },
+    { id: 3, name: "Diamond Trade Ideas", price: 43.18, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/Qx6RkZpD/DIAMOND.jpg', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "https://whop.com/mr1dollar-international/diamond-trade-ideas-7b" },
+    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1881.57, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/YSQnP5mq/PRIVATE-WEALTH-VIP-BLACK.jpg', description: "For traders who refuse to stay average. Join an exclusive circle of disciplined traders and investors focused on growing wealth, protecting capital, and building long-term financial freedom. Receive direct mentorship, advanced strategies, and priority access to MrOneDollar opportunities unavailable to the public. Membership is limited and available by application only. What You'll Receive: Direct mentorship & live trading sessions, Advanced institutional trading strategies, Elite trading psychology coaching, Private network of high-performing traders & entrepreneurs, Priority support & exclusive opportunities, Unlimited access to all premium resources. REQUIREMENTS: Reserved for traders with $100,000+ Funded Account or $10,000+ Personal Trading Account.", checkoutUrl: "https://whop.com/mr1dollar-international/private-wealth-vipblack/" },
+    { id: 5, name: "Beginners Course", price: 194.70, category: 'Courses', imageUrl: 'https://i.postimg.cc/66VKZPjZ/Beginners-Course.jpg', description: "BEGINNERS - FOREX FOUNDATIONS. Learn to Trade with Confidence. Understand how the forex market really works, Read charts like a professional, Identify high-probability trading opportunities, Build a solid foundation for consistent growth.", checkoutUrl: "https://whop.com/mr1dollar-international/beginners-course-0f/" },
+    { id: 6, name: "Intermediate Course", price: 259.60, category: 'Courses', imageUrl: 'https://i.postimg.cc/0jkBDVjs/Intermediate-Course.jpg', description: "INTERMEDIATE - BUILDING CONSISTENCY & DISCIPLINE. Turn Knowledge into Profits. Join live trading sessions with experienced mentors, Master precise trade entries and exits, Develop disciplined risk management, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "https://whop.com/mr1dollar-international/intermediate-course-b1/" },
+    { id: 17, name: "Advanced Course", price: 324.50, category: 'Courses', imageUrl: 'https://i.postimg.cc/bNHvzrcd/Advanced-Course.jpg', description: "ADVANCED - ELITE TRADER. Trade with Institutional Precision. Advanced MrOneDollar trading Concepts & market confluence, Live mentorship and market breakdown, Professional trade management techniques, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "https://whop.com/mr1dollar-international/advanced-course-fe/" },
+    { id: 7, name: "Online Full Course", price: 649, category: 'Courses', imageUrl: 'https://i.postimg.cc/6Q91wcwD/Intermediate-Mentorship.png', description: "Master Trading from Beginner to Professional. Everything you need to develop your trading knowledge and build a structured approach to the financial markets — all in one complete educational programme. Learn market analysis, trading concepts, risk management and practical techniques through structured lessons and live educational sessions with experienced mentors. What You Get: Beginner, Intermediate & Advanced Modules, Live Educational Sessions with Mentors, Practical Market Analysis & Trading Education, Access to Educational Trading Tools, Educational Trade Ideas, FREE $15,000 Prop Firm Challenge Account. Only $649. One payment. Lifetime access to the educational programme. Start Your Trading Education Today. *Terms and conditions apply. The programme is for educational purposes and does not constitute financial advice or a recommendation to buy or sell any financial product.", checkoutUrl: "https://whop.com/mr1dollar-international/online-full-course" },
     { id: 8, name: "Full Course + Free Tradecation", price: 1189.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/YSFZH4T2/Full-Course-Free-Tradecation.jpg', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer.", checkoutUrl: "full-course-tradecation-checkout" },
     { id: 12, name: "NFP Event Access", price: 16.99, category: 'Events', imageUrl: 'https://i.postimg.cc/tCmMntjX/NFP-Event-Access.jpg', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" }
 ];
@@ -3122,14 +3122,7 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                                     e.preventDefault();
                                     // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/nfp-event-access-checkout';
-                                } else if (product.checkoutUrl === 'branded-merchandise-checkout') {
-                                    e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
-                                    window.location.href = '/branded-merchandise-checkout';
-                                } else if (product.checkoutUrl === 'key-levels-calculator-checkout') {
-                                    e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
-                                    window.location.href = '/key-levels-calculator-checkout';
+
                                 } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
                                     e.preventDefault();
                                     // Navigate to Whop checkout for Gold Digger EA
@@ -3350,6 +3343,8 @@ const updatedPlatinumPackage = platinumPackage ? {
         ? filteredProducts.filter(p => p.category === 'Softwares')
         : [];
 
+
+        
     const tradeIdeas = selectedCategory === 'Trade Ideas' || !selectedCategory 
         ? filteredProducts.filter(p => p.category === 'Trade Ideas' && p.id !== 2) 
         : [];
@@ -3843,6 +3838,8 @@ const updatedPlatinumPackage = platinumPackage ? {
                                         {renderProductGrid(otherProducts)}
                                     </div>
                                 )}
+
+
 
                                 {/* Pagination */}
                                 {renderPagination()}
@@ -4460,7 +4457,7 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_KhROxgHEg4L0c?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/mr1dollar-international/diamond-trade-ideas-copy/', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -4502,7 +4499,7 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_KhROxgHEg4L0c"
+                            data-whop-checkout-plan-id="plan_qNrnwywYsgp5M"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -4587,7 +4584,7 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_x79wll9PQbIKu?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -4629,7 +4626,7 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_x79wll9PQbIKu"
+                            data-whop-checkout-plan-id="plan_t6cWYP0riNwZc"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -4714,7 +4711,7 @@ const BeginnersCourseCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_27Sg99aDR0rye?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_FLNIgd01exxwN?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -4756,7 +4753,7 @@ const BeginnersCourseCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_27Sg99aDR0rye"
+                            data-whop-checkout-plan-id="plan_FLNIgd01exxwN"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -4841,7 +4838,7 @@ const IntermediateCourseCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_5Rt6rQ307h5JC?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_mdhlnuqZn2k9O?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -4883,7 +4880,7 @@ const IntermediateCourseCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_5Rt6rQ307h5JC"
+                            data-whop-checkout-plan-id="plan_mdhlnuqZn2k9O"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -4968,7 +4965,7 @@ const AdvancedCourseCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_69dN9HWDOkgPQ?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_6exMgeEDvYPXZ?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -5010,7 +5007,7 @@ const AdvancedCourseCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_69dN9HWDOkgPQ"
+                            data-whop-checkout-plan-id="plan_6exMgeEDvYPXZ"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -5033,260 +5030,6 @@ const AdvancedCourseCheckout: React.FC = () => {
                                 <img 
                                     src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
                                     alt="Back" 
-                                    className="w-4 h-4"
-                                />
-                                <span className="text-sm font-medium">Back to Services</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
-    const [isSecure, setIsSecure] = useState(true);
-    const [showSecureWarning, setShowSecureWarning] = useState(false);
-
-    useEffect(() => {
-        // Check if running on HTTPS
-        const isHttps = window.location.protocol === 'https:';
-        setIsSecure(isHttps);
-
-        if (!isHttps) {
-            setShowSecureWarning(true);
-            return;
-        }
-
-        // Load Whop checkout script
-        const script = document.createElement('script');
-        script.src = 'https://js.whop.com/static/checkout/loader.js';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-
-        // Set up completion callback
-        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
-            console.log('Payment complete:', planId, receiptId);
-            alert('Payment successful! You now have access to the Advanced Key Levels Calculator.');
-            window.location.href = '/services';
-        };
-
-        return () => {
-            // Cleanup
-            if (document.head.contains(script)) {
-                document.head.removeChild(script);
-            }
-            delete (window as any).onCheckoutComplete;
-        };
-    }, []);
-
-    if (showSecureWarning) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center max-w-md">
-                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
-                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
-                        </svg>
-                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
-                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
-                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
-                        <div className="space-y-3">
-                            <button
-                                onClick={() => window.open('https://whop.com/checkout/prod_YBPjOT94m4lWz?d2c=true', '_blank')}
-                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
-                            >
-                                Continue on Whop
-                            </button>
-                        </div>
-                    </div>
-                    <p className="text-slate-500 text-sm">
-                        Your security is our priority. All payment processing requires encryption.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
-    if (!isSecure) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="relative mb-6">
-                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
-                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
-                        </div>
-                    </div>
-                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
-                </div>
-            </div>
-        );
-    }
-
-    return (
-        <div className="min-h-screen bg-black">
-            <div className="container mx-auto px-4 py-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Advanced Key Levels Calculator Checkout</h1>
-                    <p className="text-slate-400">Complete your purchase to get instant access to our advanced key levels calculator</p>
-                </div>
-
-                {/* Embedded Checkout */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                        <div
-                            data-whop-checkout-plan-id="prod_YBPjOT94m4lWz"
-                            data-whop-checkout-return-url="https://mr1dollar.international/"
-                            data-whop-checkout-theme="dark"
-                            data-whop-checkout-on-complete="onCheckoutComplete"
-                            style={{ minHeight: '600px' }}
-                        >
-                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
-                                <img
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png"
-                                    alt="Mr. One Dollar"
-                                    className="h-16 w-auto mb-4"
-                                />
-                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
-                            </div>
-                        </div>
-                        <div className="mt-4 flex justify-between items-center px-4">
-                            <a
-                                href="/services"
-                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
-                            >
-                                <img
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png"
-                                    alt="Back"
-                                    className="w-4 h-4"
-                                />
-                                <span className="text-sm font-medium">Back to Services</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const OnlineFullCourseCheckout: React.FC = () => {
-    const [isSecure, setIsSecure] = useState(true);
-    const [showSecureWarning, setShowSecureWarning] = useState(false);
-
-    useEffect(() => {
-        // Check if running on HTTPS
-        const isHttps = window.location.protocol === 'https:';
-        setIsSecure(isHttps);
-
-        if (!isHttps) {
-            setShowSecureWarning(true);
-            return;
-        }
-
-        // Load Whop checkout script
-        const script = document.createElement('script');
-        script.src = 'https://js.whop.com/static/checkout/loader.js';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-
-        // Set up completion callback
-        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
-            console.log('Payment complete:', planId, receiptId);
-            alert('Payment successful! You now have access to the Online Full Course.');
-            window.location.href = '/services';
-        };
-
-        return () => {
-            // Cleanup
-            if (document.head.contains(script)) {
-                document.head.removeChild(script);
-            }
-            delete (window as any).onCheckoutComplete;
-        };
-    }, []);
-
-    if (showSecureWarning) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center max-w-md">
-                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
-                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187 1.451 1.312 3.118 2.502 3.118h13.856z" />
-                        </svg>
-                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
-                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
-                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
-                        <div className="space-y-3">
-                            <button
-                                onClick={() => window.open('https://whop.com/checkout/prod_cCGBT2I6k0r6O?d2c=true', '_blank')}
-                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
-                            >
-                                Continue on Whop
-                            </button>
-                        </div>
-                    </div>
-                    <p className="text-slate-500 text-sm">
-                        Your security is our priority. All payment processing requires encryption.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
-    if (!isSecure) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="relative mb-6">
-                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
-                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
-                        </div>
-                    </div>
-                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
-                </div>
-            </div>
-        );
-    }
-
-    return (
-        <div className="min-h-screen bg-black">
-            <div className="container mx-auto px-4 py-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Online Full Course Checkout</h1>
-                    <p className="text-slate-400">Complete your purchase to get instant access to our complete online trading course</p>
-                </div>
-
-                {/* Embedded Checkout */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                        <div
-                            data-whop-checkout-plan-id="prod_cCGBT2I6k0r6O"
-                            data-whop-checkout-return-url="https://mr1dollar.international/"
-                            data-whop-checkout-theme="dark"
-                            data-whop-checkout-on-complete="onCheckoutComplete"
-                            style={{ minHeight: '600px' }}
-                        >
-                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
-                                <img
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png"
-                                    alt="Mr. One Dollar"
-                                    className="h-16 w-auto mb-4"
-                                />
-                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
-                            </div>
-                        </div>
-                        <div className="mt-4 flex justify-between items-center px-4">
-                            <a
-                                href="/services"
-                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
-                            >
-                                <img
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png"
-                                    alt="Back"
                                     className="w-4 h-4"
                                 />
                                 <span className="text-sm font-medium">Back to Services</span>
@@ -5349,7 +5092,7 @@ const FullCourseTradecationCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_esLhS7OpsObdt?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_91pPZHbkPYU9q?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -5391,7 +5134,7 @@ const FullCourseTradecationCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_esLhS7OpsObdt"
+                            data-whop-checkout-plan-id="plan_91pPZHbkPYU9q"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -5984,7 +5727,7 @@ const NFPEventAccessCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_XdZVGRFZdCbnd?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_EoyvAo4ReKJhi?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -6026,134 +5769,7 @@ const NFPEventAccessCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_XdZVGRFZdCbnd"
-                            data-whop-checkout-return-url="https://mr1dollar.international/"
-                            data-whop-checkout-theme="dark"
-                            data-whop-checkout-on-complete="onCheckoutComplete"
-                            style={{ minHeight: '600px' }}
-                        >
-                            <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
-                                <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
-                                    alt="Mr. One Dollar" 
-                                    className="h-16 w-auto mb-4"
-                                />
-                                <p className="text-slate-300 text-sm font-medium">Initializing secure checkout...</p>
-                            </div>
-                        </div>
-                        <div className="mt-4 flex justify-between items-center px-4">
-                            <a 
-                                href="/services"
-                                className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
-                            >
-                                <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
-                                    alt="Back" 
-                                    className="w-4 h-4"
-                                />
-                                <span className="text-sm font-medium">Back to Services</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const KeyLevelsCalculatorCheckout: React.FC = () => {
-    const [isSecure, setIsSecure] = useState(true);
-    const [showSecureWarning, setShowSecureWarning] = useState(false);
-
-    useEffect(() => {
-        // Check if running on HTTPS
-        const isHttps = window.location.protocol === 'https:';
-        setIsSecure(isHttps);
-        
-        if (!isHttps) {
-            setShowSecureWarning(true);
-            return;
-        }
-
-        // Load Whop checkout script
-        const script = document.createElement('script');
-        script.src = 'https://js.whop.com/static/checkout/loader.js';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-
-        // Set up completion callback
-        (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
-            console.log('Payment complete:', planId, receiptId);
-            alert('Payment successful! You now have access to Key Levels Calculator.');
-            window.location.href = '/services';
-        };
-
-        return () => {
-            // Cleanup
-            if (document.head.contains(script)) {
-                document.head.removeChild(script);
-            }
-            delete (window as any).onCheckoutComplete;
-        };
-    }, []);
-
-    if (showSecureWarning) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center max-w-md">
-                    <div className="bg-red-900/20 border border-red-500 rounded-lg p-6 mb-6">
-                        <svg className="w-12 h-12 text-red-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 2.502-3.118l-1.124-7.5c-.187-1.241-1.312-2.382-2.502-2.382H6.506c-1.19 0-2.315 1.141-2.502 2.382l-1.124 7.5c-.187-1.451 1.312 3.118 2.502 3.118h13.856z" />
-                        </svg>
-                        <h3 className="text-xl font-bold text-red-400 mb-2">Secure Connection Required</h3>
-                        <p className="text-red-300 mb-4">Payment processing requires a secure HTTPS connection.</p>
-                        <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
-                        <div className="space-y-3">
-                            <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_VnCNgYjLzaxIF?d2c=true', '_blank')}
-                                className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
-                            >
-                                Continue on Whop
-                            </button>
-                        </div>
-                    </div>
-                    <p className="text-slate-500 text-sm">
-                        Your security is our priority. All payment processing requires encryption.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
-    if (!isSecure) {
-        return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="relative mb-6">
-                        <div className="w-16 h-16 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin">
-                            <div className="absolute top-2 left-2 w-12 h-12 border-2 border-amber-400/20 border-r-amber-400 rounded-full animate-pulse"></div>
-                        </div>
-                    </div>
-                    <p className="text-slate-300 text-sm font-medium animate-pulse">Redirecting to secure connection...</p>
-                </div>
-            </div>
-        );
-    }
-
-    return (
-        <div className="min-h-screen bg-black">
-            <div className="container mx-auto px-4 py-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Key Levels Calculator Checkout</h1>
-                    <p className="text-slate-400">Complete your purchase to get instant access to the Key Levels Calculator</p>
-                </div>
-                
-                {/* Embedded Checkout */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                        <div
-                            data-whop-checkout-plan-id="prod_VnCNgYjLzaxIF"
+                            data-whop-checkout-plan-id="plan_EoyvAo4ReKJhi"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
@@ -6452,7 +6068,7 @@ const App: React.FC = () => {
     if (page === currentPage) return;
     
     // Determine transition direction based on page order
-    const pageOrder: Page[] = ['home', 'about', 'team', 'events', 'services', 'contact', 'terms', 'privacy', 'diamond-prepaid-checkout', 'gold-high-voltage-checkout', 'synthetics-checkout', 'diamond-trade-ideas-checkout', 'private-wealth-vip-black-checkout', 'beginners-course-checkout', 'intermediate-course-checkout', 'advanced-course-checkout', 'full-course-tradecation-checkout', 'beginner-mentorship-checkout', 'intermediate-mentorship-checkout', 'advanced-mentorship-checkout', 'currencies-strategy-checkout', 'nfp-event-access-checkout', 'affiliate'];
+    const pageOrder: Page[] = ['home', 'about', 'team', 'events', 'services', 'contact', 'terms', 'privacy', 'diamond-prepaid-checkout', 'gold-high-voltage-checkout', 'synthetics-checkout', 'diamond-trade-ideas-checkout', 'private-wealth-vip-black-checkout', 'beginners-course-checkout', 'intermediate-course-checkout', 'advanced-course-checkout', 'full-course-tradecation-checkout', 'beginner-mentorship-checkout', 'intermediate-mentorship-checkout', 'advanced-mentorship-checkout', 'currencies-strategy-checkout', 'nfp-event-access-checkout', 'gold-digger-ea-checkout', 'lord-loot-ea-checkout', 'affiliate'];
     const currentIndex = pageOrder.indexOf(currentPage);
     const newIndex = pageOrder.indexOf(page);
     
@@ -6502,9 +6118,6 @@ const App: React.FC = () => {
       '/advanced-mentorship-checkout': 'advanced-mentorship-checkout',
       '/currencies-strategy-checkout': 'currencies-strategy-checkout',
       '/nfp-event-access-checkout': 'nfp-event-access-checkout',
-      '/key-levels-calculator-checkout': 'key-levels-calculator-checkout',
-      '/advanced-key-levels-calculator-checkout': 'advanced-key-levels-calculator-checkout',
-      '/online-full-course-checkout': 'online-full-course-checkout',
       '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
       '/lord-loot-ea-checkout': 'lord-loot-ea-checkout',
       '/affiliate': 'affiliate'
@@ -6553,9 +6166,6 @@ const App: React.FC = () => {
         '/advanced-mentorship-checkout': 'advanced-mentorship-checkout',
         '/currencies-strategy-checkout': 'currencies-strategy-checkout',
         '/nfp-event-access-checkout': 'nfp-event-access-checkout',
-        '/key-levels-calculator-checkout': 'key-levels-calculator-checkout',
-        '/advanced-key-levels-calculator-checkout': 'advanced-key-levels-calculator-checkout',
-        '/online-full-course-checkout': 'online-full-course-checkout',
         '/gold-digger-ea-checkout': 'gold-digger-ea-checkout',
         '/lord-loot-ea-checkout': 'lord-loot-ea-checkout',
         '/affiliate': 'affiliate'
@@ -6691,9 +6301,6 @@ const App: React.FC = () => {
       'advanced-mentorship-checkout': '/advanced-mentorship-checkout',
       'currencies-strategy-checkout': '/currencies-strategy-checkout',
       'nfp-event-access-checkout': '/nfp-event-access-checkout',
-      'key-levels-calculator-checkout': '/key-levels-calculator-checkout',
-      'advanced-key-levels-calculator-checkout': '/advanced-key-levels-calculator-checkout',
-      'online-full-course-checkout': '/online-full-course-checkout',
       'gold-digger-ea-checkout': '/gold-digger-ea-checkout',
       'lord-loot-ea-checkout': '/lord-loot-ea-checkout',
       'affiliate': '/affiliate'
@@ -6827,12 +6434,6 @@ const App: React.FC = () => {
         return <CurrenciesStrategyCheckout />;
       case 'nfp-event-access-checkout':
         return <NFPEventAccessCheckout />;
-      case 'key-levels-calculator-checkout':
-        return <KeyLevelsCalculatorCheckout />;
-      case 'advanced-key-levels-calculator-checkout':
-        return <AdvancedKeyLevelsCalculatorCheckout />;
-      case 'online-full-course-checkout':
-        return <OnlineFullCourseCheckout />;
       case 'gold-digger-ea-checkout':
         return <GoldDiggerEACheckout />;
       case 'lord-loot-ea-checkout':
