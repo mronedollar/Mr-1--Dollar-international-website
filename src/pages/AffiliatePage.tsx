@@ -43,10 +43,10 @@ const AffiliatePage: React.FC = () => {
   // Product data matching the main App.tsx
   const products: Product[] = [
     // Courses
-    { id: 5, name: "Beginners Course", productId: "prod_27Sg99aDR0rye", commission: 15 },
-    { id: 6, name: "Intermediate Course", productId: "prod_Qx2L3p9W8nK0", commission: 15 },
-    { id: 7, name: "Advanced Course", productId: "prod_8J4mR2L7fX6t", commission: 15 },
-    { id: 8, name: "Full Course + Free Tradecation", productId: "prod_9K2vN4X7qH1", commission: 5 },
+    { id: 5, name: "Beginners Course", productId: "plan_FLNIgd01exxwN", commission: 15 },
+    { id: 6, name: "Intermediate Course", productId: "plan_mdhlnuqZn2k9O", commission: 15 },
+    { id: 7, name: "Advanced Course", productId: "plan_6exMgeEDvYPXZ", commission: 15 },
+    { id: 8, name: "Full Course + Free Tradecation", productId: "plan_91pPZHbkPYU9q", commission: 5 },
     { id: 12, name: "Currencies Strategy", productId: "prod_9SrCavVpvpVfh", commission: 5 }
   ];
 
