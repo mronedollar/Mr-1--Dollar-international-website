@@ -65,7 +65,7 @@ const servicesData: Product[] = [
     { id: 17, name: "Advanced Course", price: 324.50, category: 'Courses', imageUrl: 'https://i.postimg.cc/T152NC4q/Advanced.png', description: "ADVANCED - ELITE TRADER. Trade with Institutional Precision. Advanced MrOneDollar trading Concepts & market confluence, Live mentorship and market breakdown, Professional trade management techniques, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "advanced-course-checkout" },
     { id: 7, name: "Online Full Course", price: 649, category: 'Courses', imageUrl: 'https://i.postimg.cc/4yH42BSS/Online-Full.png', description: "Master Trading from Beginner to Professional. Everything you need to develop your trading knowledge and build a structured approach to the financial markets — all in one complete educational programme. Learn market analysis, trading concepts, risk management and practical techniques through structured lessons and live educational sessions with experienced mentors. What You Get: Beginner, Intermediate & Advanced Modules, Live Educational Sessions with Mentors, Practical Market Analysis & Trading Education, Access to Educational Trading Tools, Educational Trade Ideas, FREE $15,000 Prop Firm Challenge Account. Only $649. One payment. Lifetime access to the educational programme. Start Your Trading Education Today. *Terms and conditions apply. The programme is for educational purposes and does not constitute financial advice or a recommendation to buy or sell any financial product.", checkoutUrl: "online-full-course-checkout" },
     { id: 8, name: "Full Course + Free Tradecation", price: 1189.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/brSYV3BT/Full-Course-Free-Tradecation.png', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer.", checkoutUrl: "full-course-tradecation-checkout" },
-    { id: 12, name: "NFP Event Access", price: 16.99, category: 'Events', imageUrl: 'https://i.postimg.cc/1XVR7JjY/NFP.png', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" }
+    { id: 12, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.postimg.cc/1XVR7JjY/NFP.png', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" }
 ];
 
 const testimonialsData = [
@@ -4587,7 +4587,7 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                         <p className="text-slate-400 text-sm mb-6">Please access your website using https://mr1dollar.international to complete your purchase.</p>
                         <div className="space-y-3">
                             <button 
-                                onClick={() => window.open('https://whop.com/checkout/prod_x79wll9PQbIKu?d2c=true', '_blank')}
+                                onClick={() => window.open('https://whop.com/checkout/plan_t6cWYP0riNwZc?d2c=true', '_blank')}
                                 className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 rounded-lg transition-colors"
                             >
                                 Continue on Whop
@@ -4629,7 +4629,7 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
-                            data-whop-checkout-plan-id="prod_x79wll9PQbIKu"
+                            data-whop-checkout-plan-id="plan_t6cWYP0riNwZc"
                             data-whop-checkout-return-url="https://mr1dollar.international/"
                             data-whop-checkout-theme="dark"
                             data-whop-checkout-on-complete="onCheckoutComplete"
