@@ -1943,7 +1943,7 @@ const EventsPage: React.FC = () => {
             id: 2,
             title: "🎯 NFP Trading Masterclass",
             description: "Master the most volatile trading day of the month with our expert-led NFP trading session. Learn to profit from the biggest market-moving economic report.",
-            price: "R279 (≈ $15.99)",
+            price: "R260 (≈ $15.90)",
             date: "First Friday of every month",
             time: "14:30 PM - 15:30 PM (SAST)",
             location: "Physical or Online",
@@ -2124,7 +2124,7 @@ const EventsPage: React.FC = () => {
                                                         </div>
                                                         <div>
                                                             <p className="text-slate-400">Price</p>
-                                                            <p className="text-amber-400 font-bold">$15.99 (≈ R279)</p>
+                                                            <p className="text-amber-400 font-bold">$15.90 (≈ R260)</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -4001,7 +4001,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4014,7 +4014,7 @@ const DiamondPrepaidCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4123,7 +4123,7 @@ const GoldHighVoltageCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4136,7 +4136,7 @@ const GoldHighVoltageCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4245,7 +4245,7 @@ const SyntheticsCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4258,7 +4258,7 @@ const SyntheticsCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4367,7 +4367,7 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4380,7 +4380,7 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4489,7 +4489,7 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4502,7 +4502,7 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4611,7 +4611,7 @@ const BeginnersCourseCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4624,7 +4624,7 @@ const BeginnersCourseCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4733,7 +4733,7 @@ const IntermediateCourseCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4746,7 +4746,7 @@ const IntermediateCourseCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4855,7 +4855,7 @@ const AdvancedCourseCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -4868,7 +4868,7 @@ const AdvancedCourseCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -4996,8 +4996,6 @@ const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
                                 <p className="text-slate-400 text-sm mb-4">Get automated trade ideas delivered to you, perfectly complementing your Advanced Key Levels Calculator.</p>
                                 <a
                                     href="https://whop.com/checkout/plan_Y0ZE4L4ZI6nE7?d2c=true"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                     className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
                                 >
                                     Buy Now
@@ -5021,7 +5019,7 @@ const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png"
+                                    src="/logos/Vertical_Wordmark_White.png"
                                     alt="Mr. One Dollar"
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5034,7 +5032,7 @@ const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png"
+                                    src="/logos/back_16_icon.png"
                                     alt="Back"
                                     className="w-4 h-4"
                                 />
@@ -5143,7 +5141,7 @@ const OnlineFullCourseCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png"
+                                    src="/logos/Vertical_Wordmark_White.png"
                                     alt="Mr. One Dollar"
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5156,7 +5154,7 @@ const OnlineFullCourseCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png"
+                                    src="/logos/back_16_icon.png"
                                     alt="Back"
                                     className="w-4 h-4"
                                 />
@@ -5265,7 +5263,7 @@ const FullCourseTradecationCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5278,7 +5276,7 @@ const FullCourseTradecationCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -5387,7 +5385,7 @@ const BeginnerMentorshipCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5400,7 +5398,7 @@ const BeginnerMentorshipCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -5509,7 +5507,7 @@ const IntermediateMentorshipCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5522,7 +5520,7 @@ const IntermediateMentorshipCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -5631,7 +5629,7 @@ const AdvancedMentorshipCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5644,7 +5642,7 @@ const AdvancedMentorshipCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -5753,7 +5751,7 @@ const CurrenciesStrategyCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5766,7 +5764,7 @@ const CurrenciesStrategyCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -5875,7 +5873,7 @@ const NFPEventAccessCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -5888,7 +5886,7 @@ const NFPEventAccessCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -6016,8 +6014,6 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
                                 <p className="text-slate-400 text-sm mb-4">Add the Momentum Gauge indicator to supercharge your Key Levels Calculator with momentum-based signals.</p>
                                 <a
                                     href="https://whop.com/checkout/plan_LgNwFTWFAjehB?d2c=true"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                     className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
                                 >
                                     Buy Now
@@ -6037,8 +6033,6 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
                                 <p className="text-slate-400 text-sm mb-4">Get automated trade ideas delivered to you, perfectly complementing your Key Levels Calculator.</p>
                                 <a
                                     href="https://whop.com/checkout/plan_Y0ZE4L4ZI6nE7?d2c=true"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                     className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
                                 >
                                     Buy Now
@@ -6062,7 +6056,7 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -6075,7 +6069,7 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -6184,7 +6178,7 @@ const GoldDiggerEACheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -6197,7 +6191,7 @@ const GoldDiggerEACheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
@@ -6306,7 +6300,7 @@ const LordLootEACheckout: React.FC = () => {
                         >
                             <div className="flex flex-col items-center justify-center min-h-[60px] bg-slate-900">
                                 <img 
-                                    src="https://i.postimg.cc/rD8FVh1Z/mr-one-dollar-logo.png" 
+                                    src="/logos/Vertical_Wordmark_White.png" 
                                     alt="Mr. One Dollar" 
                                     className="h-16 w-auto mb-4"
                                 />
@@ -6319,7 +6313,7 @@ const LordLootEACheckout: React.FC = () => {
                                 className="flex items-center space-x-2 px-3 py-2 text-slate-400 hover:text-white transition-all duration-200 hover:scale-105 bg-slate-800 rounded-lg"
                             >
                                 <img 
-                                    src="https://i.postimg.cc/yNGHkjGr/icons8-back-100.png" 
+                                    src="/logos/back_16_icon.png" 
                                     alt="Back" 
                                     className="w-4 h-4"
                                 />
