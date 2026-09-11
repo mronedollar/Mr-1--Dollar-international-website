@@ -568,7 +568,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         {
             name: 'Funded7',
             description: 'A proprietary trading firm providing funding for forex and crypto traders with flexible programs',
-            logoUrl: 'https://i.ibb.co/WpHFYqx1/Funded7-logo.png',
+            logoUrl: '/logos/Funded7-logo.png',
             link: 'https://my.funded7.com/en/sign-up?affiliateId=mr1dollar',
             category: 'Prop Firms',
             color: 'purple',
@@ -591,7 +591,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         {
             name: 'FundedNext',
             description: 'A proprietary trading firm providing funding for forex and crypto traders worldwide',
-            logoUrl: 'https://i.postimg.cc/NGHNgjZr/short-logo-removebg-preview.png',
+            logoUrl: '/logos/images.png',
             link: 'https://fundednext.com/?fpr=tinyiko-paul-miyambo55',
             category: 'Prop Firms',
             color: 'blue'
@@ -599,7 +599,7 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
         {
             name: 'FTMO',
             description: 'A global prop trading firm offering capital to skilled traders through evaluation programs',
-            logoUrl: 'https://i.ibb.co/xQTR80Z/FTMO-logo-removebg-preview.png',
+            logoUrl: '/logos/FTMO-logo-removebg-preview.png',
             link: 'https://trader.ftmo.com/?affiliates=UAWWsYFWImbrlfINiOLH',
             category: 'Prop Firms',
             color: 'green',
@@ -1231,22 +1231,22 @@ const Testimonials: React.FC = () => {
     const minSwipeDistance = 50;
     
     const testimonialImages = [
-        'https://i.postimg.cc/mg5Kpz8t/1.jpg',
-        'https://i.postimg.cc/1tCFDS9P/2.jpg',
-        'https://i.postimg.cc/zGZgC01r/3.jpg',
-        'https://i.postimg.cc/Sss2SPc2/4.jpg',
-        'https://i.postimg.cc/mhxtS2JV/5.jpg',
-        'https://i.postimg.cc/X7F86Zj4/6.jpg',
-        'https://i.postimg.cc/vm8Ln3Wc/7.jpg',
-        'https://i.postimg.cc/T1brxSXC/8.jpg',
-        'https://i.postimg.cc/YCM1cbDn/9.jpg',
-        'https://i.postimg.cc/G28DPN93/10.jpg',
-        'https://i.postimg.cc/nVm7C66d/11.jpg',
-        'https://i.postimg.cc/W15qBjJx/12.jpg',
-        'https://i.postimg.cc/nrKC0tJS/13.jpg',
-        'https://i.postimg.cc/QdYV6b2W/14.jpg',
-        'https://i.postimg.cc/T1xPyHbR/15.jpg',
-        'https://i.postimg.cc/JhB7pW3P/16.jpg'
+        '/testimonials/t1.jpg',
+        '/testimonials/t2.jpg',
+        '/testimonials/t3.jpg',
+        '/testimonials/t4.jpg',
+        '/testimonials/t5.jpg',
+        '/testimonials/t6.jpg',
+        '/testimonials/t7.jpg',
+        '/testimonials/t8.jpg',
+        '/testimonials/t9.jpg',
+        '/testimonials/t10.jpg',
+        '/testimonials/t11.jpg',
+        '/testimonials/t12.jpg',
+        '/testimonials/t13.jpg',
+        '/testimonials/t14.jpg',
+        '/testimonials/t15.jpg',
+        '/testimonials/t16.jpg',
     ];
     
     return (
@@ -1625,7 +1625,7 @@ const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[],
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.onerror = null;
-                            target.src = 'https://i.postimg.cc/2SnNJPxH/5.png';
+                            target.src = '/Tradecation/5.png';
                         }}
                     />
                 </div>
@@ -1738,15 +1738,15 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                 <div className="relative overflow-visible rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-amber-500/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
                                     <ImageCarousel 
                                         images={[
-                                            { url: 'https://i.postimg.cc/zGGTPrNs/1.png' },
-                                            { url: 'https://i.postimg.cc/4NNKXQMk/2.png' },
-                                            { url: 'https://i.postimg.cc/d3SJsrkc/3.png' },
-                                            { url: 'https://i.postimg.cc/cHxWfXw5/4.png' },
-                                            { url: 'https://i.postimg.cc/2SnNJPxH/5.png' },
-                                            { url: 'https://i.postimg.cc/xTbwJWBJ/6.png' },
-                                            { url: 'https://i.postimg.cc/W1Vs2NzW/7.png' },
-                                            { url: 'https://i.postimg.cc/QNWD19T8/8.png' },
-                                            { url: 'https://i.postimg.cc/0NQRQbv2/9.png' }
+                                            { url: '/Tradecation/1.png' },
+                                            { url: '/Tradecation/2.png' },
+                                            { url: '/Tradecation/3.png' },
+                                            { url: '/Tradecation/4.png' },
+                                            { url: '/Tradecation/5.png' },
+                                            { url: '/Tradecation/6.png' },
+                                            { url: '/Tradecation/7.png' },
+                                            { url: '/Tradecation/8.png' },
+                                            { url: '/Tradecation/9.png' }
                                         ]} 
                                         interval={3000}
                                     />
@@ -1935,7 +1935,7 @@ const EventsPage: React.FC = () => {
             date: "February 23-27, 2026",
             time: "5-Day Immersive Residency",
             location: "Cayley Resort • Drakensburg, South Africa",
-            image: "https://i.postimg.cc/NFSssMF3/image-(17).jpg",
+            image: "/testimonials/tradecation-poster.jpg",
             whatsappMessage: "Hi, I'm interested in the Tradecation experience. Please send me more details.",
             whatsappLink: "https://wa.me/27676923876?text=Hi%2C%20I'm%20interested%20in%20the%20Tradecation%20experience.%20Please%20send%20me%20more%20details."
         },
@@ -1947,31 +1947,34 @@ const EventsPage: React.FC = () => {
             date: "First Friday of every month",
             time: "14:30 PM - 15:30 PM (SAST)",
             location: "Physical or Online",
-            image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
+            image: "/logos/NFP_event.png",
             whatsappMessage: "Hi, I'd like to register for the NFP Trading Masterclass.",
             whatsappLink: "https://wa.me/27676923876?text=Hi%2C%20I'd%20like%20to%20register%20for%20the%20NFP%20Trading%20Masterclass."
         }
     ];
 
     const eventImages = [
-        { url: 'https://i.postimg.cc/MH9h0wqq/nfp2.png', tag: '#NFP' },
-        { url: 'https://i.postimg.cc/rmQh39bf/nfp3.png', tag: '#NFP' },
-        { url: 'https://i.postimg.cc/KzvfPMzp/nfp4.png', tag: '#NFP' },
-        { url: 'https://i.postimg.cc/Hn8Qz4CN/nfp5.png', tag: '#NFP' },
-        { url: 'https://i.postimg.cc/wMNwMd3x/nfp6.png', tag: '#NFP' },
-        { url: 'https://i.postimg.cc/zGGTPrNs/1.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/4NNKXQMk/2.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/d3SJsrkc/3.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/cHxWfXw5/4.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/2SnNJPxH/5.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/xTbwJWBJ/6.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/W1Vs2NzW/7.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/QNWD19T8/8.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/0NQRQbv2/9.png', tag: '#Tradecation' },
-        { url: 'https://i.postimg.cc/66Dvfvbk/tradesfair-2024-speakers.png', tag: '#Tradersfair' },
-        { url: 'https://i.postimg.cc/kG8DpTYj/tradesfair-2024-tk.png', tag: '#Tradersfair' },
-        { url: 'https://i.postimg.cc/j2zdXLLV/tradesfair-2024.png', tag: '#Tradersfair' },
-        { url: 'https://i.postimg.cc/CKXhpjqH/tradesfair-2025.png', tag: '#Tradersfair' },
+       
+        { url: '/Events/nfp4.png', tag: '#NFP' },
+        { url: '/Tradecation/3.png', tag: '#Tradecation' },
+        { url: '/Events/tradesfair%202024%20tk.png', tag: '#Tradersfair' },
+        { url: '/Events/nfp1.png', tag: '#NFP' },
+        { url: '/Tradecation/7.png', tag: '#Tradecation' },
+        { url: '/Events/tradesfair%202025.png', tag: '#Tradersfair' },
+        { url: '/Events/nfp6.png', tag: '#Expo' },
+        { url: '/Tradecation/1.png', tag: '#Tradecation' },
+        { url: '/Events/tradesfair%202024%20speakers.png', tag: '#Tradersfair' },
+        { url: '/Events/nfp2.png', tag: '#NFP' },
+        { url: '/Tradecation/5.png', tag: '#Tradecation' },
+        { url: '/Events/tradesfair%202024.png', tag: '#Tradersfair' },
+        { url: '/Events/nfp5.png', tag: '#NFP' },
+        { url: '/Tradecation/9.png', tag: '#Tradecation' },
+        { url: '/Tradecation/2.png', tag: '#Tradecation' },
+        { url: '/Events/nfp3.png', tag: '#NFP' },
+        { url: '/Tradecation/6.png', tag: '#Tradecation' },
+        { url: '/Tradecation/4.png', tag: '#Tradecation' },
+        { url: '/Tradecation/8.png', tag: '#Tradecation' },
+        { url: '/Events/tradecation.png', tag: '#Tradecation' },
     ];
 
     return (
