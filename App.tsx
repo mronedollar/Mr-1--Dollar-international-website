@@ -1791,6 +1791,11 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                                 <p className="text-slate-300 text-sm leading-relaxed">
                                                     Experience luxury and learning in Drakensburg's breathtaking landscapes.
                                                 </p>
+                                                <img 
+                                                    src="/logos/yt-pinelake.png" 
+                                                    alt="Pine Lake Resort Tradecation" 
+                                                    className="w-full h-48 object-cover rounded-lg mb-4"
+                                                />
                                                 <a 
                                                     href="https://www.youtube.com/watch?v=AdtFWr97JmQ" 
                                                     target="_blank" 

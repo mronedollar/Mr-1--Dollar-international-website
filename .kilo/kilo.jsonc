@@ -1,0 +1,6 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "commit_message": {
+    "prompt": "Write a \"LG Solutions\" tag at the beginning of every commit message"
+  }
+}
