@@ -1198,10 +1198,7 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                             }}
                                             className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300 ease-in-out animate-bounce"
                                         >
-                                            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M17.498 14.382l-.002-.001-1.22-1.11c-.5-.4-1.12-.65-1.79-.65h-.01c-1.95 0-3.73 1.17-5.12 3.02-.38.5-.97.8-1.62.8h-.01c-1.23 0-2.23-1.01-2.23-2.24v-8.5c0-1.23 1-2.24 2.24-2.24h11.52c1.23 0 2.24 1.01 2.24 2.24v6.7c0 .86-.49 1.65-1.27 2.04z"/>
-                                                <path d="M12 12.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5z"/>
-                                            </svg>
+                                            <img src="/logos/whatsapp_16_icon.png" alt="WhatsApp" className="w-4 h-4 mr-2" />
                                             WhatsApp Nomii with Proof
                                         </a>
                                     </div>
