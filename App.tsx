@@ -333,7 +333,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
         <section 
             className="py-26 sm:py-24 text-center hero-background relative"
             style={{
-                backgroundImage: "url('/logos/Mr-1-bg.jpg')",
+                backgroundImage: "url('/logos/pin3.jpg')",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -351,21 +351,13 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
                     <div className="flex flex-col items-center justify-center space-y-4">
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto" style={{'--delay': '0.4s'} as React.CSSProperties}>
                             <a 
-                                href="#platinum-promo"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const element = document.getElementById('platinum-promo');
-                                    if (element) {
-                                        const button = element.querySelector('button');
-                                        if (button && button.getAttribute('aria-expanded') !== 'true') {
-                                            button.click();
-                                        }
-                                        element.scrollIntoView({ behavior: 'smooth' });
-                                    }
-                                }}
-                                className="w-full sm:w-auto text-center bg-amber-400 text-black font-bold py-3 px-6 sm:px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary"
+                                href="https://mr1-get-the-app.pages.dev/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full sm:w-auto text-center bg-amber-400 text-black font-bold py-3 px-6 sm:px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary flex items-center justify-center gap-2"
                             >
-                                Free Trade Ideas | Lifetime
+                                <img src="/logos/Emblem_Color.png" alt="Mr One Dollar" className="w-5 h-5" />
+                                <span>Mr One Dollar app</span>
                             </a>
                             <a 
                                 href="/services" 
@@ -1441,22 +1433,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                     <h3 className="text-xl font-bold text-white">Contact Us</h3>
                     <ul className="mt-4 space-y-3 text-sm">
                         <li className="flex items-start">
-                            <img 
-                                src="https://img.icons8.com/ios-filled/20/ffb74d/marker.png" 
-                                alt="Location" 
-                                className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
-                            />
-                            <div>
-                                <h3 className="text-slate-300 font-medium">Head office</h3>
-                                <a 
-                                    href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-slate-400 hover:text-amber-400 transition-colors"
-                                >
-                                    4 Karen Street, Bryanston, Sandton, 2060
-                                </a>
-                            </div>
+                           
                         </li>
                         <li className="flex items-start">
                             <img 
@@ -2473,16 +2450,11 @@ const TeamMemberCard: React.FC<{ name: string, role: string }> = ({ name, role }
 const TeamPage: React.FC = () => {
     const teamMembers = [
         { name: "Tinyiko. M", role: "Founder & C.E.O" },
-        { name: "Mangalani. M", role: "Co-Founder and Research Specialist" },
         { name: "Nomphiwo. C", role: "Master Female Trader" },
         { name: "Goldie. L", role: "Beginners Conductor" },
         { name: "Nathaniel. P", role: "Intermediate Conductor" },
-        { name: "Paul. H", role: "Regulatory & Compliance" },
-        { name: "Nkosi. K", role: "Senior Systems developer" },
         { name: "Mokhina. M", role: "Senior Systems Developer" },
-        { name: "Yandisa. D", role: "Business Systems" },
         { name: "Tebogo. M", role: "Technical Support" },
-        { name: "Thalente. S", role: "Technical Support" },
         { name: "Mojalefa. P", role: "Technical Support" },
         { name: "Kenny. M", role: "Technical Analyst" },
     ];
@@ -2538,17 +2510,6 @@ const ContactPage: React.FC = () => {
                                     alt="Location" 
                                     className="w-6 h-6 mr-4 mt-1 flex-shrink-0"
                                 />
-                                <div>
-                                    <h3 className="text-lg font-semibold text-white">Head office</h3>
-                                    <a 
-                                        href="https://www.google.com/maps/place/4+karen+street+bryanston+sandton/@-26.0810327,28.0180825,3a,75y,88.36h,90t/data=!3m4!1e1!3m2!1shBSh9g8WXe8onBpO2VkAOw!2e0!4m2!3m1!1s0x1e9574827132b75f:0x494501de697be44e?sa=X&ved=1t:3780&ictx=111"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-slate-400 hover:text-amber-400 transition-colors"
-                                    >
-                                        4 karen street bryanston sandton
-                                    </a>
-                                </div>
                             </li>
                             <li className="flex items-start">
                                 <img 
