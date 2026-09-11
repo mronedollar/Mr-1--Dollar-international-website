@@ -123,7 +123,7 @@ const AffiliatePage: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
               <img 
-                src="https://i.postimg.cc/T3mHV2x0/Favicon_Color.png" 
+                src="/logos/Favicon_Color.png"
                 alt="MR ONE DOLLAR Logo" 
                 className="w-8 h-8 object-contain"
               />
@@ -405,7 +405,7 @@ const AffiliatePage: React.FC = () => {
                       <div className="mb-8">
                         <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-12 shadow-lg">
                           <img 
-                            src="https://i.postimg.cc/c4ht4dZt/Paper-Money.png" 
+                            src="/logos/money_icon.png" 
                             alt="Paper Money" 
                             className="w-17 h-17 object-contain transform -rotate-12"
                           />

@@ -36,13 +36,12 @@ interface Product extends BaseProduct {
     productId?: string;
     checkoutLink?: string;
     badge?: string;
-    // Additional properties specific to Product can be added here
 }
 
 // --- Centralized Data Source ---
 const servicesData: Product[] = [
-    { id: 16, name: "Key Levels Calculator", price: 59.99, category: 'Softwares', imageUrl: 'https://i.postimg.cc/nr9VS0P3/Key-Levels-Calculator.png', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", checkoutUrl: "key-levels-calculator-checkout" },
-    { id: 18, name: "Advanced Key Levels Calculator", price: 119.98, category: 'Softwares', imageUrl: 'https://i.postimg.cc/SRYQ1DvG/Advanced-Key-Levels-Calculator.png', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "advanced-key-levels-calculator-checkout" },
+    { id: 16, name: "Key Levels Calculator", price: 59.99, category: 'Softwares', imageUrl: '/logos/Key%20Levels%20Calculator.png', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", checkoutUrl: "key-levels-calculator-checkout" },
+    { id: 18, name: "Advanced Key Levels Calculator", price: 119.98, category: 'Softwares', imageUrl: '/logos/Advanced%20Key%20Levels%20Calculator.png', description: "Spot Support & Resistance Levels Like a Professional Trader. Stop guessing where the market will turn. Key Levels Calculator gives you the exact support and resistance levels that professional traders use to make profitable decisions. Our proprietary Key Level Calculator—built by mathematicians and refined through thousands of market cycles—identifies turning points with precision across daily, weekly, and monthly timeframes. No more staring at charts trying to figure out where price will bounce or break. No more leaving money on the table. What You Get: Daily Key Levels for immediate trading opportunities, Weekly Key Levels for swing trade setups, Monthly Key Levels for identifying major market structure, Mathematically-calculated turning points, not guesswork, The same edge professional traders pay thousands to access. Whether you're day trading, swing trading, or position trading, these levels work across all markets and timeframes. Your entries become more confident. Your exits become more strategic. Your trading becomes professional. Take the guesswork out of technical analysis. Get the key levels the pros rely on.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "advanced-key-levels-calculator-checkout" },
     {
         id: 2,
         name: "Free Trade Ideas",
@@ -58,14 +57,14 @@ const servicesData: Product[] = [
         ],
         whatsappLink: "https://wa.me/27676923876?text=Hi%20Nomii%2C%20I've%20completed%20my%20PrimeXBT%20registration%20and%20funded%20with%20a%20minimum%20of%20%2410.%20Here's%20my%20proof%20of%20funding%3A%20[YOUR_PROOF_HERE]"
     },
-    { id: 3, name: "Diamond Trade Ideas", price: 43.18, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/fySWqBrc/Diamond.png', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "diamond-trade-ideas-checkout" },
-    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1881.57, category: 'Trade Ideas', imageUrl: 'https://i.postimg.cc/x8Njpt4B/Private-Wealth-VIP-Black-Trade-Ideas.png', description: "For traders who refuse to stay average. Join an exclusive circle of disciplined traders and investors focused on growing wealth, protecting capital, and building long-term financial freedom. Receive direct mentorship, advanced strategies, and priority access to MrOneDollar opportunities unavailable to the public. Membership is limited and available by application only. What You'll Receive: Direct mentorship & live trading sessions, Advanced institutional trading strategies, Elite trading psychology coaching, Private network of high-performing traders & entrepreneurs, Priority support & exclusive opportunities, Unlimited access to all premium resources. REQUIREMENTS: Reserved for traders with $100,000+ Funded Account or $10,000+ Personal Trading Account.", checkoutUrl: "private-wealth-vip-black-checkout" },
-    { id: 5, name: "Beginners Course", price: 194.70, category: 'Courses', imageUrl: 'https://i.postimg.cc/yx36pvby/Beginners.png', description: "BEGINNERS - FOREX FOUNDATIONS. Learn to Trade with Confidence. Understand how the forex market really works, Read charts like a professional, Identify high-probability trading opportunities, Build a solid foundation for consistent growth.", checkoutUrl: "beginners-course-checkout" },
-    { id: 6, name: "Intermediate Course", price: 259.60, category: 'Courses', imageUrl: 'https://i.postimg.cc/90wXgJn1/Intermediate.png', description: "INTERMEDIATE - BUILDING CONSISTENCY & DISCIPLINE. Turn Knowledge into Profits. Join live trading sessions with experienced mentors, Master precise trade entries and exits, Develop disciplined risk management, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "intermediate-course-checkout" },
-    { id: 17, name: "Advanced Course", price: 324.50, category: 'Courses', imageUrl: 'https://i.postimg.cc/T152NC4q/Advanced.png', description: "ADVANCED - ELITE TRADER. Trade with Institutional Precision. Advanced MrOneDollar trading Concepts & market confluence, Live mentorship and market breakdown, Professional trade management techniques, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "advanced-course-checkout" },
-    { id: 7, name: "Online Full Course", price: 649, category: 'Courses', imageUrl: 'https://i.postimg.cc/4yH42BSS/Online-Full.png', description: "Master Trading from Beginner to Professional. Everything you need to develop your trading knowledge and build a structured approach to the financial markets — all in one complete educational programme. Learn market analysis, trading concepts, risk management and practical techniques through structured lessons and live educational sessions with experienced mentors. What You Get: Beginner, Intermediate & Advanced Modules, Live Educational Sessions with Mentors, Practical Market Analysis & Trading Education, Access to Educational Trading Tools, Educational Trade Ideas, FREE $15,000 Prop Firm Challenge Account. Only $649. One payment. Lifetime access to the educational programme. Start Your Trading Education Today. *Terms and conditions apply. The programme is for educational purposes and does not constitute financial advice or a recommendation to buy or sell any financial product.", checkoutUrl: "online-full-course-checkout" },
-    { id: 8, name: "Full Course + Free Tradecation", price: 1189.99, category: 'Courses', imageUrl: 'https://i.postimg.cc/brSYV3BT/Full-Course-Free-Tradecation.png', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer.", checkoutUrl: "full-course-tradecation-checkout" },
-    { id: 12, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: 'https://i.postimg.cc/1XVR7JjY/NFP.png', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" }
+    { id: 3, name: "Diamond Trade Ideas", price: 43.18, category: 'Trade Ideas', imageUrl: '/logos/Diamond.png', description: "Our elite subscription for serious traders. Diamond members receive all Platinum benefits plus access to exclusive inner-circle trade ideas, advanced market commentary, and priority support from our top analysts.", badge: "bg-blue-500/20 text-blue-300 text-xs font-medium px-2 py-1 rounded-full border border-blue-500/30", checkoutUrl: "diamond-trade-ideas-checkout" },
+    { id: 4, name: "Private Wealth VIP Black Trade Ideas", price: 1881.57, category: 'Trade Ideas', imageUrl: '/logos/Private%20Wealth%20VIP%20Black%20Trade%20Ideas.png', description: "For traders who refuse to stay average. Join an exclusive circle of disciplined traders and investors focused on growing wealth, protecting capital, and building long-term financial freedom. Receive direct mentorship, advanced strategies, and priority access to MrOneDollar opportunities unavailable to the public. Membership is limited and available by application only. What You'll Receive: Direct mentorship & live trading sessions, Advanced institutional trading strategies, Elite trading psychology coaching, Private network of high-performing traders & entrepreneurs, Priority support & exclusive opportunities, Unlimited access to all premium resources. REQUIREMENTS: Reserved for traders with $100,000+ Funded Account or $10,000+ Personal Trading Account.", checkoutUrl: "private-wealth-vip-black-checkout" },
+    { id: 5, name: "Beginners Course", price: 194.70, category: 'Courses', imageUrl: '/logos/Beginners.png', description: "BEGINNERS - FOREX FOUNDATIONS. Learn to Trade with Confidence. Understand how the forex market really works, Read charts like a professional, Identify high-probability trading opportunities, Build a solid foundation for consistent growth.", checkoutUrl: "beginners-course-checkout" },
+    { id: 6, name: "Intermediate Course", price: 259.60, category: 'Courses', imageUrl: '/logos/Intermediate.png', description: "INTERMEDIATE - BUILDING CONSISTENCY & DISCIPLINE. Turn Knowledge into Profits. Join live trading sessions with experienced mentors, Master precise trade entries and exits, Develop disciplined risk management, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "intermediate-course-checkout" },
+    { id: 17, name: "Advanced Course", price: 324.50, category: 'Courses', imageUrl: '/logos/Advanced.png', description: "ADVANCED - ELITE TRADER. Trade with Institutional Precision. Advanced MrOneDollar trading Concepts & market confluence, Live mentorship and market breakdown, Professional trade management techniques, 3 Months of Premium Trade Ideas Included.", checkoutUrl: "advanced-course-checkout" },
+    { id: 7, name: "Online Full Course", price: 649, category: 'Courses', imageUrl: '/logos/Online-Full.png', description: "Master Trading from Beginner to Professional. Everything you need to develop your trading knowledge and build a structured approach to the financial markets — all in one complete educational programme. Learn market analysis, trading concepts, risk management and practical techniques through structured lessons and live educational sessions with experienced mentors. What You Get: Beginner, Intermediate & Advanced Modules, Live Educational Sessions with Mentors, Practical Market Analysis & Trading Education, Access to Educational Trading Tools, Educational Trade Ideas, FREE $15,000 Prop Firm Challenge Account. Only $649. One payment. Lifetime access to the educational programme. Start Your Trading Education Today. *Terms and conditions apply. The programme is for educational purposes and does not constitute financial advice or a recommendation to buy or sell any financial product.", checkoutUrl: "online-full-course-checkout" },
+    { id: 8, name: "Full Course + Free Tradecation", price: 1189.99, category: 'Courses', imageUrl: '/logos/Full%20Course%20%2B%20Free%20Tradecation.png', description: "The ultimate trading education package. This all-in-one course combines our Beginner, Intermediate, and Advanced modules. Master everything from fundamental principles to complex institutional strategies and become a well-rounded, profitable trader. Includes a FREE Tradecation (valued at $900) - limited time offer.", checkoutUrl: "full-course-tradecation-checkout" },
+    { id: 12, name: "NFP Event Access", price: 16.00, category: 'Events', imageUrl: '/logos/NFP.png', description: "Join us for a live trading session during the Non-Farm Payroll (NFP) announcement. Learn how to navigate one of the market's most volatile events with expert guidance, pre-release analysis, and real-time trade execution.", checkoutUrl: "nfp-event-access-checkout" }
 ];
 
 const testimonialsData = [
@@ -250,7 +249,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0">
                         <a href="#" onClick={(e) => handleNavClick(e, 'home')} className="block cursor-pointer transform hover:scale-105 transition-transform duration-300">
-                            <img src="https://i.postimg.cc/J4LgGJnS/Horizontal_Inverse.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
+                            <img src="/logos/Horizontal_Inverse.png" alt="Mr One Dollar International Logo" className="h-12 w-auto" />
                         </a>
                     </div>
                     <div className="hidden md:block">
@@ -334,7 +333,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
         <section 
             className="py-26 sm:py-24 text-center hero-background relative"
             style={{
-                backgroundImage: "url('https://i.postimg.cc/sD0B2R99/Mr-1-bg.jpg')",
+                backgroundImage: "url('/logos/Mr-1-bg.jpg')",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -393,7 +392,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
                                 >
                                     <span className="">
                                         <img
-                                            src="https://i.postimg.cc/7YZjFzbK/icons8-zoom-logo-34-1.png"
+                                            src="/logos/zoom.png"
                                             alt="Zoom Support"
                                             className="h-[34px] w-[34px] object-contain"
                                         />
@@ -412,7 +411,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
                                                 <div className="flex items-center space-x-2">
   <h3 className="text-lg font-semibold text-white">Instant Zoom Support</h3>
   <img 
-    src="https://i.postimg.cc/Gh5YKvKT/Badge_White.png" 
+    src="/logos/Badge_White.png" 
     alt="MR1Dollar Badge" 
     className="w-6 h-6 object-contain"
   />
@@ -473,16 +472,12 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
                         )}
                     </div>
                 </div>
-                {/* Zoom Support Panel handled inline with the button above */}
             </div>
         </section>
     );
 };
 
-// ... (rest of the code remains the same)
-
 const BlackFridayPromo = () => {
-    // ... (rest of the code remains the same)
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -562,18 +557,14 @@ const BlackFridayPromo = () => {
 
 const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurrentPage }) => {
     const partners = [
-        // Brokers
         {
             name: 'PrimeXBT',
             description: 'A leading cryptocurrency and forex trading broker offering leveraged trading with tight spreads',
-
             logoUrl: 'https://i.ibb.co/YGPkfR7/Prime-XBT-Logo.png',
             link: 'https://go.primexbt.direct/visit/?bta=41494&brand=primexbt',
             category: 'Brokers',
             color: 'amber'
         },
-
-        // Prop Firms
         {
             name: 'Funded7',
             description: 'A proprietary trading firm providing funding for forex and crypto traders with flexible programs',
@@ -649,7 +640,6 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
     
     return (
         <section ref={sectionRef} className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 animate-fadeIn relative overflow-hidden">
-            {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden opacity-30">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-5"></div>
                 <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-transparent via-amber-500/30 to-transparent animate-spin-slow"></div>
@@ -742,11 +732,9 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                 </div>
                             </div>
                             
-                            {/* PrimeXBT Competition Card */}
                             <div className="w-full md:w-[400px] flex-shrink-0 relative mt-6 md:mt-0 h-full">
                                 <div className="hidden md:block absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent"></div>
                                 <div className="w-full h-full flex flex-col">
-                                    {/* Competition card removed */}
                                 </div>
                             </div>
                         </div>
@@ -818,7 +806,6 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                                 {partner.description}
                                             </p>
                                             
-                                            {/* Promo Dropdown */}
                                             {partner.promo && (
                                                 <div className="mb-3">
                                                     <button
@@ -907,7 +894,6 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {/* FundedAward Card */}
                         <div 
                             className="group bg-gradient-to-br from-slate-500/10 to-slate-600/20 border border-slate-500/30 hover:border-slate-400/50 rounded-xl p-6 transition-all duration-300 hover:shadow-lg h-full flex flex-col cursor-pointer"
                             role="link"
@@ -935,7 +921,6 @@ const PropFirms: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setCurr
                                 Premium acrylic plaques for prop firm traders to showcase funded certificates and milestones.
                             </p>
                             
-                            {/* Dropdown for more info */}
                             <div className="mb-3">
                                 <button
                                     onClick={(e) => {
@@ -1017,22 +1002,17 @@ interface PromoSectionProps {
 const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [completedSteps, setCompletedSteps] = useState<number[]>([]);
-    const [activeStep, setActiveStep] = useState<number>(1); // highest visually unlocked step
+    const [activeStep, setActiveStep] = useState<number>(1);
     const [whatsAppBounce, setWhatsAppBounce] = useState<boolean>(false);
 
-    // Check for return_to parameter on component mount
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const returnTo = urlParams.get('return_to');
         
         if (returnTo === 'step2') {
-            // Open the section and scroll to it
             setIsOpen(true);
-            // Mark step 1 as completed
             setCompletedSteps(prev => (prev.includes(1) ? prev : [...prev, 1]));
             setActiveStep(2);
-            
-            // Clean up the URL
             window.history.replaceState({}, '', window.location.pathname);
         }
     }, []);
@@ -1050,13 +1030,12 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
     const canUseWhatsApp = hasStep(2);
 
     const handleKYCYes = () => {
-        // Mark step 2 as completed and visually unlock step 3
         markStepCompleted(2);
         unlockUpTo(3);
         setWhatsAppBounce(true);
     };
 
-    const progressPercentage = (completedSteps.length / 3) * 100; // 3 total steps
+    const progressPercentage = (completedSteps.length / 3) * 100;
     const cardBase = 'p-4 rounded-lg transition-all duration-300';
     const cardActive = 'bg-gray-800/50';
     const cardInactive = 'opacity-50';
@@ -1103,7 +1082,6 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
 
                             <div className="flex flex-col md:flex-row gap-8">
                                 <div className="space-y-6 flex-1">
-                                    {/* Step 1 */}
                                     <div className={`${cardBase} ${activeStep >= 1 ? cardActive : cardInactive}`}>
                                         <div className="flex items-start">
                                             <div className={`${activeStep >= 1 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>1</div>
@@ -1126,7 +1104,6 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                         </div>
                                     </div>
 
-                                    {/* Step 2 */}
                                     <div className={`${cardBase} ${activeStep >= 2 ? cardActive : cardInactive}`}>
                                         <div className="flex items-start">
                                             <div className={`${activeStep >= 2 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>2</div>
@@ -1155,7 +1132,6 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                     </div>
                                 </div>
 
-                                {/* Videos Section */}
                                 <div className="space-y-4 w-full md:w-1/3">
                                     <h4 className="font-semibold text-amber-400">Helpful Videos</h4>
                                     <div className="space-y-4">
@@ -1202,7 +1178,6 @@ const PromoSection: React.FC<PromoSectionProps> = ({ id }) => {
                                 </div>
                             </div>
 
-                            {/* Step 3 */}
                             <div className={`${cardBase} ${activeStep >= 3 ? cardActive : cardInactive} mt-4`}>
                                 <div className="flex items-start">
                                     <div className={`${activeStep >= 3 ? 'bg-amber-500' : 'bg-gray-600'} text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4`}>3</div>
@@ -1247,17 +1222,14 @@ const Testimonials: React.FC = () => {
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
     const modalRef = useRef<HTMLDivElement>(null);
 
-    // Auto-scroll to modal when it opens
     useEffect(() => {
         if (selectedImage && modalRef.current) {
             modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }, [selectedImage]);
     
-    // Minimum swipe distance to trigger navigation (in pixels)
     const minSwipeDistance = 50;
     
-    // Testimonial images from provided URLs
     const testimonialImages = [
         'https://i.postimg.cc/mg5Kpz8t/1.jpg',
         'https://i.postimg.cc/1tCFDS9P/2.jpg',
@@ -1341,7 +1313,6 @@ const Testimonials: React.FC = () => {
                     )}
                 </div>
                 
-                {/* Image Modal */}
                 {selectedImage && (
                     <div 
                         className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm" 
@@ -1369,9 +1340,7 @@ const Testimonials: React.FC = () => {
                                 </div>
                             </div>
                             
-                            {/* Image container with navigation */}
                             <div className="flex-1 flex items-center justify-center p-4 min-h-0 relative">
-                                {/* Left navigation arrow */}
                                 <button 
                                     className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
                                     onClick={(e) => {
@@ -1386,7 +1355,6 @@ const Testimonials: React.FC = () => {
                                     </svg>
                                 </button>
                                 
-                                {/* Main image */}
                                 <div 
                                     className="relative max-w-full max-h-full"
                                     onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
@@ -1423,7 +1391,6 @@ const Testimonials: React.FC = () => {
                                     </div>
                                 </div>
                                 
-                                {/* Right navigation arrow */}
                                 <button 
                                     className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors z-10"
                                     onClick={(e) => {
@@ -1463,7 +1430,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                 <div className="md:col-span-2">
                     <div className="flex items-center space-x-2">
   <img 
-    src="https://i.postimg.cc/T3mHV2x0/Favicon_Color.png" 
+    src="/logos/Favicon_Color.png" 
     alt="MR ONE DOLLAR Logo" 
     className="w-8 h-8 object-contain"
   />
@@ -1528,7 +1495,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                     <div className="flex space-x-4 mt-4">
                         <a href="https://www.youtube.com/@mr1dollar.international" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
-                                src="https://i.ibb.co/Rkr61Kyn/youtube-icon.png" 
+                                src="/logos/youtube_icon.png" 
                                 alt="YouTube Channel" 
                                 className="w-7 h-7 object-contain"
                                 onError={(e) => {
@@ -1540,7 +1507,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         </a>
                         <a href="https://www.instagram.com/mr1dollarinternational/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
-                                src="https://i.ibb.co/dwHV57BN/instagram-icon.png" 
+                                src="/logos/instagram_icon.png" 
                                 alt="Instagram Profile" 
                                 className="w-7 h-7 object-contain"
                                 onError={(e) => {
@@ -1552,7 +1519,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         </a>
                         <a href="https://t.me/mr1dollarinternational" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
-                                src="https://i.ibb.co/6cxvssxN/telegram-icon.png" 
+                                src="/logos/telegram_icon.png" 
                                 alt="Telegram Channel" 
                                 className="w-7 h-7 object-contain"
                                 onError={(e) => {
@@ -1564,7 +1531,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => (
                         </a>
                         <a href="https://chat.whatsapp.com/D31nSfWdnEaEk5An7t53Ab" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-400 transform hover:scale-110 transition-all duration-300">
                             <img 
-                                src="https://i.ibb.co/NnLKXtY5/whatsapp-icon.png" 
+                                src="/logos/whatsapp_28_icon.png" 
                                 alt="WhatsApp Community" 
                                 className="w-7 h-7 object-contain"
                                 onError={(e) => {
@@ -1608,7 +1575,7 @@ const WhatsAppWidget: React.FC = () => {
         aria-label="Chat with Nomii on WhatsApp"
       >
         <img 
-          src="https://i.postimg.cc/85bCvgVM/icons8-whatsapp-40.png" 
+          src="/logos/whatsapp_icon.png" 
           alt="WhatsApp" 
           className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
         />
@@ -1626,20 +1593,17 @@ interface HomePageProps {
     setCurrentPage: (page: Page) => void;
 }
 
-// Image carousel component
 const ImageCarousel = ({ images, interval = 3000 }: { images: { url: string }[], interval?: number }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        // Auto-advance the carousel
         timerRef.current = setInterval(() => {
             setCurrentIndex(prevIndex => 
                 prevIndex === images.length - 1 ? 0 : prevIndex + 1
             );
         }, interval);
 
-        // Clear interval on component unmount
         return () => {
             if (timerRef.current) {
                 clearInterval(timerRef.current);
@@ -1688,14 +1652,11 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
             <Hero setCurrentPage={setCurrentPage} currentPage="home" />
             <PromoSection id="platinum-promo" />
             
-            {/* Our Trusted Partners */}
             <PropFirms setCurrentPage={setCurrentPage} />
             
-            {/* Features Section with Expanded Cards */}
             <section className="py-20 bg-black animate-fadeInUp">
                 <div className="container mx-auto px-4">
                     <div className="space-y-12">
-                        {/* Proven Track Record */}
                         <div className="glass-card p-8 rounded-lg">
                             <div className="flex items-center mb-6">
                                 <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1707,7 +1668,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                 Our premium trading community consistently delivers exceptional weekly performance, with win rates ranging between 70% to 100% across all trading sessions. Here's a glimpse of our recent trading statistics:
                             </p>
                             
-                            {/* YouTube Videos Grid */}
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
                                 {[
                                     { id: 'vfX0Y106iK0', title: 'Video 1' },
@@ -1764,7 +1724,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                             </div>
                         </div>
 
-                        {/* Exclusive Trade-Cations */}
                         <div className="glass-card p-4 md:p-8 rounded-lg overflow-hidden">
                             <div className="flex items-center mb-6">
                                 <svg className="w-12 h-12 text-amber-400 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1777,7 +1736,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                             </p>
                             <div className="space-y-6 overflow-visible">
                                 <div className="relative overflow-visible rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-amber-500/20 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
-                                    {/* Image Carousel */}
                                     <ImageCarousel 
                                         images={[
                                             { url: 'https://i.postimg.cc/zGGTPrNs/1.png' },
@@ -1794,7 +1752,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                     />
                                     
                                     <div className="relative z-10 p-4 md:p-8 flex-1 flex flex-col overflow-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
-                                        {/* Header with Icon */}
                                         <div className="flex items-center gap-3 mb-6">
                                             <div className="inline-flex items-center bg-slate-700/50 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-500/30">
                                                 <svg className="w-5 h-5 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1809,7 +1766,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                         </div>
 
                                         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 mb-6">
-                                            {/* What's Included */}
                                             <div>
                                                 <h4 className="text-lg font-bold text-amber-400 mb-4">What's Included</h4>
                                                 <div className="grid gap-3">
@@ -1829,7 +1785,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                                 </div>
                                             </div>
 
-                                            {/* Previous Tradecation */}
                                             <div className="bg-gradient-to-br from-slate-800/70 to-slate-900/80 border border-amber-500/20 rounded-xl p-5 space-y-4">
                                                 <div className="inline-flex items-center gap-2 text-amber-300 text-xs font-semibold uppercase tracking-[0.2em]">
                                                     <span className="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
@@ -1853,7 +1808,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                                             </div>
                                         </div>
 
-                                        {/* CTA */}
                                         <a 
                                             href="#" 
                                             onClick={(e) => { 
@@ -1873,7 +1827,6 @@ const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                             </div>
                         </div>
                         
-                        {/* Support & Community Section */}
                         <SupportSection />
                         
                     </div>
@@ -1891,7 +1844,6 @@ const EventsPage: React.FC = () => {
     const [tradecationPerksOpen, setTradecationPerksOpen] = useState(false);
     const modalRef = useRef<HTMLDivElement>(null);
 
-    // Auto-scroll to modal when it opens
     useEffect(() => {
         if (selectedImage && modalRef.current) {
             modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1939,7 +1891,6 @@ const EventsPage: React.FC = () => {
      'Trade like a funded professional and pass prop firm challenges'
     ];
 
-    // Event data
     const events = [
         {
             id: 1,
@@ -2002,15 +1953,12 @@ const EventsPage: React.FC = () => {
         }
     ];
 
-    // Events gallery images with tags
     const eventImages = [
-        // NFP Images
         { url: 'https://i.postimg.cc/MH9h0wqq/nfp2.png', tag: '#NFP' },
         { url: 'https://i.postimg.cc/rmQh39bf/nfp3.png', tag: '#NFP' },
         { url: 'https://i.postimg.cc/KzvfPMzp/nfp4.png', tag: '#NFP' },
         { url: 'https://i.postimg.cc/Hn8Qz4CN/nfp5.png', tag: '#NFP' },
         { url: 'https://i.postimg.cc/wMNwMd3x/nfp6.png', tag: '#NFP' },
-        // Tradecation Images
         { url: 'https://i.postimg.cc/zGGTPrNs/1.png', tag: '#Tradecation' },
         { url: 'https://i.postimg.cc/4NNKXQMk/2.png', tag: '#Tradecation' },
         { url: 'https://i.postimg.cc/d3SJsrkc/3.png', tag: '#Tradecation' },
@@ -2020,7 +1968,6 @@ const EventsPage: React.FC = () => {
         { url: 'https://i.postimg.cc/W1Vs2NzW/7.png', tag: '#Tradecation' },
         { url: 'https://i.postimg.cc/QNWD19T8/8.png', tag: '#Tradecation' },
         { url: 'https://i.postimg.cc/0NQRQbv2/9.png', tag: '#Tradecation' },
-        // Traders Fair Images
         { url: 'https://i.postimg.cc/66Dvfvbk/tradesfair-2024-speakers.png', tag: '#Tradersfair' },
         { url: 'https://i.postimg.cc/kG8DpTYj/tradesfair-2024-tk.png', tag: '#Tradersfair' },
         { url: 'https://i.postimg.cc/j2zdXLLV/tradesfair-2024.png', tag: '#Tradersfair' },
@@ -2031,7 +1978,6 @@ const EventsPage: React.FC = () => {
         <div className="bg-black py-16 sm:py-24 animate-fadeIn">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row gap-12">
-                    {/* Main Content */}
                     <div className="lg:w-2/3 space-y-8">
                         {events.map((event) => (
                             <div key={event.id} className="glass-card p-6 sm:p-8 rounded-lg">
@@ -2240,7 +2186,6 @@ const EventsPage: React.FC = () => {
                         ))}
 
 
-                        {/* Events Gallery */}
                         <div className="glass-card p-6 sm:p-8 rounded-lg">
                             <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-6">Events Gallery</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -2275,7 +2220,6 @@ const EventsPage: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Event Description */}
                         <div className="glass-card p-6 sm:p-8 rounded-lg">
                             <h2 className="text-2xl font-bold text-white border-b border-slate-700 pb-3 mb-4">📅 Event Details</h2>
                             <div className="space-y-6">
@@ -2291,7 +2235,6 @@ const EventsPage: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Sidebar */}
                     <aside className="lg:w-1/3 space-y-8">
                         <div className="glass-card p-6 rounded-lg">
                             <h3 className="text-xl font-bold text-white mb-4">Upcoming Events</h3>
@@ -2301,7 +2244,6 @@ const EventsPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Image Modal */}
             {selectedImage && (
                 <div 
                     className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
@@ -2329,7 +2271,6 @@ const EventsPage: React.FC = () => {
                             </div>
                         </div>
                         
-                        {/* Image container */}
                         <div className="flex-1 flex items-center justify-center p-4 min-h-0">
                             <img 
                                 src={selectedImage} 
@@ -2435,7 +2376,6 @@ const AboutPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Mission Section */}
             <section className="pt-8 pb-20 bg-slate-900 animate-fadeInUp">
                 <div className="container mx-auto px-4 max-w-4xl text-center">
                     <p className="text-xl text-slate-300 leading-relaxed">
@@ -2446,12 +2386,10 @@ const AboutPage: React.FC = () => {
 
             <FAQ />
 
-            {/* YouTube Channel Section */}
             <section className="py-20 animate-fadeInUp">
                 <div className="container mx-auto px-4">
                     <div className="glass-card rounded-lg p-8 md:p-10 text-center">
                         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                            {/* YouTube Profile Picture */}
                             <div className="flex-shrink-0">
                                 <a 
                                     href="https://www.youtube.com/@mr1dollar.international" 
@@ -2461,7 +2399,7 @@ const AboutPage: React.FC = () => {
                                 >
                                     <div className="relative">
                                         <img 
-                                            src="https://i.postimg.cc/QNYm7P8L/Emblem_Inverse.png" 
+                                            src="/logos/Emblem_Inverse.png" 
                                             alt="Mr One Dollar YouTube Channel" 
                                             className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-amber-400/30 hover:border-amber-400/70 transition-all duration-300 transform group-hover:scale-105 object-cover"
                                             onError={(e) => {
@@ -2479,7 +2417,6 @@ const AboutPage: React.FC = () => {
                                 </a>
                             </div>
                             
-                            {/* Channel Info */}
                             <div className="max-w-2xl">
                                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Go Beyond the Charts with Mr One Dollar</h2>
                                 <p className="text-slate-300 mb-6">
@@ -2584,7 +2521,6 @@ const ContactPage: React.FC = () => {
                     <div className="mt-6 h-1 w-24 bg-amber-400 mx-auto shadow-[0_0_8px_theme(colors.amber.400)]"></div>
                 </div>
                 <div className="glass-card rounded-lg p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 animate-fadeInUp">
-                    {/* Contact Information */}
                     <div>
                         <h2 className="text-3xl font-bold text-white">Contact information</h2>
                         <p className="mt-4 text-slate-400">
@@ -2638,7 +2574,6 @@ const ContactPage: React.FC = () => {
                             </li>
                         </ul>
                     </div>
-                    {/* Opening Hours */}
                     <div>
                         <h2 className="text-3xl font-bold text-white">Opening hours</h2>
                         <ul className="mt-8 space-y-3 text-slate-400">
@@ -2657,7 +2592,6 @@ const ContactPage: React.FC = () => {
     );
 };
 
-// Support Section Component
 const SupportSection: React.FC = () => {
     const zoomDetails = {
         meetingLink: "https://us06web.zoom.us/j/81165255532?pwd=ofshvQl8ruaMygqfgxAKaQ8eKbK1i2.1",
@@ -2679,7 +2613,6 @@ const SupportSection: React.FC = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Telegram Community */}
                 <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-blue-400/50 transition-all duration-300">
                     <div className="flex items-center mb-4">
                         <div className="bg-blue-500/10 p-3 rounded-lg mr-4">
@@ -2703,12 +2636,11 @@ const SupportSection: React.FC = () => {
                     </a>
                 </div>
 
-                {/* Zoom Support */}
                 <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-blue-400/50 transition-all duration-300">
                     <div className="flex items-center mb-4">
                         <div className="bg-blue-500/10 p-3 rounded-lg mr-4">
                             <img 
-                                src="https://i.ibb.co/Qvx1Vr53/zoom-icon.png" 
+                                src="/logos/zoom32.png" 
                                 alt="Zoom" 
                                 className="w-8 h-8 object-contain"
                                 onError={(e) => {
@@ -2757,7 +2689,6 @@ const SupportSection: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Technical Analyst Community */}
                 <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-green-400/50 transition-all duration-300">
                     <div className="flex items-center mb-4">
                         <div className="bg-green-500/10 p-3 rounded-lg mr-4">
@@ -2792,11 +2723,10 @@ interface PlatinumProduct extends BaseProduct {
 
 const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) => void; isExpanded: boolean; onToggle: () => void; setCurrentPage: (page: Page) => void }> = ({ product, onAddToCart, isExpanded, onToggle, setCurrentPage }) => {
     const [imageError, setImageError] = useState(false);
-    const [currentImageUrl, setCurrentImageUrl] = useState(product.imageUrl.startsWith('http') ? product.imageUrl : `/${product.imageUrl}`);
+    const [currentImageUrl, setCurrentImageUrl] = useState(product.imageUrl.startsWith('http') || product.imageUrl.startsWith('/') ? product.imageUrl : `/${product.imageUrl}`);
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     const modalRef = useRef<HTMLDivElement>(null);
 
-    // Auto-scroll to modal when it opens
     useEffect(() => {
         if (isImageModalOpen && modalRef.current) {
             modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2806,20 +2736,16 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
     const handleImageError = () => {
         if (!imageError) {
             setImageError(true);
-            // Fallback to an inline SVG if the image fails to load
             setCurrentImageUrl('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWEyOTQyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+TXIgJDEgSW50ZXJuYXRpb25hbDwvdGV4dD48L3N2Zz4=');
         }
     };
-    // Check if the product is a mentorship package
     const isMentorship = product.category === 'Mentorship';
     
-    // Handle click on image to open modal
     const handleImageClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         setIsImageModalOpen(true);
     };
     
-    // Close modal when clicking outside the image
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -2844,7 +2770,6 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
         };
     }, [isImageModalOpen]);
 
-    // Handle add to cart with proper event handling
     const handleAddToCartClick = (e: React.MouseEvent, product: Product) => {
         e.stopPropagation();
         onAddToCart(product);
@@ -3068,75 +2993,57 @@ const ProductCard: React.FC<{ product: Product; onAddToCart: (product: Product) 
                             onClick={(e) => {
                                 if (product.checkoutUrl === 'diamond-prepaid-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/diamond-prepaid-checkout';
                                 } else if (product.checkoutUrl === 'gold-high-voltage-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/gold-high-voltage-checkout';
                                 } else if (product.checkoutUrl === 'synthetics-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/synthetics-checkout';
                                 } else if (product.checkoutUrl === 'diamond-trade-ideas-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/diamond-trade-ideas-checkout';
                                 } else if (product.checkoutUrl === 'private-wealth-vip-black-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/private-wealth-vip-black-checkout';
                                 } else if (product.checkoutUrl === 'beginners-course-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/beginners-course-checkout';
                                 } else if (product.checkoutUrl === 'intermediate-course-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/intermediate-course-checkout';
                                 } else if (product.checkoutUrl === 'advanced-course-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/advanced-course-checkout';
                                 } else if (product.checkoutUrl === 'full-course-tradecation-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/full-course-tradecation-checkout';
                                 } else if (product.checkoutUrl === 'beginner-mentorship-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/beginner-mentorship-checkout';
                                 } else if (product.checkoutUrl === 'intermediate-mentorship-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/intermediate-mentorship-checkout';
                                 } else if (product.checkoutUrl === 'advanced-mentorship-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/advanced-mentorship-checkout';
                                 } else if (product.checkoutUrl === 'currencies-strategy-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/currencies-strategy-checkout';
                                 } else if (product.checkoutUrl === 'nfp-event-access-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/nfp-event-access-checkout';
                                 } else if (product.checkoutUrl === 'branded-merchandise-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/branded-merchandise-checkout';
                                 } else if (product.checkoutUrl === 'key-levels-calculator-checkout') {
                                     e.preventDefault();
-                                    // Navigate directly to checkout page and refresh to ensure Whop checkout renders correctly
                                     window.location.href = '/key-levels-calculator-checkout';
                                 } else if (product.checkoutUrl === 'gold-digger-ea-checkout') {
                                     e.preventDefault();
-                                    // Navigate to Whop checkout for Gold Digger EA
                                     window.location.href = '/gold-digger-ea-checkout';
                                 } else if (product.checkoutUrl === 'lord-loot-ea-checkout') {
                                     e.preventDefault();
-                                    // Navigate to Whop checkout for Lord Loot EA
                                     window.location.href = '/lord-loot-ea-checkout';
                                 }
                             }}
@@ -3213,16 +3120,13 @@ const ServicesPage: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setC
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    // Check if we need to expand a specific product when component mounts
     useEffect(() => {
         const expandProductId = sessionStorage.getItem('expandProductId');
         if (expandProductId) {
             const productId = Number(expandProductId);
             setExpandedProductId(productId);
-            // Clear the stored ID so it doesn't affect future visits
             sessionStorage.removeItem('expandProductId');
             
-            // Scroll to the product section after a short delay to allow rendering
             setTimeout(() => {
                 const element = document.getElementById(`product-${productId}`);
                 if (element) {
@@ -3232,24 +3136,18 @@ const ServicesPage: React.FC<{ setCurrentPage: (page: Page) => void }> = ({ setC
         }
     }, []);
 
-    // Check for hash to trigger All Categories selection
     useEffect(() => {
         if (window.location.hash === '#all-categories') {
             setSelectedCategory(null);
             setProductsCurrentPage(1);
-            // Clear the hash after processing
             window.history.replaceState(null, '', window.location.pathname);
         }
     }, []);
 
     const itemsPerPage = 14;
     
-    // Get Platinum package (ID: 2)
     const platinumPackage = products.find(p => p.id === 2);
     
-    // Categorize products
-    
-    // Update Platinum package with new WhatsApp link and broker link
 const updatedPlatinumPackage = platinumPackage ? {
         ...platinumPackage,
         offerSteps: [
@@ -3332,20 +3230,16 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
     
-    // Filter products based on selected category first, then apply pagination
     const categoryFilteredProducts = selectedCategory 
         ? filteredAndSortedProducts.filter(p => p.category === selectedCategory)
         : filteredAndSortedProducts;
     
-    // When a category is selected, show all items in that category on one page
     const paginatedProducts = selectedCategory 
         ? categoryFilteredProducts
         : filteredAndSortedProducts.slice((productsCurrentPage - 1) * itemsPerPage, productsCurrentPage * itemsPerPage);
     
-    // Filter products for display
     const filteredProducts = paginatedProducts;
 
-    // Categorize products
     const softwares = selectedCategory === 'Softwares' || !selectedCategory
         ? filteredProducts.filter(p => p.category === 'Softwares')
         : [];
@@ -3389,15 +3283,12 @@ const updatedPlatinumPackage = platinumPackage ? {
         setIsLoading(true);
         setProductsCurrentPage(1);
         
-        // Add a small delay to show loading state
         await new Promise(resolve => setTimeout(resolve, 500));
         
         const min = priceRange.min === '' ? null : Number(priceRange.min);
         const max = priceRange.max === '' ? null : Number(priceRange.max);
         
-        // Validate min and max values
         if (min !== null && max !== null && min > max) {
-            // Swap values if min is greater than max
             setPriceRange({ min: max, max: min });
             setAppliedPriceRange({ min: max, max: min });
         } else {
@@ -3407,11 +3298,9 @@ const updatedPlatinumPackage = platinumPackage ? {
         setIsFilterApplied(true);
         setIsLoading(false);
         
-        // Close mobile sidebar if open
         setIsSidebarOpen(false);
     };
     
-    // Clear all filters and reset to default state
     const clearAllFilters = () => {
         setSearchTerm('');
         setPriceRange({ min: '', max: '' });
@@ -3464,7 +3353,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                     </button>
                 </div>
                 
-                {/* Category Filter Buttons */}
                 <div className="flex flex-wrap gap-2 pt-1">
                     <button
                         onClick={() => {
@@ -3498,7 +3386,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                 </div>
             </div>
 
-            {/* Price Range Filter */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                 <div>
                     <label className="block text-sm font-medium text-slate-300 mb-1">Min Price ($)</label>
@@ -3562,7 +3449,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                     isExpanded={expandedProductId === product.id}
                     onToggle={() => {
                         setExpandedProductId(expandedProductId === product.id ? null : product.id);
-                        // Scroll to the product when expanded
                         if (expandedProductId !== product.id) {
                             setTimeout(() => {
                                 const element = document.getElementById(`product-${product.id}`);
@@ -3622,7 +3508,6 @@ const updatedPlatinumPackage = platinumPackage ? {
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white font-sans">
-            {/* Mobile Filter Sidebar */}
             {isSidebarOpen && (
                 <div className="fixed inset-0 z-50 overflow-hidden">
                     <div 
@@ -3713,12 +3598,9 @@ const updatedPlatinumPackage = platinumPackage ? {
 
             <div className="container mx-auto px-4 py-8">
                 <div className="flex flex-col md:flex-row gap-8">
-                    {/* Main Content */}
                     <main className="flex-1">
-                        {/* Filter Section */}
                         {renderFilterSection()}
 
-                        {/* Products Grid */}
                         {filteredAndSortedProducts.length === 0 ? (
                             <div className="text-center py-16">
                                 <svg
@@ -3747,7 +3629,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                             </div>
                         ) : (
                             <>
-                                {/* Mobile App Download Link */}
                                 <div className="md:hidden mb-4">
                                     <a 
                                         href="https://mr1-get-the-app.pages.dev/" 
@@ -3755,12 +3636,11 @@ const updatedPlatinumPackage = platinumPackage ? {
                                         rel="noopener noreferrer"
                                         className="flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/10 to-blue-500/10 p-3 rounded-xl border border-amber-500/20 text-amber-400 hover:text-amber-300 transition-colors group"
                                     >
-                                        <img src="https://i.postimg.cc/T3mHV2x0/Favicon_Color.png" alt="App" className="w-5 h-5 object-contain group-hover:animate-bounce" />
+                                        <img src="/logos/Favicon_Color.png" alt="App" className="w-5 h-5 object-contain group-hover:animate-bounce" />
                                         <span className="text-sm font-medium">Download Mr One Dollar app</span>
                                     </a>
                                 </div>
                                 
-                                {/* Softwares Section */}
                                 {(selectedCategory === 'Softwares' || !selectedCategory) && softwares.length > 0 && (
                                     <div className="mb-12">
                                         <h2 className="text-2xl font-bold text-white mb-6 flex items-center justify-between">
@@ -3776,7 +3656,7 @@ const updatedPlatinumPackage = platinumPackage ? {
                                                 rel="noopener noreferrer"
                                                 className="hidden md:flex items-center gap-2 bg-gradient-to-r from-amber-500/10 to-blue-500/10 p-2 rounded-lg border border-amber-500/20 text-amber-400 hover:text-amber-300 transition-colors group text-sm"
                                             >
-                                                <img src="https://i.postimg.cc/T3mHV2x0/Favicon_Color.png" alt="App" className="w-4 h-4 object-contain group-hover:animate-bounce" />
+                                                <img src="/logos/Favicon_Color.png" alt="App" className="w-4 h-4 object-contain group-hover:animate-bounce" />
                                                 <span className="font-medium">Download Mr One Dollar app</span>
                                             </a>
                                         </h2>
@@ -3784,7 +3664,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                                     </div>
                                 )}
 
-                                {/* Trade Ideas Section */}
                                 {(selectedCategory === 'Trade Ideas' || !selectedCategory) && tradeIdeas.length > 0 && (
                                     <div className="mb-12">
                                         <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
@@ -3797,7 +3676,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                                     </div>
                                 )}
 
-                                {/* Courses Section */}
                                 {courses.length > 0 && (
                                     <div className="mb-12">
                                         <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
@@ -3810,7 +3688,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                                     </div>
                                 )}
 
-                                {/* Strategies Section */}
                                 {strategies.length > 0 && (
                                     <div className="mb-12">
                                         <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
@@ -3823,7 +3700,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                                     </div>
                                 )}
 
-                                {/* Events Section */}
                                 {events.length > 0 && (
                                     <div className="mb-12">
                                         <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
@@ -3836,7 +3712,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                                     </div>
                                 )}
 
-                                {/* Other Products */}
                                 {otherProducts.length > 0 && (
                                     <div className="mb-12">
                                         <h2 className="text-2xl font-bold text-white mb-6">Other Products</h2>
@@ -3844,7 +3719,6 @@ const updatedPlatinumPackage = platinumPackage ? {
                                     </div>
                                 )}
 
-                                {/* Pagination */}
                                 {renderPagination()}
                             </>
                         )}
@@ -4034,7 +3908,6 @@ const DiamondPrepaidCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4043,14 +3916,12 @@ const DiamondPrepaidCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Diamond 7-Days Prepaid trade ideas.');
@@ -4058,7 +3929,6 @@ const DiamondPrepaidCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4117,7 +3987,6 @@ const DiamondPrepaidCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to premium trade ideas</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4161,7 +4030,6 @@ const GoldHighVoltageCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4170,14 +4038,12 @@ const GoldHighVoltageCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Gold High Voltage Trade Ideas.');
@@ -4185,7 +4051,6 @@ const GoldHighVoltageCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4244,7 +4109,6 @@ const GoldHighVoltageCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to premium Gold trade ideas</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4288,7 +4152,6 @@ const SyntheticsCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4297,14 +4160,12 @@ const SyntheticsCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Synthetics Trade Ideas.');
@@ -4312,7 +4173,6 @@ const SyntheticsCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4371,7 +4231,6 @@ const SyntheticsCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to premium Synthetics trade ideas</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4415,7 +4274,6 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4424,14 +4282,12 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Diamond Trade Ideas.');
@@ -4439,7 +4295,6 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4498,7 +4353,6 @@ const DiamondTradeIdeasCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to elite Diamond trade ideas</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4542,7 +4396,6 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4551,14 +4404,12 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Private Wealth VIP Black Trade Ideas.');
@@ -4566,7 +4417,6 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4625,7 +4475,6 @@ const PrivateWealthVipBlackCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to exclusive VIP Black trade ideas</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4669,7 +4518,6 @@ const BeginnersCourseCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4678,14 +4526,12 @@ const BeginnersCourseCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Beginners Course.');
@@ -4693,7 +4539,6 @@ const BeginnersCourseCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4752,7 +4597,6 @@ const BeginnersCourseCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our comprehensive Forex trading course</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4796,7 +4640,6 @@ const IntermediateCourseCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4805,14 +4648,12 @@ const IntermediateCourseCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Intermediate Course.');
@@ -4820,7 +4661,6 @@ const IntermediateCourseCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -4879,7 +4719,6 @@ const IntermediateCourseCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our intermediate trading course</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -4923,7 +4762,6 @@ const AdvancedCourseCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -4932,14 +4770,12 @@ const AdvancedCourseCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Advanced Course.');
@@ -4947,7 +4783,6 @@ const AdvancedCourseCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5006,7 +4841,6 @@ const AdvancedCourseCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our advanced trading course</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5048,9 +4882,9 @@ const AdvancedCourseCheckout: React.FC = () => {
 const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
     const [isSecure, setIsSecure] = useState(true);
     const [showSecureWarning, setShowSecureWarning] = useState(false);
+    const [showAddons, setShowAddons] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
 
@@ -5059,14 +4893,12 @@ const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Advanced Key Levels Calculator.');
@@ -5074,7 +4906,6 @@ const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5133,7 +4964,49 @@ const AdvancedKeyLevelsCalculatorCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our advanced key levels calculator</p>
                 </div>
 
-                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto mb-6">
+                    <button
+                        onClick={() => setShowAddons(!showAddons)}
+                        className="w-full flex items-center justify-between bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 rounded-xl p-4 border border-amber-500/30 hover:border-amber-500/50 transition-all duration-200"
+                    >
+                        <div className="flex items-center gap-3">
+                            <img src="/logos/Favicon_Color.png" alt="Add-ons" className="w-9 h-9 rounded-full" />
+                            <div className="text-left">
+                                <h2 className="text-lg font-bold text-white">Add-Ons</h2>
+                                <p className="text-slate-400 text-sm">Optional add-ons — subscribe separately on Whop</p>
+                            </div>
+                        </div>
+                        <svg className={`w-5 h-5 text-amber-400 transition-transform duration-300 ${showAddons ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    {showAddons && (
+                        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-slate-800/80 rounded-lg p-5 border border-slate-700 hover:border-amber-500/60 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 group">
+                                <div className="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-white group-hover:text-amber-400 transition-colors">Automated Trade Ideas</h3>
+                                        <p className="text-amber-400 font-bold text-lg">$19.99<span className="text-slate-400 text-sm font-normal">/month</span></p>
+                                    </div>
+                                    <span className="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Add-on</span>
+                                </div>
+                                <p className="text-slate-400 text-sm mb-4">Get automated trade ideas delivered to you, perfectly complementing your Advanced Key Levels Calculator.</p>
+                                <a
+                                    href="https://whop.com/checkout/plan_Y0ZE4L4ZI6nE7?d2c=true"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                                >
+                                    Buy Now
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5177,7 +5050,6 @@ const OnlineFullCourseCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
 
@@ -5186,14 +5058,12 @@ const OnlineFullCourseCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Online Full Course.');
@@ -5201,7 +5071,6 @@ const OnlineFullCourseCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5260,7 +5129,6 @@ const OnlineFullCourseCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our complete online trading course</p>
                 </div>
 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5304,7 +5172,6 @@ const FullCourseTradecationCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -5313,14 +5180,12 @@ const FullCourseTradecationCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Full Course + Free Tradecation.');
@@ -5328,7 +5193,6 @@ const FullCourseTradecationCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5387,7 +5251,6 @@ const FullCourseTradecationCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our complete trading education package with free tradecation</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5431,7 +5294,6 @@ const BeginnerMentorshipCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -5440,14 +5302,12 @@ const BeginnerMentorshipCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Beginner Mentorship.');
@@ -5455,7 +5315,6 @@ const BeginnerMentorshipCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5514,7 +5373,6 @@ const BeginnerMentorshipCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to personalized beginner mentorship</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5558,7 +5416,6 @@ const IntermediateMentorshipCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -5567,14 +5424,12 @@ const IntermediateMentorshipCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Intermediate Mentorship.');
@@ -5582,7 +5437,6 @@ const IntermediateMentorshipCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5641,7 +5495,6 @@ const IntermediateMentorshipCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to intermediate level mentorship</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5685,7 +5538,6 @@ const AdvancedMentorshipCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -5694,14 +5546,12 @@ const AdvancedMentorshipCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Advanced Mentorship.');
@@ -5709,7 +5559,6 @@ const AdvancedMentorshipCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5768,7 +5617,6 @@ const AdvancedMentorshipCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to advanced level mentorship</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5812,7 +5660,6 @@ const CurrenciesStrategyCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -5821,14 +5668,12 @@ const CurrenciesStrategyCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to the Currencies Strategy.');
@@ -5836,7 +5681,6 @@ const CurrenciesStrategyCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -5895,7 +5739,6 @@ const CurrenciesStrategyCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our proprietary currency trading strategy</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -5939,7 +5782,6 @@ const NFPEventAccessCheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -5948,14 +5790,12 @@ const NFPEventAccessCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to NFP Event Access.');
@@ -5963,7 +5803,6 @@ const NFPEventAccessCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -6022,7 +5861,6 @@ const NFPEventAccessCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to our live NFP trading session</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -6064,9 +5902,9 @@ const NFPEventAccessCheckout: React.FC = () => {
 const KeyLevelsCalculatorCheckout: React.FC = () => {
     const [isSecure, setIsSecure] = useState(true);
     const [showSecureWarning, setShowSecureWarning] = useState(false);
+    const [showAddons, setShowAddons] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -6075,14 +5913,12 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Key Levels Calculator.');
@@ -6090,7 +5926,6 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -6149,7 +5984,70 @@ const KeyLevelsCalculatorCheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to the Key Levels Calculator</p>
                 </div>
                 
-                {/* Embedded Checkout */}
+                <div className="max-w-4xl mx-auto mb-6">
+                    <button
+                        onClick={() => setShowAddons(!showAddons)}
+                        className="w-full flex items-center justify-between bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 rounded-xl p-4 border border-amber-500/30 hover:border-amber-500/50 transition-all duration-200"
+                    >
+                        <div className="flex items-center gap-3">
+                            <img src="/logos/Favicon_Color.png" alt="Add-ons" className="w-9 h-9 rounded-full" />
+                            <div className="text-left">
+                                <h2 className="text-lg font-bold text-white">Add-Ons</h2>
+                                <p className="text-slate-400 text-sm">Optional add-ons — subscribe separately on Whop</p>
+                            </div>
+                        </div>
+                        <svg className={`w-5 h-5 text-amber-400 transition-transform duration-300 ${showAddons ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    {showAddons && (
+                        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-slate-800/80 rounded-lg p-5 border border-slate-700 hover:border-amber-500/60 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 group">
+                                <div className="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-white group-hover:text-amber-400 transition-colors">Momentum Gauge</h3>
+                                        <p className="text-amber-400 font-bold text-lg">$59.99<span className="text-slate-400 text-sm font-normal">/month</span></p>
+                                    </div>
+                                    <span className="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Add-on</span>
+                                </div>
+                                <p className="text-slate-400 text-sm mb-4">Add the Momentum Gauge indicator to supercharge your Key Levels Calculator with momentum-based signals.</p>
+                                <a
+                                    href="https://whop.com/checkout/plan_LgNwFTWFAjehB?d2c=true"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                                >
+                                    Buy Now
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div className="bg-slate-800/80 rounded-lg p-5 border border-slate-700 hover:border-amber-500/60 hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-300 group">
+                                <div className="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-white group-hover:text-amber-400 transition-colors">Automated Trade Ideas</h3>
+                                        <p className="text-amber-400 font-bold text-lg">$19.99<span className="text-slate-400 text-sm font-normal">/month</span></p>
+                                    </div>
+                                    <span className="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Add-on</span>
+                                </div>
+                                <p className="text-slate-400 text-sm mb-4">Get automated trade ideas delivered to you, perfectly complementing your Key Levels Calculator.</p>
+                                <a
+                                    href="https://whop.com/checkout/plan_Y0ZE4L4ZI6nE7?d2c=true"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                                >
+                                    Buy Now
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -6193,7 +6091,6 @@ const GoldDiggerEACheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -6202,14 +6099,12 @@ const GoldDiggerEACheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Mr One Dollar Gold Digger (EA) Robot.');
@@ -6217,7 +6112,6 @@ const GoldDiggerEACheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -6276,7 +6170,6 @@ const GoldDiggerEACheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to the automated gold trading EA</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -6320,7 +6213,6 @@ const LordLootEACheckout: React.FC = () => {
     const [showSecureWarning, setShowSecureWarning] = useState(false);
 
     useEffect(() => {
-        // Check if running on HTTPS
         const isHttps = window.location.protocol === 'https:';
         setIsSecure(isHttps);
         
@@ -6329,14 +6221,12 @@ const LordLootEACheckout: React.FC = () => {
             return;
         }
 
-        // Load Whop checkout script
         const script = document.createElement('script');
         script.src = 'https://js.whop.com/static/checkout/loader.js';
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
 
-        // Set up completion callback
         (window as any).onCheckoutComplete = (planId: string, receiptId: string) => {
             console.log('Payment complete:', planId, receiptId);
             alert('Payment successful! You now have access to Mr One Dollar Lord Loot (EA) Robot.');
@@ -6344,7 +6234,6 @@ const LordLootEACheckout: React.FC = () => {
         };
 
         return () => {
-            // Cleanup
             if (document.head.contains(script)) {
                 document.head.removeChild(script);
             }
@@ -6403,7 +6292,6 @@ const LordLootEACheckout: React.FC = () => {
                     <p className="text-slate-400">Complete your purchase to get instant access to the automated currency pairs trading EA</p>
                 </div>
                 
-                {/* Embedded Checkout */}
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                         <div
@@ -6447,11 +6335,9 @@ const App: React.FC = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | 'up'>('up');
   
-  // Handle page changes with smooth transitions
   const handlePageChange = (page: Page) => {
     if (page === currentPage) return;
     
-    // Determine transition direction based on page order
     const pageOrder: Page[] = ['home', 'about', 'team', 'events', 'services', 'contact', 'terms', 'privacy', 'diamond-prepaid-checkout', 'gold-high-voltage-checkout', 'synthetics-checkout', 'diamond-trade-ideas-checkout', 'private-wealth-vip-black-checkout', 'beginners-course-checkout', 'intermediate-course-checkout', 'advanced-course-checkout', 'full-course-tradecation-checkout', 'beginner-mentorship-checkout', 'intermediate-mentorship-checkout', 'advanced-mentorship-checkout', 'currencies-strategy-checkout', 'nfp-event-access-checkout', 'affiliate'];
     const currentIndex = pageOrder.indexOf(currentPage);
     const newIndex = pageOrder.indexOf(page);
@@ -6466,19 +6352,16 @@ const App: React.FC = () => {
     
     setIsTransitioning(true);
     
-    // Change page after brief delay for transition effect
     setTimeout(() => {
       setCurrentPage(page);
       setIsTransitioning(false);
     }, 150);
   };
   
-  // Handle direct URL navigation for SPA
   useEffect(() => {
     const path = window.location.pathname;
     const hash = window.location.hash;
     
-    // Map paths to pages
     const pathToPageMap: Record<string, Page> = {
       '/': 'home',
       '/services': 'services',
@@ -6510,26 +6393,21 @@ const App: React.FC = () => {
       '/affiliate': 'affiliate'
     };
     
-    // Set current page based on URL
     if (pathToPageMap[path]) {
       setCurrentPage(pathToPageMap[path]);
     }
     
-    // Handle hash for services page
     if (path === '/services' && hash === '#all-categories') {
-      // The ServicesPage component will handle this hash
       setTimeout(() => {
         window.history.replaceState(null, '', '/services');
       }, 100);
     }
   }, []);
 
-  // Handle browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
       
-      // Map paths to pages
       const pathToPageMap: Record<string, Page> = {
         '/': 'home',
         '/services': 'services',
@@ -6561,22 +6439,18 @@ const App: React.FC = () => {
         '/affiliate': 'affiliate'
       };
       
-      // Update current page based on new URL
       if (pathToPageMap[path]) {
         setCurrentPage(pathToPageMap[path]);
       }
     };
 
-    // Add popstate event listener
     window.addEventListener('popstate', handlePopState);
     
-    // Cleanup event listener
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
   }, []);
   
-  // Add animation styles to document head
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -6665,9 +6539,7 @@ const App: React.FC = () => {
     };
   }, []);
 
-  // Smooth scroll to top on page change and add performance optimizations
   useEffect(() => {
-    // Update URL in address bar
     const pageToPathMap: Record<Page, string> = {
       'home': '/',
       'services': '/services',
@@ -6699,16 +6571,13 @@ const App: React.FC = () => {
       'affiliate': '/affiliate'
     };
     
-    // Update browser URL without page reload
     window.history.pushState(null, '', pageToPathMap[currentPage]);
     
-    // Smooth scroll to top when page changes
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
     
-    // Add passive event listeners for better scroll performance
     const addPassiveScroll = () => {
       try {
         const options = Object.defineProperty({}, 'passive', {
@@ -6724,7 +6593,6 @@ const App: React.FC = () => {
     let passiveSupported = false;
     addPassiveScroll();
     
-    // Apply passive event listeners to all scrollable elements
     const scrollableElements = document.querySelectorAll('*');
     scrollableElements.forEach(element => {
       const style = window.getComputedStyle(element);
@@ -6733,7 +6601,6 @@ const App: React.FC = () => {
       }
     });
     
-    // Cleanup function
     return () => {
       scrollableElements.forEach(element => {
         element.removeEventListener('scroll', () => {});
@@ -6741,7 +6608,6 @@ const App: React.FC = () => {
     };
   }, [currentPage]);
   
-  // Add global styles for better performance
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -6764,7 +6630,6 @@ const App: React.FC = () => {
         background: #f59e0b;
         border-radius: 4px;
       }
-      /* Optimize animations */
       *,
       *::before,
       *::after {
