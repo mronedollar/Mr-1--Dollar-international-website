@@ -354,10 +354,10 @@ const Hero: React.FC<HeroProps> = ({ setCurrentPage, currentPage }) => {
                                 href="https://mr1-get-the-app.pages.dev/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-full sm:w-auto text-center bg-amber-400 text-black font-bold py-3 px-6 sm:px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary flex items-center justify-center gap-2"
+                                className="w-full sm:w-auto text-center bg-amber-400 text-black font-bold py-2 px-6 sm:px-8 rounded-md hover:bg-amber-300 transition-all duration-300 ease-in-out transform hover:scale-105 btn-primary flex items-center justify-center gap-2"
                             >
-                                <img src="/logos/Emblem_Color.png" alt="Mr One Dollar" className="w-5 h-5" />
-                                <span>Mr One Dollar app</span>
+                                <img src="/logos/Emblem_Color.png" alt="Mr One Dollar" className="w-9 h-9" />
+                                <span>Download app</span>
                             </a>
                             <a 
                                 href="/services" 
