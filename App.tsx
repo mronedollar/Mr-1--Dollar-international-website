@@ -2505,11 +2505,7 @@ const ContactPage: React.FC = () => {
                         </p>
                         <ul className="mt-8 space-y-6">
                             <li className="flex items-start">
-                                <img 
-                                    src="https://img.icons8.com/ios-filled/20/ffb74d/marker.png" 
-                                    alt="Location" 
-                                    className="w-6 h-6 mr-4 mt-1 flex-shrink-0"
-                                />
+                               
                             </li>
                             <li className="flex items-start">
                                 <img 
